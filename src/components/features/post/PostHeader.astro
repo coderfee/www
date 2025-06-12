@@ -2,15 +2,17 @@
 import dayjs from 'dayjs';
 import IconCalendar from '~icons/tabler/calendar';
 import IconHash from '~icons/tabler/hash';
+import IconCopy from '~icons/tabler/copy';
 
 interface Props {
   title: string;
   date?: Date;
   tags?: string[];
   tldr?: string;
+  markdown?: string;
 }
 
-const { title, date, tags = [], tldr } = Astro.props;
+const { title, date, tags = [], tldr, markdown } = Astro.props;
 ---
 
 <div>
@@ -18,7 +20,6 @@ const { title, date, tags = [], tldr } = Astro.props;
     {title}
   </h1>
   
-  <!-- 文章元数据 -->
   <div class="flex flex-wrap items-center gap-4 font-mono text-xs text-zinc-500 dark:text-zinc-400">
     {date && (
       <time datetime={date.toISOString()} class="flex items-center">
@@ -27,7 +28,6 @@ const { title, date, tags = [], tldr } = Astro.props;
       </time>
     )}
     
-    {/* 标签列表 */}
     {tags.length > 0 && (
       <div class="flex flex-wrap gap-2">
         {tags.map((tag) => (
@@ -44,9 +44,18 @@ const { title, date, tags = [], tldr } = Astro.props;
         ))}
       </div>
     )}
+
+    {markdown && (
+      <a href="javascript:void(0)" class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium 
+                   text-zinc-600 dark:text-zinc-400
+                   hover:text-zinc-900 dark:hover:text-zinc-200
+                   transition-colors duration-300" id="copy-markdown">
+        <IconCopy class="mr-1 opacity-70"></IconCopy>
+        复制 Markdown
+      </a>
+    )}
   </div>
   
-  {/* 摘要 */}
   {tldr && (
     <div class="mt-8">
       <p class="font-serif text-lg text-zinc-600 dark:text-zinc-300 italic">
@@ -55,3 +64,10 @@ const { title, date, tags = [], tldr } = Astro.props;
     </div>
   )}
 </div>
+
+<script is:inline define:vars={{ title, markdown }}>
+  const copyMarkdown = document.getElementById('copy-markdown');
+  copyMarkdown.addEventListener('click', () => {
+    navigator.clipboard.writeText(`# ${title}\n\n${markdown}`);
+  });
+</script>
