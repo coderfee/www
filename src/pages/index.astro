@@ -8,13 +8,19 @@ import TagCloud from '@/components/features/blog/TagCloud.astro';
 import BaseLayout from '@/components/layouts/BaseLayout.astro';
 import IconArrowRight from '~icons/tabler/arrow-right';
 
-Astro.locals.runtime.env.R2_OBSIDIAN.list({
-  prefix: 'Newsletter'
-}).then((result) => {
-  console.log('R2 Obsidian Newsletter List:', result);
-}).catch((error) => {
-  console.error('Error fetching R2 Obsidian Newsletter:', error);
-});
+try {
+  Astro.locals.runtime.env.R2_OBSIDIAN.list({
+    prefix: 'Newsletter',
+  })
+    .then((result) => {
+      console.log('R2 Obsidian Newsletter List:', result);
+    })
+    .catch((error) => {
+      console.error('Error fetching R2 Obsidian Newsletter:', error);
+    });
+} catch (error) {
+  console.error('Error accessing R2 Obsidian:', error);
+}
 
 const allPosts = await getCollection('blog');
 
@@ -35,7 +41,8 @@ const allTags = Array.from(tagMap.entries())
   .map(([tag, count]) => ({ tag, count }))
   .sort((a, b) => b.count - a.count);
 
-const pageDescription = "欢迎来到 Coderfee 的博客，这里记录了前端开发、技术思考和个人成长。探索最新的 Web 技术、框架实践和优化技巧。"; 
+const pageDescription =
+  '欢迎来到 Coderfee 的博客，这里记录了前端开发、技术思考和个人成长。探索最新的 Web 技术、框架实践和优化技巧。';
 ---
 
 <BaseLayout title="首页" description={pageDescription}>

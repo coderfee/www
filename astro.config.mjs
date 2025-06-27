@@ -29,10 +29,6 @@ export default defineConfig({
   },
   site: 'https://coderfee.com',
   publicDir: 'public',
-  prefetch: {
-    prefetchAll: true,
-    defaultStrategy: 'viewport',
-  },
   markdown: {
     syntaxHighlight: 'shiki',
     gfm: true,
@@ -56,8 +52,6 @@ export default defineConfig({
     platformProxy: {
       enabled: true,
     },
-
-    imageService: 'cloudflare',
   }),
   integrations: [
     react(),
