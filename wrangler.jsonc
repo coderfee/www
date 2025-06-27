@@ -1,6 +1,6 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "www",
+	"name": "coderfee-com",
 	"main": "./dist/_worker.js/index.js",
 	"compatibility_date": "2025-06-27",
 	"compatibility_flags": [
