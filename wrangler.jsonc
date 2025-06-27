@@ -33,7 +33,8 @@
 	 "r2_buckets": [
     {
       "binding": "R2_OBSIDIAN",
-      "bucket_name": "obsidian"
+      "bucket_name": "obsidian",
+			"preview_bucket_name": "obsidian"
     }
   ]
 

@@ -8,6 +8,14 @@ import TagCloud from '@/components/features/blog/TagCloud.astro';
 import BaseLayout from '@/components/layouts/BaseLayout.astro';
 import IconArrowRight from '~icons/tabler/arrow-right';
 
+Astro.locals.runtime.env.R2_OBSIDIAN.list({
+  prefix: 'Newsletter'
+}).then((result) => {
+  console.log('R2 Obsidian Newsletter List:', result);
+}).catch((error) => {
+  console.error('Error fetching R2 Obsidian Newsletter:', error);
+});
+
 const allPosts = await getCollection('blog');
 
 const twoYearsAgo = new Date();
