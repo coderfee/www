@@ -13,7 +13,7 @@ const isActive = (path: string) => {
 
 const navItems = [
   { name: '首页', path: '/', icon: HomeIcon },
-  { name: '周刊', path: '/newsletter', icon: BookIcon },
+  { name: '周刊', path: '/newsletter', icon: BookIcon, target: '_blank' },
   { name: '归档', path: '/archive', icon: ArchiveIcon },
   { name: '关于我', path: '/blog/pages/about', icon: UserIcon },
 ];
@@ -58,6 +58,7 @@ const { showNavigation = true } = Astro.props;
                   ? [colors!.light, colors!.dark, 'font-semibold']
                   : ['text-zinc-600', 'dark:text-zinc-400', colors!.inactive]
               ]}
+              target={item.target || '_self'}
               aria-current={isActive(item.path) ? 'page' : undefined}
               data-index={index}
             >

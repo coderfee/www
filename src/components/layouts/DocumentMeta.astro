@@ -2,6 +2,7 @@
 import '@/styles/style.css';
 import '@/styles/print.css';
 import { SITE_DESCRIPTION, SITE_TITLE } from '@/consts';
+import { Font } from 'astro:assets';
 
 export interface Props {
   title: string;
@@ -45,6 +46,8 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION, ogImage = '/placehol
 <!-- rss styles -->
 <link rel="alternate" type="application/rss+xml" href={`${Astro.site}rss.xml`} />
 <link rel="alternate" type="application/rss+xml" title="coderfee's blog" href={new URL("rss.xml", Astro.site)} />
+
+<Font cssVariable="--font-lxgw" preload />
 
 <slot />
 
