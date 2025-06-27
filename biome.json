@@ -27,7 +27,7 @@
         "noUselessElse": "error"
       }
     },
-    "includes": ["**/*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}", "!**/*.astro"]
+    "includes": ["**/*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}", "!**/*.astro", "!worker-configuration.d.ts"]
   },
   "javascript": {
     "formatter": {

@@ -11,7 +11,8 @@
 		"astro": "astro",
     "check": "pnpx @biomejs/biome check --write ./src",
     "add": "pnpx shadcn@latest add",
-    "upgrade": "pnpm update && pnpx @astrojs/upgrade"
+    "upgrade": "pnpm update && pnpx @astrojs/upgrade",
+    "cf-typegen": "wrangler types"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.0",
