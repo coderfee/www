@@ -4,14 +4,15 @@
   "version": "3.0.0",
   "packageManager": "pnpm@10.12.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "pnpm run sync-r2 && astro dev",
     "start": "astro dev",
-    "build": "astro build && pagefind",
+    "build": "pnpm run sync-r2 && astro build && pagefind",
     "preview": "astro preview",
     "astro": "astro",
     "check": "pnpx @biomejs/biome check --write ./src",
     "add": "pnpx shadcn@latest add",
-    "upgrade": "pnpm update && pnpx @astrojs/upgrade"
+    "upgrade": "pnpm update && pnpx @astrojs/upgrade",
+    "sync-r2": "node scripts/sync-r2.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.0",
@@ -39,12 +40,14 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@aws-sdk/client-s3": "^3.837.0",
     "@biomejs/biome": "^2.0.5",
     "@iconify-json/tabler": "^1.2.19",
     "@iconify/react": "^5.2.1",
     "@tailwindcss/typography": "^0.5.16",
     "@types/node": "latest",
     "dayjs": "^1.11.13",
+    "dotenv": "^16.6.0",
     "lefthook": "^1.11.14",
     "unplugin-icons": "^22.1.0"
   },
