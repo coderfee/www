@@ -1,0 +1,106 @@
+---
+title: 闲聊 Obsidian
+date: 2025-06-30
+tldr: 分享我对 Obsidian 的使用体验，以及如何将其与明日周刊的写作流程结合起来，实现自动化部署。
+tags: ['折腾', '产品']
+keywords: ['Obsidian', 'Cloudflare']
+---
+
+最近在研究 Obsidian 笔记部署到博客的功能，我发现 Obsidian 的功能比我想的要更多、更强大，于是也仔细研究了一下，顺便把明日周刊的写作流程自动化。这篇文章就来聊一下 Obsidian 和明日周刊自动部署。
+
+## Obsidian
+
+### 如何用
+
+有几篇文章非常适合作为 Obsidian 的入门教程，它们讲的并不是什么主题插件配置，而是一种笔记的组织方法和 Obsidian 这个笔记软件的理念：
+
+1. [How I use Obsidian](https://stephango.com/vault)
+2. [File over app](https://stephango.com/file-over-app)
+3. [Don't delegate understanding](https://stephango.com/understand)
+
+这三篇文章都是 Obsidian 现任 CEO 写的，我从他的文章中学到了一些组织笔记的方式。例如他说的不要用文件夹来组织笔记，这是我之前常用的方法，但是在 Obsidian 里并不适用，或者说有更好的方法。我们可以用“元数据”来管理笔记，例如标签、链接、分类等。
+
+再聊聊我对笔记的组织形式：
+
+1. `Dashoboard`——存放仪表盘的文件夹，例如任务、看板等汇总视图
+2. `Learning Notes`——主要放一些正在学习或者进行中的项目的笔记
+3. `Writings`——主要的写作区，随手写一些想法、随记之类的内容
+4. `Daily Notes`——日记类，Todo 也可放在对应的日期，后续用 Tasks 统一管理
+5. `Newsletter`——明日周刊的内容，使用 R2 自动部署，后面会谈到
+6. `Z-Templates`——模板文件，日记和周刊的模板，使用 Templater 管理
+
+笔记的“元数据”我暂时只用标签来组织，因为现在笔记库的内容还比较少，关联不起来。而链接、双向连接这些功能，应该刻到肌肉记忆里，或者每过一段时间整理一下，将自己的知识关联起来。
+
+### 插件
+
+#### [Calendar](https://github.com/liamcain/obsidian-calendar-plugin)
+
+这款插件非常简单，为 Obsidian 侧边栏提供一个日历视图，同时它可以把日期和你的笔记关联起来，通过日历快速访问或者创建特定日期的笔记。
+
+#### [Commander](https://github.com/phibr0/obsidian-commander)
+
+Commander 能够在 Obsidian 的任何 UI 界面创建快捷命令，像侧边栏、状态栏、标题栏、右键菜单这些地方都可以自定义。移动端也支持在 Toolbar 上自定义。这种方式比 Obsidian 原生的命令面板来得更、效率也更高一点。
+
+#### [Dataview](https://github.com/blacksmithgu/obsidian-dataview)
+
+Dataview 允许用户把笔记库作为数据库，通过查询语言，将笔记库中的数据可视化，以表格、列表、日历等等形式展现出了。很多人的 Obsidian 仪表盘就是借助这款插件做的。不过查询语言有学习曲线，我也在学习中。
+
+不过 Obsidian 要发布 [Bases](https://help.obsidian.md/bases) 插件，能力和 Dataview 差不多，估计会在 25 年 Q3-Q4。我挺期待的，但是不清楚怎么定价。
+
+#### [Excalidraw](https://github.com/zsviczian/obsidian-excalidraw-plugin)
+
+虚拟白板和手绘风格的绘图工具，可以用来在 Obsidian 中创建图表、流程图、思维导图和自由形式的草图。我用的不多，还在学习中。
+
+#### [Linter](https://github.com/platers/obsidian-linter)
+
+自动化笔记格式整理，确保笔记内容在格式上保持一致性、整洁性和可读性。目前我默认的使用方法就是在保存的时候自动运行。例如在中英数字之间自动加空格，移除不可见的空白字符，标题、段落自动加空行。Linter 也提供了自定义规则和配置界面。
+
+#### [Remotely Save](https://github.com/remotely-save/remotely-save)
+
+Obsidian 作为一个 Local-first 的软件，同步问题一直是一个诟病的点，虽然官方提供了 Sync 服务，但是每月 4 刀服务费对我来说还是太贵了。而 Remotely Save 插件则可以免费解决这个问题，只要你拥有以下云服务：
+
+- Amazon S3 / S3 兼容服务
+- Dropbox
+- OneDrive
+- WebDAV
+- ...
+
+我之前用坚果云的 WebDAV，但是发生过一次数据丢失，就不再用了。后来迁移域名的时候发现 Cloudflare R2 也有免费额度，而且兼容 S3 服务，于是就切换到了 R2，目前服务还是很稳定的。而且依靠 Cloudflare 的生态，还能实现博客内容的自动发布，一举两得。
+
+#### [Style Settings](https://github.com/mgmeyers/obsidian-style-settings)
+
+这个插件可以用来深度定制 Obsidian 的 UI 界面，它相当于是主题和插件的桥梁，例如 Minimal、AnuPpuccin、Primary 提供了很多自定义选项，就是通过这个插件暴露出来给普通用户，让普通用户不用编写 CSS 就可以微调 UI。而且配置项支持导入导出，方便分享和备份。
+
+#### [Tasks](https://github.com/obsidian-tasks-group/obsidian-tasks)
+
+简单来说，Tasks 插件在 Obsidian 笔记库中管理你的 Todo 任务，无论你的任务散布在各个笔记，还是集中在一起，Tasks 都可以方便地管理和查询，甚至创建可视化界面。不过和 Dataview 一样，需要学习查询语言。
+
+#### [Templater](https://github.com/SilentVoid13/Templater)
+
+顾名思义，这个插件就是用来管理笔记模版的，相比 Obsidian 原生模版功能，Templater 则在其基础上增加了 JavaScript 脚本能力和更多的内置函数，以及一些自动化任务的能力，可以把记笔记的过程流程化。
+
+#### [Obsidian Web Clipper](https://obsidian.md/clipper)
+
+这是一款 Chrome 插件，可以把浏览器中的内容剪藏到 Obsidian。我不是很喜欢剪藏东西，所以用的很少。我感兴趣的点在于这个插件的底层实现，它是如何把网页内容保存为 Markdown 的，当然它是开源的 [defuddle](https://github.com/kepano/defuddle)，有时间要好好研究一下。
+
+### 主题
+
+Obsidian 主题我切换过不少，但是现在我还是会从维护性和适配性的角度来看，如果一个主题长时间没有维护，或者适配程度不高的话，其实要慎重考虑。所以，我目前就只用两款，分别是 Primay 和 Minimal。
+
+#### Primary
+
+[Primary](https://github.com/primary-theme/obsidian) 是一款桌面端和移动端通用的 Obsidian 主题，支持配色方案自动切换，同时还可以通过 [Style Settings](#style-settings) 插件对主题进行微调。我比较喜欢它的一些小动画和细节。
+
+#### Minimal
+
+[Minimal](https://github.com/kepano/obsidian-minimal) 主题我曾经用过一段时间，就像它的名字一样“小而美”，简洁，自定义程度也很高。我现在会把它作为备选方案，等我哪天想用简洁风格的时候，再启用。对了，这款主题不仅要安装主题插件本身，还要安装它的配套插件 [Minimal Theme Settings](https://github.com/kepano/obsidian-minimal-settings)。还有一个有趣的点是，这款主题的作者其实是 Obsidian 的现任 CEO——Steph Ango，他有自己的 [博客](https://stephango.com/)。
+
+## 周刊自动部署
+
+[明日周刊](https://coderfee.com/newsletter/) 鸽了好久了，因为从写作到发布这个流程比较麻烦，需要自己手动来 push，然后构建部署。最近在想怎么搞一个自动发布流程，于是研究了一下 Obsidian 和 Cloudflare R2，我发现了一条可行路线。大概的流程如下图：
+
+![blog/posts/2025/obsidian-cf-r2.png](https://assets.coderfee.com/blog/posts/2025/obsidian-cf-r2.png)
+
+改造之后的流程需要我手动参与的就是在 Obsidian 写作，完事之后使用 Remotely Save 插件同步到 Cloudflare R2。后面的流程就自动化了，我在博客的 api worker 里设置一个定时任务，去查看 R2 里的周刊文件是否有更新，如果有更新就调用 Cloudflare Pages 的 Deploy Hook 去进行构建流程，Pages 会从 R2 拉取最新的周刊内容，部署完成。
+
+这是我折腾之后完全不用花钱的做法。如果你能接受付费，那么 Cloudflare R2 有事件通知功能，也就是说 R2 里文件发生的任何改动，都可以发送一个通知事件，你可以通过监听这个事件来触发 Pages 的部署流程，价格是每月 5 刀起。对我而言太贵了，所以我选择自己折腾。
