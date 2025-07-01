@@ -125,7 +125,9 @@ const jsonLd = {
     </div>
   </article>
 
-  <Visitor slug={post.slug} title={post.data.title} client:load />
+  <span class="hidden">
+    <Visitor slug={post.slug} title={post.data.title} client:load />
+  </span>
   
   <BackToTop />
 </BaseLayout>
