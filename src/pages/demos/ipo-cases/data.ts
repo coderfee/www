@@ -1,3 +1,5 @@
+export const prerender = false;
+
 export default [
   {
     name: '两面针',
