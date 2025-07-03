@@ -1,6 +1,6 @@
 import { promises as fs } from 'node:fs';
-import { S3Client, ListObjectsV2Command, GetObjectCommand } from '@aws-sdk/client-s3';
 import path from 'node:path';
+import { GetObjectCommand, ListObjectsV2Command, S3Client } from '@aws-sdk/client-s3';
 import 'dotenv/config';
 
 const R2 = new S3Client({
@@ -25,10 +25,26 @@ async function streamToString(stream) {
   });
 }
 
+async function getLocalFiles(dir) {
+  try {
+    const dirents = await fs.readdir(dir, { withFileTypes: true });
+    const files = await Promise.all(
+      dirents.map((dirent) => {
+        const res = path.join(dir, dirent.name);
+        return dirent.isDirectory() ? getLocalFiles(res) : res;
+      }),
+    );
+    return files.flat();
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      return [];
+    }
+    throw error;
+  }
+}
+
 async function syncR2() {
   console.log('🚀 Starting sync with Cloudflare R2...');
-
-  await fs.mkdir(CONTENT_DIR, { recursive: true });
 
   const listedObjects = await R2.send(
     new ListObjectsV2Command({
@@ -37,14 +53,24 @@ async function syncR2() {
     }),
   );
 
-  if (!listedObjects.Contents || listedObjects.Contents.length === 0) {
-    console.log('✅ No objects found in R2. Sync complete.');
+  const remoteFiles = listedObjects.Contents?.filter((item) => item.Key && !item.Key.endsWith('/')) || [];
+  const remoteFileCount = remoteFiles.length;
+
+  const localMdxFiles = (await getLocalFiles(CONTENT_DIR)).filter((file) => file.endsWith('.mdx'));
+  const localFileCount = localMdxFiles.length;
+
+  console.log(`   - Found ${remoteFileCount} files in R2.`);
+  console.log(`   - Found ${localFileCount} local files.`);
+
+  if (remoteFileCount === localFileCount) {
+    console.log('✅ File counts match. No sync needed.');
     return;
   }
 
-  for (const item of listedObjects.Contents) {
-    if (!item.Key || item.Key.endsWith('/')) continue;
+  console.log('   - File counts differ. Starting download...');
+  await fs.mkdir(CONTENT_DIR, { recursive: true });
 
+  for (const item of remoteFiles) {
     const relativePath = item.Key.substring(R2_PREFIX.length);
     if (!relativePath) continue;
 
