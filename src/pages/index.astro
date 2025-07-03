@@ -18,7 +18,7 @@ const posts = allPosts
   .sort(({ data: { date: dateA } }, { data: { date: dateB } }) => dateB.valueOf() - dateA.valueOf());
 
 const tagMap = new Map();
-posts.forEach((post) => {
+allPosts.forEach((post) => {
   (post.data.tags || []).forEach((tag) => {
     tagMap.set(tag, (tagMap.get(tag) || 0) + 1);
   });
