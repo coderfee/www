@@ -1,9 +1,9 @@
 import { loadRenderers } from 'astro:container';
 import { getCollection } from 'astro:content';
-import { SITE_DESCRIPTION, SITE_TITLE } from '@/consts';
 import { getContainerRenderer } from '@astrojs/mdx';
 import rss from '@astrojs/rss';
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
+import { SITE_DESCRIPTION, SITE_TITLE } from '@/consts';
 
 export async function GET(context) {
   if (!context.site) {

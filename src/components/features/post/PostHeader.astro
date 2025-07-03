@@ -1,8 +1,8 @@
 ---
 import dayjs from 'dayjs';
 import IconCalendar from '~icons/tabler/calendar';
-import IconHash from '~icons/tabler/hash';
 import IconCopy from '~icons/tabler/copy';
+import IconHash from '~icons/tabler/hash';
 
 interface Props {
   title: string;
@@ -66,8 +66,9 @@ const { title, date, tags = [], tldr, markdown } = Astro.props;
 </div>
 
 <script is:inline define:vars={{ title, markdown }}>
+  const copyright = '\n\n---\n\n© 2025 [coderfee.com](https://coderfee.com). All rights reserved.\n转载请注明出处。'
   const copyMarkdown = document.getElementById('copy-markdown');
   copyMarkdown.addEventListener('click', () => {
-    navigator.clipboard.writeText(`# ${title}\n\n${markdown}`);
+    navigator.clipboard.writeText(`# ${title}\n\n${markdown}${copyright}`);
   });
 </script>
