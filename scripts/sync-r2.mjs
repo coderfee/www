@@ -19,7 +19,7 @@ const PROJECT_CONTENT_DIR = path.join(process.cwd(), 'src/content/newsletter');
 
 const isProd = process.env.NODE_ENV === 'production';
 const CACHE_BASE_DIR = isProd
-  ? path.join(os.homedir(), '.pnpm-store')
+  ? path.join(os.homedir(), '.pnpm-store/v10')
   : path.join(process.cwd(), 'node_modules/.cache');
 const CACHE_DIR = path.join(CACHE_BASE_DIR, 'newsletters');
 
