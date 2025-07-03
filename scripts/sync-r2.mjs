@@ -1,5 +1,4 @@
 import { promises as fs } from 'node:fs';
-import os from 'node:os';
 import path from 'node:path';
 import { GetObjectCommand, ListObjectsV2Command, S3Client } from '@aws-sdk/client-s3';
 import 'dotenv/config';
@@ -17,13 +16,7 @@ const BUCKET_NAME = process.env.R2_BUCKET_NAME;
 const R2_PREFIX = 'Newsletter/';
 const PROJECT_CONTENT_DIR = path.join(process.cwd(), 'src/content/newsletter');
 
-const isProd = process.env.NODE_ENV === 'production';
-const CACHE_BASE_DIR = isProd
-  ? path.join(os.homedir(), '.pnpm-store/v10')
-  : path.join(process.cwd(), 'node_modules/.cache');
-const CACHE_DIR = path.join(CACHE_BASE_DIR, 'newsletters');
-
-console.log(`Using cache directory: ${CACHE_DIR}`);
+const CACHE_DIR = '/tmp/newsletters';
 
 async function streamToString(stream) {
   const chunks = [];
