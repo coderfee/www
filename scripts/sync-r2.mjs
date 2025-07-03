@@ -1,7 +1,11 @@
 import { promises as fs } from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { GetObjectCommand, ListObjectsV2Command, S3Client } from '@aws-sdk/client-s3';
 import 'dotenv/config';
+
+const isCF =
+  typeof navigator !== 'undefined' && navigator.userAgent === 'Cloudflare-Worker';
 
 const R2 = new S3Client({
   region: 'auto',
@@ -13,8 +17,13 @@ const R2 = new S3Client({
 });
 
 const BUCKET_NAME = process.env.R2_BUCKET_NAME;
-const CONTENT_DIR = path.join(process.cwd(), 'src/content/newsletter');
 const R2_PREFIX = 'Newsletter/';
+const PROJECT_CONTENT_DIR = path.join(process.cwd(), 'src/content/newsletter');
+
+const CACHE_BASE_DIR = isCF
+  ? path.join(os.homedir(), '.pnpm-store')
+  : path.join(process.cwd(), 'node_modules/.cache');
+const CACHE_DIR = path.join(CACHE_BASE_DIR, 'newsletters');
 
 async function streamToString(stream) {
   const chunks = [];
@@ -43,52 +52,77 @@ async function getLocalFiles(dir) {
   }
 }
 
-async function syncR2() {
-  console.log('🚀 Starting sync with Cloudflare R2...');
-
+async function getRemoteFiles() {
   const listedObjects = await R2.send(
     new ListObjectsV2Command({
       Bucket: BUCKET_NAME,
       Prefix: R2_PREFIX,
     }),
   );
+  return listedObjects.Contents?.filter((item) => item.Key && !item.Key.endsWith('/')) || [];
+}
 
-  const remoteFiles = listedObjects.Contents?.filter((item) => item.Key && !item.Key.endsWith('/')) || [];
+async function syncR2ToCache(remoteFiles, cachedFiles) {
   const remoteFileCount = remoteFiles.length;
-
-  const localMdxFiles = (await getLocalFiles(CONTENT_DIR)).filter((file) => file.endsWith('.mdx'));
-  const localFileCount = localMdxFiles.length;
+  const localFileCount = cachedFiles.length;
 
   console.log(`   - Found ${remoteFileCount} files in R2.`);
-  console.log(`   - Found ${localFileCount} local files.`);
+  console.log(`   - Found ${localFileCount} cached files.`);
 
   if (remoteFileCount === localFileCount) {
-    console.log('✅ File counts match. No sync needed.');
+    console.log('✅ Cache is up to date. No sync needed.');
     return;
   }
 
-  console.log('   - File counts differ. Starting download...');
-  await fs.mkdir(CONTENT_DIR, { recursive: true });
+  console.log('   - Cache is outdated. Starting download...');
+  await fs.mkdir(CACHE_DIR, { recursive: true });
 
   for (const item of remoteFiles) {
     const relativePath = item.Key.substring(R2_PREFIX.length);
     if (!relativePath) continue;
 
     const newRelativePath = relativePath.replace(/\.md$/, '.mdx');
-    const localPath = path.join(CONTENT_DIR, newRelativePath);
+    const localPath = path.join(CACHE_DIR, newRelativePath);
     const localDir = path.dirname(localPath);
 
     await fs.mkdir(localDir, { recursive: true });
 
-    console.log(`   - Downloading ${item.Key} to ${newRelativePath}...`);
+    console.log(`   - Downloading ${item.Key} to cache...`);
 
     const object = await R2.send(new GetObjectCommand({ Bucket: BUCKET_NAME, Key: item.Key }));
     const content = await streamToString(object.Body);
 
     await fs.writeFile(localPath, content);
   }
-
-  console.log('✅ Sync with R2 complete.');
+  console.log('✅ Cache sync complete.');
 }
 
-syncR2().catch(console.error);
+async function copyFiles(sourceDir, destDir) {
+  await fs.rm(destDir, { recursive: true, force: true });
+  await fs.mkdir(destDir, { recursive: true });
+  const filesToCopy = await getLocalFiles(sourceDir);
+  for (const file of filesToCopy) {
+    const relativePath = path.relative(sourceDir, file);
+    const destPath = path.join(destDir, relativePath);
+    await fs.mkdir(path.dirname(destPath), { recursive: true });
+    await fs.copyFile(file, destPath);
+  }
+}
+
+async function main() {
+  console.log('🚀 Starting sync with Cloudflare R2...');
+
+  await fs.mkdir(CACHE_DIR, { recursive: true });
+
+  const remoteFiles = await getRemoteFiles();
+  const cachedFiles = (await getLocalFiles(CACHE_DIR)).filter((file) => file.endsWith('.mdx'));
+
+  await syncR2ToCache(remoteFiles, cachedFiles);
+
+  console.log('   - Copying files to project directory...');
+  await copyFiles(CACHE_DIR, PROJECT_CONTENT_DIR);
+
+  console.log('✅ Sync complete.');
+}
+
+main().catch(console.error);
