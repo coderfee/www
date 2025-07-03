@@ -21,9 +21,11 @@ const R2_PREFIX = 'Newsletter/';
 const PROJECT_CONTENT_DIR = path.join(process.cwd(), 'src/content/newsletter');
 
 const CACHE_BASE_DIR = isCF
-  ? path.join(os.homedir(), '.pnpm-store')
+  ? path.join('/opt/buildhome', '.pnpm-store')
   : path.join(process.cwd(), 'node_modules/.cache');
 const CACHE_DIR = path.join(CACHE_BASE_DIR, 'newsletters');
+
+console.log(`Using cache directory: ${CACHE_DIR}`);
 
 async function streamToString(stream) {
   const chunks = [];
