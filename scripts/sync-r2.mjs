@@ -4,9 +4,6 @@ import path from 'node:path';
 import { GetObjectCommand, ListObjectsV2Command, S3Client } from '@aws-sdk/client-s3';
 import 'dotenv/config';
 
-const isCF =
-  typeof navigator !== 'undefined' && navigator.userAgent === 'Cloudflare-Worker';
-
 const R2 = new S3Client({
   region: 'auto',
   endpoint: `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
@@ -20,8 +17,9 @@ const BUCKET_NAME = process.env.R2_BUCKET_NAME;
 const R2_PREFIX = 'Newsletter/';
 const PROJECT_CONTENT_DIR = path.join(process.cwd(), 'src/content/newsletter');
 
-const CACHE_BASE_DIR = isCF
-  ? path.join('/opt/buildhome', '.pnpm-store')
+const isProd = process.env.NODE_ENV === 'production';
+const CACHE_BASE_DIR = isProd
+  ? path.join(os.homedir(), '.pnpm-store')
   : path.join(process.cwd(), 'node_modules/.cache');
 const CACHE_DIR = path.join(CACHE_BASE_DIR, 'newsletters');
 
