@@ -58,3 +58,14 @@ function fallbackCopyTextToClipboard(text: string) {
     document.body.removeChild(textArea);
   }
 }
+
+// base64 解码
+export function base64Decode(str: string): string {
+  if (typeof window === 'undefined') return str;
+  return decodeURIComponent(
+    atob(str)
+      .split('')
+      .map((c) => `%${(`00${c.charCodeAt(0).toString(16)}`).slice(-2)}`)
+      .join(''),
+  );
+}

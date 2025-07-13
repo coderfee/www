@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import { getContainerRenderer } from '@astrojs/mdx';
 import rss from '@astrojs/rss';
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
-import { SITE_DESCRIPTION, SITE_TITLE } from '@/consts';
+import { FOLO_CHALLENGE, SITE_DESCRIPTION, SITE_TITLE } from '@/consts';
 
 export async function GET(context) {
   if (!context.site) {
@@ -21,9 +21,9 @@ export async function GET(context) {
 
   return rss({
     title: SITE_TITLE,
-    description: `${SITE_DESCRIPTION} feedId:52340201851637784+userId:55812696340985856`,
+    description: SITE_DESCRIPTION,
     site: context.site,
-    // stylesheet: '/rss/styles.xsl',
+    customData: FOLO_CHALLENGE,
     items: await Promise.all(
       posts.map(async (post) => ({
         ...post.data,
