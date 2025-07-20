@@ -32,6 +32,20 @@ export default defineConfig({
     prefetchAll: true,
     defaultStrategy: 'viewport',
   },
+  image: {
+    // 配置图片优化设置
+    service: {
+      entrypoint: 'astro/assets/services/sharp',
+      config: {
+        limitInputPixels: 268402689, // 限制输入像素数量 (16384x16384)
+      },
+    },
+    // 配置图片格式和质量
+    domains: [],
+    remotePatterns: [],
+    // 启用图片优化
+    experimentalLayout: 'responsive',
+  },
   markdown: {
     syntaxHighlight: 'shiki',
     gfm: true,

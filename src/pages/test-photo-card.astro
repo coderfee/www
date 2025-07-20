@@ -1,0 +1,104 @@
+---
+import BaseLayout from '@/components/layouts/BaseLayout.astro';
+import PhotoCard from '@/components/features/photos/PhotoCard.astro';
+import type { PhotoData } from '@/types/photos';
+
+// 创建测试照片数据
+const testPhotos: PhotoData[] = [
+  {
+    id: 'test-sunset',
+    title: '日落时分',
+    description: '在海边拍摄的美丽日落，天空呈现出绚烂的橙红色渐变',
+    image: '/src/assets/photos/sunset-001.jpg',
+    category: '风景',
+    tags: ['日落', '海边', '自然', '风景'],
+    date: new Date('2024-06-15'),
+    alt: '海边日落景色，天空呈现橙红色渐变，海面波光粼粼'
+  },
+  {
+    id: 'test-cityscape',
+    title: '城市夜景',
+    description: '现代都市的璀璨夜景，高楼大厦灯火通明',
+    image: '/src/assets/photos/cityscape-001.jpg',
+    category: '城市',
+    tags: ['夜景', '城市', '建筑'],
+    date: new Date('2024-05-20'),
+    alt: '城市夜景，高楼大厦灯火辉煌'
+  },
+  {
+    id: 'test-coffee',
+    title: '咖啡时光',
+    description: '悠闲的午后，一杯香浓的咖啡',
+    image: '/src/assets/photos/coffee-001.jpg',
+    category: '生活',
+    tags: ['咖啡', '生活', '静物'],
+    date: new Date('2024-04-10'),
+    alt: '一杯咖啡放在木桌上，旁边有咖啡豆'
+  },
+  {
+    id: 'test-mountain',
+    title: '山间小径',
+    description: '蜿蜒的山路通向远方，两旁绿树成荫',
+    image: '/src/assets/photos/mountain-path-001.jpg',
+    category: '风景',
+    tags: ['山路', '自然', '徒步'],
+    date: new Date('2024-03-25'),
+    alt: '山间蜿蜒的小径，两旁绿树环绕'
+  }
+];
+---
+
+<BaseLayout title="PhotoCard 组件测试" description="测试 PhotoCard.astro 组件的功能">
+  <div class="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-blue-50 dark:from-zinc-900 dark:via-purple-900/20 dark:to-blue-900/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
+      <!-- 页面标题 -->
+      <header class="text-center mb-12">
+        <h1 class="text-4xl font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-blue-600 bg-clip-text text-transparent mb-4">
+          PhotoCard 组件测试
+        </h1>
+        <p class="text-lg text-zinc-600 dark:text-zinc-300 max-w-2xl mx-auto">
+          测试 PhotoCard.astro 组件的悬停效果、点击事件和响应式布局
+        </p>
+      </header>
+
+      <!-- 照片网格 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {testPhotos.map((photo, index) => (
+          <PhotoCard photo={photo} index={index} />
+        ))}
+      </div>
+
+      <!-- 说明文字 -->
+      <div class="mt-12 text-center">
+        <div class="bg-white/50 dark:bg-zinc-800/50 backdrop-blur-sm rounded-lg p-6 max-w-2xl mx-auto">
+          <h2 class="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-3">
+            测试说明
+          </h2>
+          <ul class="text-sm text-zinc-600 dark:text-zinc-400 space-y-2 text-left">
+            <li>• <strong>悬停效果</strong>: 鼠标悬停时卡片会轻微上移，图片会放大，显示放大镜图标</li>
+            <li>• <strong>点击事件</strong>: 点击卡片会在控制台输出事件信息（打开开发者工具查看）</li>
+            <li>• <strong>响应式布局</strong>: 在不同屏幕尺寸下自动调整网格列数</li>
+            <li>• <strong>无障碍支持</strong>: 支持键盘导航（Tab 键聚焦，Enter 或空格键激活）</li>
+            <li>• <strong>错误处理</strong>: 图片加载失败时显示占位符</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  // 监听灯箱打开事件
+  document.addEventListener('openLightbox', (event) => {
+    const detail = (event as CustomEvent).detail;
+    console.log('🖼️ 灯箱事件触发:', {
+      index: detail.index,
+      photoId: detail.photoId,
+      timestamp: new Date().toISOString()
+    });
+    
+    // 显示一个简单的提示，因为灯箱组件还未实现
+    alert(`照片卡片点击成功！\n\n照片索引: ${detail.index}\n照片ID: ${detail.photoId}\n\n注意：灯箱组件将在后续任务中实现。`);
+  });
+</script>
+</BaseLayout>

@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/components/layouts/BaseLayout.astro';
+import BackgroundDecoration from '@/components/common/BackgroundDecoration.astro';
+import PhotoGallery from '@/components/features/photos/PhotoGallery.astro';
+import { transformPhotoData, extractCategories, sortPhotosByDate } from '@/utils/photos';
+
+// 获取所有照片数据
+const allPhotos = await getCollection('photos');
+
+// 转换照片数据格式
+const transformedPhotos = allPhotos.map(transformPhotoData);
+
+// 按日期排序（最新的在前）
+const photos = sortPhotosByDate(transformedPhotos, 'desc');
+
+// 提取所有分类
+const categories = extractCategories(photos);
+
+// SEO 元数据
+const pageTitle = "照片库";
+const pageDescription = "浏览精选照片集合，包含风景、城市、生活等各类摄影作品。发现美好瞬间，感受视觉艺术的魅力。";
+const ogImage = photos.length > 0 ? photos[0].image : undefined;
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} ogImage={ogImage}>
+  <div class="relative min-h-screen">
+    <BackgroundDecoration />
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+      <!-- 页面标题 -->
+      <header class="text-center mb-16">
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-blue-600 bg-clip-text text-transparent mb-6">
+          照片库
+        </h1>
+        <p class="text-lg sm:text-xl text-zinc-600 dark:text-zinc-300 max-w-2xl mx-auto leading-relaxed">
+          {pageDescription}
+        </p>
+        
+
+      </header>
+
+      <!-- 照片网格容器组件 -->
+      <PhotoGallery photos={photos} categories={categories} />
+    </div>
+  </div>
+</BaseLayout>
+

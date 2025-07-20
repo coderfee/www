@@ -2,6 +2,7 @@
 import ArchiveIcon from '~icons/tabler/archive';
 import BookIcon from '~icons/tabler/book-2';
 import HomeIcon from '~icons/tabler/home';
+import PhotoIcon from '~icons/tabler/photo';
 import UserIcon from '~icons/tabler/user';
 
 const pathname = new URL(Astro.request.url).pathname;
@@ -14,6 +15,7 @@ const isActive = (path: string) => {
 const navItems = [
   { name: '首页', path: '/', icon: HomeIcon },
   { name: '周刊', path: '/newsletter', icon: BookIcon, target: '_blank' },
+  { name: '照片', path: '/photos', icon: PhotoIcon },
   { name: '归档', path: '/archive', icon: ArchiveIcon },
   { name: '关于我', path: '/blog/pages/about', icon: UserIcon },
 ];
@@ -36,6 +38,11 @@ const { showNavigation = true } = Astro.props;
               light: 'text-purple-500 hover:text-purple-600',
               dark: 'dark:text-purple-400 dark:hover:text-purple-300',
               inactive: 'hover:text-purple-500 dark:hover:text-purple-400'
+            },
+            '/photos': {
+              light: 'text-orange-500 hover:text-orange-600',
+              dark: 'dark:text-orange-400 dark:hover:text-orange-300',
+              inactive: 'hover:text-orange-500 dark:hover:text-orange-400'
             },
             '/archive': {
               light: 'text-blue-500 hover:text-blue-600',

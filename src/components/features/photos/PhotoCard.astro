@@ -1,0 +1,322 @@
+---
+import type { PhotoData } from '@/types/photos';
+
+interface Props {
+  photo: PhotoData;
+  index?: number;
+  class?: string;
+}
+
+const { photo, index = 0, class: className = '' } = Astro.props;
+
+// 格式化日期
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString('zh-CN', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  });
+};
+---
+
+<div 
+  class={`photo-card group relative overflow-hidden rounded-lg bg-white/10 backdrop-blur-lg border border-white/20 hover:border-violet-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-violet-500/20 cursor-pointer hover:-translate-y-0.5 ${className}`}
+  data-photo-index={index}
+  data-photo-id={photo.id}
+>
+  <!-- 照片容器 -->
+  <div class="aspect-square overflow-hidden relative">
+    <!-- 主图片 -->
+    <img
+      src={photo.thumbnail || photo.image}
+      alt={photo.alt}
+      class="w-full h-full object-cover group-hover:scale-105 transition-all duration-300"
+      loading="lazy"
+      width={photo.width}
+      height={photo.height}
+    />
+    
+    <!-- 悬停遮罩和放大图标 -->
+    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+      <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 scale-0 group-hover:scale-100 transition-all duration-300">
+        <svg 
+          class="w-6 h-6 text-white" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path 
+            stroke-linecap="round" 
+            stroke-linejoin="round" 
+            stroke-width="2" 
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" 
+          />
+        </svg>
+      </div>
+    </div>
+    
+    <!-- 加载失败占位符 -->
+    <div class="photo-error-placeholder absolute inset-0 bg-zinc-100 dark:bg-zinc-800 rounded-lg items-center justify-center hidden">
+      <div class="text-center p-4">
+        <svg 
+          class="w-12 h-12 text-zinc-400 dark:text-zinc-600 mx-auto mb-2" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path 
+            stroke-linecap="round" 
+            stroke-linejoin="round" 
+            stroke-width="2" 
+            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" 
+          />
+        </svg>
+        <p class="text-xs text-zinc-500 dark:text-zinc-400 mb-2">图片加载失败</p>
+        <button 
+          class="photo-retry-btn text-xs bg-violet-500 hover:bg-violet-600 text-white px-2 py-1 rounded transition-colors duration-200"
+          aria-label={`重试加载图片: ${photo.alt}`}
+        >
+          重试
+        </button>
+      </div>
+    </div>
+    
+    <!-- 加载中占位符 -->
+    <div class="photo-loading-placeholder absolute inset-0 bg-zinc-100 dark:bg-zinc-800 rounded-lg items-center justify-center hidden">
+      <div class="text-center">
+        <div class="w-8 h-8 border-2 border-violet-500 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+        <p class="text-xs text-zinc-500 dark:text-zinc-400">加载中...</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 照片信息 -->
+  <div class="p-3 lg:p-4">
+    <!-- 标题 -->
+    <h3 class="font-semibold text-zinc-900 dark:text-zinc-100 mb-1 text-sm lg:text-base line-clamp-1 group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors duration-300">
+      {photo.title}
+    </h3>
+    
+    <!-- 描述 -->
+    {photo.description && (
+      <p class="text-xs lg:text-sm text-zinc-600 dark:text-zinc-400 mb-2 line-clamp-2">
+        {photo.description}
+      </p>
+    )}
+    
+    <!-- 元数据：分类和日期 -->
+    <div class="flex items-center justify-between text-xs">
+      <!-- 分类标签 -->
+      <span class="bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 px-2 py-1 rounded-full text-xs font-medium">
+        {photo.category}
+      </span>
+      
+      <!-- 日期 -->
+      <time 
+        datetime={photo.date.toISOString()}
+        class="text-zinc-500 dark:text-zinc-500"
+      >
+        {formatDate(photo.date)}
+      </time>
+    </div>
+    
+    <!-- 标签 (如果有) -->
+    {photo.tags && photo.tags.length > 0 && (
+      <div class="flex flex-wrap gap-1 mt-2">
+        {photo.tags.slice(0, 3).map(tag => (
+          <span class="text-xs bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-2 py-0.5 rounded">
+            #{tag}
+          </span>
+        ))}
+        {photo.tags.length > 3 && (
+          <span class="text-xs text-zinc-500 dark:text-zinc-500">
+            +{photo.tags.length - 3}
+          </span>
+        )}
+      </div>
+    )}
+  </div>
+</div>
+
+<style>
+  .photo-card {
+    /* 确保卡片有合适的最小高度 */
+    min-height: 200px;
+  }
+  
+  /* 文本截断样式 */
+  .line-clamp-1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  /* 悬停效果增强 */
+  .photo-card:hover {
+    transform: translateY(-2px);
+  }
+  
+  /* 图片加载失败处理 */
+  .photo-card img:not([src]),
+  .photo-card img[src=""] {
+    display: none;
+  }
+  
+  .photo-card img:not([src]) + .photo-error-placeholder,
+  .photo-card img[src=""] + .photo-error-placeholder {
+    display: flex;
+  }
+  
+  /* 响应式调整 */
+  @media (max-width: 768px) {
+    .photo-card {
+      min-height: 180px;
+    }
+  }
+</style>
+
+<script>
+  // 处理照片卡片点击事件
+  document.addEventListener('DOMContentLoaded', () => {
+    const photoCards = document.querySelectorAll('.photo-card');
+    
+    photoCards.forEach((card) => {
+      const img = card.querySelector('img');
+      const errorPlaceholder = card.querySelector('.photo-error-placeholder');
+      const loadingPlaceholder = card.querySelector('.photo-loading-placeholder');
+      const retryBtn = card.querySelector('.photo-retry-btn');
+      let retryCount = 0;
+      const maxRetries = 3;
+      
+      // 显示加载状态
+      const showLoading = () => {
+        if (loadingPlaceholder) {
+          loadingPlaceholder.classList.remove('hidden');
+          loadingPlaceholder.classList.add('flex');
+        }
+        if (errorPlaceholder) {
+          errorPlaceholder.classList.add('hidden');
+          errorPlaceholder.classList.remove('flex');
+        }
+      };
+      
+      // 隐藏加载状态
+      const hideLoading = () => {
+        if (loadingPlaceholder) {
+          loadingPlaceholder.classList.add('hidden');
+          loadingPlaceholder.classList.remove('flex');
+        }
+      };
+      
+      // 显示错误状态
+      const showError = () => {
+        hideLoading();
+        if (errorPlaceholder) {
+          errorPlaceholder.classList.remove('hidden');
+          errorPlaceholder.classList.add('flex');
+        }
+        
+        // 更新重试按钮文本
+        if (retryBtn) {
+          retryBtn.textContent = `重试 (${retryCount}/${maxRetries})`;
+          if (retryCount >= maxRetries) {
+            retryBtn.textContent = '多次重试失败';
+            retryBtn.disabled = true;
+            retryBtn.classList.add('opacity-50', 'cursor-not-allowed');
+          }
+        }
+      };
+      
+      // 隐藏错误状态
+      const hideError = () => {
+        if (errorPlaceholder) {
+          errorPlaceholder.classList.add('hidden');
+          errorPlaceholder.classList.remove('flex');
+        }
+      };
+      
+      // 重试加载图片
+      const retryLoad = () => {
+        if (retryCount >= maxRetries || !img) return;
+        
+        retryCount++;
+        showLoading();
+        
+        // 延迟重试，避免立即重复请求
+        setTimeout(() => {
+          const originalSrc = img.src;
+          img.src = '';
+          // 添加时间戳避免缓存
+          img.src = `${originalSrc}?retry=${retryCount}&t=${Date.now()}`;
+        }, 1000 * retryCount); // 递增延迟
+      };
+      
+      // 处理图片加载错误
+      if (img) {
+        // 初始加载时显示加载状态
+        img.addEventListener('loadstart', showLoading);
+        
+        img.addEventListener('error', () => {
+          console.warn(`Image load failed: ${img.src}, retry count: ${retryCount}`);
+          showError();
+        });
+        
+        img.addEventListener('load', () => {
+          hideLoading();
+          hideError();
+          retryCount = 0; // 重置重试计数
+        });
+        
+        // 处理重试按钮点击
+        if (retryBtn) {
+          retryBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // 防止触发卡片点击事件
+            retryLoad();
+          });
+        }
+      }
+      
+      // 处理卡片点击事件 - 触发灯箱
+      card.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        const photoIndex = card.getAttribute('data-photo-index');
+        const photoId = card.getAttribute('data-photo-id');
+        
+        // 触发自定义事件，让父组件处理灯箱打开
+        const lightboxEvent = new CustomEvent('openLightbox', {
+          detail: {
+            index: parseInt(photoIndex || '0'),
+            photoId: photoId
+          },
+          bubbles: true
+        });
+        
+        card.dispatchEvent(lightboxEvent);
+      });
+      
+      // 键盘无障碍支持
+      card.addEventListener('keydown', (e: KeyboardEvent) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          (card as HTMLElement).click();
+        }
+      });
+      
+      // 添加 tabindex 使卡片可聚焦
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-label', `查看照片: ${card.querySelector('h3')?.textContent || '未知标题'}`);
+    });
+  });
+</script>

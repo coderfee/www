@@ -1,0 +1,228 @@
+---
+import { Image } from 'astro:assets';
+import type { PhotoData } from '@/types/photos';
+import { generateOptimizedImage, generateSizesAttribute, IMAGE_SIZES } from '@/utils/imageOptimization';
+
+interface Props {
+  photo: PhotoData;
+  index: number;
+  eager?: boolean;
+}
+
+const { photo, index, eager = false } = Astro.props;
+
+// 动态导入图片
+let imageModule;
+let optimizedImages = {};
+
+try {
+  // 尝试导入图片模块
+  const imagePath = photo.image.replace('/src/', '../../../');
+  imageModule = await import(imagePath);
+  
+  // 生成优化的图片版本
+  const thumbnail = await generateOptimizedImage(imageModule.default, 'thumbnail', 'webp');
+  const thumbnailAvif = await generateOptimizedImage(imageModule.default, 'thumbnail', 'avif');
+  const thumbnailJpeg = await generateOptimizedImage(imageModule.default, 'thumbnail', 'jpeg');
+  
+  optimizedImages = {
+    webp: thumbnail,
+    avif: thumbnailAvif,
+    jpeg: thumbnailJpeg,
+  };
+} catch (error) {
+  console.warn(`Failed to optimize image for ${photo.title}:`, error);
+  // 使用原始图片路径作为后备
+  optimizedImages = {
+    jpeg: { src: photo.image, width: 400, height: 400 }
+  };
+}
+
+// 生成 sizes 属性
+const sizes = generateSizesAttribute({
+  '(max-width: 640px)': '100vw',
+  '(max-width: 768px)': '50vw',
+  '(max-width: 1024px)': '33vw',
+  '(max-width: 1280px)': '25vw',
+  'default': '20vw',
+});
+---
+
+<div 
+  class="photo-card group relative overflow-hidden rounded-lg sm:rounded-xl bg-white/10 backdrop-blur-lg border border-white/20 hover:border-violet-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-violet-500/20 cursor-pointer touch-manipulation"
+  data-photo-index={index}
+>
+  <!-- 照片容器 -->
+  <div class="aspect-square overflow-hidden relative">
+    <!-- 使用 picture 元素提供多格式支持 -->
+    <picture>
+      <!-- AVIF 格式 (最新浏览器) -->
+      {optimizedImages.avif && (
+        <source 
+          srcset={optimizedImages.avif.src} 
+          type="image/avif"
+          sizes={sizes}
+        />
+      )}
+      
+      <!-- WebP 格式 (现代浏览器) -->
+      {optimizedImages.webp && (
+        <source 
+          srcset={optimizedImages.webp.src} 
+          type="image/webp"
+          sizes={sizes}
+        />
+      )}
+      
+      <!-- JPEG 格式 (后备) -->
+      <img
+        src={optimizedImages.jpeg.src}
+        alt={photo.alt}
+        width={optimizedImages.jpeg.width || IMAGE_SIZES.thumbnail.width}
+        height={optimizedImages.jpeg.height || IMAGE_SIZES.thumbnail.height}
+        loading={eager ? 'eager' : 'lazy'}
+        decoding="async"
+        sizes={sizes}
+        class="w-full h-full object-cover group-hover:scale-105 transition-all duration-300 photo-image"
+        style="content-visibility: auto;"
+      />
+    </picture>
+    
+    <!-- 加载占位符 -->
+    <div class="absolute inset-0 bg-zinc-200 dark:bg-zinc-800 animate-pulse photo-skeleton opacity-100 transition-opacity duration-300">
+      <div class="w-full h-full flex items-center justify-center">
+        <svg class="w-8 h-8 text-zinc-400 dark:text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+      </div>
+    </div>
+    
+    <!-- 悬停遮罩 -->
+    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+      <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-75 group-hover:scale-100">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+        </svg>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 照片信息 -->
+  <div class="p-2 sm:p-3 lg:p-4">
+    <h3 class="font-semibold text-zinc-900 dark:text-zinc-100 mb-1 text-xs sm:text-sm lg:text-base line-clamp-1">
+      {photo.title}
+    </h3>
+    {photo.description && (
+      <p class="text-xs sm:text-xs lg:text-sm text-zinc-600 dark:text-zinc-400 mb-2 line-clamp-2">
+        {photo.description}
+      </p>
+    )}
+    
+    <!-- 元数据 -->
+    <div class="flex items-center justify-between text-xs text-zinc-500 dark:text-zinc-500">
+      <span class="bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-xs">
+        {photo.category}
+      </span>
+      <time datetime={photo.date.toISOString()} class="text-xs">
+        {photo.date.toLocaleDateString('zh-CN')}
+      </time>
+    </div>
+  </div>
+</div>
+
+<script>
+  // 图片加载完成后隐藏骨架屏
+  document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('.photo-image');
+    
+    images.forEach((img) => {
+      const skeleton = img.parentElement?.querySelector('.photo-skeleton');
+      
+      if (img.complete) {
+        skeleton?.classList.add('opacity-0');
+      } else {
+        img.addEventListener('load', () => {
+          skeleton?.classList.add('opacity-0');
+        });
+        
+        img.addEventListener('error', () => {
+          skeleton?.classList.add('opacity-0');
+          // 可以在这里添加错误处理逻辑
+        });
+      }
+    });
+  });
+  
+  // 添加点击事件处理
+  document.addEventListener('click', (e) => {
+    const card = e.target.closest('.photo-card');
+    if (card) {
+      const index = parseInt(card.dataset.photoIndex || '0');
+      // 触发自定义事件，让 React 组件处理
+      window.dispatchEvent(new CustomEvent('photo-click', { 
+        detail: { index } 
+      }));
+    }
+  });
+</script>
+
+<style>
+  .photo-card {
+    /* 使用 content-visibility 优化渲染性能 */
+    content-visibility: auto;
+    contain-intrinsic-size: 300px;
+  }
+  
+  .photo-image {
+    /* 优化图片渲染 */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+  
+  /* 骨架屏动画 */
+  .photo-skeleton {
+    background: linear-gradient(90deg, 
+      rgba(255, 255, 255, 0) 0%, 
+      rgba(255, 255, 255, 0.2) 20%, 
+      rgba(255, 255, 255, 0.5) 60%, 
+      rgba(255, 255, 255, 0)
+    );
+    background-size: 200px 100%;
+    animation: loading 2s infinite;
+  }
+  
+  .dark .photo-skeleton {
+    background: linear-gradient(90deg, 
+      rgba(255, 255, 255, 0) 0%, 
+      rgba(255, 255, 255, 0.05) 20%, 
+      rgba(255, 255, 255, 0.1) 60%, 
+      rgba(255, 255, 255, 0)
+    );
+  }
+  
+  @keyframes loading {
+    0% {
+      background-position: -200px 0;
+    }
+    100% {
+      background-position: calc(200px + 100%) 0;
+    }
+  }
+  
+  /* 响应式优化 */
+  @media (max-width: 640px) {
+    .photo-card {
+      contain-intrinsic-size: 250px;
+    }
+  }
+  
+  /* 减少动画在低性能设备上的影响 */
+  @media (prefers-reduced-motion: reduce) {
+    .photo-card,
+    .photo-image,
+    .photo-skeleton {
+      animation: none;
+      transition: none;
+    }
+  }
+</style>

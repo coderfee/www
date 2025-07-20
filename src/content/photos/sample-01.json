@@ -1,0 +1,36 @@
+{
+  "title": "日落时分",
+  "description": "在海边拍摄的美丽日落，天空呈现出绚烂的橙红色渐变",
+  "image": "/src/assets/photos/cl-001.jpg",
+  "category": "风景",
+  "tags": [
+    "日落",
+    "海边",
+    "自然",
+    "风景"
+  ],
+  "date": "2024-06-15",
+  "alt": "海边日落景色，天空呈现橙红色渐变，海面波光粼粼",
+  "formats": {
+    "webp": "/src/assets/photos/optimized/cl-001-thumbnail.webp",
+    "avif": "/src/assets/photos/optimized/cl-001-thumbnail.avif",
+    "jpeg": "/src/assets/photos/optimized/cl-001-thumbnail.jpeg"
+  },
+  "sizes": {
+    "thumbnail": {
+      "width": 400,
+      "height": 400
+    },
+    "medium": {
+      "width": 800,
+      "height": 800
+    },
+    "large": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  "quality": 85,
+  "priority": false,
+  "thumbnail": "/src/assets/photos/optimized/cl-001-thumbnail.webp"
+}

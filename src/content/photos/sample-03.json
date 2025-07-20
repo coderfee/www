@@ -1,0 +1,36 @@
+{
+  "title": "山间小径",
+  "description": "蜿蜒的山间小径，两旁绿树成荫",
+  "image": "/src/assets/photos/jx-002.jpg",
+  "category": "自然",
+  "tags": [
+    "山景",
+    "小径",
+    "绿色",
+    "徒步"
+  ],
+  "date": "2024-05-20",
+  "alt": "山间蜿蜒小径，两旁树木茂盛，阳光透过树叶洒下斑驳光影",
+  "formats": {
+    "webp": "/src/assets/photos/optimized/jx-002-thumbnail.webp",
+    "avif": "/src/assets/photos/optimized/jx-002-thumbnail.avif",
+    "jpeg": "/src/assets/photos/optimized/jx-002-thumbnail.jpeg"
+  },
+  "sizes": {
+    "thumbnail": {
+      "width": 400,
+      "height": 400
+    },
+    "medium": {
+      "width": 800,
+      "height": 800
+    },
+    "large": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  "quality": 85,
+  "priority": false,
+  "thumbnail": "/src/assets/photos/optimized/jx-002-thumbnail.webp"
+}

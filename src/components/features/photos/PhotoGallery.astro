@@ -1,0 +1,19 @@
+---
+import PhotoGrid from './PhotoGrid';
+import PhotoPerformanceMonitor from './PhotoPerformanceMonitor';
+import PhotoErrorBoundary from './PhotoErrorBoundary';
+import type { PhotoData, PhotoCategory } from '@/types/photos';
+
+export interface Props {
+  photos: PhotoData[];
+  categories: PhotoCategory[];
+}
+
+const { photos, categories } = Astro.props;
+---
+
+<PhotoErrorBoundary client:load>
+  <PhotoGrid photos={photos} categories={categories} client:load />
+</PhotoErrorBoundary>
+<PhotoPerformanceMonitor client:only="react" showStats={import.meta.env.DEV} />
+

@@ -1,0 +1,36 @@
+{
+  "title": "城市夜景",
+  "description": "繁华都市的夜晚，霓虹灯光璀璨夺目",
+  "image": "/src/assets/photos/jx-001.jpg",
+  "category": "城市",
+  "tags": [
+    "夜景",
+    "城市",
+    "建筑",
+    "灯光"
+  ],
+  "date": "2024-07-02",
+  "alt": "城市夜景，高楼大厦灯火通明，街道车流如织",
+  "formats": {
+    "webp": "/src/assets/photos/optimized/jx-001-thumbnail.webp",
+    "avif": "/src/assets/photos/optimized/jx-001-thumbnail.avif",
+    "jpeg": "/src/assets/photos/optimized/jx-001-thumbnail.jpeg"
+  },
+  "sizes": {
+    "thumbnail": {
+      "width": 400,
+      "height": 400
+    },
+    "medium": {
+      "width": 800,
+      "height": 800
+    },
+    "large": {
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  "quality": 85,
+  "priority": false,
+  "thumbnail": "/src/assets/photos/optimized/jx-001-thumbnail.webp"
+}

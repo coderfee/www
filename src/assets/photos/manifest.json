@@ -1,0 +1,24 @@
+{
+  "cl": {
+    "001": {
+      "large": "/src/assets/photos/optimized/cl-001-large.webp",
+      "lightbox": "/src/assets/photos/optimized/cl-001-lightbox.webp",
+      "medium": "/src/assets/photos/optimized/cl-001-medium.webp",
+      "thumbnail": "/src/assets/photos/optimized/cl-001-thumbnail.webp"
+    }
+  },
+  "jx": {
+    "001": {
+      "large": "/src/assets/photos/optimized/jx-001-large.webp",
+      "lightbox": "/src/assets/photos/optimized/jx-001-lightbox.webp",
+      "medium": "/src/assets/photos/optimized/jx-001-medium.webp",
+      "thumbnail": "/src/assets/photos/optimized/jx-001-thumbnail.webp"
+    },
+    "002": {
+      "large": "/src/assets/photos/optimized/jx-002-large.webp",
+      "lightbox": "/src/assets/photos/optimized/jx-002-lightbox.webp",
+      "medium": "/src/assets/photos/optimized/jx-002-medium.webp",
+      "thumbnail": "/src/assets/photos/optimized/jx-002-thumbnail.webp"
+    }
+  }
+}
