@@ -7,6 +7,7 @@ interface ImportMetaEnv {
   readonly PUBLIC_BASE_API_URL: string;
 }
 
+// biome-ignore lint/correctness/noUnusedVariables: import.meta
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }

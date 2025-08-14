@@ -1,35 +1,9 @@
 export const getHref = () => {
   if (typeof window === 'undefined') return '';
   const url = new URL(window.location.href);
-  // 处理更多开发环境的情况
   const hostname = url.hostname.replace(/^(dev\.|local\.)/, '');
   return `https://${hostname}${url.pathname}`.replace(/\/$/, '');
 };
-
-export function throttle(func: Function, timeFrame: number) {
-  let lastTime = 0;
-  return function (...args: any) {
-    const now = Date.now();
-    if (now - lastTime >= timeFrame) {
-      func(...args);
-      lastTime = now;
-    }
-  };
-}
-
-export function debounce(func: Function, wait: number, immediate: boolean) {
-  let timeout: NodeJS.Timeout;
-  return function () {
-    let context = this,
-      args = arguments;
-    clearTimeout(timeout);
-    if (immediate && !timeout) func.apply(context, args);
-    timeout = setTimeout(function () {
-      clearTimeout(timeout);
-      if (!immediate) func.apply(context, args);
-    }, wait);
-  };
-}
 
 export function copyTextToClipboard(text: string): Promise<void> {
   return new Promise((resolve) => {
@@ -59,7 +33,6 @@ function fallbackCopyTextToClipboard(text: string) {
   }
 }
 
-// base64 解码
 export function base64Decode(str: string): string {
   if (typeof window === 'undefined') return str;
   return decodeURIComponent(
