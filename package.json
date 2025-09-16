@@ -23,7 +23,7 @@
     "@types/react": "^18.3.24",
     "@types/react-dom": "^18.3.7",
     "astro": "^5.13.7",
-    "astro-embed": "^0.9.0",
+    "astro-embed": "^0.9.1",
     "astro-pagefind": "^1.8.5",
     "framer-motion": "^12.23.12",
     "ky": "^1.10.0",
@@ -40,16 +40,16 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@aws-sdk/client-s3": "^3.886.0",
+    "@aws-sdk/client-s3": "^3.888.0",
     "@biomejs/biome": "^2.2.4",
     "@iconify-json/tabler": "^1.2.22",
-    "@iconify/react": "^6.0.1",
+    "@iconify/react": "^6.0.2",
     "@tailwindcss/typography": "^0.5.16",
     "@types/node": "latest",
     "dayjs": "^1.11.18",
     "dotenv": "^17.2.2",
-    "lefthook": "^1.12.4",
-    "unplugin-icons": "^22.2.0"
+    "lefthook": "^1.13.0",
+    "unplugin-icons": "^22.3.0"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
