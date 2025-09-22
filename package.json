@@ -48,7 +48,7 @@
     "@types/node": "latest",
     "dayjs": "^1.11.18",
     "dotenv": "^17.2.2",
-    "lefthook": "^1.13.1",
+    "lefthook": "^1.13.2",
     "unplugin-icons": "^22.3.0"
   },
   "pnpm": {
