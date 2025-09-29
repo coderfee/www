@@ -44,7 +44,7 @@
     "@biomejs/biome": "^2.2.4",
     "@iconify-json/tabler": "^1.2.23",
     "@iconify/react": "^6.0.2",
-    "@tailwindcss/typography": "^0.5.18",
+    "@tailwindcss/typography": "^0.5.19",
     "@types/node": "latest",
     "dayjs": "^1.11.18",
     "dotenv": "^17.2.2",
