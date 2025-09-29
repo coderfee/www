@@ -42,8 +42,8 @@ importers:
         specifier: ^12.23.19
         version: 12.23.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       ky:
-        specifier: ^1.10.0
-        version: 1.10.0
+        specifier: ^1.11.0
+        version: 1.11.0
       pagefind:
         specifier: ^1.4.0
         version: 1.4.0
@@ -1975,8 +1975,8 @@ packages:
   kolorist@1.8.0:
     resolution: {integrity: sha512-Y+60/zizpJ3HRH8DCss+q95yr6145JXZo46OTpFvDZWLfRCE4qChOyk1b26nMaNpfHHgxagk9dXT5OP0Tfe+dQ==}
 
-  ky@1.10.0:
-    resolution: {integrity: sha512-YRPCzHEWZffbfvmRrfwa+5nwBHwZuYiTrfDX0wuhGBPV0pA/zCqcOq93MDssON/baIkpYbvehIX5aLpMxrRhaA==}
+  ky@1.11.0:
+    resolution: {integrity: sha512-NEyo0ICpS0cqSuyoJFMCnHOZJILqXsKhIZlHJGDYaH8OB5IFrGzuBpEwyoMZG6gUKMPrazH30Ax5XKaujvD8ag==}
     engines: {node: '>=18'}
 
   lefthook-darwin-arm64@1.13.4:
@@ -5444,7 +5444,7 @@ snapshots:
 
   kolorist@1.8.0: {}
 
-  ky@1.10.0: {}
+  ky@1.11.0: {}
 
   lefthook-darwin-arm64@1.13.4:
     optional: true
