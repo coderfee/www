@@ -5,7 +5,12 @@
     @apply text-[12pt] leading-[1.3] bg-white text-black;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     page-break-after: avoid;
     page-break-inside: avoid;
   }
@@ -15,11 +20,18 @@
     page-break-inside: avoid;
   }
 
-  a, a:visited {
+  a,
+  a:visited {
     @apply no-underline text-black;
   }
 
-  div, section, p, ul, ol, dl, table {
+  div,
+  section,
+  p,
+  ul,
+  ol,
+  dl,
+  table {
     @apply text-black;
   }
 

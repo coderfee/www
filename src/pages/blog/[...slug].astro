@@ -1,8 +1,7 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
-import { getEntry } from 'astro:content';
-import BackToTop from '@/components/common/BackToTop.astro';
+import { type CollectionEntry, getCollection, getEntry } from 'astro:content';
 import BackgroundGrid from '@/components/common/BackgroundGrid.astro';
+import BackToTop from '@/components/common/BackToTop.astro';
 import Visitor from '@/components/common/Visitor';
 import License from '@/components/features/post/License.astro';
 import PostHeader from '@/components/features/post/PostHeader.astro';
@@ -10,9 +9,9 @@ import PostNavigation from '@/components/features/post/PostNavigation.astro';
 import PostSummary from '@/components/features/post/PostSummary';
 import RelatedPosts from '@/components/features/post/RelatedPosts.astro';
 import BaseLayout from '@/components/layouts/BaseLayout.astro';
+import { AUTHOR } from '@/consts';
 import IconMessageCircle from '~icons/tabler/message-circle';
 import IconSeparator from '~icons/tabler/separator';
-import { AUTHOR } from '@/consts';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');

@@ -22,5 +22,5 @@ body {
 }
 
 .newsletter img {
-  @apply rounded-lg shadow-lg;  
+  @apply rounded-lg shadow-lg;
 }

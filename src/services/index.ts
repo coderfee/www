@@ -26,7 +26,7 @@ export const http = ky.create({
   },
 });
 
-export async function view(json: { slug: string, title: string }) {
+export async function view(json: { slug: string; title: string }) {
   return await http
     .post('blog/post/view', {
       json,
@@ -34,7 +34,7 @@ export async function view(json: { slug: string, title: string }) {
     .json<ApiResponse<number>>();
 }
 
-export async function summary(json: { slug: string, content: string }) {
+export async function summary(json: { slug: string; content: string }) {
   return await http
     .post('blog/post/summary', {
       json,
