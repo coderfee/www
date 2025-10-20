@@ -49,7 +49,7 @@
     "dayjs": "^1.11.18",
     "dotenv": "^17.2.3",
     "lefthook": "^1.13.6",
-    "unplugin-icons": "^22.4.2"
+    "unplugin-icons": "^22.5.0"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
