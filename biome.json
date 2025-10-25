@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.1.0/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.3.0/schema.json",
   "formatter": {
     "enabled": true,
     "formatWithErrors": false,
@@ -9,7 +9,25 @@
     "lineWidth": 120,
     "attributePosition": "auto"
   },
-  "assist": { "actions": { "source": { "organizeImports": "on" } } },
+  "html": {
+    "formatter": {
+      "enabled": true,
+      "indentScriptAndStyle": true
+    },
+    "experimentalFullSupportEnabled": true
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  },
   "linter": {
     "enabled": true,
     "rules": {
@@ -27,7 +45,10 @@
         "noUselessElse": "error"
       }
     },
-    "includes": ["**/*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}", "!**/*.astro"]
+    "includes": [
+      "**/*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}",
+      "!**/*.astro"
+    ]
   },
   "javascript": {
     "formatter": {
