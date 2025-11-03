@@ -2,7 +2,7 @@
   "name": "www",
   "type": "module",
   "version": "3.0.0",
-  "packageManager": "pnpm@10.12.4",
+  "packageManager": "pnpm@10.20.0",
   "scripts": {
     "dev": "pnpm run sync-r2 && astro dev",
     "start": "astro dev",
@@ -48,7 +48,7 @@
     "@types/node": "latest",
     "dayjs": "^1.11.19",
     "dotenv": "^17.2.3",
-    "lefthook": "^1.13.6",
+    "lefthook": "^2.0.2",
     "unplugin-icons": "^22.5.0"
   },
   "pnpm": {
