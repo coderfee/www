@@ -25,7 +25,7 @@ import companyList from './_data.json';
   <body class="bg-zinc-50 dark:bg-zinc-900 min-h-screen font-sans text-zinc-800 dark:text-zinc-200">
     <!-- 背景装饰 -->
     <div class="fixed inset-0 -z-10 overflow-hidden">
-      <div class="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#3f3f46_1px,transparent_1px)] [background-size:20px_20px] opacity-50"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#3f3f46_1px,transparent_1px)] bg-size-[20px_20px] opacity-50"></div>
     </div>
 
     <!-- 顶部导航 -->
@@ -68,8 +68,8 @@ import companyList from './_data.json';
               
               <div class="pl-6 pr-4 py-5 sm:py-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
                 {/* 公司图标和名称 */}
-                <div class="flex items-center gap-3 min-w-0 flex-shrink-0">
-                  <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-zinc-100 dark:bg-zinc-700 flex items-center justify-center text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-600">
+                <div class="flex items-center gap-3 min-w-0 shrink-0">
+                  <div class="shrink-0 w-10 h-10 rounded-lg bg-zinc-100 dark:bg-zinc-700 flex items-center justify-center text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-600">
                     <IconBuildingSkyscraper class="w-5 h-5" />
                   </div>
                   <div class="min-w-0">
@@ -122,7 +122,7 @@ import companyList from './_data.json';
         
         <div class="sticky top-0 z-10 flex items-center justify-between p-6 backdrop-blur-sm bg-white/90 dark:bg-zinc-800/90 border-b border-zinc-200 dark:border-zinc-700">
           <div class="flex items-center gap-3">
-            <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-zinc-100 dark:bg-zinc-700 flex items-center justify-center text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-600">
+            <div class="shrink-0 w-10 h-10 rounded-lg bg-zinc-100 dark:bg-zinc-700 flex items-center justify-center text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-600">
               <IconBuildingSkyscraper class="w-5 h-5" />
             </div>
             <h2 id="modalTitle" class="text-xl md:text-2xl font-bold text-zinc-800 dark:text-zinc-100"></h2>
