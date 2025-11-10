@@ -13,7 +13,7 @@ const R2 = new S3Client({
 });
 
 const BUCKET_NAME = process.env.R2_BUCKET_NAME;
-const R2_PREFIX = 'Newsletter/';
+const R2_PREFIX = '明日周刊/';
 const PROJECT_CONTENT_DIR = path.join(process.cwd(), 'src/content/newsletter');
 
 const CACHE_DIR = '/tmp/newsletters';
