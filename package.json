@@ -15,15 +15,15 @@
     "sync-r2": "node scripts/sync-r2.mjs"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.10",
+    "@astrojs/mdx": "^4.3.12",
     "@astrojs/react": "^4.4.2",
-    "@astrojs/rss": "^4.0.13",
+    "@astrojs/rss": "^4.0.14",
     "@astrojs/sitemap": "^3.6.0",
     "@tailwindcss/vite": "^4.1.17",
-    "@types/react": "^19.2.2",
-    "@types/react-dom": "^19.2.2",
-    "astro": "^5.15.4",
-    "astro-embed": "^0.9.1",
+    "@types/react": "^19.2.6",
+    "@types/react-dom": "^19.2.3",
+    "astro": "^5.16.0",
+    "astro-embed": "^0.9.2",
     "astro-pagefind": "^1.8.5",
     "framer-motion": "^12.23.24",
     "ky": "^1.14.0",
@@ -40,15 +40,15 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@aws-sdk/client-s3": "^3.927.0",
-    "@biomejs/biome": "^2.3.4",
+    "@aws-sdk/client-s3": "^3.937.0",
+    "@biomejs/biome": "^2.3.7",
     "@iconify-json/tabler": "^1.2.23",
     "@iconify/react": "^6.0.2",
     "@tailwindcss/typography": "^0.5.19",
     "@types/node": "latest",
     "dayjs": "^1.11.19",
     "dotenv": "^17.2.3",
-    "lefthook": "^2.0.2",
+    "lefthook": "^2.0.4",
     "unplugin-icons": "^22.5.0"
   },
   "pnpm": {
