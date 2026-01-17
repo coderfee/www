@@ -2,11 +2,9 @@
 import { type CollectionEntry, getCollection, getEntry } from 'astro:content';
 import BackgroundGrid from '@/components/common/BackgroundGrid.astro';
 import BackToTop from '@/components/common/BackToTop.astro';
-import Visitor from '@/components/common/Visitor';
 import License from '@/components/features/post/License.astro';
 import PostHeader from '@/components/features/post/PostHeader.astro';
 import PostNavigation from '@/components/features/post/PostNavigation.astro';
-import PostSummary from '@/components/features/post/PostSummary';
 import RelatedPosts from '@/components/features/post/RelatedPosts.astro';
 import BaseLayout from '@/components/layouts/BaseLayout.astro';
 import { AUTHOR } from '@/consts';
@@ -94,9 +92,6 @@ const jsonLd = {
            prose-headings:text-zinc-900 dark:prose-headings:text-zinc-100
            prose-p:text-zinc-600 dark:prose-p:text-zinc-300
            prose-img:rounded-xl prose-img:shadow-lg lg:prose-lg text-justify">
-        <div class="hidden">
-          <PostSummary slug={post.slug} content={raw} client:idle />
-        </div>
         <Content />
       </div>
       
@@ -123,10 +118,6 @@ const jsonLd = {
       </footer>
     </div>
   </article>
-
-  <span class="hidden">
-    <Visitor slug={post.slug} title={post.data.title} client:load />
-  </span>
   
   <BackToTop />
 </BaseLayout>
