@@ -63,12 +63,3 @@ const { title, description, ogImage, showNavigation = true } = Astro.props;
     animation: slide-from-right var(--motion-duration) var(--motion-ease) both;
   }
 </style>
-
-<script>
-  import { heartbeat } from '@/services/index'
-  try {
-    heartbeat()
-  } catch(error) {
-    // todo
-  }
-</script>
