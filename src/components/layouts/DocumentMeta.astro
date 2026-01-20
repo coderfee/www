@@ -17,47 +17,35 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION, ogImage = '/placehol
 
 <title>{title} - coderfee's blog</title>
 
-<Font cssVariable="--font-lxgw" preload />
-
 <!-- Global Metadata -->
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<link
-  rel="icon"
-  type="image/svg+xml"
-  href="/favicon-light.svg"
-  media="(prefers-color-scheme: light)"
-/>
-<link
-  rel="icon"
-  type="image/svg+xml"
-  href="/favicon-dark.svg"
-  media="(prefers-color-scheme: dark)"
-/>
-<meta name="generator" content={Astro.generator} />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)">
+<meta name="generator" content={Astro.generator}>
 
 <!-- Canonical URL -->
-<link rel="canonical" href={canonicalURL} />
+<link rel="canonical" href={canonicalURL}>
 
-<meta name="description" content={description} />
+<meta name="description" content={description}>
 
 <!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta property="og:url" content={Astro.url} />
-<meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(ogImage, Astro.url)} />
+<meta property="og:type" content="website">
+<meta property="og:url" content={Astro.url}>
+<meta property="og:title" content={title}>
+<meta property="og:description" content={description}>
+<meta property="og:image" content={new URL(ogImage, Astro.url)}>
 
 <!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(ogImage, Astro.url)} />
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content={Astro.url}>
+<meta property="twitter:title" content={title}>
+<meta property="twitter:description" content={description}>
+<meta property="twitter:image" content={new URL(ogImage, Astro.url)}>
 
 <!-- rss styles -->
-<link rel="alternate" type="application/rss+xml" href={`${Astro.site}rss.xml`} />
-<link rel="alternate" type="application/rss+xml" title="coderfee's blog" href={new URL("rss.xml", Astro.site)} />
+<link rel="alternate" type="application/rss+xml" href={`${Astro.site}rss.xml`}>
+<link rel="alternate" type="application/rss+xml" title="coderfee's blog" href={new URL("rss.xml", Astro.site)}>
 
 <slot />
 

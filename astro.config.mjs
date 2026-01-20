@@ -2,8 +2,8 @@ import mdx from '@astrojs/mdx';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
+import { defineConfig } from 'astro/config';
 import pagefind from 'astro-pagefind';
-import { defineConfig, fontProviders } from 'astro/config';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeExternalLinks from 'rehype-external-links';
 import rehypeCodeProps from 'rehype-mdx-code-props';
@@ -12,20 +12,6 @@ import remarkToc from 'remark-toc';
 import Icons from 'unplugin-icons/vite';
 
 export default defineConfig({
-  experimental: {
-    fonts: [
-      {
-        name: 'LXGWZhenKai',
-        cssVariable: '--font-lxgw',
-        provider: 'local',
-        variants: [
-          {
-            src: ['./src/assets/fonts/LXGWZhenKai-Regular.ttf'],
-          }
-        ],
-      },
-    ],
-  },
   site: 'https://coderfee.com',
   publicDir: 'public',
   prefetch: {

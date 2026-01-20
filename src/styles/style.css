@@ -2,21 +2,6 @@
 @plugin "@tailwindcss/typography";
 @plugin "tailwindcss-animate";
 
-@font-face {
-  font-family: "LXGWZhenKai";
-  src: url("../assets/fonts/LXGWZhenKai-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@theme {
-  --font-lxgw: "LXGWZhenKai";
-}
-
-body {
-  @apply font-lxgw;
-}
-
 ::selection {
   @apply bg-zinc-900 text-white dark:bg-white dark:text-zinc-900;
 }
