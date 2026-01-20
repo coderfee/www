@@ -74,7 +74,7 @@ const jsonLd = {
 
   <article class="relative min-h-screen">
     <BackgroundGrid />
-    
+
     <div class="max-w-3xl mx-auto px-4 sm:px-6 py-12 mt-12">
       <PostHeader title={title} date={date} tags={tags} tldr={tldr} markdown={raw} />
 
@@ -82,59 +82,78 @@ const jsonLd = {
         <div class="absolute inset-0 flex items-center">
           <div class="w-full border-t border-zinc-200/30 dark:border-zinc-700/30"></div>
         </div>
-        <div class="relative flex items-center justify-center w-8 h-8 rounded-full bg-linear-to-b from-zinc-50/80 to-white/80 dark:from-zinc-800/80 dark:to-zinc-900/80 backdrop-blur-sm shadow-sm">
+        <div
+          class="relative flex items-center justify-center w-8 h-8 rounded-full bg-linear-to-b from-zinc-50/80 to-white/80 dark:from-zinc-800/80 dark:to-zinc-900/80 backdrop-blur-sm shadow-sm"
+        >
           <IconSeparator font-size={14} class="text-zinc-400 dark:text-zinc-500" />
         </div>
       </div>
 
-      <div class="prose prose-zinc dark:prose-invert max-w-none
+      <div
+        class="prose prose-zinc dark:prose-invert max-w-none
            prose-headings:font-bold prose-headings:tracking-tight 
            prose-headings:text-zinc-900 dark:prose-headings:text-zinc-100
            prose-p:text-zinc-600 dark:prose-p:text-zinc-300
-           prose-img:rounded-xl prose-img:shadow-lg lg:prose-lg text-justify">
+           prose-img:rounded-xl prose-img:shadow-lg lg:prose-lg text-justify"
+      >
         <Content />
       </div>
-      
-      <hr class="my-12 border-zinc-200/50 dark:border-zinc-800/50" />
+
+      <hr class="my-12 border-zinc-200/50 dark:border-zinc-800/50">
 
       <PostNavigation prev={prev} next={next} />
 
       <RelatedPosts currentSlug={post.slug} tags={tags} />
-      
+
       <!-- 评论区 -->
       <div class="comments-container mt-16">
         <div class="comment-header flex items-center gap-2 mb-6">
           <IconMessageCircle class="text-zinc-500 dark:text-zinc-400" />
           <h2 class="text-xl font-semibold text-zinc-800 dark:text-zinc-200">评论</h2>
         </div>
-        
+
         <div class="giscus-container">
           <div class="giscus"></div>
         </div>
       </div>
-      
+
       <footer class="mt-16">
         <License />
       </footer>
     </div>
   </article>
-  
+
   <BackToTop />
 </BaseLayout>
 
-<script src="https://giscus.app/client.js"
-        data-repo="coderfe/www"
-        data-repo-id="MDEwOlJlcG9zaXRvcnkxNjA5OTc3MTY="
-        data-category="Comments"
-        data-category-id="DIC_kwDOCZihVM4CoBlh"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="preferred_color_scheme"
-        data-lang="zh-CN"
-        data-loading="lazy"
-        crossorigin="anonymous"
-        async>
+<script
+  src="https://giscus.app/client.js"
+  data-repo="coderfe/www"
+  data-repo-id="MDEwOlJlcG9zaXRvcnkxNjA5OTc3MTY="
+  data-category="Comments"
+  data-category-id="DIC_kwDOCZihVM4CoBlh"
+  data-mapping="pathname"
+  data-strict="0"
+  data-reactions-enabled="1"
+  data-emit-metadata="0"
+  data-input-position="top"
+  data-theme="preferred_color_scheme"
+  data-lang="zh-CN"
+  data-loading="lazy"
+  crossorigin="anonymous"
+  async
+>
+</script>
+
+<script define:vars={{ slug: post.slug, title, isDev: import.meta.env.DEV }}>
+  const url = isDev ? 'http://localhost:3001/api/public/visit' : 'https://dash.coderfee.com/api/public/visit';
+
+  fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ slug, title }),
+    keepalive: true,
+  }).catch(() => {
+    // Silent failure
+  });
 </script>
