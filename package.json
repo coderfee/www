@@ -25,7 +25,7 @@
     "astro": "^5.16.11",
     "astro-embed": "^0.12.0",
     "astro-pagefind": "^1.8.5",
-    "framer-motion": "^12.27.3",
+    "framer-motion": "^12.29.2",
     "ky": "^1.14.2",
     "pagefind": "^1.4.0",
     "react": "^19.2.3",
