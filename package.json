@@ -40,7 +40,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@aws-sdk/client-s3": "^3.971.0",
+    "@aws-sdk/client-s3": "^3.975.0",
     "@biomejs/biome": "^2.3.11",
     "@iconify-json/tabler": "^1.2.26",
     "@iconify/react": "^6.0.2",
