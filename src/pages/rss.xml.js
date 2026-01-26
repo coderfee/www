@@ -1,5 +1,5 @@
 import { loadRenderers } from 'astro:container';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content'
 import { getContainerRenderer } from '@astrojs/mdx';
 import rss from '@astrojs/rss';
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
@@ -29,8 +29,8 @@ export async function GET(context) {
         ...post.data,
         pubDate: post.data.date,
         description: post.data.tldr,
-        link: `/blog/${post.slug}/`,
-        content: await container.renderToString((await post.render()).Content),
+        link: `/blog/${post.id}/`,
+        content: await container.renderToString((await render(post)).Content),
       })),
     ),
   });

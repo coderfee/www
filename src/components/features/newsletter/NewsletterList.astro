@@ -12,12 +12,12 @@ const { items, currentSlug } = Astro.props;
 
 <div class="space-y-px">
   {items.map((item, index) => {
-    const isActive = item.slug === currentSlug;
+    const isActive = item.id === currentSlug;
     const itemDate = dayjs(item.data.date).format('DD MMM, YYYY');
     
     return (
       <a 
-        href={`/newsletter/${item.slug}`} 
+        href={`/newsletter/${item.id}`} 
         class={`group block px-3 py-3 -mx-3 rounded-lg transition-all duration-200 relative ${
           isActive 
             ? 'bg-indigo-50/60 dark:bg-indigo-950/40' 

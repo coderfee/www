@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 
 export interface Props {
   post: {
-    slug: string;
+    id: string;
     data: {
       title: string;
       date: Date;
@@ -23,7 +23,7 @@ const { post, index } = Astro.props;
   <div class="relative bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transform transition-all duration-500 hover:translate-y-[-6px] hover:[transform:rotateX(4deg)_rotateY(-4deg)] will-change-transform group
     before:absolute before:inset-0 before:bg-gradient-to-br before:from-violet-500/5 before:to-fuchsia-500/5 before:opacity-0 before:transition-opacity before:duration-500 group-hover:before:opacity-100
     after:absolute after:inset-0 after:rounded-2xl after:shadow-[inset_0_0_4px_rgba(0,0,0,0.1)] after:opacity-0 after:transition-opacity after:duration-500 group-hover:after:opacity-100">
-    <a href={`/blog/${post.slug}`} class="block p-8 relative z-10">
+    <a href={`/blog/${post.id}`} class="block p-8 relative z-10">
       <div class="absolute top-3 right-3 transform rotate-3 group-hover:rotate-0 transition-transform duration-300 pointer-events-none">
         <time 
           datetime={post.data.date.toISOString()} 

@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getCollection, getEntry } from 'astro:content';
+import { type CollectionEntry, getCollection, getEntry, render } from 'astro:content';
 import BackgroundGrid from '@/components/common/BackgroundGrid.astro';
 import BackToTop from '@/components/common/BackToTop.astro';
 import License from '@/components/features/post/License.astro';
@@ -19,7 +19,7 @@ export async function getStaticPaths() {
     const next = index + 1 < sortedPosts.length ? sortedPosts[index + 1] : null;
     const prev = index - 1 >= 0 ? sortedPosts[index - 1] : null;
     return {
-      params: { slug: post.slug },
+      params: { slug: post.id },
       props: { post, prev, next },
     };
   });
@@ -32,11 +32,11 @@ type Props = {
 };
 
 const { post, prev, next } = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
 const { title, tldr, date, tags = [], cover, keywords } = post.data;
 const modifiedDate = post.data.date;
 
-const entry = await getEntry('blog', post.slug);
+const entry = await getEntry('blog', post.id);
 const raw = entry?.body;
 
 const jsonLd = {
@@ -103,7 +103,7 @@ const jsonLd = {
 
       <PostNavigation prev={prev} next={next} />
 
-      <RelatedPosts currentSlug={post.slug} tags={tags} />
+      <RelatedPosts currentSlug={post.id} tags={tags} />
 
       <!-- 评论区 -->
       <div class="comments-container mt-16">
@@ -145,7 +145,7 @@ const jsonLd = {
 >
 </script>
 
-<script define:vars={{ slug: post.slug, title, isDev: import.meta.env.DEV }}>
+<script define:vars={{ slug: post.id, title, isDev: import.meta.env.DEV }}>
   const url = isDev ? 'http://localhost:3001/api/public/visit' : 'https://dash.coderfee.com/api/public/visit';
 
   fetch(url, {

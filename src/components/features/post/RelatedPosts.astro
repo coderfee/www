@@ -16,7 +16,7 @@ const posts = await getCollection('blog');
 // 过滤出具有相同标签的文章，但排除当前文章
 const relatedPosts = posts
   .filter(({ data: { draft = false } }) => !draft)
-  .filter((post) => post.slug !== currentSlug)
+  .filter((post) => post.id !== currentSlug)
   .filter((post) => {
     const postTags = post.data.tags || [];
     return tags.some((tag) => postTags.includes(tag));
@@ -44,7 +44,7 @@ const relatedPosts = posts
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
       {relatedPosts.map(post => (
         <a 
-          href={`/blog/${post.slug}`}
+          href={`/blog/${post.id}`}
           class="group relative overflow-hidden rounded-xl bg-white/40 dark:bg-zinc-900/40 backdrop-blur-sm border border-zinc-200/50 dark:border-zinc-800/50 p-4 transition-all duration-500 hover:scale-[1.02] hover:shadow-lg hover:shadow-violet-500/5 dark:hover:shadow-violet-400/5"
         >
           <div class="absolute inset-0 bg-gradient-to-br from-violet-500/5 via-transparent to-fuchsia-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>

@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getCollection, getEntry } from 'astro:content';
+import { type CollectionEntry, getCollection, getEntry, render } from 'astro:content';
 import BackgroundGrid from '@/components/common/BackgroundGrid.astro';
 import NewsletterHeader from '@/components/features/newsletter/NewsletterHeader.astro';
 import NewsletterSidebar from '@/components/features/newsletter/NewsletterSidebar.astro';
@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 
   return sorted.map((newsletter) => {
     return {
-      params: { slug: newsletter.slug },
+      params: { slug: newsletter.id },
       props: { newsletter },
     };
   });
@@ -25,11 +25,11 @@ type Props = {
 };
 
 const { newsletter } = Astro.props;
-const { Content } = await newsletter.render();
+const { Content } = await render(newsletter);
 const { title, description, cover, date, issue } = newsletter.data;
 const collection = await getCollection('newsletter', ({ data }) => !data.draft);
 const sorted = collection.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const entry = await getEntry('newsletter', newsletter.slug);
+const entry = await getEntry('newsletter', newsletter.id);
 const raw = entry?.body;
 ---
 
@@ -37,7 +37,7 @@ const raw = entry?.body;
   <BackgroundGrid />
   
   <div class="newsletter grid grid-cols-1 lg:grid-cols-[280px_1fr] h-screen lg:h-screen w-full relative overflow-hidden">
-    <NewsletterSidebar items={sorted} currentSlug={newsletter.slug} />
+    <NewsletterSidebar items={sorted} currentSlug={newsletter.id} />
     
     <main class="h-full overflow-y-auto lg:pt-0">
       <div class="max-w-3xl mx-auto px-4 lg:px-8 py-6">

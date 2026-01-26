@@ -26,8 +26,8 @@ serialize: ({ query: { site, allMarkdownRemark } }) => {
     return Object.assign({}, edge.node.frontmatter, {
       description: edge.node.frontmatter.tldr,
       date: edge.node.frontmatter.date,
-      url: site.siteMetadata.siteUrl + edge.node.fields.slug,
-      guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
+      url: site.siteMetadata.siteUrl + edge.node.fields.id,
+      guid: site.siteMetadata.siteUrl + edge.node.fields.id,
       custom_elements: [
         {
           'content:encoded': edge.node.html.replace(
