@@ -1,15 +1,13 @@
 ---
-import { type CollectionEntry, getCollection, getEntry, render } from 'astro:content';
-import BackgroundGrid from '@/components/common/BackgroundGrid.astro';
-import BackToTop from '@/components/common/BackToTop.astro';
-import License from '@/components/features/post/License.astro';
-import PostHeader from '@/components/features/post/PostHeader.astro';
-import PostNavigation from '@/components/features/post/PostNavigation.astro';
-import RelatedPosts from '@/components/features/post/RelatedPosts.astro';
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import BackToTop from '@/components/BackToTop.astro';
+import PostHeader from '@/components/blog/PostHeader.astro';
+import PostLicense from '@/components/blog/PostLicense.astro';
+import PostNavigation from '@/components/blog/PostNavigation.astro';
+import PostRelatedPosts from '@/components/blog/PostRelatedPosts.astro';
 import BaseLayout from '@/components/layouts/BaseLayout.astro';
 import { AUTHOR } from '@/consts';
 import IconMessageCircle from '~icons/tabler/message-circle';
-import IconSeparator from '~icons/tabler/separator';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -35,9 +33,6 @@ const { post, prev, next } = Astro.props;
 const { Content } = await render(post);
 const { title, tldr, date, tags = [], cover, keywords } = post.data;
 const modifiedDate = post.data.date;
-
-const entry = await getEntry('blog', post.id);
-const raw = entry?.body;
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -73,39 +68,27 @@ const jsonLd = {
   </Fragment>
 
   <article class="relative min-h-screen">
-    <BackgroundGrid />
-
     <div class="max-w-3xl mx-auto px-4 sm:px-6 py-12 mt-12">
-      <PostHeader title={title} date={date} tags={tags} tldr={tldr} markdown={raw} />
-
-      <div class="relative py-12 flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 flex items-center">
-          <div class="w-full border-t border-zinc-200/30 dark:border-zinc-700/30"></div>
-        </div>
-        <div
-          class="relative flex items-center justify-center w-8 h-8 rounded-full bg-linear-to-b from-zinc-50/80 to-white/80 dark:from-zinc-800/80 dark:to-zinc-900/80 backdrop-blur-sm shadow-sm"
-        >
-          <IconSeparator font-size={14} class="text-zinc-400 dark:text-zinc-500" />
-        </div>
-      </div>
+      <PostHeader title={title} date={date} tags={tags} tldr={tldr} />
+      
+      <div class="w-full my-10 border-t border-dashed border-zinc-200/30 dark:border-zinc-700/30"></div>
 
       <div
         class="prose prose-zinc dark:prose-invert max-w-none
            prose-headings:font-bold prose-headings:tracking-tight 
            prose-headings:text-zinc-900 dark:prose-headings:text-zinc-100
            prose-p:text-zinc-600 dark:prose-p:text-zinc-300
-           prose-img:rounded-xl prose-img:shadow-lg lg:prose-lg text-justify"
+           prose-img:rounded-xl prose-img:mx-auto text-justify"
       >
         <Content />
       </div>
 
-      <hr class="my-12 border-zinc-200/50 dark:border-zinc-800/50">
+      <div class="w-full my-10 border-t border-dashed border-zinc-200/30 dark:border-zinc-700/30"></div>
 
       <PostNavigation prev={prev} next={next} />
 
-      <RelatedPosts currentSlug={post.id} tags={tags} />
+      <PostRelatedPosts currentSlug={post.id} tags={tags} />
 
-      <!-- 评论区 -->
       <div class="comments-container mt-16">
         <div class="comment-header flex items-center gap-2 mb-6">
           <IconMessageCircle class="text-zinc-500 dark:text-zinc-400" />
@@ -118,7 +101,7 @@ const jsonLd = {
       </div>
 
       <footer class="mt-16">
-        <License />
+        <PostLicense />
       </footer>
     </div>
   </article>

@@ -1,10 +1,8 @@
 ---
-import { type CollectionEntry, getCollection, getEntry, render } from 'astro:content';
-import BackgroundGrid from '@/components/common/BackgroundGrid.astro';
-import NewsletterHeader from '@/components/features/newsletter/NewsletterHeader.astro';
-import NewsletterSidebar from '@/components/features/newsletter/NewsletterSidebar.astro';
-import Layout from '@/components/layouts/newsletter/Layout.astro';
-import TablerCopy from '~icons/tabler/copy';
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import NewsletterLayout from '@/components/layouts/NewsletterLayout.astro';
+import NewsletterHeader from '@/components/newsletter/NewsletterHeader.astro';
+import NewsletterSidebar from '@/components/newsletter/NewsletterSidebar.astro';
 
 export async function getStaticPaths() {
   const collection = await getCollection('newsletter');
@@ -20,22 +18,14 @@ export async function getStaticPaths() {
   });
 }
 
-type Props = {
-  newsletter: CollectionEntry<'newsletter'>;
-};
-
 const { newsletter } = Astro.props;
 const { Content } = await render(newsletter);
 const { title, description, cover, date, issue } = newsletter.data;
 const collection = await getCollection('newsletter', ({ data }) => !data.draft);
 const sorted = collection.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const entry = await getEntry('newsletter', newsletter.id);
-const raw = entry?.body;
 ---
 
-<Layout title={title} description={description} cover={cover}>
-  <BackgroundGrid />
-  
+<NewsletterLayout title={title} description={description} cover={cover}>
   <div class="newsletter grid grid-cols-1 lg:grid-cols-[280px_1fr] h-screen lg:h-screen w-full relative overflow-hidden">
     <NewsletterSidebar items={sorted} currentSlug={newsletter.id} />
     
@@ -49,36 +39,16 @@ const raw = entry?.body;
           issue={issue}
           total={sorted.length}
         />
-
-        <div class="flex justify-end mb-4">
-          <button 
-            id="copyMarkdown"
-            class="inline-flex items-center gap-1 px-3 py-1 text-sm rounded-lg 
-            hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors
-            text-gray-600 dark:text-gray-400 cursor-pointer"
-          >
-            <TablerCopy class="w-4 h-4" />
-            复制为 Markdown
-          </button>
-        </div>
         
-        <article class="prose dark:prose-invert max-w-none text-justify lg:prose-lg">
+        <article class="prose prose-zinc dark:prose-invert max-w-none
+           prose-headings:font-bold prose-headings:tracking-tight 
+           prose-headings:text-zinc-900 dark:prose-headings:text-zinc-100
+           prose-p:text-zinc-600 dark:prose-p:text-zinc-300
+           prose-img:rounded-xl prose-img:mx-auto text-justify"
+        >
           <Content />
         </article>
       </div>
     </main>
   </div>
-
-  <script is:inline define:vars={{ title, raw }}>
-    const copyright = '\n\n---\n\n© 2025 [coderfee.com](https://coderfee.com). All rights reserved.\n转载请注明出处。'
-    const markdown = `# ${title}\n\n${raw}${copyright}`
-    
-    document.getElementById('copyMarkdown').addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(markdown)
-      } catch (err) {
-        console.error('Failed to copy:', err)
-      }
-    })
-  </script>
-</Layout>
+</NewsletterLayout>

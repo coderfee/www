@@ -1,48 +1,47 @@
 ---
 import { getCollection } from 'astro:content';
-import BackgroundDecoration from '@/components/common/BackgroundDecoration.astro';
-import PostCard from '@/components/features/blog/PostCard.astro';
+import PostCard from '@/components/blog/PostCard.astro';
 import BaseLayout from '@/components/layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
-  const collection = await getCollection('blog');
-  const posts = collection
-    .filter(({ data: { draft = false } }) => !draft)
-    .sort(({ data: { date: dateA } }, { data: { date: dateB } }) => dateB.valueOf() - dateA.valueOf());
-  const tags = posts.map(({ data: { tags = [] } }) => tags).flat();
+  const allPosts = await getCollection('blog');
+  const posts = allPosts.filter(({ data: { draft = false } }) => !draft);
+  const tags = posts.flatMap(({ data: { tags = [] } }) => tags);
   const uniqueTags = [...new Set(tags)];
   return uniqueTags.map((tag) => ({ params: { tag } }));
 }
+
 const { tag } = Astro.params;
-const collection = await getCollection('blog');
-const posts = collection
-  .filter(({ data: { tags = [] } }) => tags.includes(tag))
-  .filter(({ data: { draft = false } }) => !draft)
+const allPosts = await getCollection('blog');
+const posts = allPosts
+  .filter(({ data: { tags = [], draft = false } }) => !draft && tags.includes(tag))
   .sort(({ data: { date: dateA } }, { data: { date: dateB } }) => dateB.valueOf() - dateA.valueOf());
 
 const tagDescription = `探索所有关于 #${tag} 的文章。coderfee 的博客涵盖了与 ${tag} 相关的技术分享、实践总结和深入思考。`;
 ---
 
 <BaseLayout title={`#${tag} · 标签文章`} description={tagDescription}>
-  <div class="relative min-h-[80vh]">
-    <BackgroundDecoration />
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+    <header class="mb-12">
+      <h1 class="text-3xl sm:text-4xl font-bold text-zinc-800 dark:text-zinc-100 text-center">
+        #{tag}
+      </h1>
+      <p class="mt-4 text-center text-zinc-600 dark:text-zinc-400">共 {posts.length} 篇文章</p>
+    </header>
 
-    <main class="container max-w-4xl mx-auto px-4 py-10">
-      <header class="my-12 relative overflow-hidden">
-        <h1 class="py-6 text-3xl font-bold text-zinc-800 dark:text-zinc-100 hover:text-violet-600 dark:hover:text-violet-400 transition-all duration-500 text-center">
-          #{tag}
-        </h1>
-      </header>
-
+    <main class="space-y-0">
       {posts.length > 0 ? (
-        <div class="space-y-6">
-          {posts.map((post, index) => (
-            <PostCard post={post} index={index} />
-          ))}
-        </div>
+        posts.map((post, index) => (
+          <>
+            <PostCard post={post} />
+            {index < posts.length - 1 && (
+              <div class="border-t border-dashed border-zinc-100 dark:border-zinc-800"></div>
+            )}
+          </>
+        ))
       ) : (
-        <div class="flex flex-col items-center justify-center p-10 bg-white/60 dark:bg-zinc-900/60 backdrop-blur-md rounded-xl border border-zinc-200/50 dark:border-zinc-800/50 text-center">
-          <p class="text-zinc-600 dark:text-zinc-400">暂无相关文章</p>
+        <div class="p-8 text-center bg-zinc-50 dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800">
+          <p class="text-lg text-zinc-600 dark:text-zinc-400">暂无相关文章</p>
         </div>
       )}
     </main>

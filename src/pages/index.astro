@@ -1,12 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
-import BackgroundDecoration from '@/components/common/BackgroundDecoration.astro';
-import AboutMe from '@/components/features/blog/AboutMe.astro';
-import PageHeader from '@/components/features/blog/HomeHeader.astro';
-import PostCard from '@/components/features/blog/PostCard.astro';
-import TagCloud from '@/components/features/blog/TagCloud.astro';
+import PostCard from '@/components/blog/PostCard.astro';
 import BaseLayout from '@/components/layouts/BaseLayout.astro';
-import IconArrowRight from '~icons/tabler/arrow-right';
+import SocialLinks from '@/components/SocialLinks.astro';
 
 const allPosts = await getCollection('blog');
 
@@ -17,80 +13,38 @@ const posts = allPosts
   .filter(({ data: { draft = false, date } }) => !draft && date >= twoYearsAgo)
   .sort(({ data: { date: dateA } }, { data: { date: dateB } }) => dateB.valueOf() - dateA.valueOf());
 
-const tagMap = new Map();
-allPosts.forEach((post) => {
-  (post.data.tags || []).forEach((tag) => {
-    tagMap.set(tag, (tagMap.get(tag) || 0) + 1);
-  });
-});
-const allTags = Array.from(tagMap.entries())
-  .map(([tag, count]) => ({ tag, count }))
-  .sort((a, b) => b.count - a.count);
-
 const pageDescription =
   '欢迎来到 Coderfee 的博客，这里记录了前端开发、技术思考和个人成长。探索最新的 Web 技术、框架实践和优化技巧。';
 ---
 
 <BaseLayout title="首页" description={pageDescription}>
-  <div class="relative min-h-screen">
-    <BackgroundDecoration />
-    
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
-      <PageHeader title="coderfee's blog" />
-      
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12">
-        <main class="lg:col-span-8 space-y-16">
-          {posts.length > 0 ? (
-            posts.map((post, index) => (
-              <PostCard post={post} index={index} />
-            ))
-          ) : (
-            <div class="p-8 text-center bg-white/10 backdrop-blur-lg rounded-xl border border-white/20">
-              <p class="text-lg text-gray-200">最近两年没有发布文章</p>
-            </div>
-          )}
-          
-          <div class="flex justify-center pt-8">
-            <a href="/archive" 
-               class="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-zinc-600 dark:text-zinc-300 hover:text-violet-600 dark:hover:text-violet-400 group">
-              查看所有文章
-              <IconArrowRight class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </a>
-          </div>
-        </main>
-        
-        <aside class="lg:col-span-4 relative">
-          <div class="sticky top-24 space-y-6">
-            <TagCloud tags={allTags} />
-            
-            <AboutMe />
-          </div>
-        </aside>
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+    <main class="space-y-0">
+      {posts.length > 0 ? (
+        posts.map((post, index) => (
+          <>
+            <PostCard post={post} />
+            {index < posts.length - 1 && (
+              <div class="border-t border-dashed border-zinc-100 dark:border-zinc-800"></div>
+            )}
+          </>
+        ))
+      ) : (
+        <div class="p-8 text-center bg-zinc-50 dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800">
+          <p class="text-lg text-zinc-600 dark:text-zinc-400">最近两年没有发布文章</p>
+        </div>
+      )}
+    </main>
+
+    {posts.length > 0 && (
+      <div class="mt-12 flex justify-center">
+        <a href="/archive"
+           class="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100">
+          查看所有文章
+        </a>
       </div>
-    </div>
+    )}
   </div>
+
+  <SocialLinks />
 </BaseLayout>
-
-<style>
-  @keyframes gentle-float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
-  }
-</style>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const stickyContainer = document.querySelector('.sticky');
-    
-    if (stickyContainer) {
-      window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY;
-        if (scrollY > 100) {
-          stickyContainer.classList.add('has-scrolled');
-        } else {
-          stickyContainer.classList.remove('has-scrolled');
-        }
-      });
-    }
-  });
-</script>

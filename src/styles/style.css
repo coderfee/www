@@ -1,6 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
+
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @plugin "tailwindcss-animate";
+
+@theme {
+  --font-major: "Major Mono Display", monospace;
+}
+
+html {
+  @apply scroll-smooth;
+}
+
+html, body {
+  @apply overscroll-none;
+}
 
 ::selection {
   @apply bg-zinc-900 text-white dark:bg-white dark:text-zinc-900;

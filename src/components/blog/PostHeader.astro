@@ -1,0 +1,49 @@
+---
+import dayjs from 'dayjs';
+import IconCalendar from '~icons/tabler/calendar';
+import IconHash from '~icons/tabler/hash';
+
+interface Props {
+  title: string;
+  date?: Date;
+  tags?: string[];
+  tldr?: string;
+}
+
+const { title, date, tags = [], tldr } = Astro.props;
+---
+
+<div>
+  <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 mb-4">
+    {title}
+  </h1>
+  
+  <div class="flex flex-wrap items-center gap-3 tabular-nums text-xs text-zinc-500 dark:text-zinc-400">
+    {date && (
+      <time datetime={date.toISOString()} class="flex items-center gap-1">
+        <IconCalendar></IconCalendar>
+        <span>{dayjs(date).format("DD MMM, YY")}</span>
+      </time>
+    )}
+    
+    {tags.length > 0 && (
+      <div class="flex flex-wrap gap-1">
+        {tags.map((tag) => (
+          <a 
+            href={`/blog/tags/${tag}`} 
+            class="inline-flex items-center"
+          >
+            <IconHash class="mr-1 opacity-70"></IconHash>
+            <span class="hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors duration-300">{tag}</span>
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+
+  {tldr && (
+    <div class="mt-8 text-zinc-700 dark:text-zinc-300 italic">
+      {tldr}
+    </div>
+  )}
+</div>

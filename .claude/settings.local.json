@@ -3,7 +3,8 @@
     "allow": [
       "mcp__context7__resolve-library-id",
       "Bash(tree:*)",
-      "WebFetch(domain:v6.docs.astro.build)"
+      "WebFetch(domain:v6.docs.astro.build)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []

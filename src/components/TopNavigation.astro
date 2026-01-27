@@ -1,0 +1,54 @@
+---
+import ArchiveIcon from '~icons/tabler/archive';
+import BookIcon from '~icons/tabler/book-2';
+import ExternalLinkIcon from '~icons/tabler/external-link';
+import HomeIcon from '~icons/tabler/home';
+
+const pathname = new URL(Astro.request.url).pathname;
+const isActive = (path: string) => {
+  if (path === '/' && pathname === path) return true;
+  if (path !== '/' && pathname.startsWith(path)) return true;
+  return false;
+};
+
+const navItems = [
+  { name: '首页', path: '/', icon: HomeIcon },
+  { name: '归档', path: '/archive', icon: ArchiveIcon },
+  { name: '周刊', path: '/newsletter', icon: BookIcon, target: '_blank' },
+];
+
+const { showNavigation = true } = Astro.props;
+---
+
+{showNavigation && (
+  <header class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md">
+    <nav class="max-w-4xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2 text-base font-medium text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors">
+        <img src="/favicon-light.svg" alt="CoderFee" class="w-6 h-6 dark:hidden" />
+        <img src="/favicon-dark.svg" alt="CoderFee" class="w-6 h-6 hidden dark:block" />
+        <span class="font-major uppercase">coderfee</span>
+      </a>
+
+      <!-- Nav Links -->
+      <div class="flex items-center gap-6">
+        {navItems.map((item) => (
+          <a 
+            href={item.path}
+            class:list={[
+              'text-sm transition-colors flex items-center gap-1',
+              isActive(item.path)
+                ? 'text-zinc-900 dark:text-zinc-100'
+                : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100'
+            ]}
+            target={item.target || '_self'}
+            aria-current={isActive(item.path) ? 'page' : undefined}
+          >
+            {item.name}
+            {item.target === '_blank' && <ExternalLinkIcon class="w-3 h-3" />}
+          </a>
+        ))}
+      </div>
+    </nav>
+  </header>
+)}

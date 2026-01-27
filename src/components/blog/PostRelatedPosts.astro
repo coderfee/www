@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import dayjs from 'dayjs';
+import IconArrowsRightLeft from '~icons/tabler/arrows-right-left';
+
+interface Props {
+  currentSlug: string;
+  tags: string[];
+}
+
+const { currentSlug, tags } = Astro.props;
+
+const posts = await getCollection('blog');
+
+const relatedPosts = posts
+  .filter(({ data: { draft = false } }) => !draft)
+  .filter((post) => post.id !== currentSlug)
+  .filter((post) => {
+    const postTags = post.data.tags || [];
+    return tags.some((tag) => postTags.includes(tag));
+  })
+  .sort((a, b) => {
+    const aMatchCount = (a.data.tags || []).filter((tag) => tags.includes(tag)).length;
+    const bMatchCount = (b.data.tags || []).filter((tag) => tags.includes(tag)).length;
+    if (aMatchCount === bMatchCount) {
+      return b.data.date.valueOf() - a.data.date.valueOf();
+    }
+    return bMatchCount - aMatchCount;
+  })
+  .slice(0, 3);
+---
+
+{relatedPosts.length > 0 && (
+  <div class="my-12">
+    <div class="flex items-center gap-2 mb-6">
+      <IconArrowsRightLeft class="text-zinc-400"></IconArrowsRightLeft>
+      <h2 class="text-lg font-medium text-zinc-700 dark:text-zinc-300">相关文章</h2>
+    </div>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      {relatedPosts.map(post => (
+        <a 
+          href={`/blog/${post.id}`}
+          class="group relative rounded-lg bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 p-4 transition-all duration-200 hover:bg-zinc-100 dark:hover:bg-zinc-900 hover:border-zinc-300 dark:hover:border-zinc-700"
+        >
+          <h3 class="text-base font-medium text-zinc-800 dark:text-zinc-200 line-clamp-2 mb-2 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors">
+            {post.data.title}
+          </h3>
+          <time datetime={post.data.date.toISOString()} class="text-xs text-zinc-500 dark:text-zinc-400 tabular-nums">
+            {dayjs(post.data.date).format('DD MMM, YY')}
+          </time>
+        </a>
+      ))}
+    </div>
+  </div>
+)}
