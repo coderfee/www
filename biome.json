@@ -9,6 +9,11 @@
     "lineWidth": 120,
     "attributePosition": "auto"
   },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
   "html": {
     "formatter": {
       "enabled": true,
@@ -33,7 +38,7 @@
     "rules": {
       "recommended": true
     },
-    "includes": ["**/*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}", "!**/*.astro"]
+    "includes": ["**/*", "!**/*.astro"]
   },
   "javascript": {
     "formatter": {
