@@ -23,6 +23,6 @@ pnpm-debug.log*
 
 .idea/
 .vercel/
-.claude/
+.claude
 
 src/content/newsletter
