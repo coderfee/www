@@ -52,18 +52,7 @@
     "@types/node": "latest",
     "dayjs": "^1.11.19",
     "dotenv": "^17.2.3",
-    "lefthook": "^2.0.15",
+    "lefthook": "^2.0.16",
     "unplugin-icons": "^23.0.1"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@biomejs/biome",
-      "esbuild",
-      "lefthook",
-      "sharp"
-    ],
-    "ignoredBuiltDependencies": [
-      "@tailwindcss/oxide"
-    ]
   }
 }
