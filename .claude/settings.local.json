@@ -4,7 +4,9 @@
       "mcp__context7__resolve-library-id",
       "Bash(tree:*)",
       "WebFetch(domain:v6.docs.astro.build)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(git add:*)",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": []
