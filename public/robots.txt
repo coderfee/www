@@ -1,5 +1,1 @@
-User-agent: *
-Allow: /
-Disallow: /cdn-cgi/
-
 Sitemap: https://coderfee.com/sitemap-index.xml
