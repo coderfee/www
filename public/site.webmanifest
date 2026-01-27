@@ -6,13 +6,12 @@
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "theme_color": "#000000",
   "background_color": "#ffffff",
   "dir": "ltr",
   "lang": "zh-CN",
   "icons": [
     {
-      "src": "/favicon-dark.svg",
+      "src": "/logo.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"

@@ -21,12 +21,11 @@ const { showNavigation = true } = Astro.props;
 ---
 
 {showNavigation && (
-  <header class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md">
+  <header class="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-zinc-900">
     <nav class="max-w-4xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
       <!-- Logo -->
       <a href="/" class="flex items-center gap-2 text-base font-medium text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors">
-        <img src="/favicon-light.svg" alt="CoderFee" class="w-6 h-6 dark:hidden" />
-        <img src="/favicon-dark.svg" alt="CoderFee" class="w-6 h-6 hidden dark:block" />
+        <img src="https://assets.coderfee.com/favicon/www.svg" alt="CoderFee" class="size-10 overflow-hidden" width="40" height="40" />
         <span class="font-major uppercase">coderfee</span>
       </a>
 
