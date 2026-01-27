@@ -17,7 +17,6 @@ import companyList from './_data.json';
     <title>《沉浮与梦想：A股十年上市博弈》——案例</title>
     <meta name="description" content="中国A股资本市场的标志性事件与案例分析，展示了资本市场发展的关键时刻与转折点">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <!-- 字体优化 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -26,14 +25,12 @@ import companyList from './_data.json';
     >
   </head>
   <body class="bg-zinc-50 dark:bg-zinc-900 min-h-screen font-sans text-zinc-800 dark:text-zinc-200">
-    <!-- 背景装饰 -->
     <div class="fixed inset-0 -z-10 overflow-hidden">
       <div
         class="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#3f3f46_1px,transparent_1px)] bg-size-[20px_20px] opacity-50"
       ></div>
     </div>
 
-    <!-- 顶部导航 -->
     <header
       class="sticky top-0 z-40 backdrop-blur-sm bg-white/80 dark:bg-zinc-900/80 border-b border-zinc-200 dark:border-zinc-800 shadow-sm"
     >
@@ -55,7 +52,6 @@ import companyList from './_data.json';
     </header>
 
     <main id="top" class="container mx-auto px-4 py-8 md:py-16">
-      <!-- 排序控制 -->
       <div class="max-w-4xl mx-auto mb-8 flex justify-center sm:justify-end space-x-2">
         <button
           data-sort="all"
@@ -71,18 +67,15 @@ import companyList from './_data.json';
         </button>
       </div>
 
-      <!-- 公司案例列表容器 -->
       <div id="companyListContainer" class="max-w-4xl mx-auto space-y-4">
         {companyList.map((item, index) => (
           <article 
             class="group relative cursor-pointer"
             data-company-id={index}
           >
-            <!-- 列表项容器 -->
             <div class="relative bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg overflow-hidden transition-all duration-200 hover:border-zinc-400 dark:hover:border-zinc-600 hover:shadow-md">
               
               <div class="pl-6 pr-4 py-5 sm:py-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                {/* 公司图标和名称 */}
                 <div class="flex items-center gap-3 min-w-0 shrink-0">
                   <div class="shrink-0 w-10 h-10 rounded-lg bg-zinc-100 dark:bg-zinc-700 flex items-center justify-center text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-600">
                     <IconBuildingSkyscraper class="w-5 h-5" />
@@ -94,7 +87,6 @@ import companyList from './_data.json';
                   </div>
                 </div>
                 
-                {/* 标签列表 - 中间部分 */}
                 <div class="flex flex-wrap gap-2 flex-1 min-w-0">
                   {item.keyword.map((tag) => (
                     <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-300 text-xs border border-zinc-200 dark:border-zinc-600 transition-transform duration-200">
@@ -104,7 +96,6 @@ import companyList from './_data.json';
                   ))}
                 </div>
                 
-                {/* 右侧状态标识 */}
                 <div class="flex items-center ml-auto">
                   {item.delisted && (
                     <span class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-red-100 dark:bg-red-900/50 border border-red-300 dark:border-red-700/50 text-red-700 dark:text-red-300 text-xs font-medium">
@@ -120,7 +111,6 @@ import companyList from './_data.json';
       </div>
     </main>
 
-    <!-- 详情弹窗 -->
     <div
       id="detailModal"
       class="fixed inset-0 z-50 hidden items-center justify-center p-4 md:p-6"
@@ -175,7 +165,6 @@ import companyList from './_data.json';
       </div>
     </div>
 
-    <!-- 页脚 -->
     <footer class="mt-12 py-8 border-t border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/50">
       <div class="container mx-auto px-4">
         <div class="flex flex-col md:flex-row justify-between items-center gap-4">
@@ -205,7 +194,6 @@ import companyList from './_data.json';
         const sortButtons = document.querySelectorAll('.sort-button');
         const allCards = document.querySelectorAll('article[data-company-id]');
 
-        // 过滤并显示公司列表
         const filterCompanyList = (sortBy = 'all') => {
           allCards.forEach((card) => {
             const companyId = parseInt(card.dataset.companyId);
@@ -220,13 +208,11 @@ import companyList from './_data.json';
           });
         };
 
-        // 排序按钮事件
         sortButtons.forEach((button) => {
           button.addEventListener('click', () => {
             const sortBy = button.dataset.sort;
             filterCompanyList(sortBy);
 
-            // 更新按钮激活状态
             sortButtons.forEach((btn) => {
               btn.classList.remove('active', 'bg-zinc-200', 'dark:bg-zinc-700', 'text-zinc-800', 'dark:text-zinc-200');
               btn.classList.add(
@@ -251,7 +237,6 @@ import companyList from './_data.json';
           });
         });
 
-        // 弹窗打开逻辑 (使用事件委托)
         companyListContainer.addEventListener('click', (event) => {
           const card = event.target.closest('article[data-company-id]');
           if (!card) return;
@@ -264,14 +249,12 @@ import companyList from './_data.json';
             return;
           }
 
-          // 填充弹窗内容
           modalTitle.textContent = company.name;
           modalTags.innerHTML = '';
           company.keyword.forEach((tag, index) => {
             const tagElement = document.createElement('span');
             tagElement.className =
               'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-100 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-300 text-xs border border-zinc-200 dark:border-zinc-600 opacity-0 translate-y-2';
-            // 使用 Tabler Tag 图标
             tagElement.innerHTML = `
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag w-3 h-3 opacity-70" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -282,7 +265,6 @@ import companyList from './_data.json';
             `;
             modalTags.appendChild(tagElement);
 
-            // 添加标签动画
             setTimeout(() => {
               tagElement.style.transition = 'all 0.3s ease-out';
               tagElement.style.opacity = '1';
@@ -291,7 +273,6 @@ import companyList from './_data.json';
           });
           modalContent.textContent = company.detail || '暂无详细信息';
 
-          // 显示弹窗
           modal.classList.remove('hidden');
           modal.classList.add('flex');
           document.body.classList.add('overflow-hidden');
@@ -301,21 +282,18 @@ import companyList from './_data.json';
           modal.focus();
         });
 
-        // 关闭弹窗功能
         const closeModal = () => {
           modalDialog.classList.add('scale-95', 'opacity-0', 'translate-y-4');
           setTimeout(() => {
             modal.classList.add('hidden');
             modal.classList.remove('flex');
             document.body.classList.remove('overflow-hidden');
-          }, 200); // 匹配过渡动画时长
+          }, 200);
         };
 
         document.getElementById('closeModal').addEventListener('click', closeModal);
         document.getElementById('closeModalBtn').addEventListener('click', closeModal);
         document.getElementById('modalOverlay').addEventListener('click', closeModal);
-
-        // ESC 键关闭弹窗
         document.addEventListener('keydown', (e) => {
           if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
             closeModal();
@@ -323,7 +301,6 @@ import companyList from './_data.json';
         });
       });
 
-      // 暗色模式切换
       const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
       const toggleDarkMode = (e) => {
         if (e.matches) {
@@ -334,7 +311,7 @@ import companyList from './_data.json';
       };
 
       darkModeMediaQuery.addEventListener('change', toggleDarkMode);
-      toggleDarkMode(darkModeMediaQuery); // 初始检查
+      toggleDarkMode(darkModeMediaQuery);
     </script>
   </body>
 </html>

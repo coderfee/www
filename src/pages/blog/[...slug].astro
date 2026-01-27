@@ -146,7 +146,5 @@ const jsonLd = {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ slug, title }),
     keepalive: true,
-  }).catch(() => {
-    // Silent failure
-  });
+  }).catch(() => {});
 </script>

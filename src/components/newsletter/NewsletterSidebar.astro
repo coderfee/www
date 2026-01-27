@@ -59,19 +59,28 @@ const { items, currentSlug } = Astro.props;
 </aside>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  function initSidebar() {
     const sidebarToggle = document.getElementById('sidebarToggle');
+    const closeBtn = document.getElementById('close-newsletter-list');
     const sidebar = document.getElementById('newsletter-sidebar');
     const collapsedIcon = document.querySelector('[data-sidebar-collapsed]');
     const expandedIcon = document.querySelector('[data-sidebar-expanded]');
-    let isExpanded = false;
 
-    sidebarToggle?.addEventListener('click', () => {
-      isExpanded = !isExpanded;
+    const toggleSidebar = () => {
       sidebar?.classList.toggle('translate-x-[0]');
-
       collapsedIcon?.classList.toggle('hidden');
       expandedIcon?.classList.toggle('hidden');
-    });
-  });
+    };
+
+    sidebarToggle?.addEventListener('click', toggleSidebar);
+    closeBtn?.addEventListener('click', toggleSidebar);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSidebar);
+  } else {
+    initSidebar();
+  }
+
+  document.addEventListener('astro:after-swap', initSidebar);
 </script>
