@@ -1,5 +1,5 @@
 import { loadRenderers } from 'astro:container';
-import { getCollection, render } from 'astro:content'
+import { getCollection, render } from 'astro:content';
 import { getContainerRenderer } from '@astrojs/mdx';
 import rss from '@astrojs/rss';
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';

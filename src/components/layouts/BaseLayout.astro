@@ -1,5 +1,4 @@
 ---
-import { ClientRouter } from 'astro:transitions';
 import TopNavigation from '@/components/TopNavigation.astro';
 import DocumentMeta from './DocumentMeta.astro';
 
@@ -10,7 +9,6 @@ const { title, description, ogImage, showNavigation = true } = Astro.props;
 <html lang="zh-Hans">
   <head>
     <DocumentMeta title={title} description={description} ogImage={ogImage} />
-    <ClientRouter />
     <slot name="head" />
   </head>
   <body class="bg-white dark:bg-zinc-900 dark:text-white">
@@ -19,39 +17,3 @@ const { title, description, ogImage, showNavigation = true } = Astro.props;
     <slot />
   </body>
 </html>
-
-<style is:global>
-  .dark::view-transition-old(root) {
-    z-index: 1;
-  }
-  .dark::view-transition-new(root) {
-    z-index: 9999;
-  }
-
-  @keyframes slide-from-right {
-    from {
-      opacity: 0;
-      transform: translateX(20px);
-    }
-  }
-
-  @keyframes slide-to-left {
-    to {
-      opacity: 0;
-      transform: translateX(-20px);
-    }
-  }
-
-  :root {
-    --motion-duration: 0.3s;
-    --motion-ease: cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  ::view-transition-old(root) {
-    animation: slide-to-left var(--motion-duration) var(--motion-ease) both;
-  }
-
-  ::view-transition-new(root) {
-    animation: slide-from-right var(--motion-duration) var(--motion-ease) both;
-  }
-</style>

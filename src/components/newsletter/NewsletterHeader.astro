@@ -12,7 +12,7 @@ interface Props {
   total: number;
 }
 
-const { title, cover, description, date, issue, total } = Astro.props;
+const { title, cover, description, date, issue } = Astro.props;
 const formattedDate = dayjs(date).format('DD MMM, YYYY');
 ---
 
@@ -28,7 +28,11 @@ const formattedDate = dayjs(date).format('DD MMM, YYYY');
     </div>
   </div>
 
-  <h1 class="text-3xl md:text-4xl font-bold mb-6 bg-clip-text text-transparent bg-linear-to-r from-zinc-800 via-zinc-900 to-zinc-800 dark:from-white dark:via-zinc-100 dark:to-white leading-[1.15]">{title}</h1>
+  <h1
+    class="text-3xl md:text-4xl font-bold mb-6 bg-clip-text text-transparent bg-linear-to-r from-zinc-800 via-zinc-900 to-zinc-800 dark:from-white dark:via-zinc-100 dark:to-white leading-[1.15]"
+  >
+    {title}
+  </h1>
 
   {description && (
     <div class="relative my-6">
@@ -41,6 +45,5 @@ const formattedDate = dayjs(date).format('DD MMM, YYYY');
   {cover && 
     <div class="mb-8">
       <img src={cover} alt={title} class="object-cover rounded-xl mb-4" />
-    </div>
-  }
+    </div>}
 </div>

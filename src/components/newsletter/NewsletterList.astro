@@ -11,7 +11,7 @@ const { items, currentSlug } = Astro.props;
 ---
 
 <div class="space-y-px">
-  {items.map((item, index) => {
+  {items.map((item) => {
     const isActive = item.id === currentSlug;
     const itemDate = dayjs(item.data.date).format('DD MMM, YYYY');
     

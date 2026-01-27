@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getCollection, render } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import NewsletterLayout from '@/components/layouts/NewsletterLayout.astro';
 import NewsletterHeader from '@/components/newsletter/NewsletterHeader.astro';
 import NewsletterSidebar from '@/components/newsletter/NewsletterSidebar.astro';
@@ -26,12 +26,14 @@ const sorted = collection.sort((a, b) => b.data.date.valueOf() - a.data.date.val
 ---
 
 <NewsletterLayout title={title} description={description} cover={cover}>
-  <div class="newsletter grid grid-cols-1 lg:grid-cols-[280px_1fr] h-screen lg:h-screen w-full relative overflow-hidden">
+  <div
+    class="newsletter grid grid-cols-1 lg:grid-cols-[280px_1fr] h-screen lg:h-screen w-full relative overflow-hidden"
+  >
     <NewsletterSidebar items={sorted} currentSlug={newsletter.id} />
-    
+
     <main class="h-full overflow-y-auto lg:pt-0">
       <div class="max-w-3xl mx-auto px-4 lg:px-8 py-6">
-        <NewsletterHeader 
+        <NewsletterHeader
           title={title}
           cover={cover as string}
           description={description}
@@ -39,8 +41,9 @@ const sorted = collection.sort((a, b) => b.data.date.valueOf() - a.data.date.val
           issue={issue}
           total={sorted.length}
         />
-        
-        <article class="prose prose-zinc dark:prose-invert max-w-none
+
+        <article
+          class="prose prose-zinc dark:prose-invert max-w-none
            prose-headings:font-bold prose-headings:tracking-tight 
            prose-headings:text-zinc-900 dark:prose-headings:text-zinc-100
            prose-p:text-zinc-600 dark:prose-p:text-zinc-300

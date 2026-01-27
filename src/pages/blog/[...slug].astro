@@ -7,6 +7,7 @@ import PostNavigation from '@/components/blog/PostNavigation.astro';
 import PostRelatedPosts from '@/components/blog/PostRelatedPosts.astro';
 import BaseLayout from '@/components/layouts/BaseLayout.astro';
 import { AUTHOR } from '@/consts';
+import IconArrowLeft from '~icons/tabler/arrow-left';
 import IconMessageCircle from '~icons/tabler/message-circle';
 
 export async function getStaticPaths() {
@@ -64,13 +65,21 @@ const jsonLd = {
   <Fragment slot="head">
     {date && <meta name="date" content={date.toLocaleDateString()} />}
     {keywords && <meta name="keywords" content={keywords.join(', ')} />}
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </Fragment>
 
   <article class="relative min-h-screen">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 py-12 mt-12">
+      <button
+        onclick="history.back()"
+        class="inline-flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors mb-8 group cursor-pointer"
+      >
+        <IconArrowLeft class="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
+        <span>返回</span>
+      </button>
+
       <PostHeader title={title} date={date} tags={tags} tldr={tldr} />
-      
+
       <div class="w-full my-10 border-t border-dashed border-zinc-200/30 dark:border-zinc-700/30"></div>
 
       <div
@@ -110,6 +119,7 @@ const jsonLd = {
 </BaseLayout>
 
 <script
+  is:inline
   src="https://giscus.app/client.js"
   data-repo="coderfe/www"
   data-repo-id="MDEwOlJlcG9zaXRvcnkxNjA5OTc3MTY="
@@ -128,7 +138,7 @@ const jsonLd = {
 >
 </script>
 
-<script define:vars={{ slug: post.id, title, isDev: import.meta.env.DEV }}>
+<script is:inline define:vars={{ slug: post.id, title, isDev: import.meta.env.DEV }}>
   const url = isDev ? 'http://localhost:3001/api/public/visit' : 'https://dash.coderfee.com/api/public/visit';
 
   fetch(url, {

@@ -19,13 +19,13 @@ const { post } = Astro.props;
 
 <article class="relative">
   <a href={`/blog/${post.id}`} transition:animate={fade({ duration: '0.3s' })} class="block py-8">
-    <h2 class="text-lg sm:text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-2 hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors">
+    <h2
+      class="text-lg sm:text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-2 hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors"
+    >
       {post.data.title}
     </h2>
 
-    <p class="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mb-2">
-      {post.data.tldr}
-    </p>
+    <p class="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mb-2">{post.data.tldr}</p>
 
     <div class="flex items-start justify-between gap-2">
       <time

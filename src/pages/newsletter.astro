@@ -4,6 +4,8 @@ import { getCollection } from 'astro:content';
 const collection = await getCollection('newsletter', ({ data }) => !data.draft);
 const sorted = collection.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const [newest] = sorted;
+const id = newest.id;
 
-return Astro.rewrite(`/newsletter/${newest.id}`);
+return Astro.rewrite(`/newsletter/${id}`);
 ---
+
