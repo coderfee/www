@@ -5,16 +5,14 @@
   "packageManager": "pnpm@10.28.0",
   "scripts": {
     "dev": "pnpm run sync-r2 && astro dev",
-    "start": "astro dev",
     "build": "pnpm run sync-r2 && astro build && pagefind",
-    "preview": "astro preview",
-    "astro": "astro",
-    "check": "pnpx @biomejs/biome check --write ./src",
-    "add": "pnpx shadcn@latest add",
+    "lint": "pnpm biome check ./src && astro check --minimumSeverity warning",
+    "lint:fix": "pnpm biome check ./src --write",
     "upgrade": "pnpm update && pnpx @astrojs/upgrade",
     "sync-r2": "node scripts/sync-r2.mjs"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.6",
     "@astrojs/mdx": "5.0.0-beta.2",
     "@astrojs/react": "5.0.0-beta.2",
     "@astrojs/rss": "4.0.15-beta.1",
@@ -37,11 +35,14 @@
     "remark-toc": "^9.0.0",
     "tailwind-merge": "^3.4.0",
     "tailwindcss": "^4.1.18",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.975.0",
     "@biomejs/biome": "^2.3.13",
+    "@commitlint/cli": "^20.3.1",
+    "@commitlint/config-conventional": "^20.3.1",
     "@iconify-json/tabler": "^1.2.26",
     "@iconify/react": "^6.0.2",
     "@tailwindcss/typography": "^0.5.19",

@@ -60,10 +60,5 @@ export default defineConfig({
         external: ['fsevents'],
       },
     },
-    server: {
-      watch: {
-        usePolling: true,
-      },
-    },
   },
 });

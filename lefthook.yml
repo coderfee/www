@@ -1,5 +1,30 @@
 pre-commit:
+  parallel: true
   commands:
-    check:
-      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc,astro}"
-      run: pnpx biome check --write --no-errors-on-unmatched --files-ignore-unknown=true {staged_files} && git update-index --again
+    biome-check:
+      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
+      run: pnpm biome check --write --unsafe --no-errors-on-unmatched --files-ignore-unknown=true {staged_files} && git update-index --again
+      stage_fixed: true
+      skip:
+        - merge
+        - rebase
+        
+pre-push:
+  parallel: true
+  commands:
+    biome-lint:
+      run: pnpm biome check ./src
+      skip:
+        - merge
+        - rebase
+    
+    astro-check:
+      run: pnpm astro check --minimumSeverity warning
+      skip:
+        - merge
+        - rebase
+
+commit-msg:
+  commands:
+    commitlint:
+      run: pnpm commitlint --edit {1}
