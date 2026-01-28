@@ -1,10 +1,10 @@
 ---
-import { getCollection } from 'astro:content';
-import PostCard from '@/components/blog/PostCard.astro';
-import BaseLayout from '@/components/layouts/BaseLayout.astro';
+import { getCollection } from "astro:content";
+import PostCard from "@/components/blog/PostCard.astro";
+import BaseLayout from "@/components/layouts/BaseLayout.astro";
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection('blog');
+  const allPosts = await getCollection("blog");
   const posts = allPosts.filter(({ data: { draft = false } }) => !draft);
   const tags = posts.flatMap(({ data: { tags = [] } }) => tags);
   const uniqueTags = [...new Set(tags)];
@@ -12,36 +12,38 @@ export async function getStaticPaths() {
 }
 
 const { tag } = Astro.params;
-const allPosts = await getCollection('blog');
+const allPosts = await getCollection("blog");
 const posts = allPosts
   .filter(({ data: { tags = [], draft = false } }) => !draft && tags.includes(tag))
   .sort(({ data: { date: dateA } }, { data: { date: dateB } }) => dateB.valueOf() - dateA.valueOf());
 
-const tagDescription = `探索所有关于 #${tag} 的文章。coderfee 的博客涵盖了与 ${tag} 相关的技术分享、实践总结和深入思考。`;
+const tagDescription = `浏览 coderfee 博客中关于 ${tag} 的 ${posts.length} 篇技术文章，包括开发教程、实践经验和深度思考。探索与 ${tag} 相关的最新内容。`;
+
+const pageTitle = `${tag} - 技术文章合集`;
 ---
 
-<BaseLayout title={`#${tag} · 标签文章`} description={tagDescription}>
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-    <header class="mb-12">
-      <h1 class="text-3xl sm:text-4xl font-bold text-zinc-800 dark:text-zinc-100 text-center">#{tag}</h1>
-      <p class="mt-4 text-center text-zinc-600 dark:text-zinc-400">共 {posts.length} 篇文章</p>
+<BaseLayout title={pageTitle} description={tagDescription}>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 pt-20">
+    <header class="mb-8">
+      <h1 class="font-noto text-2xl sm:text-4xl font-bold text-zinc-800 dark:text-zinc-100 text-center">#{tag}</h1>
+      <p class="text-sm mt-4 text-center text-zinc-600 dark:text-zinc-400">共 {posts.length} 篇文章</p>
     </header>
 
     <main class="space-y-0">
-      {posts.length > 0 ? (
-        posts.map((post, index) => (
-          <>
-            <PostCard post={post} />
-            {index < posts.length - 1 && (
-              <div class="border-t border-dashed border-zinc-100 dark:border-zinc-800"></div>
-            )}
-          </>
-        ))
-      ) : (
-        <div class="p-8 text-center bg-zinc-50 dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800">
-          <p class="text-lg text-zinc-600 dark:text-zinc-400">暂无相关文章</p>
-        </div>
-      )}
+      {
+        posts.length > 0 ? (
+          posts.map((post, index) => (
+            <>
+              <PostCard post={post} />
+              {index < posts.length - 1 && <div class="border-t border-dashed border-zinc-100 dark:border-zinc-800" />}
+            </>
+          ))
+        ) : (
+          <div class="p-8 text-center bg-zinc-50 dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800">
+            <p class="text-lg text-zinc-600 dark:text-zinc-400">暂无相关文章</p>
+          </div>
+        )
+      }
     </main>
   </div>
 </BaseLayout>
