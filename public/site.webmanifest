@@ -17,5 +17,19 @@
       "purpose": "any"
     }
   ],
-  "categories": ["productivity", "news"]
+  "categories": ["productivity", "news"],
+  "shortcuts": [
+    {
+      "name": "首页",
+      "url": "/"
+    },
+    {
+      "name": "归档",
+      "url": "/archive/"
+    },
+    {
+      "name": "周刊",
+      "url": "/newsletter/"
+    }
+  ]
 }
