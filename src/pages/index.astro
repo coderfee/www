@@ -3,15 +3,14 @@ import { getCollection } from 'astro:content';
 import PostCard from '@/components/blog/PostCard.astro';
 import BaseLayout from '@/components/layouts/BaseLayout.astro';
 import SocialLinks from '@/components/SocialLinks.astro';
+import IconArrowRight from '~icons/tabler/arrow-right';
 
 const allPosts = await getCollection('blog');
 
-const twoYearsAgo = new Date();
-twoYearsAgo.setFullYear(twoYearsAgo.getFullYear() - 2);
-
 const posts = allPosts
-  .filter(({ data: { draft = false, date } }) => !draft && date >= twoYearsAgo)
-  .sort(({ data: { date: dateA } }, { data: { date: dateB } }) => dateB.valueOf() - dateA.valueOf());
+  .filter(({ data: { draft = false } }) => !draft)
+  .sort(({ data: { date: dateA } }, { data: { date: dateB } }) => dateB.valueOf() - dateA.valueOf())
+  .slice(0, 20);
 
 const pageDescription =
   '欢迎来到 Coderfee 的博客，这里记录了前端开发、技术思考和个人成长。探索最新的 Web 技术、框架实践和优化技巧。';
@@ -31,7 +30,7 @@ const pageDescription =
         ))
       ) : (
         <div class="p-8 text-center bg-zinc-50 dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800">
-          <p class="text-lg text-zinc-600 dark:text-zinc-400">最近两年没有发布文章</p>
+          <p class="text-lg text-zinc-600 dark:text-zinc-400">暂无发布的文章</p>
         </div>
       )}
     </main>
@@ -39,8 +38,9 @@ const pageDescription =
     {posts.length > 0 && (
       <div class="mt-12 flex justify-center">
         <a href="/archive"
-           class="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100">
-          查看所有文章
+           class="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 group">
+          <span>查看所有文章</span>
+          <IconArrowRight class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
         </a>
       </div>
     )}
