@@ -64,7 +64,7 @@ const jsonLd = {
 <BaseLayout title={title} description={tldr} ogImage={cover}>
   <Fragment slot="head">
     {date && <meta name="date" content={date.toLocaleDateString()} />}
-    {keywords && <meta name="keywords" content={keywords.join(', ')} />}
+    {keywords && <meta name="keywords" content={keywords.join(", ")} />}
     <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </Fragment>
 
@@ -84,7 +84,7 @@ const jsonLd = {
 
       <div
         class="prose prose-zinc dark:prose-invert max-w-none
-           prose-headings:font-bold prose-headings:tracking-tight 
+           prose-headings:font-bold prose-headings:tracking-tight
            prose-headings:text-zinc-900 dark:prose-headings:text-zinc-100
            prose-p:text-zinc-600 dark:prose-p:text-zinc-300
            prose-img:rounded-xl prose-img:mx-auto text-justify prose-headings:font-noto"
@@ -136,8 +136,7 @@ const jsonLd = {
   crossorigin="anonymous"
   async
   defer
->
-</script>
+></script>
 
 <script is:inline define:vars={{ slug: post.id, title, isDev: import.meta.env.DEV }}>
   const url = isDev ? 'http://localhost:3001/api/public/visit' : 'https://dash.coderfee.com/api/public/visit';

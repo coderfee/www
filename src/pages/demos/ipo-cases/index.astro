@@ -69,45 +69,39 @@ import companyList from './_data.json';
 
       <div id="companyListContainer" class="max-w-4xl mx-auto space-y-4">
         {companyList.map((item, index) => (
-          <article 
-            class="group relative cursor-pointer"
-            data-company-id={index}
-          >
-            <div class="relative bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg overflow-hidden transition-all duration-200 hover:border-zinc-400 dark:hover:border-zinc-600 hover:shadow-md">
-              
-              <div class="pl-6 pr-4 py-5 sm:py-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                <div class="flex items-center gap-3 min-w-0 shrink-0">
-                  <div class="shrink-0 w-10 h-10 rounded-lg bg-zinc-100 dark:bg-zinc-700 flex items-center justify-center text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-600">
-                    <IconBuildingSkyscraper class="w-5 h-5" />
+            <article class="group relative cursor-pointer" data-company-id={index}>
+              <div class="relative bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg overflow-hidden transition-all duration-200 hover:border-zinc-400 dark:hover:border-zinc-600 hover:shadow-md">
+                <div class="pl-6 pr-4 py-5 sm:py-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                  <div class="flex items-center gap-3 min-w-0 shrink-0">
+                    <div class="shrink-0 w-10 h-10 rounded-lg bg-zinc-100 dark:bg-zinc-700 flex items-center justify-center text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-600">
+                      <IconBuildingSkyscraper class="w-5 h-5" />
+                    </div>
+                    <div class="min-w-0">
+                      <h3 class="text-xl font-bold text-zinc-800 dark:text-zinc-100 line-clamp-1">{item.name}</h3>
+                    </div>
                   </div>
-                  <div class="min-w-0">
-                    <h3 class="text-xl font-bold text-zinc-800 dark:text-zinc-100 line-clamp-1">
-                      {item.name}
-                    </h3>
+
+                  <div class="flex flex-wrap gap-2 flex-1 min-w-0">
+                    {item.keyword.map((tag) => (
+                      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-300 text-xs border border-zinc-200 dark:border-zinc-600 transition-transform duration-200">
+                        <IconTagOutline class="w-3 h-3 opacity-70" />
+                        <span class="font-medium">{tag}</span>
+                      </span>
+                    ))}
                   </div>
-                </div>
-                
-                <div class="flex flex-wrap gap-2 flex-1 min-w-0">
-                  {item.keyword.map((tag) => (
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-300 text-xs border border-zinc-200 dark:border-zinc-600 transition-transform duration-200">
-                      <IconTagOutline class="w-3 h-3 opacity-70" />
-                      <span class="font-medium">{tag}</span>
-                    </span>
-                  ))}
-                </div>
-                
-                <div class="flex items-center ml-auto">
-                  {item.delisted && (
-                    <span class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-red-100 dark:bg-red-900/50 border border-red-300 dark:border-red-700/50 text-red-700 dark:text-red-300 text-xs font-medium">
-                      <IconAlertCircle class="w-3.5 h-3.5" />
-                      已退市
-                    </span>
-                  )}
+
+                  <div class="flex items-center ml-auto">
+                    {item.delisted && (
+                      <span class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-red-100 dark:bg-red-900/50 border border-red-300 dark:border-red-700/50 text-red-700 dark:text-red-300 text-xs font-medium">
+                        <IconAlertCircle class="w-3.5 h-3.5" />
+                        已退市
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          </article>
-        ))}
+            </article>
+          ))}
       </div>
     </main>
 

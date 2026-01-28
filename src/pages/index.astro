@@ -1,11 +1,11 @@
 ---
-import { getCollection } from "astro:content";
-import PostCard from "@/components/blog/PostCard.astro";
-import BaseLayout from "@/components/layouts/BaseLayout.astro";
-import SocialLinks from "@/components/SocialLinks.astro";
-import IconArrowRight from "~icons/tabler/arrow-right";
+import { getCollection } from 'astro:content';
+import PostCard from '@/components/blog/PostCard.astro';
+import BaseLayout from '@/components/layouts/BaseLayout.astro';
+import SocialLinks from '@/components/SocialLinks.astro';
+import IconArrowRight from '~icons/tabler/arrow-right';
 
-const allPosts = await getCollection("blog");
+const allPosts = await getCollection('blog');
 
 const posts = allPosts
   .filter(({ data: { draft = false } }) => !draft)
@@ -13,14 +13,13 @@ const posts = allPosts
   .slice(0, 20);
 
 const pageDescription =
-  "Coderfee 的个人技术博客，专注于前端开发、Web 技术实践和架构设计。分享 Astro、React、TypeScript、TailwindCSS 等现代 Web 技术的开发经验、最佳实践和深度思考。";
+  'Coderfee 的个人技术博客，专注于前端开发、Web 技术实践和架构设计。分享 Astro、React、TypeScript、TailwindCSS 等现代 Web 技术的开发经验、最佳实践和深度思考。';
 ---
 
 <BaseLayout title="首页" description={pageDescription}>
   <div class="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
     <main class="space-y-0">
-      {
-        posts.length > 0 ? (
+      {posts.length > 0 ? (
           posts.map((post, index) => (
             <>
               <PostCard post={post} />
@@ -31,12 +30,10 @@ const pageDescription =
           <div class="p-8 text-center bg-zinc-50 dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800">
             <p class="text-lg text-zinc-600 dark:text-zinc-400">暂无发布的文章</p>
           </div>
-        )
-      }
+        )}
     </main>
 
-    {
-      posts.length > 0 && (
+    {posts.length > 0 && (
         <div class="mt-12 flex justify-center">
           <a
             href="/archive"
@@ -46,8 +43,7 @@ const pageDescription =
             <IconArrowRight class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </a>
         </div>
-      )
-    }
+      )}
   </div>
 
   <SocialLinks />
