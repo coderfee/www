@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap");
+@import url("https://fonts.googleapis.cn/css2?family=Major+Mono+Display&family=Noto+Serif+SC:wght@600&display=swap");
 
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
@@ -6,6 +6,7 @@
 
 @theme {
   --font-major: "Major Mono Display", monospace;
+  --font-noto: "Noto Serif SC", serif;
 }
 
 html {

@@ -14,13 +14,13 @@ const { title, date, tags = [], tldr } = Astro.props;
 ---
 
 <div>
-  <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 mb-4">{title}</h1>
+  <h1 class="font-noto text-3xl sm:text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 mb-4">{title}</h1>
 
   <div class="flex flex-wrap items-center gap-3 tabular-nums text-xs text-zinc-500 dark:text-zinc-400">
     {date && (
-      <time datetime={date.toISOString()} class="flex items-center gap-1">
+      <time datetime={date.toISOString()} class="flex items-center gap-1 tabular-nums">
         <IconCalendar></IconCalendar>
-        <span>{dayjs(date).format("DD MMM, YY")}</span>
+        <span>{dayjs(date).format("YYYY年MM月DD日")}</span>
       </time>
     )}
 
@@ -40,7 +40,7 @@ const { title, date, tags = [], tldr } = Astro.props;
   </div>
 
   {tldr && (
-    <div class="mt-8 text-zinc-700 dark:text-zinc-300 italic">
+    <div class="font-noto mt-8 text-zinc-700 dark:text-zinc-300 italic">
       {tldr}
     </div>
   )}

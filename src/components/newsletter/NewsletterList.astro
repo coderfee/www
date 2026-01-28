@@ -18,7 +18,7 @@ const { items, currentSlug } = Astro.props;
     return (
       <a 
         href={`/newsletter/${item.id}`} 
-        class={`group block px-3 py-3 -mx-3 rounded-lg transition-all duration-200 relative ${
+        class={`group block font-noto px-3 py-3 -mx-3 rounded-lg transition-all duration-200 relative ${
           isActive 
             ? 'bg-zinc-100 dark:bg-zinc-800/50' 
             : 'hover:bg-zinc-50 dark:hover:bg-zinc-800/30'

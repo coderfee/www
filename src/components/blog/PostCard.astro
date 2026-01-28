@@ -18,9 +18,9 @@ const { post } = Astro.props;
 ---
 
 <article class="relative">
-  <a href={`/blog/${post.id}`} transition:animate={fade({ duration: '0.3s' })} class="block py-8">
+  <a href={`/blog/${post.id}`} transition:animate={fade({ duration: '0.3s' })} class="block py-8 group">
     <h2
-      class="text-lg sm:text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-2 hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors"
+      class="font-noto text-xl sm:text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-2 group-hover:text-zinc-600 dark:group-hover:text-zinc-400 transition-colors"
     >
       {post.data.title}
     </h2>

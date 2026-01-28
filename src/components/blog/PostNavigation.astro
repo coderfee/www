@@ -21,7 +21,7 @@ const { prev, next } = Astro.props;
         <IconArrowLeft class="group-hover:-translate-x-0.5 transition-transform"></IconArrowLeft>
         <span>新一篇</span>
       </div>
-      <div class="text-zinc-800 dark:text-zinc-200 font-medium line-clamp-2 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors">
+      <div class="font-noto text-zinc-800 dark:text-zinc-200 font-medium line-clamp-2 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors">
         {prev.data.title}
       </div>
     </a>
@@ -36,7 +36,7 @@ const { prev, next } = Astro.props;
         <span>旧一篇</span>
         <IconArrowRight class="group-hover:translate-x-0.5 transition-transform"></IconArrowRight>
       </div>
-      <div class="text-zinc-800 dark:text-zinc-200 font-medium line-clamp-2 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors">
+      <div class="font-noto text-zinc-800 dark:text-zinc-200 font-medium line-clamp-2 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors">
         {next.data.title}
       </div>
     </a>
