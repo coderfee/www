@@ -138,7 +138,7 @@ const jsonLd = {
   defer
 ></script>
 
-<script is:inline define:vars={{ slug: post.id, title, isDev: import.meta.env.DEV }}>
+<script defer async is:inline define:vars={{ slug: post.id, title, isDev: import.meta.env.DEV }}>
   const url = isDev ? 'http://localhost:3001/api/public/visit' : 'https://dash.coderfee.com/api/public/visit';
 
   fetch(url, {
