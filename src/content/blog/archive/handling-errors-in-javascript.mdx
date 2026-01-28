@@ -5,10 +5,6 @@ tldr: 错误并不可怕。通过这些错误我们可以了解哪些事情不�
 tags: ['JavaScript', '译文']
 ---
 
-import GlobalErrors from '../../../assets/blog/global-error-ui.jpg';
-import HandleSpecificErrors from '../../../assets/blog/handling-specific-request-error.jpg';
-import OriginErrors from '../../../assets/blog/frontend-origin-errors.jpg';
-
 > 原文链接：[Handling Errors in JavaScript: The Definitive Guide](https://levelup.gitconnected.com/the-definite-guide-to-handling-errors-gracefully-in-javascript-58424d9c60e6)
 
 这篇文章将分为三个部分。首先，我们会看一下常规错误；之后，我们会集中梳理一下后端（Node.js 和 Express.js）中的错误处理；最后，我们会看看在 React.js 中如何处理错误。我选择这些框架是因为它们都是当下最受欢迎的，但是，你应该能够很容易地将这些新知识应用到其它框架里面去。
@@ -318,7 +314,7 @@ throw new CustomError('MY_CODE', 400, 'Error description');
 
 我通常会把这些错误保存在**最外层有状态组件**，并且将其渲染为一个静态 UI 元素，它可以是屏幕顶部的一个红色条幅，一个模态框或者其他任何东西，具体的设计实现取决于你自己。
 
-<img src={GlobalErrors.src} alt="UI for global errors" />
+![global-error-ui.jpg](https://assets.coderfee.com/blog/posts/global-error-ui.jpg)
 
 让我们看看代码实现：
 
@@ -437,7 +433,7 @@ class GenericErrorReq extends Component {
 
 #### 处理特定请求错误
 
-<img src={OriginErrors.src} alt="Handling specific request errors" />
+![frontend-origin-errors.jpg](https://assets.coderfee.com/blog/posts/frontend-origin-errors.jpg)
 
 和全局错误类似，我们可以在其它组件中包含**局部错误状态**。程序是类似的：
 
@@ -494,7 +490,7 @@ export default SpecificErrorRequest;
 
 #### 前端自身错误
 
-<img src={OriginErrors.src} alt="Frontend origin errors" />
+![frontend-origin-errors.jpg](https://assets.coderfee.com/blog/posts/frontend-origin-errors.jpg)
 
 正如之前提到过，这些错误可以使用与处理从后端返回特定错误的相同方式来处理。让我们用一个输入字段的例子来说明，这次我们允许用户在输入之后删除一个城市：
 

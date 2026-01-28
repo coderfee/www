@@ -5,11 +5,6 @@ tldr: 随着 Vue3 的发布，尤大新推了一个前端构建工具——Vite�
 tags: ['Vue', 'Vite']
 ---
 
-import ViteDev from '../../../assets/blog/use-vite-in-vue2/vite-dev.png';
-import VueServe from '../../../assets/blog/use-vite-in-vue2/vue-serve.png';
-import ViteInAction from '../../../assets/blog/use-vite-in-vue2/vite-in-action.png';
-import VuecliInAction from '../../../assets/blog/use-vite-in-vue2/vuecli-in-action.png';
-
 ## Vite 是个啥
 
 如 Vite 官网所介绍，Vite 是一个新型前端构建工具，能够显著提高前端开发体验，主要体现在：
@@ -26,11 +21,11 @@ npm init vite@latest
 
 这行代码会创建一个最简单的 Vite 项目，其中 Vue 为 3.x 版本。然后启动项目，能看到如下的输出，只用了 500ms 左右就能启动开发环境：
 
-<img src={ViteDev.src} alt="vite dev time spent" />
+![vite-dev.png](https://assets.coderfee.com/blog/posts/vite-dev.png)
 
 而 Vue CLI 生成 Webpack 项目的运行时间如下，大概在 3s 左右：
 
-<img src={VueServe.src} alt="vue serve time spent" />
+![vue-serve.png](https://assets.coderfee.com/blog/posts/vue-serve.png)
 
 显而易见的效率提升，对于大项目来说真的是很香了，不用坐等，直接启动就能看到项目的效果
 
@@ -176,11 +171,11 @@ Vite 默认的打包方式放弃了对传统浏览器的支持，如果你的项
 
 先看使用 Vite 之前，总共耗时 21s 左右：
 
-<img src={VuecliInAction.src} alt="vue cli project" />
+![vuecli-in-action.png](https://assets.coderfee.com/blog/posts/vuecli-in-action.png)
 
 使用 Vite 之后启动只需要 1-2s 左右：
 
-<img src={ViteInAction.src} alt="vite project" />
+![vite-in-action.png](https://assets.coderfee.com/blog/posts/vite-in-action.png)
 
 ## 最后
 
