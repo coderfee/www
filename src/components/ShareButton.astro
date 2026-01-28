@@ -1,0 +1,62 @@
+---
+import IconShare from '~icons/tabler/share';
+
+interface Props {
+  title: string;
+  url?: string;
+  description?: string;
+}
+
+const { title, url, description } = Astro.props;
+---
+
+<div class="flex justify-center my-8">
+  <button
+    id="share-button"
+    class="flex items-center gap-2 px-5 py-2.5 rounded-full
+           bg-white dark:bg-zinc-900
+           border border-zinc-200 dark:border-zinc-700
+           hover:bg-zinc-100 dark:hover:bg-zinc-800
+           text-zinc-600 dark:text-zinc-400
+           transition-colors cursor-pointer"
+    aria-label="Share this article"
+  >
+    <IconShare class="w-4 h-4" />
+    <span id="share-text" class="text-sm font-medium">分享文章</span>
+  </button>
+</div>
+
+<script is:inline defer async define:vars={{ title, description, url }}>
+  function setupShare() {
+    const btn = document.getElementById('share-button');
+    const shareText = document.getElementById('share-text');
+
+    if (!btn || !shareText) return;
+
+    btn.onclick = async () => {
+      const shareUrl = url || window.location.href;
+      const shareTextContent = description || '';
+
+      try {
+        if (navigator.share) {
+          await navigator.share({
+            title,
+            text: shareTextContent,
+            url: shareUrl,
+          });
+        } else {
+          await navigator.clipboard.writeText(shareUrl);
+          const originalText = shareText.textContent;
+          shareText.textContent = '链接已复制';
+          setTimeout(() => {
+            shareText.textContent = originalText;
+          }, 2000);
+        }
+      } catch (err) {}
+    };
+  }
+
+  setupShare();
+
+  document.addEventListener('astro:page-load', setupShare);
+</script>
