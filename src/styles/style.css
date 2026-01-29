@@ -20,3 +20,31 @@ html {
 .newsletter img {
   @apply rounded-lg shadow-lg;
 }
+
+pre {
+  @apply relative;
+}
+
+.copy-code {
+  @apply absolute top-2 right-2 px-3 py-1 text-xs font-medium text-zinc-600 bg-zinc-100 border border-zinc-200 rounded cursor-pointer transition-all duration-200 opacity-0;
+}
+
+.dark .copy-code {
+  @apply text-zinc-400 bg-zinc-800 border-zinc-700;
+}
+
+pre:hover .copy-code {
+  @apply opacity-100;
+}
+
+.copy-code:hover {
+  @apply bg-zinc-200 border-zinc-300;
+}
+
+.dark .copy-code:hover {
+  @apply bg-zinc-700 border-zinc-600;
+}
+
+.copy-code.copied {
+  @apply text-green-600 border-green-600;
+}

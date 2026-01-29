@@ -24,6 +24,22 @@ export default defineConfig({
     shikiConfig: {
       theme: 'vitesse-dark',
       wrap: true,
+      transformers: [
+        {
+          name: 'add-copy-button',
+          pre(node) {
+            node.children.push({
+              type: 'element',
+              tagName: 'button',
+              properties: {
+                className: ['copy-code'],
+                'aria-label': '复制代码',
+              },
+              children: [{ type: 'text', value: '复制' }],
+            });
+          },
+        },
+      ],
     },
     remarkPlugins: [[remarkToc, { headings: ['h2', 'h3', 'h4'] }]],
     rehypePlugins: [

@@ -15,5 +15,38 @@ const { title, description, ogImage, showNavigation = true } = Astro.props;
     {showNavigation && <TopNavigation />}
 
     <slot />
+
+    <script async defer is:inline>
+      function initCopyButtons() {
+        const buttons = document.querySelectorAll('.copy-code');
+        buttons.forEach((button) => {
+          if (button.hasAttribute('data-initialized')) return;
+
+          button.addEventListener('click', async () => {
+            const pre = button.closest('pre');
+            const code = pre?.querySelector('code');
+            if (!code) return;
+
+            try {
+              await navigator.clipboard.writeText(code.innerText);
+              button.textContent = '已复制!';
+              button.classList.add('copied');
+              setTimeout(() => {
+                button.textContent = '复制';
+                button.classList.remove('copied');
+              }, 2000);
+            } catch (err) {
+              console.error('复制失败:', err);
+            }
+          });
+
+          button.setAttribute('data-initialized', 'true');
+        });
+      }
+
+      initCopyButtons();
+
+      document.addEventListener('astro:after-swap', initCopyButtons);
+    </script>
   </body>
 </html>
