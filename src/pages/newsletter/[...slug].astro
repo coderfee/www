@@ -1,7 +1,9 @@
 ---
 import { getCollection, render } from 'astro:content';
+import dayjs from 'dayjs';
 import NewsletterLayout from '@/components/layouts/NewsletterLayout.astro';
-import NewsletterHeader from '@/components/newsletter/NewsletterHeader.astro';
+import IconBook from '~icons/tabler/book';
+import IconCalendar from '~icons/tabler/calendar';
 
 export async function getStaticPaths() {
   const collection = await getCollection('newsletter');
@@ -20,18 +22,43 @@ export async function getStaticPaths() {
 const { newsletter } = Astro.props;
 const { Content } = await render(newsletter);
 const { title, description, cover, date, issue } = newsletter.data;
+const formattedDate = dayjs(date).format('YYYY年MM月DD日');
 ---
 
 <NewsletterLayout title={title} description={description} cover={cover}>
   <div class="max-w-3xl mx-auto px-4 py-12">
-    <NewsletterHeader
-      title={title}
-      cover={cover as string}
-      description={description}
-      date={date}
-      issue={issue}
-      total={0}
-    />
+    <div class="mb-6">
+      <div class="flex items-center text-xs space-x-4 text-zinc-500 dark:text-zinc-400 mb-3">
+        <div class="flex items-center gap-1">
+          <IconCalendar aria-hidden="true" />
+          <time datetime={date.toISOString()}>{formattedDate}</time>
+        </div>
+        <div class="flex items-center gap-1">
+          <IconBook aria-hidden="true" />
+          <span>第 {issue} 期</span>
+        </div>
+      </div>
+
+      <h1
+        class="font-noto text-3xl md:text-4xl font-bold mb-6 bg-clip-text text-transparent bg-linear-to-r from-zinc-800 via-zinc-900 to-zinc-800 dark:from-white dark:via-zinc-100 dark:to-white leading-[1.15]"
+      >
+        {title}
+      </h1>
+
+      {description && (
+        <div class="relative my-6">
+          <p class="font-noto text-base italic leading-relaxed tracking-wide text-zinc-600 dark:text-zinc-300">
+            {description}
+          </p>
+        </div>
+      )}
+
+      {cover && (
+        <div class="mb-8">
+          <img src={cover as string} alt={title} class="object-cover rounded-xl mb-4" />
+        </div>
+      )}
+    </div>
 
     <article
       class="prose prose-zinc dark:prose-invert max-w-none
