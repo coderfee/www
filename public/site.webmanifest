@@ -1,4 +1,5 @@
 {
+  "id": "/",
   "name": "CSpace",
   "short_name": "CSpace",
   "description": "CSpace——方寸之间，见微知著",
@@ -25,7 +26,8 @@
     {
       "src": "/icons/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
   "screenshots": [
