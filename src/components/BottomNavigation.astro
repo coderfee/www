@@ -1,7 +1,7 @@
 ---
 import ArchiveIcon from '~icons/tabler/archive';
 import BookIcon from '~icons/tabler/book-2';
-import HomeIcon from '~icons/tabler/home';
+import SmartHomeIcon from '~icons/tabler/smart-home';
 
 const pathname = new URL(Astro.request.url).pathname;
 const isActive = (path: string) => {
@@ -11,7 +11,7 @@ const isActive = (path: string) => {
 };
 
 const navItems = [
-  { name: '首页', path: '/', icon: HomeIcon },
+  { name: '首页', path: '/', icon: SmartHomeIcon },
   { name: '归档', path: '/archive', icon: ArchiveIcon },
   { name: '周刊', path: '/newsletter', icon: BookIcon },
 ];
