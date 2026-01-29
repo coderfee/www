@@ -13,7 +13,7 @@ const posts = allPosts
   .slice(0, 20);
 
 const pageDescription =
-  'Coderfee 的个人技术博客，专注于前端开发、Web 技术实践和架构设计。分享 Astro、React、TypeScript、TailwindCSS 等现代 Web 技术的开发经验、最佳实践和深度思考。';
+  'coderfee 的个人技术博客，专注于前端开发、Web 技术实践和架构设计。分享 Astro、React、TypeScript、TailwindCSS 等现代 Web 技术的开发经验、最佳实践和深度思考。';
 ---
 
 <BaseLayout title="首页" description={pageDescription}>
@@ -34,16 +34,21 @@ const pageDescription =
     </main>
 
     {posts.length > 0 && (
-        <div class="mt-12 flex justify-center">
-          <a
-            href="/archive"
-            class="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 group"
-          >
-            <span>查看所有文章</span>
-            <IconArrowRight class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-          </a>
-        </div>
-      )}
+      <div class="mt-12 flex justify-center">
+        <a
+          href="/archive"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full
+                 bg-white dark:bg-zinc-900
+                 border border-zinc-200 dark:border-zinc-700
+                 hover:bg-zinc-100 dark:hover:bg-zinc-800
+                 text-zinc-600 dark:text-zinc-400
+                 transition-colors group"
+        >
+          <span class="text-sm font-medium">查看所有文章</span>
+          <IconArrowRight class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+        </a>
+      </div>
+    )}
   </div>
 
   <SocialLinks />

@@ -28,28 +28,27 @@ const years = Object.keys(postsByYear)
 
 <BaseLayout title="归档" description="所有归档文章">
   <div class="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-16 mt-8">
-    <main class="space-y-12">
+    <main class="space-y-16 sm:space-y-24">
       {years.map((year) => (
-          <section id={`year-${year}`} class="space-y-0">
-            <h2 class="text-2xl font-semibold text-zinc-900 dark:text-zinc-100 mb-6">
+        <section class="relative flex flex-col sm:flex-row gap-8 sm:gap-12">
+          <div class="sm:w-24 shrink-0 sm:sticky sm:top-24 sm:self-start z-10">
+            <h2 class="text-3xl sm:text-4xl font-bold font-major text-zinc-300 dark:text-zinc-700 select-none">
               {year}
-              <span class="ml-2 text-sm font-normal text-zinc-500 dark:text-zinc-500">
-                {postsByYear[year].length} 篇
-              </span>
             </h2>
+            <span class="text-sm text-zinc-400 dark:text-zinc-500 mt-1 block sm:hidden">
+              {postsByYear[year].length} 篇
+            </span>
+          </div>
 
-            <div>
-              {postsByYear[year].map((post, index) => (
-                <>
-                  <PostCard post={post} />
-                  {index < postsByYear[year].length - 1 && (
-                    <div class="border-t border-dashed border-zinc-100 dark:border-zinc-800" />
-                  )}
-                </>
-              ))}
-            </div>
-          </section>
-        ))}
+          <div class="flex-1 relative sm:pl-8 pl-6 space-y-8 pb-4">
+            {postsByYear[year].map((post) => (
+              <div class="relative group">
+                <PostCard post={post} />
+              </div>
+            ))}
+          </div>
+        </section>
+      ))}
     </main>
   </div>
 </BaseLayout>
