@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.cn/css2?family=Major+Mono+Display&family=Noto+Serif+SC:wght@600&display=swap");
-
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @plugin "tailwindcss-animate";
