@@ -25,14 +25,14 @@ const { title, date, tags = [], tldr } = Astro.props;
     )}
 
     {tags.length > 0 && (
-      <div class="flex flex-wrap gap-1">
+      <div class="flex flex-wrap gap-2">
         {tags.map((tag) => (
-          <a 
-            href={`/blog/tags/${tag}`} 
-            class="inline-flex items-center"
+          <a
+            href={`/blog/tags/${tag}`}
+            class="inline-flex items-center hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors duration-300"
           >
-            <IconHash class="mr-1 opacity-70"></IconHash>
-            <span class="hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors duration-300">{tag}</span>
+            <IconHash />
+            <span>{tag}</span>
           </a>
         ))}
       </div>
