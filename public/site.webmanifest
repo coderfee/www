@@ -1,7 +1,7 @@
 {
   "name": "CSpace",
   "short_name": "CSpace",
-  "description": "coderfee's personal blog",
+  "description": "CSpace——方寸之间，见微知著",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
@@ -21,6 +21,27 @@
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/mobile.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "CSpace 移动端预览"
+    },
+    {
+      "src": "/screenshots/desktop.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "CSpace 桌面端预览"
     }
   ],
   "categories": ["productivity", "news"]
