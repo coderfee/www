@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "pnpm run sync-r2 && astro dev",
-    "build": "pnpm run sync-r2 && astro build && pagefind",
+    "build": "pnpm run sync-r2 && astro build",
     "lint": "pnpm biome check ./src && astro check --minimumSeverity warning",
     "lint:fix": "pnpm biome check ./src --write",
     "upgrade": "pnpm update && pnpx @astrojs/upgrade",

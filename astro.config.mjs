@@ -3,7 +3,6 @@ import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'astro/config';
-import pagefind from 'astro-pagefind';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeExternalLinks from 'rehype-external-links';
 import rehypeCodeProps from 'rehype-mdx-code-props';
@@ -59,7 +58,6 @@ export default defineConfig({
     sitemap({
       changefreq: 'weekly',
     }),
-    pagefind(),
   ],
   devToolbar: {
     enabled: false,
