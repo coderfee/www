@@ -62,23 +62,23 @@ async function syncR2ToCache(remoteFiles, cachedFiles) {
   console.log(`   - Found ${remoteFileCount} files in R2.`);
   console.log(`   - Found ${localFileCount} cached files.`);
 
-  if (remoteFileCount === localFileCount) {
+  const allFilesExistAtRoot = remoteFiles.every((item) => {
+    const filename = path.basename(item.Key).replace(/\.md$/, '.mdx');
+    return cachedFiles.some((cf) => path.basename(cf) === filename && path.dirname(cf) === CACHE_DIR);
+  });
+
+  if (remoteFileCount === localFileCount && allFilesExistAtRoot) {
     console.log('✅ Cache is up to date. No sync needed.');
     return;
   }
 
-  console.log('   - Cache is outdated. Starting download...');
+  console.log('   - Cache is outdated or structure changed. Starting download...');
+  await fs.rm(CACHE_DIR, { recursive: true, force: true });
   await fs.mkdir(CACHE_DIR, { recursive: true });
 
   for (const item of remoteFiles) {
-    const relativePath = item.Key.substring(R2_PREFIX.length);
-    if (!relativePath) continue;
-
-    const newRelativePath = relativePath.replace(/\.md$/, '.mdx');
-    const localPath = path.join(CACHE_DIR, newRelativePath);
-    const localDir = path.dirname(localPath);
-
-    await fs.mkdir(localDir, { recursive: true });
+    const filename = path.basename(item.Key).replace(/\.md$/, '.mdx');
+    const localPath = path.join(CACHE_DIR, filename);
 
     console.log(`   - Downloading ${item.Key} to cache...`);
 

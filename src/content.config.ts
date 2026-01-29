@@ -21,7 +21,7 @@ const blog = defineCollection({
 });
 
 const newsletter = defineCollection({
-  loader: glob({ base: './src/content/newsletter', pattern: '**/*.{md,mdx}' }),
+  loader: glob({ base: './src/content/newsletter', pattern: '*.{md,mdx}' }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
