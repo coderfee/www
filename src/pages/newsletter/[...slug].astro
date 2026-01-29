@@ -2,7 +2,6 @@
 import { getCollection, render } from 'astro:content';
 import NewsletterLayout from '@/components/layouts/NewsletterLayout.astro';
 import NewsletterHeader from '@/components/newsletter/NewsletterHeader.astro';
-import NewsletterSidebar from '@/components/newsletter/NewsletterSidebar.astro';
 
 export async function getStaticPaths() {
   const collection = await getCollection('newsletter');
@@ -21,36 +20,28 @@ export async function getStaticPaths() {
 const { newsletter } = Astro.props;
 const { Content } = await render(newsletter);
 const { title, description, cover, date, issue } = newsletter.data;
-const collection = await getCollection('newsletter', ({ data }) => !data.draft);
-const sorted = collection.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
 <NewsletterLayout title={title} description={description} cover={cover}>
-  <div class="newsletter grid grid-cols-1 lg:grid-cols-[280px_1fr] w-full relative">
-    <NewsletterSidebar items={sorted} currentSlug={newsletter.id} />
+  <div class="max-w-3xl mx-auto px-4 py-12">
+    <NewsletterHeader
+      title={title}
+      cover={cover as string}
+      description={description}
+      date={date}
+      issue={issue}
+      total={0}
+    />
 
-    <div class="lg:pt-0">
-      <div class="max-w-3xl mx-auto px-4 lg:px-8 py-6">
-        <NewsletterHeader
-          title={title}
-          cover={cover as string}
-          description={description}
-          date={date}
-          issue={issue}
-          total={sorted.length}
-        />
-
-        <article
-          class="prose prose-zinc dark:prose-invert max-w-none
-            prose-headings:font-bold prose-headings:tracking-tight prose-p:leading-loose
-            prose-headings:text-zinc-900 dark:prose-headings:text-zinc-100
-            prose-p:text-zinc-600 dark:prose-p:text-zinc-300
-            prose-img:rounded-xl prose-img:mx-auto text-justify prose-headings:font-noto break-all"
-          style="text-justify: inter-character;"
-        >
-          <Content />
-        </article>
-      </div>
-    </div>
+    <article
+      class="prose prose-zinc dark:prose-invert max-w-none
+        prose-headings:font-bold prose-headings:tracking-tight prose-p:leading-loose
+        prose-headings:text-zinc-900 dark:prose-headings:text-zinc-100
+        prose-p:text-zinc-600 dark:prose-p:text-zinc-300
+        prose-img:rounded-xl prose-img:mx-auto text-justify prose-headings:font-noto break-all"
+      style="text-justify: inter-character;"
+    >
+      <Content />
+    </article>
   </div>
 </NewsletterLayout>

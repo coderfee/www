@@ -1,11 +1,60 @@
 ---
 import { getCollection } from 'astro:content';
+import dayjs from 'dayjs';
+import BaseLayout from '../components/layouts/BaseLayout.astro';
 
 const collection = await getCollection('newsletter', ({ data }) => !data.draft);
-const sorted = collection.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const [newest] = sorted;
-const id = newest.id;
+const newsletters = collection.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-return Astro.rewrite(`/newsletter/${id}`);
+const title = '明日周刊';
+const description = '分享包括但不限于技术阅读、生活思考、工具推荐等内容。';
 ---
 
+<BaseLayout title={title} description={description}>
+  <div class="max-w-7xl mx-auto px-4 py-12">
+    <header class="mb-12 text-center">
+      <h1 class="font-noto text-3xl md:text-4xl font-bold text-zinc-900 dark:text-zinc-100 mb-4">{title}</h1>
+      <p class="text-zinc-600 dark:text-zinc-400">{description}</p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {newsletters.map((item) => (
+        <article class="relative group flex flex-col h-full bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 border border-zinc-100 dark:border-zinc-800">
+          <a href={`/newsletter/${item.id}`} class="flex flex-col h-full">
+            {item.data.cover && (
+              <div class="aspect-video w-full overflow-hidden bg-zinc-100 dark:bg-zinc-800">
+                <img
+                  src={item.data.cover as string}
+                  alt={item.data.title}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+              </div>
+            )}
+
+            <div class="flex-1 p-6 flex flex-col">
+              <div class="flex items-center justify-between text-xs text-zinc-500 dark:text-zinc-400 mb-3">
+                <time datetime={item.data.date.toISOString()}>
+                  {dayjs(item.data.date).format('YYYY年MM月DD日')}
+                </time>
+                <span class="font-medium bg-zinc-100 dark:bg-zinc-800 px-2 py-1 rounded text-[10px] tracking-wide">NO.{item.data.issue}</span>
+              </div>
+
+              <h2 class="font-noto text-lg font-bold text-zinc-900 dark:text-zinc-100 mb-3 group-hover:text-zinc-600 dark:group-hover:text-zinc-400 transition-colors line-clamp-2">
+                {item.data.title}
+              </h2>
+
+              <p class="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed line-clamp-3 mb-4 flex-1">
+                {item.data.description}
+              </p>
+
+              <div class="flex items-center text-xs font-medium text-zinc-900 dark:text-zinc-100 opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                阅读全文 <span class="ml-1">→</span>
+              </div>
+            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
