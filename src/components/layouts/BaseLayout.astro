@@ -12,10 +12,10 @@ const { title, description, ogImage, showNavigation = true } = Astro.props;
     <DocumentMeta title={title} description={description} ogImage={ogImage} />
     <slot name="head" />
   </head>
-  <body class="bg-white dark:bg-zinc-900 dark:text-white h-dvh flex flex-col overflow-hidden">
+  <body class="bg-white dark:bg-zinc-900 dark:text-white min-h-dvh flex flex-col overflow-x-hidden">
     {showNavigation && <TopNavigation />}
 
-    <main class="flex-1 w-full overflow-y-auto overflow-x-hidden">
+    <main class:list={["flex-1 w-full", showNavigation && "pb-14 md:pb-0"]}>
       <slot />
     </main>
 

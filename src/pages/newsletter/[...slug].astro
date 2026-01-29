@@ -26,12 +26,10 @@ const sorted = collection.sort((a, b) => b.data.date.valueOf() - a.data.date.val
 ---
 
 <NewsletterLayout title={title} description={description} cover={cover}>
-  <div
-    class="newsletter grid grid-cols-1 lg:grid-cols-[280px_1fr] h-screen lg:h-screen w-full relative overflow-hidden"
-  >
+  <div class="newsletter grid grid-cols-1 lg:grid-cols-[280px_1fr] w-full relative">
     <NewsletterSidebar items={sorted} currentSlug={newsletter.id} />
 
-    <main class="h-full overflow-y-auto lg:pt-0">
+    <div class="lg:pt-0">
       <div class="max-w-3xl mx-auto px-4 lg:px-8 py-6">
         <NewsletterHeader
           title={title}
@@ -53,6 +51,6 @@ const sorted = collection.sort((a, b) => b.data.date.valueOf() - a.data.date.val
           <Content />
         </article>
       </div>
-    </main>
+    </div>
   </div>
 </NewsletterLayout>

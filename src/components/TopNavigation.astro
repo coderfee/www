@@ -1,7 +1,6 @@
 ---
 import ArchiveIcon from '~icons/tabler/archive';
 import BookIcon from '~icons/tabler/book-2';
-import ExternalLinkIcon from '~icons/tabler/external-link';
 import HomeIcon from '~icons/tabler/home';
 
 const pathname = new URL(Astro.request.url).pathname;
@@ -14,14 +13,14 @@ const isActive = (path: string) => {
 const navItems = [
   { name: '首页', path: '/', icon: HomeIcon },
   { name: '归档', path: '/archive', icon: ArchiveIcon },
-  { name: '周刊', path: '/newsletter', icon: BookIcon, target: '_blank' },
+  { name: '周刊', path: '/newsletter', icon: BookIcon },
 ];
 
 const { showNavigation = true } = Astro.props;
 ---
 
 {showNavigation && (
-  <header class="w-full z-50 bg-white dark:bg-zinc-900 pt-[env(safe-area-inset-top)] flex-none">
+  <header class="sticky top-0 w-full z-50 bg-white dark:bg-zinc-900 pt-[env(safe-area-inset-top)] flex-none">
     <nav class="max-w-4xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
       <a href="/" class="flex items-center gap-2 text-base font-medium text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors">
         <img src="https://assets.coderfee.com/favicon/www.svg" alt="CoderFee" class="size-8 overflow-hidden" width="32" height="32" />
@@ -38,11 +37,9 @@ const { showNavigation = true } = Astro.props;
                 ? 'text-zinc-900 dark:text-zinc-100'
                 : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100'
             ]}
-            target={item.target || '_self'}
             aria-current={isActive(item.path) ? 'page' : undefined}
           >
             {item.name}
-            {item.target === '_blank' && <ExternalLinkIcon class="w-3 h-3" />}
           </a>
         ))}
       </div>
