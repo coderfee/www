@@ -14,8 +14,7 @@ export default defineConfig({
   site: 'https://coderfee.com',
   publicDir: 'public',
   prefetch: {
-    prefetch: false,
-    prefetchAll: false,
+    defaultStrategy: 'hover',
   },
   markdown: {
     syntaxHighlight: 'shiki',
