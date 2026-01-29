@@ -1,0 +1,47 @@
+---
+import ArchiveIcon from '~icons/tabler/archive';
+import BookIcon from '~icons/tabler/book-2';
+import ExternalLinkIcon from '~icons/tabler/external-link';
+import HomeIcon from '~icons/tabler/home';
+
+const pathname = new URL(Astro.request.url).pathname;
+const isActive = (path: string) => {
+  if (path === '/' && pathname === path) return true;
+  if (path !== '/' && pathname.startsWith(path)) return true;
+  return false;
+};
+
+const navItems = [
+  { name: '首页', path: '/', icon: HomeIcon },
+  { name: '归档', path: '/archive', icon: ArchiveIcon },
+  { name: '周刊', path: '/newsletter', icon: BookIcon, target: '_blank' },
+];
+---
+
+<nav
+  class="md:hidden w-full flex-none z-50 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border-t border-zinc-200 dark:border-zinc-800 pb-[env(safe-area-inset-bottom)]"
+>
+  <div class="flex h-14">
+    {navItems.map((item) => (
+
+      <a
+        href={item.path}
+        class:list={[
+          'flex-1 flex items-center justify-center transition-colors relative',
+          isActive(item.path)
+            ? 'text-zinc-900 dark:text-zinc-100'
+            : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100'
+        ]}
+        target={item.target || '_self'}
+        aria-current={isActive(item.path) ? 'page' : undefined}
+        aria-label={item.name}
+        title={item.name}
+      >
+        <item.icon class="w-6 h-6" />
+        {isActive(item.path) && (
+          <span class="absolute bottom-2 w-1 h-1 rounded-full bg-zinc-900 dark:bg-zinc-100" />
+        )}
+      </a>
+    ))}
+  </div>
+</nav>
