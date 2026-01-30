@@ -13,7 +13,7 @@ interface Props {
 const { title, date, tags = [], tldr } = Astro.props;
 ---
 
-<div>
+<div transition:name="post-header">
   <h1 class="font-noto text-3xl sm:text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 mb-4">{title}</h1>
 
   <div class="flex flex-wrap items-center gap-3 tabular-nums text-xs text-zinc-500 dark:text-zinc-400">

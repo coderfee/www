@@ -17,24 +17,23 @@ export interface Props {
 const { post } = Astro.props;
 ---
 
-<article class="relative">
-  <a href={`/blog/${post.id}`} transition:animate={fade({ duration: '0.3s' })} class="block py-8 group">
-    <h2
-      class="font-noto text-xl sm:text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-2 group-hover:text-zinc-600 dark:group-hover:text-zinc-400 transition-colors"
+<article class="relative"><a href={`/blog/${post.id}`} transition:name="post-header" class="block py-8 group">
+  <h2
+    class="font-noto text-xl sm:text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-2 group-hover:text-zinc-600 dark:group-hover:text-zinc-400 transition-colors"
+  >
+    {post.data.title}
+  </h2>
+
+  <p class="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mb-2">{post.data.tldr}</p>
+
+  <div class="flex items-start justify-between gap-2">
+    <time
+      datetime={post.data.date.toISOString()}
+      class="text-xs text-zinc-500 dark:text-zinc-500 tabular-nums shrink-0"
     >
-      {post.data.title}
-    </h2>
-
-    <p class="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mb-2">{post.data.tldr}</p>
-
-    <div class="flex items-start justify-between gap-2">
-      <time
-        datetime={post.data.date.toISOString()}
-        class="text-xs text-zinc-500 dark:text-zinc-500 tabular-nums shrink-0"
-      >
-        {dayjs(post.data.date).format('YYYY年MM月DD日')}
-      </time>
-      {post.data.tags && post.data.tags.length > 0 && (
+      {dayjs(post.data.date).format('YYYY年MM月DD日')}
+    </time>
+    {post.data.tags && post.data.tags.length > 0 && (
         <div class="flex flex-wrap gap-1.5 justify-end">
           {post.data.tags.map((tag) => (
             <span class="inline-block px-1.5 py-0.5 text-xs text-zinc-500 dark:text-zinc-500 bg-zinc-100 dark:bg-zinc-800 rounded">
@@ -43,6 +42,5 @@ const { post } = Astro.props;
           ))}
         </div>
       )}
-    </div>
-  </a>
-</article>
+  </div>
+</a></article>
