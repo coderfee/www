@@ -15,7 +15,7 @@ const { title, description, ogImage, showNavigation = true } = Astro.props;
   <body class="bg-white dark:bg-zinc-900 dark:text-white min-h-dvh flex flex-col overflow-x-hidden">
     {showNavigation && <TopNavigation />}
 
-    <main class:list={["flex-1 w-full", showNavigation && "pb-14 md:pb-0"]}>
+    <main class:list={["flex-1 w-full"]}>
       <slot />
     </main>
 
@@ -49,9 +49,52 @@ const { title, description, ogImage, showNavigation = true } = Astro.props;
         });
       }
 
-      initCopyButtons();
+      let lastScrollY = window.scrollY;
+      let scrollListener = null;
 
-      document.addEventListener('astro:after-swap', initCopyButtons);
+      function initScrollNav() {
+        const topNav = document.getElementById('top-nav');
+        const bottomNav = document.getElementById('bottom-nav');
+        const tolerance = 5;
+
+        if (scrollListener) {
+          window.removeEventListener('scroll', scrollListener);
+        }
+
+        scrollListener = () => {
+          const currentScrollY = window.scrollY;
+
+          if (currentScrollY <= 100) {
+            topNav?.classList.remove('-translate-y-full');
+            bottomNav?.classList.remove('translate-y-full');
+            lastScrollY = currentScrollY;
+            return;
+          }
+
+          if (Math.abs(currentScrollY - lastScrollY) <= tolerance) {
+            return;
+          }
+
+          if (currentScrollY > lastScrollY) {
+            topNav?.classList.add('-translate-y-full');
+            bottomNav?.classList.add('translate-y-full');
+          } else {
+            topNav?.classList.remove('-translate-y-full');
+            bottomNav?.classList.remove('translate-y-full');
+          }
+          lastScrollY = currentScrollY;
+        };
+
+        window.addEventListener('scroll', scrollListener, { passive: true });
+      }
+
+      initCopyButtons();
+      initScrollNav();
+
+      document.addEventListener('astro:after-swap', () => {
+        initCopyButtons();
+        initScrollNav();
+      });
     </script>
   </body>
 </html>

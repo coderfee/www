@@ -20,7 +20,7 @@ const { showNavigation = true } = Astro.props;
 ---
 
 {showNavigation && (
-  <header class="sticky top-0 w-full z-50 bg-white dark:bg-zinc-900 pt-[env(safe-area-inset-top)] flex-none">
+  <header id="top-nav" class="sticky top-0 w-full z-50 bg-white dark:bg-zinc-900 pt-[env(safe-area-inset-top)] flex-none transition-transform duration-300">
     <nav class="max-w-4xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
       <a href="/" class="flex items-center gap-2 text-base font-medium text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors">
         <img src="https://assets.coderfee.com/favicon/www.svg" alt="CoderFee" class="size-8 overflow-hidden" width="32" height="32" />

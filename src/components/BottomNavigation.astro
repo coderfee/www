@@ -18,7 +18,8 @@ const navItems = [
 ---
 
 <nav
-  class="md:hidden w-full fixed bottom-0 left-0 right-0 z-50 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border-t border-zinc-200 dark:border-zinc-800 pb-[env(safe-area-inset-bottom)]"
+  id="bottom-nav"
+  class="md:hidden w-full fixed bottom-0 left-0 right-0 z-50 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md pb-[env(safe-area-inset-bottom)] transition-transform duration-300"
 >
   <div class="flex h-14">
     {navItems.map((item) => (
