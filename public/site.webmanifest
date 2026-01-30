@@ -66,6 +66,42 @@
           "purpose": "any"
         }
       ]
+    },
+    {
+      "name": "归档",
+      "url": "/archive",
+      "icons": [
+        {
+          "src": "/icons/shortcuts/archive-96.png",
+          "sizes": "96x96",
+          "type": "image/png",
+          "purpose": "any"
+        },
+        {
+          "src": "/icons/shortcuts/archive-192.png",
+          "sizes": "192x192",
+          "type": "image/png",
+          "purpose": "any"
+        }
+      ]
+    },
+    {
+      "name": "明日周刊",
+      "url": "/newsletter",
+      "icons": [
+        {
+          "src": "/icons/shortcuts/newsletter-96.png",
+          "sizes": "96x96",
+          "type": "image/png",
+          "purpose": "any"
+        },
+        {
+          "src": "/icons/shortcuts/newsletter-192.png",
+          "sizes": "192x192",
+          "type": "image/png",
+          "purpose": "any"
+        }
+      ]
     }
   ],
   "categories": ["productivity", "news"]
