@@ -66,7 +66,7 @@ const { title, description, ogImage, showNavigation = true } = Astro.props;
 
           if (currentScrollY <= 100) {
             topNav?.classList.remove('-translate-y-full');
-            bottomNav?.classList.remove('translate-y-full');
+            bottomNav?.classList.remove('translate-y-[200%]');
             lastScrollY = currentScrollY;
             return;
           }
@@ -77,10 +77,10 @@ const { title, description, ogImage, showNavigation = true } = Astro.props;
 
           if (currentScrollY > lastScrollY) {
             topNav?.classList.add('-translate-y-full');
-            bottomNav?.classList.add('translate-y-full');
+            bottomNav?.classList.add('translate-y-[200%]');
           } else {
             topNav?.classList.remove('-translate-y-full');
-            bottomNav?.classList.remove('translate-y-full');
+            bottomNav?.classList.remove('translate-y-[200%]');
           }
           lastScrollY = currentScrollY;
         };
