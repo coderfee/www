@@ -67,7 +67,6 @@ const navItems = [
 
     if (!nav || !backToTopBtn) return;
 
-    // 触感反馈
     nav.addEventListener('click', (e) => {
       const target = e.target as HTMLElement;
       if (target.closest('.nav-tab') || target.closest('#back-to-top')) {
@@ -77,12 +76,10 @@ const navItems = [
       }
     });
 
-    // 回到顶部逻辑
     backToTopBtn.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // 滚动显示/隐藏回顶按钮
     const handleScroll = () => {
       if (window.scrollY > 300) {
         backToTopBtn.classList.remove('translate-x-10', 'opacity-0', 'scale-0');
@@ -92,11 +89,9 @@ const navItems = [
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // 初始化状态
+    handleScroll();
   }
 
-  // Initialize on load
   initNavFeatures();
-  // Re-initialize after Astro view transitions
   document.addEventListener('astro:after-swap', initNavFeatures);
 </script>
