@@ -61,12 +61,19 @@ const navItems = [
 </div>
 
 <script>
+  import { prefetch } from 'astro:prefetch';
+
   function initNavFeatures() {
     const nav = document.getElementById('bottom-nav');
     const container = document.getElementById('back-to-top-container');
     const btn = document.getElementById('back-to-top');
 
     if (!nav || !container || !btn) return;
+
+    if (window.location.pathname === '/') {
+      prefetch('/archive', { eagerness: 'moderate' });
+      prefetch('/newsletter', { eagerness: 'moderate' });
+    }
 
     nav.addEventListener('click', (e) => {
       const target = e.target as HTMLElement;

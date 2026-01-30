@@ -17,6 +17,9 @@ export default defineConfig({
     prefetch: true,
     defaultStrategy: 'viewport',
   },
+  experimental: {
+    clientPrerender: true,
+  },
   markdown: {
     syntaxHighlight: 'shiki',
     gfm: true,
