@@ -27,7 +27,7 @@ const navItems = [
       <a
         href={item.path}
         class:list={[
-          'flex-1 flex items-center justify-center transition-colors relative',
+          'nav-tab flex-1 flex items-center justify-center transition-colors relative',
           isActive(item.path)
             ? 'text-zinc-900 dark:text-zinc-100'
             : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100'
@@ -44,3 +44,22 @@ const navItems = [
     ))}
   </div>
 </nav>
+
+<script>
+  function initHaptic() {
+    const nav = document.getElementById('bottom-nav');
+    if (nav && 'vibrate' in navigator) {
+      nav.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        if (target.closest('.nav-tab')) {
+          navigator.vibrate(10);
+        }
+      });
+    }
+  }
+
+  // Initialize on load
+  initHaptic();
+  // Re-initialize after Astro view transitions
+  document.addEventListener('astro:after-swap', initHaptic);
+</script>
