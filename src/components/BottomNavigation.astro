@@ -18,7 +18,7 @@ const navItems = [
 ];
 ---
 
-<div id="bottom-nav" class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none w-max">
+<div id="bottom-nav" class="md:hidden fixed bottom-2 left-1/2 -translate-x-1/2 z-50 pointer-events-none w-max">
   <nav
     class="pointer-events-auto bg-white/50 dark:bg-zinc-900/50 backdrop-blur-xl rounded-full border border-zinc-200/50 dark:border-zinc-800/50 shadow-[0_8px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)] p-1 mb-[env(safe-area-inset-bottom)] flex items-center"
   >
@@ -27,7 +27,7 @@ const navItems = [
         <a
           href={item.path}
           class:list={[
-            'nav-tab flex flex-col items-center justify-center min-w-[80px] h-12 rounded-full transition-colors duration-300 relative overflow-hidden active:scale-90',
+            'nav-tab flex flex-col items-center justify-center min-w-[80px] h-11 rounded-full transition-colors duration-300 relative overflow-hidden active:scale-90',
             isActive(item.path)
               ? 'text-zinc-900 dark:text-zinc-100'
               : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100'
@@ -50,7 +50,7 @@ const navItems = [
     <div id="back-to-top-container" class="flex items-center overflow-hidden w-0 opacity-0">
       <button
         id="back-to-top"
-        class="flex flex-col items-center justify-center min-w-[52px] h-12 rounded-full text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 active:scale-90 cursor-pointer"
+        class="flex flex-col items-center justify-center min-w-[48px] h-11 rounded-full text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 active:scale-90 cursor-pointer"
         aria-label="回到顶部"
       >
         <ArrowUpIcon class="w-5 h-5 mb-0.5" />
@@ -82,9 +82,9 @@ const navItems = [
     const updateState = () => {
       if (window.scrollY > 300) {
         container.classList.remove('w-0', 'opacity-0');
-        container.classList.add('w-[52px]', 'opacity-100');
+        container.classList.add('w-[48px]', 'opacity-100');
       } else {
-        container.classList.remove('w-[52px]', 'opacity-100');
+        container.classList.remove('w-[48px]', 'opacity-100');
         container.classList.add('w-0', 'opacity-0');
       }
     };
