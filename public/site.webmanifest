@@ -48,5 +48,25 @@
       "label": "CSpace 桌面端预览"
     }
   ],
+  "shortcuts": [
+    {
+      "name": "首页",
+      "url": "/",
+      "icons": [
+        {
+          "src": "/icons/shortcut-home-96.png",
+          "sizes": "96x96",
+          "type": "image/png",
+          "purpose": "any"
+        },
+        {
+          "src": "/icons/shortcut-home-192.png",
+          "sizes": "192x192",
+          "type": "image/png",
+          "purpose": "any"
+        }
+      ]
+    }
+  ],
   "categories": ["productivity", "news"]
 }
