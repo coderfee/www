@@ -1,5 +1,6 @@
 ---
 import ArchiveIcon from '~icons/tabler/archive';
+import ArrowUpIcon from '~icons/tabler/arrow-up';
 import BookIcon from '~icons/tabler/book-2';
 import SmartHomeIcon from '~icons/tabler/smart-home';
 
@@ -19,7 +20,7 @@ const navItems = [
 
 <div
   id="bottom-nav"
-  class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 transition-transform duration-300 pointer-events-none w-max"
+  class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 transition-transform duration-300 pointer-events-none w-max flex items-center gap-3"
 >
   <nav
     class="pointer-events-auto bg-white/50 dark:bg-zinc-900/50 backdrop-blur-xl rounded-full border border-zinc-200/50 dark:border-zinc-800/50 shadow-[0_8px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)] p-1 mb-[env(safe-area-inset-bottom)]"
@@ -49,23 +50,53 @@ const navItems = [
       ))}
     </div>
   </nav>
+
+  <button
+    id="back-to-top"
+    class="pointer-events-auto w-14 h-14 flex items-center justify-center rounded-full bg-white/50 dark:bg-zinc-900/50 backdrop-blur-xl border border-zinc-200/50 dark:border-zinc-800/50 shadow-[0_8px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)] text-zinc-500 dark:text-zinc-400 active:scale-90 transition-all duration-300 translate-x-10 opacity-0 scale-0 mb-[env(safe-area-inset-bottom)] cursor-pointer"
+    aria-label="回到顶部"
+  >
+    <ArrowUpIcon class="w-5 h-5" />
+  </button>
 </div>
 
 <script>
-  function initHaptic() {
+  function initNavFeatures() {
     const nav = document.getElementById('bottom-nav');
-    if (nav && 'vibrate' in navigator) {
-      nav.addEventListener('click', (e) => {
-        const target = e.target as HTMLElement;
-        if (target.closest('.nav-tab')) {
+    const backToTopBtn = document.getElementById('back-to-top');
+
+    if (!nav || !backToTopBtn) return;
+
+    // 触感反馈
+    nav.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      if (target.closest('.nav-tab') || target.closest('#back-to-top')) {
+        if ('vibrate' in navigator) {
           navigator.vibrate(10);
         }
-      });
-    }
+      }
+    });
+
+    // 回到顶部逻辑
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // 滚动显示/隐藏回顶按钮
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        backToTopBtn.classList.remove('translate-x-10', 'opacity-0', 'scale-0');
+      } else {
+        backToTopBtn.classList.add('translate-x-10', 'opacity-0', 'scale-0');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // 初始化状态
   }
 
   // Initialize on load
-  initHaptic();
+  initNavFeatures();
   // Re-initialize after Astro view transitions
-  document.addEventListener('astro:after-swap', initHaptic);
+  document.addEventListener('astro:after-swap', initNavFeatures);
 </script>

@@ -1,6 +1,5 @@
 ---
 import { type CollectionEntry, getCollection, render } from 'astro:content';
-import BackToTop from '@/components/BackToTop.astro';
 import PostHeader from '@/components/blog/PostHeader.astro';
 import PostLicense from '@/components/blog/PostLicense.astro';
 import PostNavigation from '@/components/blog/PostNavigation.astro';
@@ -118,8 +117,6 @@ const jsonLd = {
       </footer>
     </div>
   </article>
-
-  <BackToTop />
 </BaseLayout>
 
 <script
