@@ -54,13 +54,13 @@
       "url": "/",
       "icons": [
         {
-          "src": "/icons/shortcut-home-96.png",
+          "src": "/icons/shortcuts/home-96.png",
           "sizes": "96x96",
           "type": "image/png",
           "purpose": "any"
         },
         {
-          "src": "/icons/shortcut-home-192.png",
+          "src": "/icons/shortcuts/home-192.png",
           "sizes": "192x192",
           "type": "image/png",
           "purpose": "any"
