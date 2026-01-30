@@ -15,7 +15,7 @@ export default defineConfig({
   publicDir: 'public',
   prefetch: {
     prefetch: true,
-    defaultStrategy: 'load',
+    defaultStrategy: 'viewport',
   },
   markdown: {
     syntaxHighlight: 'shiki',
