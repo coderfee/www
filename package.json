@@ -24,6 +24,7 @@
     "@types/react": "^19.2.10",
     "@types/react-dom": "^19.2.3",
     "astro": "6.0.0-beta.3",
+    "framer-motion": "^12.29.2",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "rehype-autolink-headings": "^7.1.0",
