@@ -1,5 +1,5 @@
 ---
-import BottomNavigation from '@/components/BottomNavigation.astro';
+import BottomNavigation from '@/components/BottomNavigation.tsx';
 import TopNavigation from '@/components/TopNavigation.astro';
 import DocumentMeta from './DocumentMeta.astro';
 
@@ -26,7 +26,7 @@ const {
       <slot />
     </main>
 
-    {showBottomNavigation && <BottomNavigation />}
+    {showBottomNavigation && <BottomNavigation client:load />}
 
     <script async defer is:inline>
       function initCopyButtons() {
@@ -61,8 +61,6 @@ const {
 
       function initScrollNav() {
         const topNav = document.getElementById('top-nav');
-        const bottomNav = document.getElementById('bottom-nav');
-        const postBottomNav = document.getElementById('post-bottom-nav');
         const tolerance = 5;
 
         if (scrollListener) {
@@ -74,8 +72,6 @@ const {
 
           if (currentScrollY <= 100) {
             topNav?.classList.remove('-translate-y-full');
-            bottomNav?.classList.remove('translate-y-[200%]');
-            postBottomNav?.classList.remove('translate-y-[200%]');
             lastScrollY = currentScrollY;
             return;
           }
@@ -86,12 +82,8 @@ const {
 
           if (currentScrollY > lastScrollY) {
             topNav?.classList.add('-translate-y-full');
-            bottomNav?.classList.add('translate-y-[200%]');
-            postBottomNav?.classList.add('translate-y-[200%]');
           } else {
             topNav?.classList.remove('-translate-y-full');
-            bottomNav?.classList.remove('translate-y-[200%]');
-            postBottomNav?.classList.remove('translate-y-[200%]');
           }
           lastScrollY = currentScrollY;
         };
