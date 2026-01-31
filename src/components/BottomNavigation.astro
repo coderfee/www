@@ -27,7 +27,7 @@ const navItems = [
         <a
           href={item.path}
           class:list={[
-            'nav-tab flex flex-col items-center justify-center min-w-[80px] h-11 rounded-full transition-colors duration-300 relative overflow-hidden active:scale-90',
+            'nav-tab flex flex-col items-center justify-center min-w-[80px] h-11 rounded-full transition-colors duration-300 relative overflow-hidden active:scale-90 hover:bg-zinc-100 dark:hover:bg-zinc-800',
             isActive(item.path)
               ? 'text-zinc-900 dark:text-zinc-100'
               : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100'
@@ -46,17 +46,6 @@ const navItems = [
         </a>
       ))}
     </div>
-
-    <div id="back-to-top-container" class="flex items-center overflow-hidden w-0 opacity-0">
-      <button
-        id="back-to-top"
-        class="flex flex-col items-center justify-center min-w-[48px] h-11 rounded-full text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 active:scale-90 cursor-pointer"
-        aria-label="回到顶部"
-      >
-        <ArrowUpIcon class="w-5 h-5 mb-0.5" />
-        <span class="text-[10px] font-medium leading-none">顶部</span>
-      </button>
-    </div>
   </nav>
 </div>
 
@@ -65,10 +54,8 @@ const navItems = [
 
   function initNavFeatures() {
     const nav = document.getElementById('bottom-nav');
-    const container = document.getElementById('back-to-top-container');
-    const btn = document.getElementById('back-to-top');
 
-    if (!nav || !container || !btn) return;
+    if (!nav) return;
 
     if (window.location.pathname === '/') {
       prefetch('/archive', { eagerness: 'moderate' });
@@ -77,40 +64,10 @@ const navItems = [
 
     nav.addEventListener('click', (e) => {
       const target = e.target as HTMLElement;
-      if (target.closest('.nav-tab') || target.closest('#back-to-top')) {
+      if (target.closest('.nav-tab')) {
         if ('vibrate' in navigator) navigator.vibrate(10);
       }
     });
-
-    btn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    const updateState = () => {
-      if (window.scrollY > 300) {
-        container.classList.remove('w-0', 'opacity-0');
-        container.classList.add('w-[48px]', 'opacity-100');
-      } else {
-        container.classList.remove('w-[48px]', 'opacity-100');
-        container.classList.add('w-0', 'opacity-0');
-      }
-    };
-
-    updateState();
-
-    void container.offsetWidth;
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        container.classList.add('transition-all', 'duration-500', 'ease-[cubic-bezier(0.32,0.72,0,1)]');
-      });
-    });
-
-    window.addEventListener('scroll', updateState, { passive: true });
-
-    setTimeout(() => {
-      updateState();
-    }, 100);
   }
 
   initNavFeatures();

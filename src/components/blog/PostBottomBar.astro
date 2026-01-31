@@ -1,6 +1,5 @@
 ---
 import IconArrowLeft from '~icons/tabler/arrow-left';
-import IconArrowUp from '~icons/tabler/arrow-up';
 import IconHeart from '~icons/tabler/heart';
 import IconShare from '~icons/tabler/share';
 
@@ -13,14 +12,15 @@ interface Props {
 const { title, description, url } = Astro.props;
 ---
 
-<div id="post-bottom-nav" class="md:hidden fixed bottom-2 left-1/2 -translate-x-1/2 z-50 pointer-events-none w-max">
+<div id="post-bottom-nav" class="md:hidden fixed bottom-2 left-1/2 -translate-x-1/2 z-50 pointer-events-none flex items-center transition-transform duration-300">
+  <!-- Main Actions -->
   <nav
     class="pointer-events-auto bg-white/50 dark:bg-zinc-900/50 backdrop-blur-xl rounded-full border border-zinc-200/50 dark:border-zinc-800/50 shadow-[0_8px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)] p-1 mb-[env(safe-area-inset-bottom)] flex items-center select-none [touch-callout:none] [-webkit-touch-callout:none]"
   >
     <div class="flex items-center gap-1">
       <button
         id="post-nav-back"
-        class="nav-tab flex flex-col items-center justify-center min-w-[80px] h-11 rounded-full text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors duration-300 active:scale-90 cursor-pointer"
+        class="nav-tab flex flex-col items-center justify-center min-w-[80px] h-11 rounded-full text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors duration-300 active:scale-90 cursor-pointer"
         aria-label="返回"
       >
         <IconArrowLeft class="w-5 h-5 mb-0.5" />
@@ -29,7 +29,7 @@ const { title, description, url } = Astro.props;
 
       <button
         id="post-nav-like"
-        class="hidden nav-tab flex flex-col items-center justify-center min-w-[80px] h-11 rounded-full text-zinc-500 dark:text-zinc-400 hover:text-red-500 dark:hover:text-red-400 transition-colors duration-300 active:scale-90 cursor-pointer group"
+        class="hidden nav-tab flex flex-col items-center justify-center min-w-[80px] h-11 rounded-full text-zinc-500 dark:text-zinc-400 hover:text-red-500 dark:hover:text-red-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors duration-300 active:scale-90 cursor-pointer group"
         aria-label="点赞"
       >
         <IconHeart
@@ -40,22 +40,11 @@ const { title, description, url } = Astro.props;
 
       <button
         id="post-nav-share"
-        class="nav-tab flex flex-col items-center justify-center min-w-[80px] h-11 rounded-full text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors duration-300 active:scale-90 cursor-pointer"
+        class="nav-tab flex flex-col items-center justify-center min-w-[80px] h-11 rounded-full text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors duration-300 active:scale-90 cursor-pointer"
         aria-label="分享"
       >
         <IconShare class="w-5 h-5 mb-0.5" />
         <span id="post-nav-share-text" class="text-[10px] font-medium leading-none">分享</span>
-      </button>
-    </div>
-
-    <div id="post-back-to-top-container" class="flex items-center overflow-hidden w-0 opacity-0">
-      <button
-        id="post-back-to-top"
-        class="flex flex-col items-center justify-center min-w-[48px] h-11 rounded-full text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 active:scale-90 cursor-pointer"
-        aria-label="回到顶部"
-      >
-        <IconArrowUp class="w-5 h-5 mb-0.5" />
-        <span class="text-[10px] font-medium leading-none">顶部</span>
       </button>
     </div>
   </nav>
@@ -64,21 +53,19 @@ const { title, description, url } = Astro.props;
 <script define:vars={{ title, description, url }}>
   function initPostNavFeatures() {
     const nav = document.getElementById('post-bottom-nav');
-    const container = document.getElementById('post-back-to-top-container');
-    const btnTop = document.getElementById('post-back-to-top');
     const btnBack = document.getElementById('post-nav-back');
     const btnLike = document.getElementById('post-nav-like');
     const btnShare = document.getElementById('post-nav-share');
     const btnShareText = document.getElementById('post-nav-share-text');
 
-    if (!nav || !container || !btnTop || !btnBack || !btnLike || !btnShare || !btnShareText) return;
+    if (!nav || !btnBack || !btnLike || !btnShare || !btnShareText) return;
 
     // Vibration on click
     nav.addEventListener('click', (e) => {
       const target = e.target;
       if (!(target instanceof HTMLElement)) return;
 
-      if (target.closest('.nav-tab') || target.closest('#post-back-to-top')) {
+      if (target.closest('.nav-tab')) {
         if ('vibrate' in navigator) navigator.vibrate(10);
       }
     });
@@ -137,33 +124,6 @@ const { title, description, url } = Astro.props;
         }
       } catch (err) {}
     };
-
-    // Top
-    btnTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    const updateState = () => {
-      if (window.scrollY > 300) {
-        container.classList.remove('w-0', 'opacity-0');
-        container.classList.add('w-[48px]', 'opacity-100');
-      } else {
-        container.classList.remove('w-[48px]', 'opacity-100');
-        container.classList.add('w-0', 'opacity-0');
-      }
-    };
-
-    updateState();
-
-    // Ensure transition logic matches original
-    void container.offsetWidth;
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        container.classList.add('transition-all', 'duration-500', 'ease-[cubic-bezier(0.32,0.72,0,1)]');
-      });
-    });
-
-    window.addEventListener('scroll', updateState, { passive: true });
   }
 
   initPostNavFeatures();
