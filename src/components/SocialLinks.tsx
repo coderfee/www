@@ -31,20 +31,19 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.05,
     },
   },
 };
 
 const itemVariants = {
-  hidden: { y: 20, opacity: 0 },
+  hidden: { y: 10, opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
     transition: {
-      type: 'spring' as const,
-      stiffness: 260,
-      damping: 20,
+      duration: 0.3,
+      ease: 'easeOut' as const,
     },
   },
 };
@@ -71,9 +70,12 @@ export default function SocialLinks() {
               rel="noopener"
               target="_blank"
               variants={itemVariants}
-              whileHover={{ y: -4, scale: 1.1 }}
+              whileHover={{
+                rotate: [0, -10, 10, -10, 10, 0],
+                transition: { duration: 0.4 },
+              }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center justify-center p-3 rounded-xl text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-white dark:hover:bg-zinc-800 shadow-zinc-200/50 dark:shadow-none hover:shadow-xl transition-colors duration-300"
+              className="flex items-center justify-center p-3 rounded-xl text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-white dark:hover:bg-zinc-800 transition-colors duration-300"
             >
               <Icon icon={link.icon} className="text-xl" />
             </motion.a>
@@ -84,7 +86,7 @@ export default function SocialLinks() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
+          transition={{ duration: 0.5 }}
           className="flex flex-col items-center justify-center text-xs text-zinc-500 dark:text-zinc-400 gap-2"
         >
           <div className="flex items-center gap-3">
