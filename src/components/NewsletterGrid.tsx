@@ -9,7 +9,7 @@ interface NewsletterItem {
     title: string;
     description?: string;
     date: Date;
-    cover?: any;
+    cover?: string;
     issue: number;
   };
 }
@@ -59,7 +59,7 @@ export default function NewsletterGrid({ items }: Props) {
             {item.data.cover && (
               <div className="aspect-video w-full overflow-hidden bg-zinc-100 dark:bg-zinc-800">
                 <img
-                  src={typeof item.data.cover === 'string' ? item.data.cover : item.data.cover.src}
+                  src={item.data.cover}
                   alt={item.data.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
