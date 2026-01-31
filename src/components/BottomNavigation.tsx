@@ -68,7 +68,7 @@ export default function BottomNavigation() {
                   whileTap={{ scale: 0.9 }}
                   onMouseEnter={() => setHoveredPath(item.path)}
                   onClick={() => handleClick(item.path)}
-                  className={`flex flex-col items-center justify-center min-w-[80px] h-11 rounded-full transition-colors relative overflow-hidden ${
+                  className={`flex flex-col items-center justify-center min-w-[80px] h-11 rounded-full transition-colors relative ${
                     active || isHovered ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 dark:text-zinc-400'
                   }`}
                   aria-current={active ? 'page' : undefined}
@@ -77,8 +77,13 @@ export default function BottomNavigation() {
                   {showPill && (
                     <motion.div
                       layoutId="nav-pill"
-                      className="absolute inset-0 bg-zinc-100 dark:bg-zinc-800 -z-10"
-                      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                      className="absolute inset-0 bg-zinc-100 dark:bg-zinc-800 -z-10 rounded-full"
+                      transition={{
+                        type: 'spring',
+                        stiffness: 350,
+                        damping: 30,
+                        mass: 0.8,
+                      }}
                     />
                   )}
                   <Icon icon={item.icon} className="w-5 h-5 mb-0.5" />
