@@ -1,6 +1,6 @@
 ---
 import BottomNavigation from '@/components/BottomNavigation.tsx';
-import TopNavigation from '@/components/TopNavigation.astro';
+import TopNavigation from '@/components/TopNavigation.tsx';
 import DocumentMeta from './DocumentMeta.astro';
 
 const {
@@ -20,7 +20,7 @@ const {
     <slot name="head" />
   </head>
   <body class="bg-white dark:bg-zinc-900 dark:text-white min-h-dvh flex flex-col overflow-x-hidden">
-    {showTopNavigation && <TopNavigation />}
+    {showTopNavigation && <TopNavigation client:load showNavigation={showTopNavigation} />}
 
     <main class:list={["flex-1 w-full"]}>
       <slot />
@@ -56,47 +56,10 @@ const {
         });
       }
 
-      let lastScrollY = window.scrollY;
-      let scrollListener = null;
-
-      function initScrollNav() {
-        const topNav = document.getElementById('top-nav');
-        const tolerance = 5;
-
-        if (scrollListener) {
-          window.removeEventListener('scroll', scrollListener);
-        }
-
-        scrollListener = () => {
-          const currentScrollY = window.scrollY;
-
-          if (currentScrollY <= 100) {
-            topNav?.classList.remove('-translate-y-full');
-            lastScrollY = currentScrollY;
-            return;
-          }
-
-          if (Math.abs(currentScrollY - lastScrollY) <= tolerance) {
-            return;
-          }
-
-          if (currentScrollY > lastScrollY) {
-            topNav?.classList.add('-translate-y-full');
-          } else {
-            topNav?.classList.remove('-translate-y-full');
-          }
-          lastScrollY = currentScrollY;
-        };
-
-        window.addEventListener('scroll', scrollListener, { passive: true });
-      }
-
       initCopyButtons();
-      initScrollNav();
 
       document.addEventListener('astro:after-swap', () => {
         initCopyButtons();
-        initScrollNav();
       });
     </script>
   </body>
