@@ -52,14 +52,14 @@ export default function SocialLinks() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="py-12 border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950/50">
+    <footer className="py-6 border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="flex items-center justify-center gap-2 mb-6"
+          className="flex items-center justify-center gap-4 mb-4"
         >
           {socialLinks.map((link) => (
             <motion.a
@@ -70,14 +70,17 @@ export default function SocialLinks() {
               rel="noopener"
               target="_blank"
               variants={itemVariants}
-              whileHover={{
-                rotate: [0, -10, 10, -10, 10, 0],
-                transition: { duration: 0.4 },
-              }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center justify-center p-3 rounded-xl text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-white dark:hover:bg-zinc-800 transition-colors duration-300"
+              className="flex items-center justify-center p-2 rounded-lg text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200 transition-colors duration-300"
             >
-              <Icon icon={link.icon} className="text-xl" />
+              <motion.div
+                whileHover={{
+                  rotate: [0, -10, 10, -10, 10, 0],
+                  transition: { duration: 0.4 },
+                }}
+              >
+                <Icon icon={link.icon} className="text-xl" />
+              </motion.div>
             </motion.a>
           ))}
         </motion.div>
