@@ -12,11 +12,6 @@ const description = '分享包括但不限于技术阅读、生活思考、工�
 
 <BaseLayout title={title} description={description}>
   <div class="max-w-7xl mx-auto px-4 py-12">
-    <header class="mb-12 text-center">
-      <h1 class="font-noto text-3xl md:text-4xl font-bold text-zinc-900 dark:text-zinc-100 mb-4">{title}</h1>
-      <p class="text-zinc-600 dark:text-zinc-400">{description}</p>
-    </header>
-
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {newsletters.map((item) => (
         <article class="relative group flex flex-col h-full bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden transition-all duration-300 border border-zinc-100 dark:border-zinc-800">
