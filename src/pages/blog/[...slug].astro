@@ -1,6 +1,6 @@
 ---
 import { type CollectionEntry, getCollection, render } from 'astro:content';
-import PostBottomBar from '@/components/blog/PostBottomBar.astro';
+import PostBottomBar from '@/components/blog/PostBottomBar.tsx';
 import PostHeader from '@/components/blog/PostHeader.astro';
 import PostLicense from '@/components/blog/PostLicense.astro';
 import PostNavigation from '@/components/blog/PostNavigation.astro';
@@ -119,7 +119,12 @@ const jsonLd = {
     </div>
   </article>
 
-  <PostBottomBar title={title} description={tldr} url={new URL(Astro.url.pathname, Astro.site).toString()} />
+  <PostBottomBar
+    client:load
+    title={title}
+    description={tldr}
+    url={new URL(Astro.url.pathname, Astro.site).toString()}
+  />
 </BaseLayout>
 
 <script

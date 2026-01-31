@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import dayjs from 'dayjs';
-import PostBottomBar from '@/components/blog/PostBottomBar.astro';
+import PostBottomBar from '@/components/blog/PostBottomBar.tsx';
 import NewsletterLayout from '@/components/layouts/NewsletterLayout.astro';
 import IconBook from '~icons/tabler/book';
 import IconCalendar from '~icons/tabler/calendar';
@@ -72,5 +72,10 @@ const formattedDate = dayjs(date).format('YYYY年MM月DD日');
       <Content />
     </article>
   </div>
-  <PostBottomBar title={title} description={description} url={new URL(Astro.url.pathname, Astro.site).toString()} />
+  <PostBottomBar
+    client:load
+    title={title}
+    description={description}
+    url={new URL(Astro.url.pathname, Astro.site).toString()}
+  />
 </NewsletterLayout>
