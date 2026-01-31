@@ -3,7 +3,14 @@ import BottomNavigation from '@/components/BottomNavigation.astro';
 import TopNavigation from '@/components/TopNavigation.astro';
 import DocumentMeta from './DocumentMeta.astro';
 
-const { title, description, ogImage, showNavigation = true } = Astro.props;
+const {
+  title,
+  description,
+  ogImage,
+  showNavigation = true,
+  showTopNavigation = showNavigation,
+  showBottomNavigation = showNavigation,
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -13,13 +20,13 @@ const { title, description, ogImage, showNavigation = true } = Astro.props;
     <slot name="head" />
   </head>
   <body class="bg-white dark:bg-zinc-900 dark:text-white min-h-dvh flex flex-col overflow-x-hidden">
-    {showNavigation && <TopNavigation />}
+    {showTopNavigation && <TopNavigation />}
 
     <main class:list={["flex-1 w-full"]}>
       <slot />
     </main>
 
-    {showNavigation && <BottomNavigation />}
+    {showBottomNavigation && <BottomNavigation />}
 
     <script async defer is:inline>
       function initCopyButtons() {

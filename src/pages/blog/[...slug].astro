@@ -1,5 +1,6 @@
 ---
 import { type CollectionEntry, getCollection, render } from 'astro:content';
+import PostBottomBar from '@/components/blog/PostBottomBar.astro';
 import PostHeader from '@/components/blog/PostHeader.astro';
 import PostLicense from '@/components/blog/PostLicense.astro';
 import PostNavigation from '@/components/blog/PostNavigation.astro';
@@ -61,7 +62,7 @@ const jsonLd = {
 };
 ---
 
-<BaseLayout title={title} description={tldr} ogImage={cover}>
+<BaseLayout title={title} description={tldr} ogImage={cover} showBottomNavigation={false}>
   <Fragment slot="head">
     {date && <meta name="date" content={date.toLocaleDateString()} />}
     {keywords && <meta name="keywords" content={keywords.join(", ")} />}
@@ -72,7 +73,7 @@ const jsonLd = {
     <div class="max-w-3xl mx-auto px-4 sm:px-6 py-8">
       <button
         onclick="history.back()"
-        class="inline-flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors mb-8 group cursor-pointer"
+        class="hidden md:inline-flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors mb-8 group cursor-pointer"
       >
         <IconArrowLeft class="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
         <span>返回</span>
@@ -117,6 +118,8 @@ const jsonLd = {
       </footer>
     </div>
   </article>
+
+  <PostBottomBar title={title} description={tldr} url={new URL(Astro.url.pathname, Astro.site).toString()} />
 </BaseLayout>
 
 <script
