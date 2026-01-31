@@ -12,6 +12,7 @@ const navItems = [
 
 export default function BottomNavigation() {
   const [activePath, setActivePath] = useState('');
+  const [hoveredPath, setHoveredPath] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState(true);
   const { scrollY } = useScroll();
 
@@ -52,25 +53,28 @@ export default function BottomNavigation() {
               stiffness: 260,
               damping: 25,
             }}
+            onMouseLeave={() => setHoveredPath(null)}
             className="pointer-events-auto bg-white/50 dark:bg-zinc-900/50 backdrop-blur-xl rounded-full border border-zinc-200/50 dark:border-zinc-800/50 shadow-[0_8px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)] p-1 mb-[env(safe-area-inset-bottom)] flex items-center select-none [touch-callout:none] [-webkit-touch-callout:none] gap-1"
           >
             {navItems.map((item) => {
               const active = isActive(item.path);
+              const isHovered = hoveredPath === item.path;
+              const showPill = isHovered || (active && hoveredPath === null);
+
               return (
                 <motion.a
                   key={item.path}
                   href={item.path}
                   whileTap={{ scale: 0.9 }}
+                  onMouseEnter={() => setHoveredPath(item.path)}
                   onClick={() => handleClick(item.path)}
                   className={`flex flex-col items-center justify-center min-w-[80px] h-11 rounded-full transition-colors relative overflow-hidden ${
-                    active
-                      ? 'text-zinc-900 dark:text-zinc-100'
-                      : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+                    active || isHovered ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 dark:text-zinc-400'
                   }`}
                   aria-current={active ? 'page' : undefined}
                   aria-label={item.name}
                 >
-                  {active && (
+                  {showPill && (
                     <motion.div
                       layoutId="nav-pill"
                       className="absolute inset-0 bg-zinc-100 dark:bg-zinc-800 -z-10"
