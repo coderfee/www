@@ -11,9 +11,10 @@ interface Props {
 }
 
 export default function PostBottomBar({ title, description, url }: Props) {
-  const [isLiked, setIsLiked] = useState(false);
+  const [_isLiked, setIsLiked] = useState(false);
   const [shareText, setShareText] = useState('分享');
   const [isVisible, setIsVisible] = useState(true);
+  const [hoveredKey, setHoveredKey] = useState<string | null>(null);
   const { scrollY } = useScroll();
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -44,7 +45,7 @@ export default function PostBottomBar({ title, description, url }: Props) {
   const _handleLike = () => {
     if ('vibrate' in navigator) navigator.vibrate(10);
     const key = `liked:${window.location.pathname}`;
-    const nextLiked = !isLiked;
+    const nextLiked = !_isLiked;
     setIsLiked(nextLiked);
 
     if (nextLiked) {
@@ -99,24 +100,55 @@ export default function PostBottomBar({ title, description, url }: Props) {
                 stiffness: 260,
                 damping: 25,
               }}
+              onMouseLeave={() => setHoveredKey(null)}
               className="pointer-events-auto bg-white/50 dark:bg-zinc-900/50 backdrop-blur-xl rounded-full border border-zinc-200/50 dark:border-zinc-800/50 shadow-[0_8px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)] p-1 mb-[env(safe-area-inset-bottom)] flex items-center select-none [touch-callout:none] [-webkit-touch-callout:none] gap-1"
             >
               <motion.button
                 whileTap={{ scale: 0.9 }}
+                onMouseEnter={() => setHoveredKey('back')}
                 onClick={handleBack}
-                className="flex flex-col items-center justify-center min-w-[80px] h-11 rounded-full text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+                className={`flex flex-col items-center justify-center min-w-[80px] h-11 rounded-full transition-colors relative cursor-pointer ${
+                  hoveredKey === 'back' ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 dark:text-zinc-400'
+                }`}
                 aria-label="返回"
               >
+                {hoveredKey === 'back' && (
+                  <motion.div
+                    layoutId="nav-pill"
+                    className="absolute inset-0 bg-zinc-100 dark:bg-zinc-800 -z-10 rounded-full"
+                    transition={{
+                      type: 'spring',
+                      stiffness: 350,
+                      damping: 30,
+                      mass: 0.8,
+                    }}
+                  />
+                )}
                 <Icon icon="tabler:arrow-left" className="w-5 h-5 mb-0.5" />
                 <span className="text-[10px] font-medium leading-none">返回</span>
               </motion.button>
 
               <motion.button
                 whileTap={{ scale: 0.9 }}
+                onMouseEnter={() => setHoveredKey('share')}
                 onClick={handleShare}
-                className="flex flex-col items-center justify-center min-w-[80px] h-11 rounded-full text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+                className={`flex flex-col items-center justify-center min-w-[80px] h-11 rounded-full transition-colors relative cursor-pointer ${
+                  hoveredKey === 'share' ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 dark:text-zinc-400'
+                }`}
                 aria-label="分享"
               >
+                {hoveredKey === 'share' && (
+                  <motion.div
+                    layoutId="nav-pill"
+                    className="absolute inset-0 bg-zinc-100 dark:bg-zinc-800 -z-10 rounded-full"
+                    transition={{
+                      type: 'spring',
+                      stiffness: 350,
+                      damping: 30,
+                      mass: 0.8,
+                    }}
+                  />
+                )}
                 <Icon icon="tabler:share" className="w-5 h-5 mb-0.5" />
                 <span className="text-[10px] font-medium leading-none overflow-hidden h-[10px]">
                   <AnimatePresence mode="wait" initial={false}>
