@@ -107,7 +107,7 @@ export default function PostBottomBar({ title, description, url }: Props) {
                 whileTap={{ scale: 0.9 }}
                 onMouseEnter={() => setHoveredKey('back')}
                 onClick={handleBack}
-                className={`flex flex-col items-center justify-center min-w-[80px] h-11 rounded-full transition-colors relative cursor-pointer ${
+                className={`flex flex-col items-center justify-center min-w-20 h-11 rounded-full transition-colors relative cursor-pointer ${
                   hoveredKey === 'back' ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 dark:text-zinc-400'
                 }`}
                 aria-label="返回"
@@ -132,7 +132,7 @@ export default function PostBottomBar({ title, description, url }: Props) {
                 whileTap={{ scale: 0.9 }}
                 onMouseEnter={() => setHoveredKey('share')}
                 onClick={handleShare}
-                className={`flex flex-col items-center justify-center min-w-[80px] h-11 rounded-full transition-colors relative cursor-pointer ${
+                className={`flex flex-col items-center justify-center min-w-20 h-11 rounded-full transition-colors relative cursor-pointer ${
                   hoveredKey === 'share' ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 dark:text-zinc-400'
                 }`}
                 aria-label="分享"
@@ -150,7 +150,7 @@ export default function PostBottomBar({ title, description, url }: Props) {
                   />
                 )}
                 <Icon icon="tabler:share" className="w-5 h-5 mb-0.5" />
-                <span className="text-[10px] font-medium leading-none overflow-hidden h-[10px]">
+                <span className="text-[10px] font-medium leading-none overflow-hidden h-2.5">
                   <AnimatePresence mode="wait" initial={false}>
                     <motion.span
                       key={shareText}
