@@ -67,7 +67,7 @@ export default function TopNavigation({ showNavigation = true }: Props) {
           {navItems.map((item) => {
             const active = isActive(item.path);
             const isHovered = hoveredPath === item.path;
-            const showLine = isHovered || (active && hoveredPath === null);
+            const showDot = isHovered || (active && hoveredPath === null);
 
             return (
               <a
@@ -78,10 +78,10 @@ export default function TopNavigation({ showNavigation = true }: Props) {
                   active || isHovered ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 dark:text-zinc-400'
                 }`}
               >
-                {showLine && (
+                {showDot && (
                   <motion.div
-                    layoutId="top-nav-line"
-                    className="absolute bottom-1 left-3 right-3 h-0.5 bg-zinc-900 dark:bg-zinc-100 rounded-full"
+                    layoutId="top-nav-dot"
+                    className="absolute bottom-1 left-1/2 -translate-x-1/2 size-1 bg-zinc-900 dark:bg-zinc-100 rounded-full"
                     transition={{
                       type: 'spring',
                       stiffness: 380,
