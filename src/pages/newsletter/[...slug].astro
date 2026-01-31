@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import dayjs from 'dayjs';
 import NewsletterLayout from '@/components/layouts/NewsletterLayout.astro';
+import PostBottomBar from '@/components/blog/PostBottomBar.astro';
 import IconBook from '~icons/tabler/book';
 import IconCalendar from '~icons/tabler/calendar';
 
@@ -25,7 +26,7 @@ const { title, description, cover, date, issue } = newsletter.data;
 const formattedDate = dayjs(date).format('YYYY年MM月DD日');
 ---
 
-<NewsletterLayout title={title} description={description} cover={cover}>
+<NewsletterLayout title={title} description={description} cover={cover} showBottomNavigation={false}>
   <div class="max-w-3xl mx-auto px-4 py-12">
     <div class="mb-6">
       <div class="flex items-center text-xs space-x-4 text-zinc-500 dark:text-zinc-400 mb-3">
@@ -71,4 +72,5 @@ const formattedDate = dayjs(date).format('YYYY年MM月DD日');
       <Content />
     </article>
   </div>
+  <PostBottomBar title={title} description={description} url={new URL(Astro.url.pathname, Astro.site).toString()} />
 </NewsletterLayout>
