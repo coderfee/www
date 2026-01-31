@@ -1,5 +1,6 @@
 'use client';
 
+import type { ImageMetadata } from 'astro';
 import dayjs from 'dayjs';
 import { motion } from 'framer-motion';
 
@@ -9,7 +10,7 @@ interface NewsletterItem {
     title: string;
     description?: string;
     date: Date;
-    cover?: any;
+    cover?: string | ImageMetadata;
     issue: number;
   };
 }
