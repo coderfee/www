@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import PostCard from '@/components/blog/PostCard.astro';
 import BaseLayout from '@/components/layouts/BaseLayout.astro';
-import SocialLinks from '@/components/SocialLinks.astro';
+import SocialLinks from '@/components/SocialLinks.tsx';
 import IconArrowRight from '~icons/tabler/arrow-right';
 
 const allPosts = await getCollection('blog');
@@ -51,5 +51,5 @@ const pageDescription =
     )}
   </div>
 
-  <SocialLinks />
+  <SocialLinks client:load />
 </BaseLayout>
