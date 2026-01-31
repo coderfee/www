@@ -21,7 +21,6 @@ export default function BottomNavigation() {
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
     const previous = scrollY.getPrevious() ?? 0;
-    // 向下滚动超过 150px 且速度较快时隐藏，向上滚动时显示
     if (latest > previous && latest > 150) {
       setIsVisible(false);
     } else {
