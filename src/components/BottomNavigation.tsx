@@ -44,7 +44,7 @@ export default function BottomNavigation() {
   };
 
   return (
-    <div className="md:hidden fixed bottom-2 left-1/2 -translate-x-1/2 z-50 pointer-events-none w-max flex items-center justify-center">
+    <div className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none w-max flex items-center justify-center">
       <AnimatePresence>
         {isVisible && (
           <motion.nav

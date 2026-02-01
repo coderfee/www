@@ -83,7 +83,7 @@ export default function PostBottomBar({ title, description, url, hasComments = t
   return (
     <div
       id="post-bottom-nav"
-      className="md:hidden fixed bottom-2 left-1/2 -translate-x-1/2 z-50 pointer-events-none w-max flex items-center justify-center"
+      className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none w-max flex items-center justify-center"
     >
       <AnimatePresence>
         {isVisible && (
