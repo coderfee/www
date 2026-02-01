@@ -7,6 +7,7 @@ const navItems = [
   { name: '首页', path: '/' },
   { name: '归档', path: '/archive' },
   { name: '周刊', path: '/newsletter' },
+  { name: '关于', path: '/about' },
 ];
 
 interface Props {

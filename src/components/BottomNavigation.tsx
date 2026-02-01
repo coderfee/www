@@ -8,6 +8,7 @@ const navItems = [
   { name: '首页', path: '/', icon: 'tabler:smart-home' },
   { name: '归档', path: '/archive', icon: 'tabler:archive' },
   { name: '周刊', path: '/newsletter', icon: 'tabler:book-2' },
+  { name: '关于', path: '/about', icon: 'tabler:user' },
 ];
 
 export default function BottomNavigation() {
@@ -70,7 +71,7 @@ export default function BottomNavigation() {
                   whileTap={{ scale: 0.96 }}
                   onMouseEnter={() => setHoveredPath(item.path)}
                   onClick={() => handleClick(item.path)}
-                  className={`flex flex-col items-center justify-center min-w-20 h-11 rounded-full transition-colors duration-300 relative cursor-pointer z-10 ${
+                  className={`flex flex-col items-center justify-center min-w-16 h-11 rounded-full transition-colors duration-300 relative cursor-pointer z-10 ${
                     active || isHovered ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 dark:text-zinc-500'
                   }`}
                   aria-current={active ? 'page' : undefined}
