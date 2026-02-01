@@ -49,9 +49,11 @@ export default function TopNavigation({ showNavigation = true }: Props) {
       className="sticky top-0 w-full z-50 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md pt-[env(safe-area-inset-top)] flex-none border-b border-zinc-200/50 dark:border-zinc-800/50"
     >
       <nav className="max-w-4xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
-        <a
+        <motion.a
           href="/"
           className="flex items-center gap-2 text-base font-medium text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors group"
+          initial="initial"
+          whileHover="hover"
         >
           <img
             src="https://assets.coderfee.com/favicon/www.svg"
@@ -60,8 +62,45 @@ export default function TopNavigation({ showNavigation = true }: Props) {
             width="32"
             height="32"
           />
-          <span className="font-major uppercase text-lg tracking-tight">coderfee</span>
-        </a>
+          <motion.span
+            className="font-major uppercase text-lg tracking-tight flex"
+            variants={{
+              hover: {
+                transition: {
+                  staggerChildren: 0.05,
+                },
+              },
+            }}
+          >
+            {'coderfee'.split('').map((char, index) => (
+              <motion.span
+                // biome-ignore lint/suspicious/noArrayIndexKey: Static logo text
+                key={`${char}-${index}`}
+                initial={{ y: 10, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{
+                  duration: 0.4,
+                  delay: index * 0.05,
+                  type: 'spring',
+                  stiffness: 300,
+                  damping: 20,
+                }}
+                variants={{
+                  hover: {
+                    y: -4,
+                    transition: {
+                      duration: 0.2,
+                      repeat: 1,
+                      repeatType: 'reverse',
+                    },
+                  },
+                }}
+              >
+                {char}
+              </motion.span>
+            ))}
+          </motion.span>
+        </motion.a>
 
         <nav className="hidden md:flex items-center gap-2 relative" onMouseLeave={() => setHoveredPath(null)}>
           {navItems.map((item) => {

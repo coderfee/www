@@ -36,8 +36,8 @@ const itemVariants = {
     y: 0,
     opacity: 1,
     transition: {
-      duration: 0.5,
-      ease: [0.21, 0.47, 0.32, 0.98] as const,
+      duration: 0.8,
+      ease: 'easeInOut',
     },
   },
 };
@@ -66,8 +66,6 @@ function NewsletterCard({ item }: { item: NewsletterItem }) {
   return (
     <motion.article
       variants={itemVariants}
-      initial="rest"
-      whileHover="hover"
       whileTap={{ scale: 0.98 }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
