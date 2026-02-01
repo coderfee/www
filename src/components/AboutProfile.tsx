@@ -62,7 +62,7 @@ const itemVariants = {
       type: 'spring',
       stiffness: 260,
       damping: 20,
-    },
+    } as const,
   },
 };
 
