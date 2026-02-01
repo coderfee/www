@@ -52,7 +52,7 @@ export default function SocialLinks() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="py-6 border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950">
+    <footer className="hidden md:block py-6 border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         <motion.div
           variants={containerVariants}
