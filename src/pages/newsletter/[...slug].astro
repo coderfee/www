@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import dayjs from 'dayjs';
 import PostBottomBar from '@/components/blog/PostBottomBar.tsx';
 import NewsletterLayout from '@/components/layouts/NewsletterLayout.astro';
+import IconArrowLeft from '~icons/tabler/arrow-left';
 import IconBook from '~icons/tabler/book';
 import IconCalendar from '~icons/tabler/calendar';
 
@@ -27,7 +28,15 @@ const formattedDate = dayjs(date).format('YYYY年MM月DD日');
 ---
 
 <NewsletterLayout title={title} description={description} cover={cover} showBottomNavigation={false}>
-  <div class="max-w-3xl mx-auto px-4 py-12">
+  <div class="max-w-3xl mx-auto px-4 py-12 animate-in fade-in slide-in-from-bottom-8 duration-700">
+    <button
+      onclick="history.back()"
+      class="hidden md:inline-flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors mb-8 group cursor-pointer"
+    >
+      <IconArrowLeft class="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
+      <span>返回</span>
+    </button>
+
     <div class="mb-6">
       <div class="flex items-center text-xs space-x-4 text-zinc-500 dark:text-zinc-400 mb-3">
         <div class="flex items-center gap-1">
