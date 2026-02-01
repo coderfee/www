@@ -114,8 +114,8 @@ export default function PostBottomBar({ title, description, url, hasComments = t
                   className="absolute inset-0 bg-zinc-100/80 dark:bg-white/10 -z-10 rounded-full"
                   transition={{
                     type: 'spring',
-                    stiffness: 400,
-                    damping: 30,
+                    stiffness: 250,
+                    damping: 25,
                     mass: 0.8,
                   }}
                 />
@@ -140,8 +140,8 @@ export default function PostBottomBar({ title, description, url, hasComments = t
                     className="absolute inset-0 bg-zinc-100/80 dark:bg-white/10 -z-10 rounded-full"
                     transition={{
                       type: 'spring',
-                      stiffness: 400,
-                      damping: 30,
+                      stiffness: 250,
+                      damping: 25,
                       mass: 0.8,
                     }}
                   />
@@ -166,8 +166,8 @@ export default function PostBottomBar({ title, description, url, hasComments = t
                   className="absolute inset-0 bg-zinc-100/80 dark:bg-white/10 -z-10 rounded-full"
                   transition={{
                     type: 'spring',
-                    stiffness: 400,
-                    damping: 30,
+                    stiffness: 250,
+                    damping: 25,
                     mass: 0.8,
                   }}
                 />

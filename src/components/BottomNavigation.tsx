@@ -34,7 +34,7 @@ export default function BottomNavigation() {
     setActivePath(path);
     setTimeout(() => {
       window.location.href = path;
-    }, 100);
+    }, 200);
   };
 
   const isActive = (path: string) => {
@@ -82,8 +82,8 @@ export default function BottomNavigation() {
                       className="absolute inset-0 bg-zinc-100/80 dark:bg-white/10 -z-10 rounded-full"
                       transition={{
                         type: 'spring',
-                        stiffness: 400,
-                        damping: 30,
+                        stiffness: 250,
+                        damping: 25,
                         mass: 0.8,
                       }}
                     />
