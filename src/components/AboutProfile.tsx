@@ -99,6 +99,17 @@ export default function AboutProfile() {
     img.src = 'https://assets.coderfee.com/blog/wechat-qrcode.jpg';
   }, []);
 
+  useEffect(() => {
+    if (showQR) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [showQR]);
+
   return (
     <div className="space-y-12">
       <motion.section
