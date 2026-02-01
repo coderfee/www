@@ -58,4 +58,12 @@ const pageDescription =
   </div>
 
   <SocialLinks client:load />
+
+  <script>
+    import { prefetch } from 'astro:prefetch';
+
+    prefetch('/archive', { ignoreSlowConnection: true });
+    prefetch('/newsletter', { ignoreSlowConnection: true });
+    prefetch('/about', { ignoreSlowConnection: true });
+  </script>
 </BaseLayout>
