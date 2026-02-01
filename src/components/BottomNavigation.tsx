@@ -32,6 +32,9 @@ export default function BottomNavigation() {
   const handleClick = (path: string) => {
     if ('vibrate' in navigator) navigator.vibrate(10);
     setActivePath(path);
+    setTimeout(() => {
+      window.location.href = path;
+    }, 100);
   };
 
   const isActive = (path: string) => {
@@ -54,7 +57,7 @@ export default function BottomNavigation() {
               damping: 25,
             }}
             onMouseLeave={() => setHoveredPath(null)}
-            className="pointer-events-auto bg-white/50 dark:bg-zinc-900/50 backdrop-blur-xl rounded-full border border-zinc-200/50 dark:border-zinc-800/50 shadow-[0_8px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)] p-1 mb-[env(safe-area-inset-bottom)] flex items-center select-none [touch-callout:none] [-webkit-touch-callout:none] gap-1"
+            className="pointer-events-auto bg-white/95 dark:bg-zinc-900/90 backdrop-blur-2xl rounded-full border border-zinc-200/50 dark:border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.3)] p-1.5 mb-[env(safe-area-inset-bottom)] flex items-center select-none [touch-callout:none] [-webkit-touch-callout:none] gap-1"
           >
             {navItems.map((item) => {
               const active = isActive(item.path);
@@ -62,14 +65,13 @@ export default function BottomNavigation() {
               const showPill = isHovered || (active && hoveredPath === null);
 
               return (
-                <motion.a
+                <motion.button
                   key={item.path}
-                  href={item.path}
-                  whileTap={{ scale: 0.9 }}
+                  whileTap={{ scale: 0.96 }}
                   onMouseEnter={() => setHoveredPath(item.path)}
                   onClick={() => handleClick(item.path)}
-                  className={`flex flex-col items-center justify-center min-w-20 h-11 rounded-full transition-colors relative ${
-                    active || isHovered ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 dark:text-zinc-400'
+                  className={`flex flex-col items-center justify-center min-w-20 h-11 rounded-full transition-colors duration-300 relative cursor-pointer z-10 ${
+                    active || isHovered ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 dark:text-zinc-500'
                   }`}
                   aria-current={active ? 'page' : undefined}
                   aria-label={item.name}
@@ -77,18 +79,21 @@ export default function BottomNavigation() {
                   {showPill && (
                     <motion.div
                       layoutId="nav-pill"
-                      className="absolute inset-0 bg-zinc-100 dark:bg-zinc-800 -z-10 rounded-full"
+                      className="absolute inset-0 bg-zinc-100/80 dark:bg-white/10 -z-10 rounded-full"
                       transition={{
                         type: 'spring',
-                        stiffness: 350,
+                        stiffness: 400,
                         damping: 30,
                         mass: 0.8,
                       }}
                     />
                   )}
-                  <Icon icon={item.icon} className="w-5 h-5 mb-0.5" />
-                  <span className="text-[10px] font-medium leading-none">{item.name}</span>
-                </motion.a>
+                  <Icon
+                    icon={item.icon}
+                    className={`w-5 h-5 mb-0.5 transition-transform duration-300 ${active ? 'scale-110' : ''}`}
+                  />
+                  <span className={`text-[10px] leading-none tracking-tight font-medium`}>{item.name}</span>
+                </motion.button>
               );
             })}
           </motion.nav>

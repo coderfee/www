@@ -76,6 +76,7 @@ const formattedDate = dayjs(date).format('YYYY年MM月DD日');
     client:load
     title={title}
     description={description}
+    hasComments={false}
     url={new URL(Astro.url.pathname, Astro.site).toString()}
   />
 </NewsletterLayout>
