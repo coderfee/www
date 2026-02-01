@@ -21,10 +21,16 @@ const pageDescription =
     <main class="space-y-0">
       {posts.length > 0 ? (
           posts.map((post, index) => (
-            <>
+            <div
+              class="animate-in fade-in slide-in-from-bottom-8 duration-1000"
+              style={{
+                animationDelay: `${index * 100}ms`,
+                animationFillMode: 'both',
+              }}
+            >
               <PostCard post={post} />
               {index < posts.length - 1 && <div class="border-t border-dashed border-zinc-100 dark:border-zinc-800" />}
-            </>
+            </div>
           ))
         ) : (
           <div class="p-8 text-center bg-zinc-50 dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800">

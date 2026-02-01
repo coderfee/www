@@ -41,8 +41,14 @@ const years = Object.keys(postsByYear)
           </div>
 
           <div class="flex-1 relative sm:pl-8 space-y-8 pb-4">
-            {postsByYear[year].map((post) => (
-              <div class="relative group">
+            {postsByYear[year].map((post, index) => (
+              <div
+                class="relative group animate-in fade-in slide-in-from-bottom-8 duration-1000"
+                style={{
+                  animationDelay: `${index * 100}ms`,
+                  animationFillMode: 'both',
+                }}
+              >
                 <PostCard post={post} />
               </div>
             ))}
