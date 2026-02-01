@@ -38,7 +38,7 @@ const itemVariants = {
     transition: {
       duration: 0.8,
       ease: 'easeInOut',
-    },
+    } as const,
   },
 };
 
