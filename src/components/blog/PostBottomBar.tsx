@@ -5,19 +5,23 @@ import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-
 import { useEffect, useState } from 'react';
 
 import { useHaptic } from '@/lib/hooks';
+import MobileTOCDrawer from './toc/MobileTOCDrawer';
+import type { Heading } from './toc/TableOfContents';
 
 interface Props {
   title: string;
   description?: string;
   url?: string;
   hasComments?: boolean;
+  headings?: Heading[];
 }
 
-export default function PostBottomBar({ title, description, url, hasComments = true }: Props) {
+export default function PostBottomBar({ title, description, url, hasComments = true, headings = [] }: Props) {
   const [_isLiked, setIsLiked] = useState(false);
   const [shareText, setShareText] = useState('分享');
   const [isVisible, setIsVisible] = useState(true);
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const { scrollY } = useScroll();
   const { vibrate } = useHaptic();
 
@@ -40,6 +44,11 @@ export default function PostBottomBar({ title, description, url, hasComments = t
   const handleBack = () => {
     vibrate('light');
     history.back();
+  };
+
+  const handleToggleDrawer = () => {
+    vibrate('light');
+    setIsDrawerOpen(!isDrawerOpen);
   };
 
   const handleScrollToComments = () => {
@@ -85,60 +94,36 @@ export default function PostBottomBar({ title, description, url, hasComments = t
   };
 
   return (
-    <div
-      id="post-bottom-nav"
-      className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none w-max flex items-center justify-center"
-    >
-      <AnimatePresence>
-        {isVisible && (
-          <motion.nav
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 100, opacity: 0 }}
-            transition={{
-              type: 'spring',
-              stiffness: 260,
-              damping: 25,
-            }}
-            onMouseLeave={() => setHoveredKey(null)}
-            className="pointer-events-auto bg-white/95 dark:bg-zinc-900/90 backdrop-blur-2xl rounded-full border border-zinc-200/50 dark:border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.3)] p-1.5 mb-[env(safe-area-inset-bottom)] flex items-center select-none [touch-callout:none] [-webkit-touch-callout:none] gap-1"
-          >
-            <motion.button
-              whileTap={{ scale: 0.96 }}
-              onMouseEnter={() => setHoveredKey('back')}
-              onClick={handleBack}
-              className={`flex flex-col items-center justify-center ${buttonMinWidth} h-11 rounded-full transition-colors duration-300 relative cursor-pointer z-10 ${
-                hoveredKey === 'back' ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 dark:text-zinc-500'
-              }`}
-              aria-label="返回"
+    <>
+      <MobileTOCDrawer isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} headings={headings} />
+      <div
+        id="post-bottom-nav"
+        className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none w-max flex items-center justify-center"
+      >
+        <AnimatePresence>
+          {isVisible && (
+            <motion.nav
+              initial={{ y: 100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: 100, opacity: 0 }}
+              transition={{
+                type: 'spring',
+                stiffness: 260,
+                damping: 25,
+              }}
+              onMouseLeave={() => setHoveredKey(null)}
+              className="pointer-events-auto bg-white/95 dark:bg-zinc-900/90 backdrop-blur-2xl rounded-full border border-zinc-200/50 dark:border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.3)] p-1.5 mb-[env(safe-area-inset-bottom)] flex items-center select-none [touch-callout:none] [-webkit-touch-callout:none] gap-1"
             >
-              {hoveredKey === 'back' && (
-                <motion.div
-                  layoutId="nav-pill"
-                  className="absolute inset-0 bg-zinc-100/80 dark:bg-white/10 -z-10 rounded-full"
-                  transition={{
-                    type: 'spring',
-                    stiffness: 250,
-                    damping: 25,
-                    mass: 0.8,
-                  }}
-                />
-              )}
-              <Icon icon="tabler:arrow-left" className="w-5 h-5 mb-0.5" />
-              <span className="text-[10px] font-medium leading-none tracking-tight">返回</span>
-            </motion.button>
-
-            {hasComments && (
               <motion.button
                 whileTap={{ scale: 0.96 }}
-                onMouseEnter={() => setHoveredKey('comments')}
-                onClick={handleScrollToComments}
+                onMouseEnter={() => setHoveredKey('back')}
+                onClick={handleBack}
                 className={`flex flex-col items-center justify-center ${buttonMinWidth} h-11 rounded-full transition-colors duration-300 relative cursor-pointer z-10 ${
-                  hoveredKey === 'comments' ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 dark:text-zinc-500'
+                  hoveredKey === 'back' ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 dark:text-zinc-500'
                 }`}
-                aria-label="评论"
+                aria-label="返回"
               >
-                {hoveredKey === 'comments' && (
+                {hoveredKey === 'back' && (
                   <motion.div
                     layoutId="nav-pill"
                     className="absolute inset-0 bg-zinc-100/80 dark:bg-white/10 -z-10 rounded-full"
@@ -150,51 +135,105 @@ export default function PostBottomBar({ title, description, url, hasComments = t
                     }}
                   />
                 )}
-                <Icon icon="tabler:message-circle" className="w-5 h-5 mb-0.5" />
-                <span className="text-[10px] font-medium leading-none tracking-tight">评论</span>
+                <Icon icon="tabler:arrow-left" className="w-5 h-5 mb-0.5" />
+                <span className="text-[10px] font-medium leading-none tracking-tight">返回</span>
               </motion.button>
-            )}
 
-            <motion.button
-              whileTap={{ scale: 0.96 }}
-              onMouseEnter={() => setHoveredKey('share')}
-              onClick={handleShare}
-              className={`flex flex-col items-center justify-center ${buttonMinWidth} h-11 rounded-full transition-colors duration-300 relative cursor-pointer z-10 ${
-                hoveredKey === 'share' ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 dark:text-zinc-500'
-              }`}
-              aria-label="分享"
-            >
-              {hoveredKey === 'share' && (
-                <motion.div
-                  layoutId="nav-pill"
-                  className="absolute inset-0 bg-zinc-100/80 dark:bg-white/10 -z-10 rounded-full"
-                  transition={{
-                    type: 'spring',
-                    stiffness: 250,
-                    damping: 25,
-                    mass: 0.8,
-                  }}
-                />
+              {headings.length > 0 && (
+                <motion.button
+                  whileTap={{ scale: 0.96 }}
+                  onMouseEnter={() => setHoveredKey('toc')}
+                  onClick={handleToggleDrawer}
+                  className={`flex flex-col items-center justify-center ${buttonMinWidth} h-11 rounded-full transition-colors duration-300 relative cursor-pointer z-10 ${
+                    hoveredKey === 'toc' ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 dark:text-zinc-500'
+                  }`}
+                  aria-label="目录"
+                >
+                  {hoveredKey === 'toc' && (
+                    <motion.div
+                      layoutId="nav-pill"
+                      className="absolute inset-0 bg-zinc-100/80 dark:bg-white/10 -z-10 rounded-full"
+                      transition={{
+                        type: 'spring',
+                        stiffness: 250,
+                        damping: 25,
+                        mass: 0.8,
+                      }}
+                    />
+                  )}
+                  <Icon icon="tabler:list" className="w-5 h-5 mb-0.5" />
+                  <span className="text-[10px] font-medium leading-none tracking-tight">目录</span>
+                </motion.button>
               )}
-              <Icon icon="tabler:share" className="w-5 h-5 mb-0.5" />
-              <span className="text-[10px] font-medium leading-none tracking-tight overflow-hidden h-2.5">
-                <AnimatePresence mode="wait" initial={false}>
-                  <motion.span
-                    key={shareText}
-                    initial={{ y: 10, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: -10, opacity: 0 }}
-                    transition={{ duration: 0.15 }}
-                    className="block"
-                  >
-                    {shareText}
-                  </motion.span>
-                </AnimatePresence>
-              </span>
-            </motion.button>
-          </motion.nav>
-        )}
-      </AnimatePresence>
-    </div>
+
+              {hasComments && (
+                <motion.button
+                  whileTap={{ scale: 0.96 }}
+                  onMouseEnter={() => setHoveredKey('comments')}
+                  onClick={handleScrollToComments}
+                  className={`flex flex-col items-center justify-center ${buttonMinWidth} h-11 rounded-full transition-colors duration-300 relative cursor-pointer z-10 ${
+                    hoveredKey === 'comments' ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 dark:text-zinc-500'
+                  }`}
+                  aria-label="评论"
+                >
+                  {hoveredKey === 'comments' && (
+                    <motion.div
+                      layoutId="nav-pill"
+                      className="absolute inset-0 bg-zinc-100/80 dark:bg-white/10 -z-10 rounded-full"
+                      transition={{
+                        type: 'spring',
+                        stiffness: 250,
+                        damping: 25,
+                        mass: 0.8,
+                      }}
+                    />
+                  )}
+                  <Icon icon="tabler:message-circle" className="w-5 h-5 mb-0.5" />
+                  <span className="text-[10px] font-medium leading-none tracking-tight">评论</span>
+                </motion.button>
+              )}
+
+              <motion.button
+                whileTap={{ scale: 0.96 }}
+                onMouseEnter={() => setHoveredKey('share')}
+                onClick={handleShare}
+                className={`flex flex-col items-center justify-center ${buttonMinWidth} h-11 rounded-full transition-colors duration-300 relative cursor-pointer z-10 ${
+                  hoveredKey === 'share' ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 dark:text-zinc-500'
+                }`}
+                aria-label="分享"
+              >
+                {hoveredKey === 'share' && (
+                  <motion.div
+                    layoutId="nav-pill"
+                    className="absolute inset-0 bg-zinc-100/80 dark:bg-white/10 -z-10 rounded-full"
+                    transition={{
+                      type: 'spring',
+                      stiffness: 250,
+                      damping: 25,
+                      mass: 0.8,
+                    }}
+                  />
+                )}
+                <Icon icon="tabler:share" className="w-5 h-5 mb-0.5" />
+                <span className="text-[10px] font-medium leading-none tracking-tight overflow-hidden h-2.5">
+                  <AnimatePresence mode="wait" initial={false}>
+                    <motion.span
+                      key={shareText}
+                      initial={{ y: 10, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: -10, opacity: 0 }}
+                      transition={{ duration: 0.15 }}
+                      className="block"
+                    >
+                      {shareText}
+                    </motion.span>
+                  </AnimatePresence>
+                </span>
+              </motion.button>
+            </motion.nav>
+          )}
+        </AnimatePresence>
+      </div>
+    </>
   );
 }

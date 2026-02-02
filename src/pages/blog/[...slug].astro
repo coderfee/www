@@ -6,6 +6,7 @@ import PostHeader from '@/components/blog/PostHeader.astro';
 import PostLicense from '@/components/blog/PostLicense.astro';
 import PostNavigation from '@/components/blog/PostNavigation.astro';
 import PostRelatedPosts from '@/components/blog/PostRelatedPosts.astro';
+import TableOfContents from '@/components/blog/toc/TableOfContents.tsx';
 import BaseLayout from '@/components/layouts/BaseLayout.astro';
 import ShareButton from '@/components/ShareButton.tsx';
 import { AUTHOR } from '@/consts';
@@ -32,7 +33,7 @@ type Props = {
 };
 
 const { post, prev, next } = Astro.props;
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
 const { title, tldr, date, tags = [], cover, keywords } = post.data;
 const modifiedDate = post.data.date;
 
@@ -63,6 +64,7 @@ const jsonLd = {
 ---
 
 <BaseLayout title={title} description={tldr} ogImage={cover} showBottomNavigation={false}>
+  <TableOfContents client:media="(min-width: 1280px)" headings={headings} />
   <Fragment slot="head">
     {date && <meta name="date" content={date.toLocaleDateString()} />}
     {keywords && <meta name="keywords" content={keywords.join(", ")} />}
@@ -115,6 +117,7 @@ const jsonLd = {
     title={title}
     description={tldr}
     url={new URL(Astro.url.pathname, Astro.site).toString()}
+    headings={headings}
   />
 </BaseLayout>
 
