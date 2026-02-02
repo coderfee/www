@@ -6,7 +6,7 @@ import { type GitHubStats, getGitHubStats } from '@/lib/github';
 import { base64Decode } from '@/lib/helper';
 import { useBodyScrollLock, useHaptic } from '@/lib/hooks';
 
-type ModalType = 'none' | 'wechat' | 'github' | 'email' | 'rss' | 'sitemap';
+type ModalType = 'none' | 'wechat' | 'github' | 'email' | 'rss' | 'sitemap' | 'friend' | 'profile';
 
 const socialLinks = [
   {
@@ -101,7 +101,8 @@ const itemVariants = {
 export default function AboutProfile() {
   const [activeModal, setActiveModal] = useState<ModalType>('none');
   const [ghStats, setGhStats] = useState<GitHubStats | null>(null);
-  const [copiedType, setCopiedType] = useState<'none' | 'email' | 'rss'>('none');
+  const [copiedType, setCopiedType] = useState<'none' | 'email' | 'rss' | 'friend' | 'profile'>('none');
+  const [selectedFriend, setSelectedFriend] = useState<(typeof friends)[0] | null>(null);
   const { vibrate } = useHaptic();
 
   useEffect(() => {
@@ -112,7 +113,7 @@ export default function AboutProfile() {
 
   useBodyScrollLock(activeModal !== 'none');
 
-  const copyToClipboard = (text: string, type: 'email' | 'rss') => {
+  const copyToClipboard = (text: string, type: Exclude<typeof copiedType, 'none'>) => {
     navigator.clipboard.writeText(text);
     setCopiedType(type);
     vibrate('success');
@@ -127,32 +128,38 @@ export default function AboutProfile() {
   return (
     <div className="space-y-12">
       <motion.section
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        className="text-center space-y-4"
-      >
-        <div className="relative inline-block">
-          <img
-            src="https://assets.coderfee.com/blog/avatar.jpg"
-            alt="Avatar"
-            className="w-24 h-24 mx-auto rounded-full bg-zinc-50 dark:bg-zinc-900 object-cover border border-zinc-100 dark:border-zinc-800 shadow-xl"
-          />
-          <div className="absolute bottom-1 right-1 w-5 h-5 bg-green-500 border-4 border-white dark:border-black rounded-full" />
-        </div>
-        <div>
-          <h1 className="font-major text-3xl font-bold text-zinc-900 dark:text-zinc-100">coderfee</h1>
-          <p className="text-zinc-500 dark:text-zinc-400 mt-2 text-sm">喜欢阅读，热爱写作，享受编程</p>
-        </div>
-      </motion.section>
-
-      <motion.section
         variants={containerVariants}
         initial="hidden"
         animate="visible"
         className="max-w-xs md:max-w-2xl mx-auto"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <motion.div
+            layoutId="profile-modal"
+            transition={transition}
+            variants={itemVariants}
+            whileTap={{ scale: 0.98 }}
+            whileHover={{ scale: 1.01 }}
+            onClick={() => {
+              vibrate('light');
+              setActiveModal('profile');
+            }}
+            className="md:col-span-2 flex items-center p-4 rounded-3xl bg-zinc-50 dark:bg-white/3 border border-zinc-100 dark:border-white/5 transition-colors group select-none cursor-pointer"
+          >
+            <div className="relative shrink-0">
+              <img
+                src="https://assets.coderfee.com/blog/avatar.jpg"
+                alt="Avatar"
+                className="w-16 h-16 rounded-2xl bg-zinc-100 dark:bg-zinc-800 object-cover shadow-sm"
+              />
+              <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-white dark:border-zinc-900 rounded-full" />
+            </div>
+            <div className="ml-5 flex flex-col min-w-0">
+              <h1 className="font-major text-2xl font-bold text-zinc-900 dark:text-zinc-100 leading-tight">coderfee</h1>
+              <p className="text-zinc-500 dark:text-zinc-400 mt-1 text-xs truncate">喜欢阅读，热爱写作，享受编程</p>
+            </div>
+          </motion.div>
+
           {socialLinks.map((link) => (
             <motion.a
               key={link.name}
@@ -170,6 +177,7 @@ export default function AboutProfile() {
                           ? 'sitemap-modal'
                           : undefined
               }
+              transition={transition}
               target={link.isEmail || link.isRSS || link.isSitemap ? '_self' : '_blank'}
               aria-label={`访问 ${link.name}: ${link.desc}`}
               rel="noopener"
@@ -228,7 +236,7 @@ export default function AboutProfile() {
             />
 
             <motion.div
-              layoutId={`${activeModal}-modal`}
+              layoutId={activeModal === 'friend' ? `friend-${selectedFriend?.name}` : `${activeModal}-modal`}
               transition={transition}
               role="dialog"
               aria-modal="true"
@@ -236,6 +244,66 @@ export default function AboutProfile() {
             >
               <div className="bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden">
                 <div className="p-8 flex flex-col">
+                  {activeModal === 'profile' && (
+                    <div className="space-y-6">
+                      <div className="flex flex-col items-center text-center">
+                        <div className="relative">
+                          <img
+                            src="https://assets.coderfee.com/blog/avatar.jpg"
+                            alt="Avatar"
+                            className="size-20 rounded-2xl bg-zinc-100 dark:bg-zinc-800 object-cover shadow-lg"
+                          />
+                          <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 border-4 border-white dark:border-zinc-900 rounded-full" />
+                        </div>
+                        <h3 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100 mt-4">coderfee</h3>
+                        <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">在代码与文字间寻找平衡</p>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-700/50">
+                          <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-0.5">码龄</p>
+                          <p className="text-xl font-bold text-zinc-900 dark:text-zinc-100">9+ 年</p>
+                        </div>
+                        <div className="p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-700/50">
+                          <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-0.5">
+                            原创博文
+                          </p>
+                          <p className="text-xl font-bold text-zinc-900 dark:text-zinc-100">60+ 篇</p>
+                        </div>
+                        <div className="p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-700/50">
+                          <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-0.5">状态</p>
+                          <p className="text-xl font-bold text-green-600 dark:text-green-400">在线中</p>
+                        </div>
+                        <div className="p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-700/50">
+                          <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-0.5">坐标</p>
+                          <p className="text-xl font-bold text-zinc-900 dark:text-zinc-100">北京</p>
+                        </div>
+                      </div>
+
+                      <div className="space-y-4">
+                        {[
+                          { label: '编程', tags: ['Astro', 'React', 'TypeScript', 'Python'], icon: 'tabler:code' },
+                          { label: '阅读', tags: ['技术', '科幻', '哲学', '小说'], icon: 'tabler:book' },
+                          { label: '写作', tags: ['记录思考', '生活在别处'], icon: 'tabler:pencil' },
+                        ].map((item) => (
+                          <div key={item.label} className="flex items-center gap-3">
+                            <Icon icon={item.icon} className="text-lg text-zinc-400 shrink-0" />
+                            <div className="flex flex-wrap gap-1.5">
+                              {item.tags.map((tag) => (
+                                <span
+                                  key={tag}
+                                  className="px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-[10px] font-medium text-zinc-600 dark:text-zinc-300 border border-zinc-200/50 dark:border-white/5"
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   {activeModal === 'email' && (
                     <div className="text-center space-y-6">
                       <div className="flex flex-col items-center">
@@ -514,6 +582,68 @@ export default function AboutProfile() {
                       </div>
                     </div>
                   )}
+
+                  {activeModal === 'friend' && selectedFriend && (
+                    <div className="text-center space-y-6">
+                      <div className="flex flex-col items-center">
+                        <img
+                          src={selectedFriend.avatar}
+                          alt={selectedFriend.name}
+                          className="size-20 rounded-full border-4 border-zinc-50 dark:border-zinc-800 shadow-xl mb-4"
+                        />
+                        <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-1">
+                          {selectedFriend.name}
+                        </h3>
+                        <p className="text-sm text-zinc-500 dark:text-zinc-400 px-4">{selectedFriend.desc}</p>
+                      </div>
+                      <div className="space-y-3">
+                        <button
+                          type="button"
+                          onClick={() => copyToClipboard(selectedFriend.url, 'friend')}
+                          className="w-full py-3 px-5 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 rounded-2xl transition-all flex items-center justify-between group"
+                        >
+                          <span className="text-sm text-zinc-600 dark:text-zinc-300 font-medium truncate mr-4">
+                            {selectedFriend.url.replace('https://', '')}
+                          </span>
+                          <div className="size-5 flex items-center justify-center shrink-0">
+                            <AnimatePresence mode="wait">
+                              {copiedType === 'friend' ? (
+                                <motion.div
+                                  key="check"
+                                  initial={{ scale: 0.5, opacity: 0 }}
+                                  animate={{ scale: 1, opacity: 1 }}
+                                  exit={{ scale: 0.5, opacity: 0 }}
+                                >
+                                  <Icon icon="tabler:check" className="text-xl text-green-600" />
+                                </motion.div>
+                              ) : (
+                                <motion.div
+                                  key="copy"
+                                  initial={{ scale: 0.5, opacity: 0 }}
+                                  animate={{ scale: 1, opacity: 1 }}
+                                  exit={{ scale: 0.5, opacity: 0 }}
+                                >
+                                  <Icon
+                                    icon="tabler:copy"
+                                    className="text-xl text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors"
+                                  />
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </div>
+                        </button>
+                        <a
+                          href={selectedFriend.url}
+                          target="_blank"
+                          rel="noopener"
+                          onClick={() => vibrate('light')}
+                          className="w-full py-3 bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:hover:bg-white text-white dark:text-zinc-900 rounded-2xl text-center font-bold transition-all shadow-lg flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98]"
+                        >
+                          <Icon icon="tabler:external-link" className="text-xl" />去 ta 的家看看
+                        </a>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -544,12 +674,19 @@ export default function AboutProfile() {
             <motion.a
               key={friend.name}
               href={friend.url}
+              layoutId={`friend-${friend.name}`}
+              transition={transition}
               target="_blank"
               rel="noopener"
               variants={itemVariants}
               whileTap={{ scale: 0.98 }}
               whileHover={{ scale: 1.02 }}
-              onClick={() => vibrate('light')}
+              onClick={(e) => {
+                e.preventDefault();
+                vibrate('light');
+                setSelectedFriend(friend);
+                setActiveModal('friend');
+              }}
               className="flex items-center gap-3 p-3 rounded-2xl bg-zinc-50/50 dark:bg-zinc-900/30 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors group cursor-pointer"
             >
               <img
