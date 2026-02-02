@@ -3,11 +3,11 @@ import AboutProfile from '@/components/AboutProfile.tsx';
 import BaseLayout from '@/components/layouts/BaseLayout.astro';
 
 const title = '关于';
-const description = 'Coderfee 的个人主页';
+const description = 'coderfee 的个人主页';
 ---
 
 <BaseLayout title={title} description={description}>
-  <div class="max-w-xl mx-auto px-4 min-h-[calc(100dvh-4rem)] flex flex-col justify-center py-8 pb-32">
+  <div class="max-w-xl mx-auto px-4 py-8 pb-24">
     <AboutProfile client:load />
   </div>
 </BaseLayout>

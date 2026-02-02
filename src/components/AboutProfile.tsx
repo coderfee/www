@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { EMAIL_ENCODED } from '@/consts';
 import { base64Decode } from '@/lib/helper';
+import { useBodyScrollLock } from '@/lib/hooks';
 
 const socialLinks = [
   {
@@ -25,7 +26,7 @@ const socialLinks = [
   },
   {
     name: 'Email',
-    url: 'mailto:',
+    url: `mailto:${base64Decode(EMAIL_ENCODED)}`,
     icon: 'tabler:mail',
     isEmail: true,
     color: 'text-[#0078D4]',
@@ -99,16 +100,7 @@ export default function AboutProfile() {
     img.src = 'https://assets.coderfee.com/blog/wechat-qrcode.jpg';
   }, []);
 
-  useEffect(() => {
-    if (showQR) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [showQR]);
+  useBodyScrollLock(showQR);
 
   return (
     <div className="space-y-12">
@@ -145,13 +137,9 @@ export default function AboutProfile() {
               href={link.url}
               layoutId={link.isQR ? 'wechat-qr' : undefined}
               target={link.isEmail ? '_self' : '_blank'}
+              aria-label={`访问 ${link.name}: ${link.desc}`}
               rel="noopener"
               onClick={(e) => {
-                if (link.isEmail) {
-                  e.preventDefault();
-                  const decodedEmail = base64Decode(EMAIL_ENCODED);
-                  window.location.href = `mailto:${decodedEmail}`;
-                }
                 if (link.isQR) {
                   e.preventDefault();
                   setShowQR(true);
@@ -191,13 +179,21 @@ export default function AboutProfile() {
               onClick={() => setShowQR(false)}
               className="fixed inset-0 bg-zinc-950/20 dark:bg-black/40 backdrop-blur-md"
             />
-            <motion.div layoutId="wechat-qr" className="relative w-full max-w-sm">
+            <motion.div
+              layoutId="wechat-qr"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="wechat-title"
+              className="relative w-full max-w-sm"
+            >
               <div className="bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden">
                 <div className="p-8 pt-10 flex flex-col items-center text-center">
                   <div className="size-16 rounded-2xl bg-[#07C160]/10 flex items-center justify-center mb-6">
                     <Icon icon="tabler:brand-wechat" className="text-4xl text-[#07C160]" />
                   </div>
-                  <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-2">微信公众号</h3>
+                  <h3 id="wechat-title" className="text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-2">
+                    微信公众号
+                  </h3>
                   <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-8">扫码关注 coderfee 获取最新动态</p>
                   <img
                     src="https://assets.coderfee.com/blog/wechat-qrcode.jpg"
