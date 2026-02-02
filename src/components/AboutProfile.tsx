@@ -229,7 +229,7 @@ export default function AboutProfile() {
               className="relative w-full max-w-sm"
             >
               <div className="bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden">
-                <div className="p-6 pt-8 flex flex-col">
+                <div className="p-6 pb-10 flex flex-col">
                   {activeModal === 'email' && (
                     <div className="text-center space-y-6">
                       <div className="flex flex-col items-center">
@@ -404,21 +404,21 @@ export default function AboutProfile() {
                             <div className="p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-700/50">
                               <div className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400 mb-0.5">
                                 <Icon icon="tabler:code" className="text-base" />
-                                <span className="text-[10px] font-bold uppercase tracking-widest">公开项目</span>
+                                <span className="text-[10px] font-bold uppercase tracking-widest">Repos</span>
                               </div>
                               <div className="text-xl font-bold text-zinc-900 dark:text-zinc-100">{ghStats.repos}</div>
                             </div>
                             <div className="p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-700/50">
                               <div className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400 mb-0.5">
                                 <Icon icon="tabler:star" className="text-base text-yellow-500" />
-                                <span className="text-[10px] font-bold uppercase tracking-widest">收获点赞</span>
+                                <span className="text-[10px] font-bold uppercase tracking-widest">Stars</span>
                               </div>
                               <div className="text-xl font-bold text-zinc-900 dark:text-zinc-100">{ghStats.stars}</div>
                             </div>
                             <div className="p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-700/50">
                               <div className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400 mb-0.5">
                                 <Icon icon="tabler:users" className="text-base text-blue-500" />
-                                <span className="text-[10px] font-bold uppercase tracking-widest">关注者</span>
+                                <span className="text-[10px] font-bold uppercase tracking-widest">Followers</span>
                               </div>
                               <div className="text-xl font-bold text-zinc-900 dark:text-zinc-100">
                                 {ghStats.followers}
@@ -427,7 +427,7 @@ export default function AboutProfile() {
                             <div className="p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-700/50">
                               <div className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400 mb-0.5">
                                 <Icon icon="tabler:calendar" className="text-base text-green-500" />
-                                <span className="text-[10px] font-bold uppercase tracking-widest">码龄</span>
+                                <span className="text-[10px] font-bold uppercase tracking-widest">Code Age</span>
                               </div>
                               <div className="text-xl font-bold text-zinc-900 dark:text-zinc-100">
                                 {new Date().getFullYear() - ghStats.since}+
