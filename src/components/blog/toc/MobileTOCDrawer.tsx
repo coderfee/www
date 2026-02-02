@@ -121,8 +121,6 @@ export default function MobileTOCDrawer({ isOpen, onClose, headings }: Props) {
                 <p className="text-center text-zinc-400 py-6 text-sm">暂无目录</p>
               )}
             </div>
-
-            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white/85 dark:bg-zinc-900/85 rotate-45 border-r border-b border-zinc-200/50 dark:border-white/10 -z-10" />
           </motion.div>
         </div>
       )}
