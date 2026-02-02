@@ -3,10 +3,6 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Heading } from './TableOfContents';
 
-/**
- * Custom hook to track the active heading based on scroll position.
- * It finds the last heading that is above a certain threshold (150px) from the top.
- */
 export function useScrollSpy(headings: Heading[]) {
   const [activeId, setActiveId] = useState<string>('');
   const isClickingRef = useRef(false);
