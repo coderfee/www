@@ -4,6 +4,8 @@ import { Icon } from '@iconify/react';
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
+import { useHaptic } from '@/lib/hooks';
+
 interface Props {
   title: string;
   description?: string;
@@ -17,6 +19,7 @@ export default function PostBottomBar({ title, description, url, hasComments = t
   const [isVisible, setIsVisible] = useState(true);
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
   const { scrollY } = useScroll();
+  const { vibrate } = useHaptic();
 
   const buttonMinWidth = 'min-w-20';
 
@@ -35,31 +38,31 @@ export default function PostBottomBar({ title, description, url, hasComments = t
   }, []);
 
   const handleBack = () => {
-    if ('vibrate' in navigator) navigator.vibrate(10);
+    vibrate('light');
     history.back();
   };
 
   const handleScrollToComments = () => {
-    if ('vibrate' in navigator) navigator.vibrate(10);
+    vibrate('light');
     document.getElementById('comments')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const _handleLike = () => {
-    if ('vibrate' in navigator) navigator.vibrate(10);
+    vibrate('light');
     const key = `liked:${window.location.pathname}`;
     const nextLiked = !_isLiked;
     setIsLiked(nextLiked);
 
     if (nextLiked) {
       localStorage.setItem(key, 'true');
-      if ('vibrate' in navigator) navigator.vibrate([50, 50, 50]);
+      vibrate('success');
     } else {
       localStorage.removeItem(key);
     }
   };
 
   const handleShare = async () => {
-    if ('vibrate' in navigator) navigator.vibrate(10);
+    vibrate('light');
     const shareUrl = url || window.location.href;
     const shareTextContent = description || '';
 
@@ -73,6 +76,7 @@ export default function PostBottomBar({ title, description, url, hasComments = t
       } else {
         await navigator.clipboard.writeText(shareUrl);
         setShareText('已复制');
+        vibrate('success');
         setTimeout(() => {
           setShareText('分享');
         }, 2000);

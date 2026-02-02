@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { EMAIL_ENCODED } from '@/consts';
 import { type GitHubStats, getGitHubStats } from '@/lib/github';
 import { base64Decode } from '@/lib/helper';
-import { useBodyScrollLock } from '@/lib/hooks';
+import { useBodyScrollLock, useHaptic } from '@/lib/hooks';
 
 type ModalType = 'none' | 'wechat' | 'github' | 'email' | 'rss' | 'sitemap';
 
@@ -102,6 +102,7 @@ export default function AboutProfile() {
   const [activeModal, setActiveModal] = useState<ModalType>('none');
   const [ghStats, setGhStats] = useState<GitHubStats | null>(null);
   const [copiedType, setCopiedType] = useState<'none' | 'email' | 'rss'>('none');
+  const { vibrate } = useHaptic();
 
   useEffect(() => {
     const img = new Image();
@@ -114,10 +115,14 @@ export default function AboutProfile() {
   const copyToClipboard = (text: string, type: 'email' | 'rss') => {
     navigator.clipboard.writeText(text);
     setCopiedType(type);
+    vibrate('success');
     setTimeout(() => setCopiedType('none'), 2000);
   };
 
-  const closeModal = () => setActiveModal('none');
+  const closeModal = () => {
+    vibrate('light');
+    setActiveModal('none');
+  };
 
   return (
     <div className="space-y-12">
@@ -169,6 +174,7 @@ export default function AboutProfile() {
               aria-label={`访问 ${link.name}: ${link.desc}`}
               rel="noopener"
               onClick={(e) => {
+                vibrate('light');
                 if (link.isQR) {
                   e.preventDefault();
                   setActiveModal('wechat');
@@ -229,7 +235,7 @@ export default function AboutProfile() {
               className="relative w-full max-w-sm"
             >
               <div className="bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden">
-                <div className="p-6 pb-10 flex flex-col">
+                <div className="p-6 pt-8 flex flex-col">
                   {activeModal === 'email' && (
                     <div className="text-center space-y-6">
                       <div className="flex flex-col items-center">
@@ -277,6 +283,7 @@ export default function AboutProfile() {
                         </button>
                         <a
                           href={`mailto:${base64Decode(EMAIL_ENCODED)}`}
+                          onClick={() => vibrate('light')}
                           className="w-full py-3 bg-[#0078D4] hover:bg-[#006cbd] text-white rounded-2xl text-center font-bold transition-all shadow-lg flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98]"
                         >
                           <Icon icon="tabler:send" className="text-xl" />
@@ -360,8 +367,9 @@ export default function AboutProfile() {
                         <a
                           href="/rss.xml"
                           target="_blank"
-                          className="w-full py-3 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 rounded-2xl transition-all flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] font-bold"
                           rel="noopener"
+                          onClick={() => vibrate('light')}
+                          className="w-full py-3 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 rounded-2xl transition-all flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] font-bold"
                         >
                           <Icon icon="tabler:file-code" className="text-xl" />
                           直接查看 XML
@@ -395,7 +403,7 @@ export default function AboutProfile() {
                             <img src={ghStats.avatar} alt={ghStats.name} className="size-14 rounded-2xl shadow-lg" />
                             <div className="text-left">
                               <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-100">{ghStats.name}</h3>
-                              <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                              <p className="text-sm text-zinc-500 dark:text-zinc-400">
                                 加入 GitHub 已经 {new Date().getFullYear() - ghStats.since} 年啦
                               </p>
                             </div>
@@ -404,21 +412,21 @@ export default function AboutProfile() {
                             <div className="p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-700/50">
                               <div className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400 mb-0.5">
                                 <Icon icon="tabler:code" className="text-base" />
-                                <span className="text-[10px] font-bold uppercase tracking-widest">Repos</span>
+                                <span className="text-[10px] font-bold uppercase tracking-widest">公开项目</span>
                               </div>
                               <div className="text-xl font-bold text-zinc-900 dark:text-zinc-100">{ghStats.repos}</div>
                             </div>
                             <div className="p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-700/50">
                               <div className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400 mb-0.5">
                                 <Icon icon="tabler:star" className="text-base text-yellow-500" />
-                                <span className="text-[10px] font-bold uppercase tracking-widest">Stars</span>
+                                <span className="text-[10px] font-bold uppercase tracking-widest">收获点赞</span>
                               </div>
                               <div className="text-xl font-bold text-zinc-900 dark:text-zinc-100">{ghStats.stars}</div>
                             </div>
                             <div className="p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-700/50">
                               <div className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400 mb-0.5">
                                 <Icon icon="tabler:users" className="text-base text-blue-500" />
-                                <span className="text-[10px] font-bold uppercase tracking-widest">Followers</span>
+                                <span className="text-[10px] font-bold uppercase tracking-widest">关注者</span>
                               </div>
                               <div className="text-xl font-bold text-zinc-900 dark:text-zinc-100">
                                 {ghStats.followers}
@@ -427,7 +435,7 @@ export default function AboutProfile() {
                             <div className="p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-700/50">
                               <div className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400 mb-0.5">
                                 <Icon icon="tabler:calendar" className="text-base text-green-500" />
-                                <span className="text-[10px] font-bold uppercase tracking-widest">Code Age</span>
+                                <span className="text-[10px] font-bold uppercase tracking-widest">码龄</span>
                               </div>
                               <div className="text-xl font-bold text-zinc-900 dark:text-zinc-100">
                                 {new Date().getFullYear() - ghStats.since}+
@@ -438,6 +446,7 @@ export default function AboutProfile() {
                             href="https://github.com/coderfee"
                             target="_blank"
                             rel="noopener"
+                            onClick={() => vibrate('light')}
                             className="w-full py-3 bg-[#24292e] hover:bg-[#1b1f23] dark:bg-zinc-100 dark:hover:bg-white text-white dark:text-zinc-900 rounded-2xl text-center font-bold transition-all shadow-lg flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98]"
                           >
                             <Icon icon="tabler:brand-github" className="text-xl" />
@@ -495,8 +504,9 @@ export default function AboutProfile() {
                         <a
                           href="/sitemap-0.xml"
                           target="_blank"
-                          className="w-full py-3 bg-[#0D9488] hover:bg-[#0c7a70] text-white rounded-2xl text-center font-bold transition-all shadow-lg flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98]"
                           rel="noopener"
+                          onClick={() => vibrate('light')}
+                          className="w-full py-3 bg-[#0D9488] hover:bg-[#0c7a70] text-white rounded-2xl text-center font-bold transition-all shadow-lg flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98]"
                         >
                           <Icon icon="tabler:map-2" className="text-xl" />
                           查看完整地图
@@ -539,6 +549,7 @@ export default function AboutProfile() {
               variants={itemVariants}
               whileTap={{ scale: 0.98 }}
               whileHover={{ scale: 1.02 }}
+              onClick={() => vibrate('light')}
               className="flex items-center gap-3 p-3 rounded-2xl bg-zinc-50/50 dark:bg-zinc-900/30 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors group cursor-pointer"
             >
               <img

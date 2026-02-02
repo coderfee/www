@@ -4,6 +4,8 @@ import { Icon } from '@iconify/react';
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
+import { useHaptic } from '@/lib/hooks';
+
 const navItems = [
   { name: '首页', path: '/', icon: 'tabler:smart-home' },
   { name: '归档', path: '/archive', icon: 'tabler:archive' },
@@ -16,6 +18,7 @@ export default function BottomNavigation() {
   const [hoveredPath, setHoveredPath] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState(true);
   const { scrollY } = useScroll();
+  const { vibrate } = useHaptic();
 
   useEffect(() => {
     setActivePath(window.location.pathname);
@@ -31,7 +34,7 @@ export default function BottomNavigation() {
   });
 
   const handleClick = (path: string) => {
-    if ('vibrate' in navigator) navigator.vibrate(10);
+    vibrate('light');
     setActivePath(path);
     setTimeout(() => {
       window.location.href = path;

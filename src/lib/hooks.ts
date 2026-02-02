@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
+import { type HapticPatternKey, triggerHaptic } from './haptic';
 
 export function useBodyScrollLock(isLocked: boolean) {
   useEffect(() => {
@@ -11,4 +12,12 @@ export function useBodyScrollLock(isLocked: boolean) {
       document.body.style.overflow = '';
     };
   }, [isLocked]);
+}
+
+export function useHaptic() {
+  const vibrate = useCallback((pattern?: HapticPatternKey | number | number[]) => {
+    triggerHaptic(pattern);
+  }, []);
+
+  return { vibrate };
 }
