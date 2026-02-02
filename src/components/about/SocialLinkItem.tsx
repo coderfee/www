@@ -11,29 +11,19 @@ interface Props {
 export default function SocialLinkItem({ link, onClick }: Props) {
   const { vibrate } = useHaptic();
 
-  const layoutId = link.isQR
-    ? 'wechat-modal'
-    : link.isGitHub
-      ? 'github-modal'
-      : link.isEmail
-        ? 'email-modal'
-        : link.isRSS
-          ? 'rss-modal'
-          : link.isSitemap
-            ? 'sitemap-modal'
-            : undefined;
+  const layoutId = link.modalType ? `${link.modalType}-modal` : undefined;
 
   return (
     <motion.a
       href={link.url}
       layoutId={layoutId}
       transition={TRANSITION}
-      target={link.isEmail || link.isRSS || link.isSitemap ? '_self' : '_blank'}
+      target={link.modalType ? '_self' : '_blank'}
       aria-label={`访问 ${link.name}: ${link.desc}`}
       rel="noopener"
       onClick={(e) => {
         vibrate('light');
-        if (layoutId) {
+        if (link.modalType) {
           e.preventDefault();
           onClick();
         }

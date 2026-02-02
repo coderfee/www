@@ -4,7 +4,6 @@ import { EMAIL_ENCODED } from '@/consts';
 import { type GitHubStats, getGitHubStats } from '@/lib/github';
 import { base64Decode } from '@/lib/helper';
 import { useBodyScrollLock, useHaptic } from '@/lib/hooks';
-
 import FriendLinkItem from './about/FriendLinkItem';
 import EmailModal from './about/modals/EmailModal';
 import FriendModal from './about/modals/FriendModal';
@@ -25,7 +24,7 @@ const socialLinks: SocialLink[] = [
     color: 'text-[#181717] dark:text-zinc-100',
     bgColor: 'bg-[#181717]/[0.03] dark:bg-white/[0.05] hover:bg-[#181717]/[0.06] dark:hover:bg-white/[0.08]',
     desc: '我的开源项目',
-    isGitHub: true,
+    modalType: 'github',
   },
   {
     name: 'X',
@@ -39,10 +38,10 @@ const socialLinks: SocialLink[] = [
     name: 'Email',
     url: `mailto:${base64Decode(EMAIL_ENCODED)}`,
     icon: 'tabler:mail',
-    isEmail: true,
     color: 'text-[#0078D4]',
     bgColor: 'bg-[#0078D4]/[0.05] dark:bg-[#0078D4]/[0.1] hover:bg-[#0078D4]/[0.08] dark:hover:bg-[#0078D4]/[0.15]',
     desc: '保持联系',
+    modalType: 'email',
   },
   {
     name: '微信公众号',
@@ -51,25 +50,25 @@ const socialLinks: SocialLink[] = [
     color: 'text-[#07C160]',
     bgColor: 'bg-[#07C160]/[0.05] dark:bg-[#07C160]/[0.1] hover:bg-[#07C160]/[0.08] dark:hover:bg-[#07C160]/[0.15]',
     desc: '深度思考与分享',
-    isQR: true,
+    modalType: 'wechat',
   },
   {
     name: 'RSS',
     url: '/rss.xml',
     icon: 'tabler:rss',
-    isRSS: true,
     color: 'text-[#EE802F]',
     bgColor: 'bg-[#EE802F]/[0.05] dark:bg-[#EE802F]/[0.1] hover:bg-[#EE802F]/[0.08] dark:hover:bg-[#EE802F]/[0.15]',
     desc: '第一时间获取更新',
+    modalType: 'rss',
   },
   {
     name: '内容总览',
     url: '/sitemap-0.xml',
     icon: 'tabler:map-2',
-    isSitemap: true,
     color: 'text-[#0D9488]',
     bgColor: 'bg-[#0D9488]/[0.05] dark:bg-[#0D9488]/[0.1] hover:bg-[#0D9488]/[0.08] dark:hover:bg-[#0D9488]/[0.15]',
     desc: '看看我都写了些什么',
+    modalType: 'sitemap',
   },
 ];
 
@@ -131,24 +130,7 @@ export default function AboutProfile() {
           <ProfileCard onClick={() => setActiveModal('profile')} />
 
           {socialLinks.map((link) => (
-            <SocialLinkItem
-              key={link.name}
-              link={link}
-              onClick={() => {
-                const type = link.isQR
-                  ? 'wechat'
-                  : link.isGitHub
-                    ? 'github'
-                    : link.isEmail
-                      ? 'email'
-                      : link.isRSS
-                        ? 'rss'
-                        : link.isSitemap
-                          ? 'sitemap'
-                          : 'none';
-                setActiveModal(type as ModalType);
-              }}
-            />
+            <SocialLinkItem key={link.name} link={link} onClick={() => setActiveModal(link.modalType || 'none')} />
           ))}
         </div>
       </motion.section>

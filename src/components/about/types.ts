@@ -7,11 +7,7 @@ export interface SocialLink {
   color: string;
   bgColor: string;
   desc: string;
-  isGitHub?: boolean;
-  isEmail?: boolean;
-  isQR?: boolean;
-  isRSS?: boolean;
-  isSitemap?: boolean;
+  modalType?: ModalType;
 }
 
 export interface Friend {
