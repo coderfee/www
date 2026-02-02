@@ -1,56 +1,66 @@
 ---
 import { getCollection } from 'astro:content';
 import dayjs from 'dayjs';
-import IconArrowsRightLeft from '~icons/tabler/arrows-right-left';
+import IconArrowRight from '~icons/tabler/arrow-right';
+import IconLink from '~icons/tabler/link';
 
 interface Props {
   currentSlug: string;
   tags: string[];
+  limit?: number;
 }
 
-const { currentSlug, tags } = Astro.props;
+const { currentSlug, tags, limit = 3 } = Astro.props;
 
 const posts = await getCollection('blog');
 
-const relatedPosts = posts
+const scoredPosts = posts
   .filter(({ data: { draft = false } }) => !draft)
   .filter((post) => post.id !== currentSlug)
-  .filter((post) => {
+  .map((post) => {
     const postTags = post.data.tags || [];
-    return tags.some((tag) => postTags.includes(tag));
+    const matchCount = postTags.filter((tag) => tags.includes(tag)).length;
+    return { post, matchCount };
   })
+  .filter((item) => item.matchCount > 0)
   .sort((a, b) => {
-    const aMatchCount = (a.data.tags || []).filter((tag) => tags.includes(tag)).length;
-    const bMatchCount = (b.data.tags || []).filter((tag) => tags.includes(tag)).length;
-    if (aMatchCount === bMatchCount) {
-      return b.data.date.valueOf() - a.data.date.valueOf();
+    if (a.matchCount === b.matchCount) {
+      return b.post.data.date.valueOf() - a.post.data.date.valueOf();
     }
-    return bMatchCount - aMatchCount;
+    return b.matchCount - a.matchCount;
   })
-  .slice(0, 3);
+  .slice(0, limit);
 ---
 
-{relatedPosts.length > 0 && (
-  <div class="my-12">
+{scoredPosts.length > 0 && (
+  <aside class="my-12" aria-label="相关文章">
     <div class="flex items-center gap-2 mb-6">
-      <IconArrowsRightLeft class="text-zinc-400"></IconArrowsRightLeft>
+      <IconLink class="text-zinc-400" />
       <h2 class="text-lg font-medium text-zinc-700 dark:text-zinc-300">相关文章</h2>
     </div>
     
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-      {relatedPosts.map(post => (
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      {scoredPosts.map(({ post }) => (
         <a 
           href={`/blog/${post.id}`}
-          class="group relative rounded-lg bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 p-4 transition-all duration-200 hover:bg-zinc-100 dark:hover:bg-zinc-900 hover:border-zinc-300 dark:hover:border-zinc-700"
+          title={post.data.title}
+          class="group relative flex flex-col justify-between p-4 rounded-2xl bg-white/60 dark:bg-zinc-800/40 backdrop-blur-md border border-zinc-200/50 dark:border-white/10 shadow-[0_2px_8px_rgba(0,0,0,0.04)] dark:shadow-[0_2px_8px_rgba(0,0,0,0.2)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] hover:bg-white/80 dark:hover:bg-zinc-800/60 hover:shadow-[0_16px_24px_rgba(0,0,0,0.06)] dark:hover:shadow-[0_16px_24px_rgba(0,0,0,0.4)]"
         >
-          <h3 class="font-noto text-base text-zinc-800 dark:text-zinc-200 line-clamp-2 mb-2 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors">
-            {post.data.title}
-          </h3>
-          <time datetime={post.data.date.toISOString()} class="text-xs text-zinc-500 dark:text-zinc-400 tabular-nums">
-            {dayjs(post.data.date).format('YYYY年MM月DD日')}
-          </time>
+          <div>
+            <h3 class="font-noto font-medium text-base text-zinc-700 dark:text-zinc-200 line-clamp-2 mb-2 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors">
+              {post.data.title}
+            </h3>
+            <time datetime={post.data.date.toISOString()} class="text-xs text-zinc-400 dark:text-zinc-500 tabular-nums">
+              {dayjs(post.data.date).format('YYYY年MM月DD日')}
+            </time>
+          </div>
+          
+          <div class="mt-4 flex items-center justify-end text-xs font-medium text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors">
+            <span>阅读文章</span>
+            <IconArrowRight class="ml-1 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </div>
         </a>
       ))}
     </div>
-  </div>
+  </aside>
 )}

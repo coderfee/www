@@ -1,6 +1,7 @@
 ---
 import { type CollectionEntry, getCollection, render } from 'astro:content';
 import PostBottomBar from '@/components/blog/PostBottomBar.tsx';
+import PostComments from '@/components/blog/PostComments.astro';
 import PostHeader from '@/components/blog/PostHeader.astro';
 import PostLicense from '@/components/blog/PostLicense.astro';
 import PostNavigation from '@/components/blog/PostNavigation.astro';
@@ -9,7 +10,6 @@ import BaseLayout from '@/components/layouts/BaseLayout.astro';
 import ShareButton from '@/components/ShareButton.tsx';
 import { AUTHOR } from '@/consts';
 import IconArrowLeft from '~icons/tabler/arrow-left';
-import IconMessageCircle from '~icons/tabler/message-circle';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -94,6 +94,10 @@ const jsonLd = {
         <Content />
       </div>
 
+      <div class="mt-8">
+        <PostLicense />
+      </div>
+
       <ShareButton client:load title={title} description={tldr} />
 
       <div class="w-full my-10 border-t border-dashed border-zinc-200/30 dark:border-zinc-700/30"></div>
@@ -102,20 +106,7 @@ const jsonLd = {
 
       <PostRelatedPosts currentSlug={post.id} tags={tags} />
 
-      <div id="comments" class="comments-container mt-16">
-        <div class="comment-header flex items-center gap-2 mb-6">
-          <IconMessageCircle class="text-zinc-500 dark:text-zinc-400" />
-          <h2 class="text-xl font-semibold text-zinc-800 dark:text-zinc-200">评论</h2>
-        </div>
-
-        <div class="giscus-container">
-          <div class="giscus"></div>
-        </div>
-      </div>
-
-      <footer class="mt-16">
-        <PostLicense />
-      </footer>
+      <PostComments />
     </div>
   </article>
 
@@ -126,26 +117,6 @@ const jsonLd = {
     url={new URL(Astro.url.pathname, Astro.site).toString()}
   />
 </BaseLayout>
-
-<script
-  is:inline
-  src="https://giscus.app/client.js"
-  data-repo="coderfe/www"
-  data-repo-id="MDEwOlJlcG9zaXRvcnkxNjA5OTc3MTY="
-  data-category="Comments"
-  data-category-id="DIC_kwDOCZihVM4CoBlh"
-  data-mapping="pathname"
-  data-strict="0"
-  data-reactions-enabled="1"
-  data-emit-metadata="0"
-  data-input-position="top"
-  data-theme="preferred_color_scheme"
-  data-lang="zh-CN"
-  data-loading="lazy"
-  crossorigin="anonymous"
-  async
-  defer
-></script>
 
 <script defer async is:inline define:vars={{ slug: post.id, title, isDev: import.meta.env.DEV }}>
   const url = isDev ? 'http://localhost:3001/api/public/visit' : 'https://dash.coderfee.com/api/public/visit';
