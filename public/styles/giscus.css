@@ -1,7 +1,7 @@
 main {
-  --color-prettylights-syntax-comment: #71717a;
+  --color-prettylights-syntax-comment: #6e7781;
   --color-prettylights-syntax-constant: #0550ae;
-  --color-prettylights-syntax-entity: #6639ba;
+  --color-prettylights-syntax-entity: #8250df;
   --color-prettylights-syntax-storage-modifier-import: #24292f;
   --color-prettylights-syntax-entity-tag: #116329;
   --color-prettylights-syntax-keyword: #cf222e;
@@ -29,42 +29,39 @@ main {
   --color-prettylights-syntax-brackethighlighter-angle: #57606a;
   --color-prettylights-syntax-sublimelinter-gutter-mark: #8c959f;
   --color-prettylights-syntax-constant-other-reference-link: #0a3069;
-  
-  --color-btn-text: #27272a;
+  --color-btn-text: #18181b;
   --color-btn-bg: #f4f4f5;
-  --color-btn-border: rgba(27, 31, 36, 0.15);
-  --color-btn-shadow: 0 1px 0 rgba(27, 31, 36, 0.04);
-  --color-btn-inset-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  --color-btn-border: transparent;
+  --color-btn-shadow: 0 0 transparent;
+  --color-btn-inset-shadow: 0 0 transparent;
   --color-btn-hover-bg: #e4e4e7;
-  --color-btn-hover-border: rgba(27, 31, 36, 0.15);
+  --color-btn-hover-border: transparent;
   --color-btn-active-bg: #d4d4d8;
-  --color-btn-active-border: rgba(27, 31, 36, 0.15);
-  --color-btn-selected-bg: #d4d4d8;
+  --color-btn-active-border: transparent;
+  --color-btn-selected-bg: #e4e4e7;
   --color-btn-primary-text: #ffffff;
   --color-btn-primary-bg: #18181b;
-  --color-btn-primary-border: rgba(27, 31, 36, 0.15);
-  --color-btn-primary-shadow: 0 1px 0 rgba(27, 31, 36, 0.1);
-  --color-btn-primary-inset-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  --color-btn-primary-border: transparent;
+  --color-btn-primary-shadow: 0 0 transparent;
+  --color-btn-primary-inset-shadow: 0 0 transparent;
   --color-btn-primary-hover-bg: #27272a;
-  --color-btn-primary-hover-border: rgba(27, 31, 36, 0.15);
+  --color-btn-primary-hover-border: transparent;
   --color-btn-primary-selected-bg: #27272a;
-  --color-btn-primary-selected-shadow: inset 0 1px 0 rgba(0, 45, 17, 0.2);
+  --color-btn-primary-selected-shadow: 0 0 transparent;
   --color-btn-primary-disabled-text: rgba(255, 255, 255, 0.8);
-  --color-btn-primary-disabled-bg: #52525b;
-  --color-btn-primary-disabled-border: rgba(27, 31, 36, 0.15);
-  
-  --color-action-list-item-default-hover-bg: rgba(208, 215, 222, 0.32);
-  --color-action-list-item-inline-divider: rgba(208, 215, 222, 0.48);
-  --color-action-list-item-default-selected-bg: rgba(208, 215, 222, 0.48);
-  --color-action-list-item-default-selected-border: rgba(208, 215, 222, 0.48);
-  --color-action-list-item-danger-hover-bg: rgba(255, 235, 233, 0.64);
+  --color-btn-primary-disabled-bg: #71717a;
+  --color-btn-primary-disabled-border: transparent;
+  --color-action-list-item-default-hover-bg: rgba(244, 244, 245, 0.8);
+  --color-action-list-item-inline-divider: #e4e4e7;
+  --color-action-list-item-default-selected-bg: #e4e4e7;
+  --color-action-list-item-default-selected-border: transparent;
+  --color-action-list-item-danger-hover-bg: #ffebe9;
   --color-action-list-item-danger-active-bg: #ffebe9;
   --color-action-list-item-danger-hover-text: #cf222e;
-  
   --color-fg-default: #18181b;
-  --color-fg-muted: #52525b;
-  --color-fg-subtle: #71717a;
-  --color-canvas-default: #ffffff;
+  --color-fg-muted: #71717a;
+  --color-fg-subtle: #a1a1aa;
+  --color-canvas-default: transparent;
   --color-canvas-overlay: #ffffff;
   --color-canvas-inset: #fafafa;
   --color-canvas-subtle: #f4f4f5;
@@ -80,15 +77,12 @@ main {
   --color-danger-fg: #cf222e;
   --color-danger-muted: #ffebe9;
   --color-danger-subtle: #ffebe9;
-  --color-primer-shadow-inset: inset 0 1px 0 rgba(208, 215, 222, 0.2);
-  --color-primer-shadow-focus: 0 0 0 3px rgba(9, 105, 218, 0.3);
-  
+  --color-primer-shadow-inset: 0 0 transparent;
+  --color-primer-shadow-focus: 0 0 0 2px #e4e4e7;
   --color-scale-gray-1: #eaeef2;
   --color-scale-blue-1: #b6e3ff;
-  
-  /*! Extensions from @primer/css/alerts/flash.scss */
-  --color-social-reaction-bg-hover: var(--color-scale-gray-1);
-  --color-social-reaction-bg-reacted-hover: var(--color-scale-blue-1);
+  --color-social-reaction-bg-hover: #f4f4f5;
+  --color-social-reaction-bg-reacted-hover: #e4e4e7;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -123,44 +117,41 @@ main {
     --color-prettylights-syntax-brackethighlighter-angle: #8b949e;
     --color-prettylights-syntax-sublimelinter-gutter-mark: #484f58;
     --color-prettylights-syntax-constant-other-reference-link: #a5d6ff;
-    
     --color-btn-text: #e4e4e7;
     --color-btn-bg: #27272a;
-    --color-btn-border: rgba(240, 246, 252, 0.1);
+    --color-btn-border: transparent;
     --color-btn-shadow: 0 0 transparent;
     --color-btn-inset-shadow: 0 0 transparent;
     --color-btn-hover-bg: #3f3f46;
-    --color-btn-hover-border: #8b949e;
+    --color-btn-hover-border: transparent;
     --color-btn-active-bg: #52525b;
-    --color-btn-active-border: #6e7681;
+    --color-btn-active-border: transparent;
     --color-btn-selected-bg: #27272a;
     --color-btn-primary-text: #18181b;
     --color-btn-primary-bg: #f4f4f5;
-    --color-btn-primary-border: rgba(240, 246, 252, 0.1);
+    --color-btn-primary-border: transparent;
     --color-btn-primary-shadow: 0 0 transparent;
     --color-btn-primary-inset-shadow: 0 0 transparent;
     --color-btn-primary-hover-bg: #e4e4e7;
-    --color-btn-primary-hover-border: rgba(240, 246, 252, 0.1);
+    --color-btn-primary-hover-border: transparent;
     --color-btn-primary-selected-bg: #e4e4e7;
     --color-btn-primary-selected-shadow: 0 0 transparent;
-    --color-btn-primary-disabled-text: rgba(240, 246, 252, 0.5);
-    --color-btn-primary-disabled-bg: rgba(238, 238, 242, 0.6);
-    --color-btn-primary-disabled-border: rgba(240, 246, 252, 0.1);
-    
-    --color-action-list-item-default-hover-bg: rgba(177, 186, 196, 0.12);
-    --color-action-list-item-inline-divider: rgba(48, 54, 61, 0.48);
-    --color-action-list-item-default-selected-bg: rgba(177, 186, 196, 0.12);
-    --color-action-list-item-default-selected-border: rgba(140, 149, 159, 0.24);
+    --color-btn-primary-disabled-text: rgba(24, 24, 27, 0.5);
+    --color-btn-primary-disabled-bg: #3f3f46;
+    --color-btn-primary-disabled-border: transparent;
+    --color-action-list-item-default-hover-bg: rgba(39, 39, 42, 0.8);
+    --color-action-list-item-inline-divider: #3f3f46;
+    --color-action-list-item-default-selected-bg: #27272a;
+    --color-action-list-item-default-selected-border: transparent;
     --color-action-list-item-danger-hover-bg: rgba(248, 81, 73, 0.16);
     --color-action-list-item-danger-active-bg: rgba(248, 81, 73, 0.24);
     --color-action-list-item-danger-hover-text: #ff7b72;
-    
     --color-fg-default: #f4f4f5;
     --color-fg-muted: #a1a1aa;
     --color-fg-subtle: #71717a;
-    --color-canvas-default: #18181b;
+    --color-canvas-default: transparent;
     --color-canvas-overlay: #18181b;
-    --color-canvas-inset: #27272a;
+    --color-canvas-inset: #000000;
     --color-canvas-subtle: #27272a;
     --color-border-default: #3f3f46;
     --color-border-muted: #27272a;
@@ -175,13 +166,14 @@ main {
     --color-danger-muted: #6e7681;
     --color-danger-subtle: #6e7681;
     --color-primer-shadow-inset: 0 0 transparent;
-    --color-primer-shadow-focus: 0 0 0 3px #1f6feb;
-    
+    --color-primer-shadow-focus: 0 0 0 2px #3f3f46;
     --color-scale-gray-7: #21262d;
     --color-scale-blue-8: #0c2d6b;
-    
-    /*! Extensions from @primer/css/alerts/flash.scss */
-    --color-social-reaction-bg-hover: var(--color-scale-gray-7);
-    --color-social-reaction-bg-reacted-hover: var(--color-scale-blue-8);
+    --color-social-reaction-bg-hover: #27272a;
+    --color-social-reaction-bg-reacted-hover: #3f3f46;
   }
+}
+
+.form-control, .gsc-comment-box-textarea {
+  border-radius: 0.75rem;
 }

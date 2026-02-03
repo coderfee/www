@@ -39,7 +39,6 @@ const scoredPosts = posts
     </div>
     
     <div class="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-20">
-      <!-- Primary Feature Post -->
       {scoredPosts[0] && (
         <a 
           href={`/blog/${scoredPosts[0].post.id}`}
@@ -62,7 +61,6 @@ const scoredPosts = posts
         </a>
       )}
 
-      <!-- Secondary Stacked Posts -->
       <div class="flex flex-col gap-16 md:gap-20 md:col-span-1">
         {scoredPosts.slice(1).map((item, index) => (
           <a 
