@@ -86,8 +86,21 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.05,
     },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: 'spring',
+      damping: 30,
+      stiffness: 200,
+    } as const,
   },
 };
 
@@ -127,10 +140,14 @@ export default function AboutProfile() {
         className="max-w-xs md:max-w-2xl mx-auto"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <ProfileCard onClick={() => setActiveModal('profile')} />
+          <motion.div variants={itemVariants} className="md:col-span-2">
+            <ProfileCard onClick={() => setActiveModal('profile')} />
+          </motion.div>
 
           {socialLinks.map((link) => (
-            <SocialLinkItem key={link.name} link={link} onClick={() => setActiveModal(link.modalType || 'none')} />
+            <motion.div key={link.name} variants={itemVariants}>
+              <SocialLinkItem link={link} onClick={() => setActiveModal(link.modalType || 'none')} />
+            </motion.div>
           ))}
         </div>
       </motion.section>
@@ -167,17 +184,23 @@ export default function AboutProfile() {
         animate="visible"
         className="max-w-xs md:max-w-2xl mx-auto"
       >
-        <h2 className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-4 px-1">志同道合</h2>
+        <motion.h2
+          variants={itemVariants}
+          className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-4 px-1"
+        >
+          志同道合
+        </motion.h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {friends.map((friend) => (
-            <FriendLinkItem
-              key={friend.name}
-              friend={friend}
-              onClick={() => {
-                setSelectedFriend(friend);
-                setActiveModal('friend');
-              }}
-            />
+            <motion.div key={friend.name} variants={itemVariants}>
+              <FriendLinkItem
+                friend={friend}
+                onClick={() => {
+                  setSelectedFriend(friend);
+                  setActiveModal('friend');
+                }}
+              />
+            </motion.div>
           ))}
         </div>
       </motion.section>
