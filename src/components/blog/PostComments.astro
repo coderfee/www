@@ -1,28 +1,82 @@
 ---
-const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : '';
-const theme = import.meta.env.PROD && site ? `${site}/styles/giscus.css` : 'preferred_color_scheme';
 ---
 
-<section id="comments" class="mt-16 animate-in fade-in slide-in-from-bottom-8 duration-1000" aria-label="评论区">
+<section
+  id="comments"
+  class="mt-24 py-12 border-t border-dashed border-zinc-200/30 dark:border-zinc-700/30"
+  aria-label="评论区"
+>
   <div class="giscus"></div>
 </section>
 
-<script
-  is:inline
-  src="https://giscus.app/client.js"
-  data-repo="coderfee/www"
-  data-repo-id="MDEwOlJlcG9zaXRvcnkxNjA5OTc3MTY="
-  data-category="Comments"
-  data-category-id="DIC_kwDOCZihVM4CoBlh"
-  data-mapping="pathname"
-  data-strict="0"
-  data-reactions-enabled="1"
-  data-emit-metadata="0"
-  data-input-position="top"
-  data-theme={theme}
-  data-lang="zh-CN"
-  data-loading="lazy"
-  crossorigin="anonymous"
-  async
-  defer
-></script>
+<script is:inline>
+  function getGiscusTheme() {
+    return 'https://coderfee.com/styles/giscus.css';
+  }
+
+  function setGiscusTheme() {
+    const theme = getGiscusTheme();
+
+    const iframe = document.querySelector('iframe.giscus-frame');
+
+    if (iframe) {
+      iframe.contentWindow.postMessage(
+        { giscus: { setConfig: { theme } } },
+
+        'https://giscus.app',
+      );
+    }
+  }
+
+  function initGiscus() {
+    const script = document.createElement('script');
+
+    script.src = 'https://giscus.app/client.js';
+
+    script.setAttribute('data-repo', 'coderfee/www');
+
+    script.setAttribute('data-repo-id', 'MDEwOlJlcG9zaXRvcnkxNjA5OTc3MTY=');
+
+    script.setAttribute('data-category', 'Comments');
+
+    script.setAttribute('data-category-id', 'DIC_kwDOCZihVM4CoBlh');
+
+    script.setAttribute('data-mapping', 'pathname');
+
+    script.setAttribute('data-strict', '0');
+
+    script.setAttribute('data-reactions-enabled', '1');
+
+    script.setAttribute('data-emit-metadata', '0');
+
+    script.setAttribute('data-input-position', 'top');
+
+    script.setAttribute('data-theme', getGiscusTheme());
+
+    script.setAttribute('data-lang', 'zh-CN');
+
+    script.setAttribute('data-loading', 'lazy');
+
+    script.setAttribute('crossorigin', 'anonymous');
+
+    script.async = true;
+
+    document.head.appendChild(script);
+  }
+
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.attributeName === 'class') {
+        setGiscusTheme();
+      }
+    });
+  });
+
+  observer.observe(document.documentElement, { attributes: true });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGiscus);
+  } else {
+    initGiscus();
+  }
+</script>
