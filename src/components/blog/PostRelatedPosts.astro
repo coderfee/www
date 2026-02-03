@@ -33,34 +33,52 @@ const scoredPosts = posts
 ---
 
 {scoredPosts.length > 0 && (
-  <aside class="my-12" aria-label="相关文章">
-    <div class="flex items-center gap-2 mb-6">
-      <IconLink class="text-zinc-400" />
-      <h2 class="text-lg font-medium text-zinc-700 dark:text-zinc-300">相关文章</h2>
+  <aside class="my-32" aria-label="相关文章">
+    <div class="mb-12">
+      <h2 class="text-xs font-mono text-zinc-400 uppercase tracking-[0.3em]">Related Reads</h2>
     </div>
     
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-      {scoredPosts.map(({ post }) => (
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-20">
+      <!-- Primary Feature Post -->
+      {scoredPosts[0] && (
         <a 
-          href={`/blog/${post.id}`}
-          title={post.data.title}
-          class="group relative flex flex-col justify-between p-4 rounded-2xl bg-white/60 dark:bg-zinc-800/40 backdrop-blur-md border border-zinc-200/50 dark:border-white/10 shadow-[0_2px_8px_rgba(0,0,0,0.04)] dark:shadow-[0_2px_8px_rgba(0,0,0,0.2)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] hover:bg-white/80 dark:hover:bg-zinc-800/60 hover:shadow-[0_16px_24px_rgba(0,0,0,0.06)] dark:hover:shadow-[0_16px_24px_rgba(0,0,0,0.4)]"
+          href={`/blog/${scoredPosts[0].post.id}`}
+          class="md:col-span-2 group relative overflow-hidden transition-all"
         >
-          <div>
-            <h3 class="font-noto font-medium text-base text-zinc-700 dark:text-zinc-200 line-clamp-2 mb-2 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors">
-              {post.data.title}
-            </h3>
-            <time datetime={post.data.date.toISOString()} class="text-xs text-zinc-400 dark:text-zinc-500 tabular-nums">
-              {dayjs(post.data.date).format('YYYY年MM月DD日')}
-            </time>
-          </div>
+          <span class="absolute -top-4 -right-4 text-[12rem] leading-none font-bold text-zinc-100 dark:text-zinc-900/40 -z-10 select-none transition-transform duration-700 group-hover:scale-110 group-hover:-rotate-3">01</span>
           
-          <div class="mt-4 flex items-center justify-end text-xs font-medium text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors">
-            <span>阅读文章</span>
-            <IconArrowRight class="ml-1 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+          <div class="flex flex-col h-full">
+            <time datetime={scoredPosts[0].post.data.date.toISOString()} class="text-xs font-mono text-zinc-400 mb-6 block tracking-widest">
+              {dayjs(scoredPosts[0].post.data.date).format('YYYY / MM / DD')}
+            </time>
+            <h3 class="font-noto text-3xl md:text-4xl font-bold text-zinc-900 dark:text-zinc-100 mb-8 leading-tight group-hover:text-zinc-600 dark:group-hover:text-zinc-400 transition-colors">
+              {scoredPosts[0].post.data.title}
+            </h3>
+             <div class="flex items-center text-xs font-bold uppercase tracking-[0.2em] text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors mt-auto">
+              <span>Read Post</span>
+              <IconArrowRight class="ml-3 w-4 h-4 transition-transform duration-500 group-hover:translate-x-3" />
+            </div>
           </div>
         </a>
-      ))}
+      )}
+
+      <!-- Secondary Stacked Posts -->
+      <div class="flex flex-col gap-16 md:gap-20 md:col-span-1">
+        {scoredPosts.slice(1).map((item, index) => (
+          <a 
+            href={`/blog/${item.post.id}`}
+            class="group transition-all"
+          >
+            <div class="flex items-center justify-between mb-6">
+              <span class="text-xs font-mono text-zinc-400 tracking-tighter">/ 0{index + 2}</span>
+              <IconArrowRight class="w-4 h-4 text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 -rotate-45 group-hover:rotate-0 transition-all duration-500" />
+            </div>
+            <h3 class="font-noto text-xl font-bold text-zinc-800 dark:text-zinc-200 leading-snug group-hover:text-zinc-600 dark:group-hover:text-zinc-400 transition-colors line-clamp-3">
+              {item.post.data.title}
+            </h3>
+          </a>
+        ))}
+      </div>
     </div>
   </aside>
 )}

@@ -1,13 +1,9 @@
 ---
-import IconMessageCircle from '~icons/tabler/message-circle';
+const site = Astro.site ? Astro.site.toString().replace(/\/$/, '') : '';
+const theme = import.meta.env.PROD && site ? `${site}/styles/giscus.css` : 'preferred_color_scheme';
 ---
 
 <section id="comments" class="mt-16 animate-in fade-in slide-in-from-bottom-8 duration-1000" aria-label="评论区">
-  <div class="flex items-center gap-2 mb-6">
-    <IconMessageCircle class="text-zinc-400" />
-    <h2 class="text-lg font-medium text-zinc-700 dark:text-zinc-300">评论</h2>
-  </div>
-
   <div class="giscus"></div>
 </section>
 
@@ -23,7 +19,7 @@ import IconMessageCircle from '~icons/tabler/message-circle';
   data-reactions-enabled="1"
   data-emit-metadata="0"
   data-input-position="top"
-  data-theme="preferred_color_scheme"
+  data-theme={theme}
   data-lang="zh-CN"
   data-loading="lazy"
   crossorigin="anonymous"
