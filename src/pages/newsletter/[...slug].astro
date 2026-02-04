@@ -3,8 +3,8 @@ import { getCollection, render } from 'astro:content';
 import dayjs from 'dayjs';
 import PostBottomBar from '@/components/blog/PostBottomBar.tsx';
 import { TOCDesktop } from '@/components/blog/toc/TableOfContents.tsx';
-import NewsletterLayout from '@/components/layouts/NewsletterLayout.astro';
 import NewsletterSidebar from '@/components/newsletter/NewsletterSidebar.tsx';
+import NewsletterLayout from '@/layouts/NewsletterLayout.astro';
 import IconCalendar from '~icons/tabler/calendar';
 
 export async function getStaticPaths() {

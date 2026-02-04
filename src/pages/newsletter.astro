@@ -1,9 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import dayjs from 'dayjs';
-import BaseLayout from '../components/layouts/BaseLayout.astro';
-
-import NewsletterGrid from '../components/NewsletterGrid.tsx';
+import NewsletterGrid from '@/components/newsletter/NewsletterGrid.tsx';
+import BaseLayout from '@/layouts/BaseLayout.astro';
 
 const collection = await getCollection('newsletter', ({ data }) => !data.draft);
 const newsletters = collection.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
