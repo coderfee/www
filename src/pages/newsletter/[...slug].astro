@@ -4,8 +4,7 @@ import dayjs from 'dayjs';
 import PostBottomBar from '@/components/blog/PostBottomBar.tsx';
 import { TOCDesktop } from '@/components/blog/toc/TableOfContents.tsx';
 import NewsletterLayout from '@/components/layouts/NewsletterLayout.astro';
-import IconArrowLeft from '~icons/tabler/arrow-left';
-import IconBook from '~icons/tabler/book';
+import NewsletterSidebar from '@/components/newsletter/NewsletterSidebar.tsx';
 import IconCalendar from '~icons/tabler/calendar';
 
 export async function getStaticPaths() {
@@ -25,64 +24,99 @@ export async function getStaticPaths() {
 const { newsletter } = Astro.props;
 const { Content, headings } = await render(newsletter);
 const { title, description, cover, date, issue } = newsletter.data;
-const formattedDate = dayjs(date).format('YYYY年MM月DD日');
 ---
 
 <NewsletterLayout title={title} description={description} cover={cover} showBottomNavigation={false}>
   <TOCDesktop client:media="(min-width: 1280px)" headings={headings} hasComments={false} />
 
-  <div class="max-w-3xl mx-auto px-4 py-12 animate-in fade-in slide-in-from-bottom-8 duration-700">
-    <button
-      onclick="history.back()"
-      class="hidden md:inline-flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors mb-8 group cursor-pointer"
-    >
-      <IconArrowLeft class="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
-      <span>返回</span>
-    </button>
+  <div class="max-w-7xl mx-auto px-4 py-8 lg:py-20 relative">
+    <div class="flex flex-col lg:flex-row gap-10 items-start">
+      <NewsletterSidebar client:load issue={issue} />
 
-    <div class="mb-6">
-      <div class="flex items-center text-xs space-x-4 text-zinc-500 dark:text-zinc-400 mb-3">
-        <div class="flex items-center gap-1">
-          <IconCalendar aria-hidden="true" />
-          <time datetime={date.toISOString()}>{formattedDate}</time>
-        </div>
-        <div class="flex items-center gap-1">
-          <IconBook aria-hidden="true" />
-          <span>第 {issue} 期</span>
+      <div class="flex-1 w-full">
+        <header class="mb-12 lg:mb-16 animate-in fade-in slide-in-from-bottom-10 duration-1000 ease-out">
+          <div class="flex items-center gap-4 text-[10px] uppercase tracking-[0.3em] text-zinc-400 dark:text-zinc-500 mb-6 font-bold">
+            <IconCalendar class="w-3.5 h-3.5" aria-hidden="true" />
+            <time datetime={date.toISOString()}>{dayjs(date).format('MMMM DD, YYYY')}</time>
+            <span class="lg:hidden w-1 h-1 rounded-full bg-zinc-200 dark:bg-zinc-800"></span>
+            <span class="lg:hidden">Issue #{issue}</span>
+          </div>
+
+          <h1 class="font-noto text-4xl md:text-5xl lg:text-7xl font-black mb-8 lg:mb-12 text-zinc-900 dark:text-zinc-100 leading-[1.15] lg:leading-[1.1] tracking-tight max-w-5xl">
+            {title}
+          </h1>
+
+          {/* Mobile Editorial Lead - Only visible on small screens */}
+          {description && (
+            <div class="lg:hidden relative mb-10 py-6 border-y border-zinc-100 dark:border-zinc-800/50">
+              <p class="font-noto text-lg leading-relaxed text-zinc-600 dark:text-zinc-300 font-medium italic">
+                “{description}”
+              </p>
+            </div>
+          )}
+
+          {cover && (
+            <div class="group relative mt-8 lg:mt-12 mb-12 lg:mb-20">
+              <div class="relative overflow-hidden rounded-[2rem] lg:rounded-[3.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.12)] lg:shadow-[0_48px_96px_-24px_rgba(0,0,0,0.12)] dark:shadow-[0_48px_96px_-24px_rgba(0,0,0,0.4)] transition-all duration-700 hover:shadow-[0_64px_112px_-20px_rgba(0,0,0,0.18)] dark:hover:shadow-[0_64px_112px_-20px_rgba(0,0,0,0.6)]">
+                <img 
+                  src={cover as string} 
+                  alt={title} 
+                  class="w-full h-auto aspect-[16/10] lg:aspect-[21/9] object-cover transition-transform duration-[2000ms] group-hover:scale-[1.03]" 
+                />
+                <div class="absolute inset-0 ring-1 ring-inset ring-black/5 dark:ring-white/10 rounded-[2rem] lg:rounded-[3.5rem]"></div>
+              </div>
+            </div>
+          )}
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+          <article
+            class="lg:col-span-8 prose prose-zinc dark:prose-invert max-w-none
+              prose-headings:font-bold prose-headings:tracking-tight prose-p:leading-loose
+              prose-headings:text-zinc-900 dark:prose-headings:text-zinc-100
+              prose-p:text-zinc-600 dark:prose-p:text-zinc-300
+              prose-img:rounded-2xl lg:prose-img:rounded-[2rem] prose-img:mx-auto text-justify prose-headings:font-noto break-all
+              prose-strong:text-zinc-900 dark:prose-strong:text-zinc-100 font-medium
+              prose-a:text-zinc-900 dark:prose-a:text-zinc-100 prose-a:underline-offset-4 prose-a:decoration-zinc-300 dark:prose-a:decoration-zinc-700 hover:prose-a:decoration-zinc-900 dark:hover:prose-a:decoration-zinc-100 transition-colors"
+            style="text-justify: inter-character;"
+          >
+            <Content />
+          </article>
+
+          <aside class="hidden lg:block lg:col-span-4">
+             <div class="sticky top-28 space-y-10 border-l border-zinc-100 dark:border-zinc-800/50 pl-10">
+                {description && (
+                  <div class="space-y-4">
+                    <span class="text-[10px] font-bold tracking-[0.3em] text-zinc-300 dark:text-zinc-700 uppercase">
+                      Editorial Lead
+                    </span>
+                    <p class="font-noto text-lg leading-relaxed text-zinc-600 dark:text-zinc-300 font-medium italic">
+                      “{description}”
+                    </p>
+                  </div>
+                )}
+
+                <div class="flex flex-col gap-2">
+                   <span class="text-[10px] font-bold tracking-[0.3em] text-zinc-300 dark:text-zinc-700 uppercase">
+                     Issue
+                   </span>
+                   <span class="font-noto text-5xl font-black text-zinc-100 dark:text-zinc-800/40">
+                     #{issue.toString().padStart(2, '0')}
+                   </span>
+                </div>
+                
+                <div class="h-px w-8 bg-zinc-200 dark:bg-zinc-800"></div>
+                
+                <div class="flex flex-col gap-4 opacity-60">
+                   <p class="text-[11px] leading-relaxed text-zinc-400 dark:text-zinc-500 font-medium uppercase tracking-wider">
+                     A weekly curation of technology, life and thoughts by coderfee.
+                   </p>
+                </div>
+             </div>
+          </aside>
         </div>
       </div>
-
-      <h1
-        class="font-noto text-3xl md:text-4xl font-bold mb-6 bg-clip-text text-transparent bg-linear-to-r from-zinc-800 via-zinc-900 to-zinc-800 dark:from-white dark:via-zinc-100 dark:to-white leading-[1.15]"
-      >
-        {title}
-      </h1>
-
-      {description && (
-        <div class="relative my-6">
-          <p class="font-noto text-base italic leading-relaxed tracking-wide text-zinc-600 dark:text-zinc-300">
-            {description}
-          </p>
-        </div>
-      )}
-
-      {cover && (
-        <div class="mb-8">
-          <img src={cover as string} alt={title} class="object-cover rounded-xl mb-4" />
-        </div>
-      )}
     </div>
-
-    <article
-      class="prose prose-zinc dark:prose-invert max-w-none
-        prose-headings:font-bold prose-headings:tracking-tight prose-p:leading-loose
-        prose-headings:text-zinc-900 dark:prose-headings:text-zinc-100
-        prose-p:text-zinc-600 dark:prose-p:text-zinc-300
-        prose-img:rounded-xl prose-img:mx-auto text-justify prose-headings:font-noto break-all"
-      style="text-justify: inter-character;"
-    >
-      <Content />
-    </article>
   </div>
   <PostBottomBar
     client:load
