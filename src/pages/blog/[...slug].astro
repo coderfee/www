@@ -122,8 +122,8 @@ const jsonLd = {
   />
 </BaseLayout>
 
-<script defer async is:inline type="module">
-  import { reportView } from '/src/lib/store/view-counts.ts';
+<script>
+  import { reportView } from '@/lib/store/view-counts';
 
   const slug = document.querySelector('meta[name="slug"]')?.getAttribute('content');
   const title = document.title;
