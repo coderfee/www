@@ -15,7 +15,7 @@ if (!prev && !next) return null;
 const hasBoth = prev && next;
 ---
 
-<nav class={`my-24 relative ${hasBoth ? 'grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24' : 'flex flex-col'}`}>
+<nav class={`my-12 relative ${hasBoth ? 'grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24' : 'flex flex-col'}`}>
   {prev && (
     <a
       href={`/blog/${prev.id}`}
