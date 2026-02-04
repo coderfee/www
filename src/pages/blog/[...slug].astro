@@ -68,7 +68,9 @@ const jsonLd = {
   <Fragment slot="head">
     {date && <meta name="date" content={date.toLocaleDateString()} />}
     {keywords && <meta name="keywords" content={keywords.join(", ")} />}
-    <meta name="slug" content={post.id}>
+    <script is:inline define:vars={{ slug: post.id, title }}>
+      window.__PAGE_DATA__ = { slug, title };
+    </script>
     <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </Fragment>
 
@@ -125,8 +127,7 @@ const jsonLd = {
 <script>
   import { reportView } from '@/lib/store/view-counts';
 
-  const slug = document.querySelector('meta[name="slug"]')?.getAttribute('content');
-  const title = document.title;
+  const { slug, title } = (window as any).__PAGE_DATA__ || {};
 
   if (slug) {
     reportView(slug, title);

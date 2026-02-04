@@ -29,6 +29,10 @@ const { title, description, cover, date, issue } = newsletter.data;
 <NewsletterLayout title={title} description={description} cover={cover} showBottomNavigation={false}>
   <TOCDesktop client:media="(min-width: 1280px)" headings={headings} hasComments={false} />
 
+  <script is:inline define:vars={{ slug: `newsletter/${newsletter.id}`, title }}>
+    window.__PAGE_DATA__ = { slug, title };
+  </script>
+
   <div class="max-w-7xl mx-auto px-4 py-8 lg:py-20 relative">
     <div class="flex flex-col lg:flex-row gap-10 items-start">
       <NewsletterSidebar client:load issue={issue} />
@@ -132,3 +136,13 @@ const { title, description, cover, date, issue } = newsletter.data;
     url={new URL(Astro.url.pathname, Astro.site).toString()}
   />
 </NewsletterLayout>
+
+<script>
+  import { reportView } from '@/lib/store/view-counts';
+
+  const { slug, title } = (window as any).__PAGE_DATA__ || {};
+
+  if (slug) {
+    reportView(slug, title);
+  }
+</script>
