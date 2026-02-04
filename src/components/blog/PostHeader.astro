@@ -1,16 +1,18 @@
 ---
 import dayjs from 'dayjs';
+import ViewCount from '@/components/ViewCount.tsx';
 import IconCalendar from '~icons/tabler/calendar';
 import IconHash from '~icons/tabler/hash';
 
 interface Props {
+  slug: string;
   title: string;
   date?: Date;
   tags?: string[];
   tldr?: string;
 }
 
-const { title, date, tags = [], tldr } = Astro.props;
+const { slug, title, date, tags = [], tldr } = Astro.props;
 ---
 
 <div>
@@ -23,6 +25,8 @@ const { title, date, tags = [], tldr } = Astro.props;
         <span>{dayjs(date).format("YYYY年MM月DD日")}</span>
       </time>
     )}
+
+    <ViewCount client:only="react" slug={slug} />
 
     {tags.length > 0 && (
       <div class="flex flex-wrap gap-2">
