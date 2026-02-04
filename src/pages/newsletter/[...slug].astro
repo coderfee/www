@@ -35,14 +35,18 @@ const { title, description, cover, date, issue } = newsletter.data;
 
       <div class="flex-1 w-full">
         <header class="mb-12 lg:mb-16 animate-in fade-in slide-in-from-bottom-10 duration-1000 ease-out">
-          <div class="flex items-center gap-4 text-[10px] uppercase tracking-[0.3em] text-zinc-400 dark:text-zinc-500 mb-6 font-bold">
+          <div
+            class="flex items-center gap-4 text-[10px] uppercase tracking-[0.3em] text-zinc-400 dark:text-zinc-500 mb-6 font-bold"
+          >
             <IconCalendar class="w-3.5 h-3.5" aria-hidden="true" />
             <time datetime={date.toISOString()}>{dayjs(date).format('MMMM DD, YYYY')}</time>
             <span class="lg:hidden w-1 h-1 rounded-full bg-zinc-200 dark:bg-zinc-800"></span>
             <span class="lg:hidden">Issue #{issue}</span>
           </div>
 
-          <h1 class="font-noto text-4xl md:text-5xl lg:text-7xl font-black mb-8 lg:mb-12 text-zinc-900 dark:text-zinc-100 leading-[1.15] lg:leading-[1.1] tracking-tight max-w-5xl">
+          <h1
+            class="font-noto text-4xl md:text-5xl lg:text-7xl font-black mb-8 lg:mb-12 text-zinc-900 dark:text-zinc-100 leading-[1.15] lg:leading-[1.1] tracking-tight max-w-5xl"
+          >
             {title}
           </h1>
 
@@ -83,8 +87,8 @@ const { title, description, cover, date, issue } = newsletter.data;
           </article>
 
           <aside class="hidden lg:block lg:col-span-4">
-             <div class="sticky top-28 space-y-10 border-l border-zinc-100 dark:border-zinc-800/50 pl-10">
-                {description && (
+            <div class="sticky top-28 space-y-10 border-l border-zinc-100 dark:border-zinc-800/50 pl-10">
+              {description && (
                   <div class="space-y-4">
                     <span class="text-[10px] font-bold tracking-[0.3em] text-zinc-300 dark:text-zinc-700 uppercase">
                       Editorial Lead
@@ -95,23 +99,25 @@ const { title, description, cover, date, issue } = newsletter.data;
                   </div>
                 )}
 
-                <div class="flex flex-col gap-2">
-                   <span class="text-[10px] font-bold tracking-[0.3em] text-zinc-300 dark:text-zinc-700 uppercase">
-                     Issue
-                   </span>
-                   <span class="font-noto text-5xl font-black text-zinc-100 dark:text-zinc-800/40">
-                     #{issue.toString().padStart(2, '0')}
-                   </span>
-                </div>
+              <div class="flex flex-col gap-2">
+                <span class="text-[10px] font-bold tracking-[0.3em] text-zinc-300 dark:text-zinc-700 uppercase">
+                  Issue
+                </span>
+                <span class="font-noto text-5xl font-black text-zinc-100 dark:text-zinc-800/40">
+                  #{issue.toString().padStart(2, '0')}
+                </span>
+              </div>
 
-                <div class="h-px w-8 bg-zinc-200 dark:bg-zinc-800"></div>
+              <div class="h-px w-8 bg-zinc-200 dark:bg-zinc-800"></div>
 
-                <div class="flex flex-col gap-4 opacity-60">
-                   <p class="text-[11px] leading-relaxed text-zinc-400 dark:text-zinc-500 font-medium uppercase tracking-wider">
-                     A weekly curation of technology, life and thoughts by coderfee.
-                   </p>
-                </div>
-             </div>
+              <div class="flex flex-col gap-4 opacity-60">
+                <p
+                  class="text-[11px] leading-relaxed text-zinc-400 dark:text-zinc-500 font-medium uppercase tracking-wider"
+                >
+                  A weekly curation of technology, life and thoughts by coderfee.
+                </p>
+              </div>
+            </div>
           </aside>
         </div>
       </div>
