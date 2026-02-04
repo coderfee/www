@@ -47,7 +47,7 @@ export default function TopNavigation({ showNavigation = true }: Props) {
       initial={{ y: 0 }}
       animate={{ y: isVisible ? 0 : -100 }}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
-      className="sticky top-0 w-full z-50 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md pt-[env(safe-area-inset-top)] flex-none border-b border-zinc-200/50 dark:border-zinc-800/50"
+      className="sticky top-0 w-full z-50 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md pt-[env(safe-area-inset-top)] flex-none border-b border-zinc-200/50 dark:border-zinc-800/50 transform-gpu"
     >
       <nav className="max-w-4xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
         <motion.a
