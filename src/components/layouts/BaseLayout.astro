@@ -28,6 +28,11 @@ const {
 
     {showBottomNavigation && <BottomNavigation client:load />}
 
+    <script>
+      import { fetchViewCounts } from '@/lib/store/view-counts';
+      fetchViewCounts();
+    </script>
+
     <script async defer is:inline>
       function initCopyButtons() {
         const buttons = document.querySelectorAll('.copy-code');

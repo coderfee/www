@@ -68,6 +68,7 @@ const jsonLd = {
   <Fragment slot="head">
     {date && <meta name="date" content={date.toLocaleDateString()} />}
     {keywords && <meta name="keywords" content={keywords.join(", ")} />}
+    <meta name="slug" content={post.id} />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </Fragment>
 
@@ -81,7 +82,7 @@ const jsonLd = {
         <span>返回</span>
       </button>
 
-      <PostHeader title={title} date={date} tags={tags} tldr={tldr} />
+      <PostHeader slug={post.id} title={title} date={date} tags={tags} tldr={tldr} />
 
       <div class="w-full my-10 border-t border-dashed border-zinc-200/30 dark:border-zinc-700/30"></div>
 
@@ -121,13 +122,13 @@ const jsonLd = {
   />
 </BaseLayout>
 
-<script defer async is:inline define:vars={{ slug: post.id, title, isDev: import.meta.env.DEV }}>
-  const url = isDev ? 'http://localhost:3001/api/public/visit' : 'https://dash.coderfee.com/api/public/visit';
+<script defer async is:inline type="module">
+  import { reportView } from '/src/lib/store/view-counts.ts';
 
-  fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ slug, title }),
-    keepalive: true,
-  }).catch(() => {});
+  const slug = document.querySelector('meta[name="slug"]')?.getAttribute('content');
+  const title = document.title;
+
+  if (slug) {
+    reportView(slug, title);
+  }
 </script>
