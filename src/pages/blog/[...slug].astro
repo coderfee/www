@@ -68,7 +68,7 @@ const jsonLd = {
   <Fragment slot="head">
     {date && <meta name="date" content={date.toLocaleDateString()} />}
     {keywords && <meta name="keywords" content={keywords.join(", ")} />}
-    <meta name="slug" content={post.id} />
+    <meta name="slug" content={post.id}>
     <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </Fragment>
 
