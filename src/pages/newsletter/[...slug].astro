@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import dayjs from 'dayjs';
 import PostBottomBar from '@/components/blog/PostBottomBar.tsx';
+import { TOCDesktop } from '@/components/blog/toc/TableOfContents.tsx';
 import NewsletterLayout from '@/components/layouts/NewsletterLayout.astro';
 import IconArrowLeft from '~icons/tabler/arrow-left';
 import IconBook from '~icons/tabler/book';
@@ -22,12 +23,14 @@ export async function getStaticPaths() {
 }
 
 const { newsletter } = Astro.props;
-const { Content } = await render(newsletter);
+const { Content, headings } = await render(newsletter);
 const { title, description, cover, date, issue } = newsletter.data;
 const formattedDate = dayjs(date).format('YYYY年MM月DD日');
 ---
 
 <NewsletterLayout title={title} description={description} cover={cover} showBottomNavigation={false}>
+  <TOCDesktop client:media="(min-width: 1280px)" headings={headings} hasComments={false} />
+
   <div class="max-w-3xl mx-auto px-4 py-12 animate-in fade-in slide-in-from-bottom-8 duration-700">
     <button
       onclick="history.back()"
@@ -86,6 +89,7 @@ const formattedDate = dayjs(date).format('YYYY年MM月DD日');
     title={title}
     description={description}
     hasComments={false}
+    headings={headings}
     url={new URL(Astro.url.pathname, Astro.site).toString()}
   />
 </NewsletterLayout>

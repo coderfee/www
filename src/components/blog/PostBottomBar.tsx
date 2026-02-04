@@ -95,7 +95,12 @@ export default function PostBottomBar({ title, description, url, hasComments = t
 
   return (
     <>
-      <TOCMobile isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} headings={headings} />
+      <TOCMobile
+        isOpen={isDrawerOpen}
+        onClose={() => setIsDrawerOpen(false)}
+        headings={headings}
+        hasComments={hasComments}
+      />
       <div
         id="post-bottom-nav"
         className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none w-max flex items-center justify-center"

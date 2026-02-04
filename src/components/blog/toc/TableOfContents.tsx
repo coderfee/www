@@ -16,9 +16,10 @@ export type Heading = {
 
 interface DesktopProps {
   headings: Heading[];
+  hasComments?: boolean;
 }
 
-export function TOCDesktop({ headings }: DesktopProps) {
+export function TOCDesktop({ headings, hasComments = true }: DesktopProps) {
   const tocHeadings = useMemo(() => headings.filter((h) => h.depth > 1 && h.depth <= 3), [headings]);
   const { activeId, setActiveId, isClickingRef } = useScrollSpy(tocHeadings);
   const { scrollTo, scrollToTop, scrollToComments } = useTOCActions(setActiveId, isClickingRef);
@@ -97,29 +98,31 @@ export function TOCDesktop({ headings }: DesktopProps) {
         );
       })}
 
-      <button
-        type="button"
-        onClick={(e) => {
-          e.preventDefault();
-          scrollToComments();
-        }}
-        className="group relative flex items-center justify-end py-1 px-2"
-        aria-label="跳转到评论"
-      >
-        <span
-          className="absolute right-full mr-3 whitespace-nowrap text-xs font-medium px-2 py-1 rounded bg-zinc-900/90 text-white dark:bg-zinc-100 dark:text-zinc-900 shadow-sm
-            transition-all duration-300 origin-right pointer-events-none opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100"
+      {hasComments && (
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToComments();
+          }}
+          className="group relative flex items-center justify-end py-1 px-2"
+          aria-label="跳转到评论"
         >
-          跳转到评论
-        </span>
+          <span
+            className="absolute right-full mr-3 whitespace-nowrap text-xs font-medium px-2 py-1 rounded bg-zinc-900/90 text-white dark:bg-zinc-100 dark:text-zinc-900 shadow-sm
+              transition-all duration-300 origin-right pointer-events-none opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100"
+          >
+            跳转到评论
+          </span>
 
-        <div className="w-5 flex items-center justify-center">
-          <Icon
-            icon="tabler:message-2"
-            className="w-4 h-4 text-zinc-400 dark:text-zinc-500 transition-colors duration-300 group-hover:text-zinc-900 dark:group-hover:text-zinc-100"
-          />
-        </div>
-      </button>
+          <div className="w-5 flex items-center justify-center">
+            <Icon
+              icon="tabler:message-2"
+              className="w-4 h-4 text-zinc-400 dark:text-zinc-500 transition-colors duration-300 group-hover:text-zinc-900 dark:group-hover:text-zinc-100"
+            />
+          </div>
+        </button>
+      )}
     </nav>
   );
 }
@@ -128,9 +131,10 @@ interface MobileProps {
   isOpen: boolean;
   onClose: () => void;
   headings: Heading[];
+  hasComments?: boolean;
 }
 
-export function TOCMobile({ isOpen, onClose, headings }: MobileProps) {
+export function TOCMobile({ isOpen, onClose, headings, hasComments = true }: MobileProps) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -191,19 +195,21 @@ export function TOCMobile({ isOpen, onClose, headings }: MobileProps) {
                 <span>回到顶部</span>
               </button>
 
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToComments();
-                }}
-                className="w-full text-left flex items-center gap-3 px-5 py-3 text-[14px] font-medium text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors active:bg-zinc-100 dark:active:bg-white/5 active:scale-[0.98]"
-              >
-                <div className="w-5 flex items-center justify-center">
-                  <Icon icon="tabler:message-2" className="w-4 h-4 text-zinc-500 dark:text-zinc-400" />
-                </div>
-                <span>跳转到评论</span>
-              </button>
+              {hasComments && (
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToComments();
+                  }}
+                  className="w-full text-left flex items-center gap-3 px-5 py-3 text-[14px] font-medium text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors active:bg-zinc-100 dark:active:bg-white/5 active:scale-[0.98]"
+                >
+                  <div className="w-5 flex items-center justify-center">
+                    <Icon icon="tabler:message-2" className="w-4 h-4 text-zinc-500 dark:text-zinc-400" />
+                  </div>
+                  <span>跳转到评论</span>
+                </button>
+              )}
 
               <div className="h-px bg-zinc-100/50 dark:bg-white/5 mx-5 my-1" />
 
