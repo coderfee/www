@@ -7,26 +7,38 @@ export interface GitHubStats {
   name: string;
 }
 
+interface GitHubUser {
+  public_repos: number;
+  followers: number;
+  created_at: string;
+  avatar_url: string;
+  name: string | null;
+}
+
 export async function getGitHubStats(username: string): Promise<GitHubStats | null> {
   const CACHE_KEY = `gh_stats_v2_${username}`;
   const CACHE_TTL = 24 * 60 * 60 * 1000;
 
-  try {
-    const cached = localStorage.getItem(CACHE_KEY);
-    if (cached) {
-      const { data, timestamp } = JSON.parse(cached);
-      if (Date.now() - timestamp < CACHE_TTL) {
-        return data;
+  const isBrowser = typeof window !== 'undefined';
+
+  if (isBrowser) {
+    try {
+      const cached = localStorage.getItem(CACHE_KEY);
+      if (cached) {
+        const { data, timestamp } = JSON.parse(cached);
+        if (Date.now() - timestamp < CACHE_TTL) {
+          return data;
+        }
       }
+    } catch (e) {
+      console.error('Failed to read GitHub stats cache', e);
     }
-  } catch (e) {
-    console.error('Failed to read GitHub stats cache', e);
   }
 
   try {
     const userRes = await fetch(`https://api.github.com/users/${username}`);
     if (!userRes.ok) throw new Error('Failed to fetch user data');
-    const user = await userRes.json();
+    const user = (await userRes.json()) as GitHubUser;
 
     const reposRes = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`);
     if (!reposRes.ok) throw new Error('Failed to fetch repos data');
@@ -43,7 +55,9 @@ export async function getGitHubStats(username: string): Promise<GitHubStats | nu
       name: user.name || username,
     };
 
-    localStorage.setItem(CACHE_KEY, JSON.stringify({ data: stats, timestamp: Date.now() }));
+    if (isBrowser) {
+      localStorage.setItem(CACHE_KEY, JSON.stringify({ data: stats, timestamp: Date.now() }));
+    }
     return stats;
   } catch (error) {
     console.error('GitHub API Error:', error);
