@@ -1,6 +1,6 @@
 ---
-import '@/styles/style.css';
 import { SITE_DESCRIPTION, SITE_TITLE } from '@/consts';
+import stylesUrl from '@/styles/style.css?url';
 
 export interface Props {
   title: string;
@@ -12,6 +12,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title = SITE_TITLE, description = SITE_DESCRIPTION, ogImage = '/placeholder-social.jpg' } = Astro.props;
 ---
+
+<link rel="preload" href={stylesUrl} as="style">
+<link rel="stylesheet" href={stylesUrl}>
 
 <title>{title} - coderfee's blog</title>
 

@@ -3,6 +3,8 @@
   "compilerOptions": {
     "strictNullChecks": true,
     "jsx": "react-jsx",
+    "target": "esnext",
+    "lib": ["ESNext"],
     "jsxImportSource": "react",
     "baseUrl": ".",
     "paths": {
