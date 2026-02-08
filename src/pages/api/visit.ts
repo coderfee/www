@@ -1,6 +1,6 @@
 import { env } from 'cloudflare:workers';
 
-export async function GET({ params }) {
+export async function GET() {
   const res = await fetch('https://api.coderfee.com/api/blog/views', {
     headers: {
       Authorization: `Bearer ${env.BEARER_TOKEN}`,
