@@ -4,7 +4,7 @@ export const viewCounts = persistentMap<Record<string, string>>('view-counts:', 
 
 const getApiUrl = () => {
   const isDev = import.meta.env.DEV;
-  return isDev ? 'http://localhost:3000/api/public/visit' : 'https://dash.coderfee.com/api/public/visit';
+  return isDev ? 'http://localhost:8787/api/blog/views' : 'https://api.coderfee.com/api/blog/views';
 };
 
 export async function fetchViewCounts() {
@@ -13,7 +13,10 @@ export async function fetchViewCounts() {
     const res = await fetch(url);
     if (!res.ok) throw new Error('Failed to fetch view counts');
 
-    const data = (await res.json()) as Record<string, number>;
+    const result = (await res.json()) as { success: boolean; data: Record<string, number> };
+    if (!result.success) throw new Error('API response unsuccessful');
+
+    const data = result.data;
     const currentCounts = viewCounts.get();
     const formattedData: Record<string, string> = { ...currentCounts };
 
