@@ -22,9 +22,7 @@ const {
   <body class="bg-white dark:bg-zinc-900 dark:text-white min-h-dvh flex flex-col overflow-x-hidden">
     {showTopNavigation && <TopNavigation client:load showNavigation={showTopNavigation} />}
 
-    <main class:list={["flex-1 w-full"]}>
-      <slot />
-    </main>
+    <main class:list={["flex-1 w-full"]}><slot /></main>
 
     {showBottomNavigation && <BottomNavigation client:load />}
 

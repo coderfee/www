@@ -10,10 +10,6 @@ const { title, description, cover, showBottomNavigation } = Astro.props;
   ogImage={cover}
   showBottomNavigation={showBottomNavigation}
 >
-  <Fragment slot="head">
-    <meta name="keywords" content={`明日周刊，${title}`}>
-  </Fragment>
-  <div class="relative">
-    <slot />
-  </div>
+  <Fragment slot="head"> <meta name="keywords" content={`明日周刊，${title}`}> </Fragment>
+  <div class="relative"><slot /></div>
 </BaseLayout>
