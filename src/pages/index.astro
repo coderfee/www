@@ -40,10 +40,10 @@ const pageDescription =
     </main>
 
     {posts.length > 0 && (
-      <div class="my-12 hidden md:flex justify-center">
+      <div class="my-12 flex justify-center">
         <a
           href="/archive"
-          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full
+          class="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full
                  bg-white dark:bg-zinc-900
                  border border-zinc-200 dark:border-zinc-700
                  hover:bg-zinc-100 dark:hover:bg-zinc-800
@@ -53,6 +53,10 @@ const pageDescription =
           <span class="text-sm font-medium">查看所有文章</span>
           <IconArrowRight class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
         </a>
+
+        <p class="md:hidden text-sm text-zinc-500 dark:text-zinc-400">
+          更多文章，请在归档中查看
+        </p>
       </div>
     )}
   </div>
