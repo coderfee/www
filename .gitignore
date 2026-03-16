@@ -27,3 +27,4 @@ pnpm-debug.log*
 .claude
 
 src/content/newsletter
+.alma-snapshots
