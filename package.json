@@ -25,7 +25,7 @@
     "@tailwindcss/vite": "^4.2.1",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "astro": "6.0.5",
+    "astro": "6.0.8",
     "framer-motion": "^12.37.0",
     "nanostores": "^1.2.0",
     "react": "^19.2.4",
