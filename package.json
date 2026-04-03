@@ -44,7 +44,7 @@
     "@biomejs/biome": "^2.4.7",
     "@commitlint/cli": "^20.5.0",
     "@commitlint/config-conventional": "^20.5.0",
-    "@iconify-json/tabler": "^1.2.31",
+    "@iconify-json/tabler": "^1.2.32",
     "@iconify/react": "^6.0.2",
     "@tailwindcss/typography": "^0.5.19",
     "@types/node": "latest",
