@@ -27,7 +27,7 @@
     "@types/react-dom": "^19.2.3",
     "astro": "6.1.5",
     "framer-motion": "^12.38.0",
-    "nanostores": "^1.2.0",
+    "nanostores": "^1.3.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "rehype-autolink-headings": "^7.1.0",
