@@ -2,17 +2,17 @@
   "name": "www",
   "type": "module",
   "version": "3.0.0",
-  "packageManager": "bun@1.3.13",
+  "packageManager": "pnpm@10.33.4",
   "engines": {
     "node": ">=24.13.0"
   },
   "scripts": {
-    "dev": "bun run sync-r2 && astro dev",
-    "build": "bun run sync-r2 && astro build",
-    "lint": "bun biome check ./src && astro check --minimumSeverity warning",
-    "lint:fix": "bun biome check ./src --write",
-    "upgrade": "bun update && bunx @astrojs/upgrade",
-    "sync-r2": "bun scripts/sync-r2.mjs"
+    "dev": "pnpm run sync-r2 && astro dev",
+    "build": "pnpm run sync-r2 && astro build",
+    "lint": "pnpm biome check ./src && astro check --minimumSeverity warning",
+    "lint:fix": "pnpm biome check ./src --write",
+    "upgrade": "pnpm update && pnpmx @astrojs/upgrade",
+    "sync-r2": "node scripts/sync-r2.mjs"
   },
   "dependencies": {
     "@astrojs/check": "0.9.9",
@@ -22,7 +22,7 @@
     "@astrojs/sitemap": "3.7.2",
     "@nanostores/persistent": "^1.3.4",
     "@nanostores/react": "^1.1.0",
-    "@tailwindcss/vite": "^4.2.4",
+    "@tailwindcss/vite": "^4.3.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "astro": "6.3.1",
@@ -35,16 +35,16 @@
     "rehype-mdx-code-props": "^3.0.1",
     "rehype-slug": "^6.0.0",
     "remark-toc": "^9.0.0",
-    "tailwindcss": "^4.2.4",
+    "tailwindcss": "^4.3.0",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^6.0.3"
   },
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.1045.0",
-    "@biomejs/biome": "^2.4.14",
-    "@commitlint/cli": "^20.5.3",
-    "@commitlint/config-conventional": "^20.5.3",
-    "@iconify-json/tabler": "^1.2.34",
+    "@biomejs/biome": "^2.4.15",
+    "@commitlint/cli": "^21.0.0",
+    "@commitlint/config-conventional": "^21.0.0",
+    "@iconify-json/tabler": "^1.2.35",
     "@iconify/react": "^6.0.2",
     "@tailwindcss/typography": "^0.5.19",
     "@types/node": "latest",
