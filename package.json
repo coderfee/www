@@ -1,6 +1,13 @@
 {
   "name": "www",
   "type": "module",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "lefthook",
+      "sharp"
+    ]
+  },
   "version": "3.0.0",
   "packageManager": "pnpm@11.0.8",
   "engines": {
