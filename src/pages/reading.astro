@@ -85,9 +85,16 @@ const description = '微信读书统计与近期阅读记录';
       <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">阅读</h1>
-          <p class="mt-3 text-sm sm:text-base text-zinc-500 dark:text-zinc-400">
-            今年读了 {annually?.totalReadTimeText ?? '0分钟'}，共 {annually?.readDays ?? 0} 天。
-          </p>
+          <div class="mt-3">
+            {availableModes.map((mode) => (
+              <p
+                data-reading-summary={mode.key}
+                class:list={['text-sm sm:text-base text-zinc-500 dark:text-zinc-400', mode.key !== defaultMode?.key && 'hidden']}
+              >
+                {mode.label}读了 {mode.summary.totalReadTimeText ?? '0分钟'}，共 {mode.summary.readDays ?? 0} 天。
+              </p>
+            ))}
+          </div>
         </div>
         {updatedText && <p class="text-xs text-zinc-400 dark:text-zinc-500">更新于 {updatedText}</p>}
       </div>
@@ -157,7 +164,7 @@ const description = '微信读书统计与近期阅读记录';
                   )}
 
                   {primaryBook.intro && (
-                    <p class="mt-5 hidden sm:block sm:line-clamp-5 text-sm leading-7 text-zinc-500 dark:text-zinc-400">
+                    <p class="mt-5 line-clamp-3 sm:line-clamp-5 text-sm leading-7 text-zinc-500 dark:text-zinc-400">
                       {primaryBook.intro.trim()}
                     </p>
                   )}
@@ -261,6 +268,7 @@ const description = '微信读书统计与近期阅读记录';
 <script>
   const tabs = document.querySelectorAll<HTMLButtonElement>('[data-reading-tab]');
   const panels = document.querySelectorAll<HTMLElement>('[data-reading-panel]');
+  const summaries = document.querySelectorAll<HTMLElement>('[data-reading-summary]');
 
   tabs.forEach((tab) => {
     tab.addEventListener('click', () => {
@@ -272,6 +280,10 @@ const description = '微信读书统计与近期阅读记录';
 
       panels.forEach((panel) => {
         panel.classList.toggle('hidden', panel.dataset.readingPanel !== mode);
+      });
+
+      summaries.forEach((summary) => {
+        summary.classList.toggle('hidden', summary.dataset.readingSummary !== mode);
       });
     });
   });
