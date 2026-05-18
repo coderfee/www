@@ -44,7 +44,7 @@
     "@aws-sdk/client-s3": "^3.1045.0",
     "@biomejs/biome": "^2.4.15",
     "@commitlint/cli": "^21.0.0",
-    "@commitlint/config-conventional": "^21.0.0",
+    "@commitlint/config-conventional": "^21.0.1",
     "@iconify-json/tabler": "^1.2.35",
     "@iconify/react": "^6.0.2",
     "@tailwindcss/typography": "^0.5.19",
