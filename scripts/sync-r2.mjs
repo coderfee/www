@@ -24,7 +24,7 @@ const COLLECTIONS = [
   },
   {
     name: 'blog',
-    prefix: '04 Blog/',
+    prefix: '02 Writing/03 Blog/',
     cacheDir: '/tmp/blog-posts',
     outputDir: path.join(process.cwd(), 'src/content/blog'),
     transform: transformBlog,
@@ -154,6 +154,7 @@ async function transformNewsletter(collection) {
 async function transformBlog(collection) {
   const sourceFiles = (await getLocalFiles(collection.cacheDir)).filter((file) => /\.(md|mdx)$/.test(file));
   const outputFiles = [];
+  const seenSlugs = new Set();
 
   for (const file of sourceFiles) {
     const article = parseFrontmatter(await fs.readFile(file, 'utf8'));
@@ -166,6 +167,12 @@ async function transformBlog(collection) {
       throw new Error(`Blog source is missing slug: ${file}`);
     }
 
+    if (seenSlugs.has(article.data.slug)) {
+      throw new Error(`Duplicate blog slug "${article.data.slug}" in ${file}`);
+    }
+
+    seenSlugs.add(article.data.slug);
+
     const data = normalizeBlogFrontmatter(article.data);
 
     outputFiles.push({
@@ -174,7 +181,7 @@ async function transformBlog(collection) {
     });
   }
 
-  return outputFiles;
+  return outputFiles.sort((a, b) => a.path.localeCompare(b.path));
 }
 
 function flattenSlug(slug) {
