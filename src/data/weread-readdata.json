@@ -1,29 +1,29 @@
 {
-  "updatedAt": "2026-05-17T08:52:51.729Z",
+  "updatedAt": "2026-05-31T10:54:26.452Z",
   "data": {
     "weekly": {
       "mode": "weekly",
-      "baseTime": 1778428800,
+      "baseTime": 1779638400,
       "readDays": 4,
-      "totalReadTimeSeconds": 13562,
-      "totalReadTimeText": "3小时46分钟",
-      "dayAverageReadTimeSeconds": 1937,
-      "dayAverageReadTimeText": "32分钟",
-      "comparePercent": 102.36,
+      "totalReadTimeSeconds": 12019,
+      "totalReadTimeText": "3小时20分钟",
+      "dayAverageReadTimeSeconds": 3004,
+      "dayAverageReadTimeText": "50分钟",
+      "comparePercent": 9.66,
       "topBooks": [
         {
-          "id": "26357939",
-          "title": "你在天堂里遇见的五个人（米奇·阿尔博姆作品）",
-          "author": "米奇·阿尔博姆",
-          "cover": "https://cdn.weread.qq.com/weread/cover/82/YueWen_26357939/t6_YueWen_26357939.jpg",
-          "intro": "    有些故事注定要从结局讲起的——其实，所有的结尾又何尝不是开端呢？《相约星期二》随着莫里的阖然长逝而告终。六年后，在米奇·阿尔博姆的全新力作中，纪实换成了虚构；死亡从结局演变成了开端；主角还是一位老人——不是洞明世事的教授，而是到死都对自己的一生心存惶惑的退伍老兵，游乐场维修工。他叫爱迪，八十三岁生日那天，为了拯救在突发事故中身处险境的女孩而殒命游乐场。醒来时，爱迪已身处天堂，这才发现：那里并不是牧歌萦绕的伊甸园，而是地球上生活片断的交叠重现。五个被爱迪或铭记或忽略或遗忘的人，轮流登场，引领他寻找逝去的时光，追问人生的谜底。无形间，天地间仿佛有一条巨大的锁链，爱迪只是其中的一环。《你在天堂里遇见的五个人》让每一个读完这本书的人都成了锁链中的一环，分享着同一个秘密：天堂里，会有五个人，为了五段不同的记忆，等候你长大、相爱、衰老、死亡，等待着解答你最后的疑问。因为，我们每一个人都会影响到另一个人，世界上各式各样的故事，说到底都是同一个。\r\n",
-          "category": "精品小说-治愈小说",
-          "publisher": "上海译文出版社",
-          "rating": 814,
-          "ratingCount": 1263,
+          "id": "923996",
+          "title": "文心",
+          "author": "夏丏尊 叶圣陶",
+          "cover": "https://wfqqreader-1252317822.image.myqcloud.com/cover/996/923996/t6_923996.jpg",
+          "intro": "知识是枯燥的，故事是有趣的。把知识巧妙地融进有趣的故事，读故事时习得许多知识，无疑是最理想的学习方法。《文心》就是这一成功方法的典范。夏丏尊、叶圣陶二位先生凭多年教学经验，用《文心》里的32个故事，讲解了“关于国文的全体知识”，平易近人，寓教于乐，多年来受到无尽读者的赞誉。本次《文心》再版，加入吴浩然先生民国风插图，形象再现民国学生的学习和生活。现代读者不仅能借《文心》轻松愉快地学习读与写的知识，且能“身临其境”地了解民国。",
+          "category": "文学-经典作品",
+          "publisher": "开明出版社",
+          "rating": 916,
+          "ratingCount": 3843,
           "type": "book",
-          "readTimeSeconds": 13507,
-          "readTimeText": "3小时45分钟",
+          "readTimeSeconds": 12019,
+          "readTimeText": "3小时20分钟",
           "tags": ["单日阅读最久"]
         }
       ],
@@ -36,12 +36,12 @@
     "monthly": {
       "mode": "monthly",
       "baseTime": 1777564800,
-      "readDays": 11,
-      "totalReadTimeSeconds": 23240,
-      "totalReadTimeText": "6小时27分钟",
-      "dayAverageReadTimeSeconds": 1367,
-      "dayAverageReadTimeText": "22分钟",
-      "comparePercent": -4.11,
+      "readDays": 22,
+      "totalReadTimeSeconds": 54439,
+      "totalReadTimeText": "15小时7分钟",
+      "dayAverageReadTimeSeconds": 1944,
+      "dayAverageReadTimeText": "32分钟",
+      "comparePercent": 36.37,
       "topBooks": [
         {
           "id": "26357939",
@@ -54,8 +54,8 @@
           "rating": 814,
           "ratingCount": 1263,
           "type": "book",
-          "readTimeSeconds": 14162,
-          "readTimeText": "3小时56分钟",
+          "readTimeSeconds": 21119,
+          "readTimeText": "5小时51分钟",
           "tags": ["单日阅读最久"]
         },
         {
@@ -66,11 +66,41 @@
           "intro": "静观自我关怀是全球第一个专门用于增强个人自我关怀能力的培训课程。它可以帮助人们在面对逆境时，静观自己的挣扎，用关怀、和善与支持的方式回应自己，培养自己的内在力量。本书是静观自我关怀的两位创始人——克里斯汀•奈夫和克里斯托弗•杰默的集大成之作。他们将静观自我关怀课程中的大部门内容以简单实用的形式呈现在本书中。全书分为24章，包含23项正式练习、22项非正式练习和6项冥想练习。本书的理念和实践主要都建立在科研的基础上（书后注释给出了详细的相关研究），同样也建立在两位创始人教授千万人如何自我关怀的教学经验之上。书中章节之间有着严谨的逻辑关系，后面讲述的技能都建立在前面技能的基础之上。每章都会提供相关主题的基本信息，然后是练习部分，让你对前面所讲的概念有一些亲身体验。本书文字优美、温暖又深入人心，适合对如何关怀自己和他人感兴趣的大众读者，也适合身处压力具有焦虑和抑郁倾向的读者，还可作为心理学爱好者及心理咨询师的参考用书。",
           "category": "个人成长-人生哲学",
           "publisher": "机械工业出版社",
-          "rating": 876,
-          "ratingCount": 254,
+          "rating": 877,
+          "ratingCount": 257,
           "type": "book",
-          "readTimeSeconds": 8368,
-          "readTimeText": "2小时19分钟",
+          "readTimeSeconds": 14044,
+          "readTimeText": "3小时54分钟",
+          "tags": []
+        },
+        {
+          "id": "923996",
+          "title": "文心",
+          "author": "夏丏尊 叶圣陶",
+          "cover": "https://wfqqreader-1252317822.image.myqcloud.com/cover/996/923996/t6_923996.jpg",
+          "intro": "知识是枯燥的，故事是有趣的。把知识巧妙地融进有趣的故事，读故事时习得许多知识，无疑是最理想的学习方法。《文心》就是这一成功方法的典范。夏丏尊、叶圣陶二位先生凭多年教学经验，用《文心》里的32个故事，讲解了“关于国文的全体知识”，平易近人，寓教于乐，多年来受到无尽读者的赞誉。本次《文心》再版，加入吴浩然先生民国风插图，形象再现民国学生的学习和生活。现代读者不仅能借《文心》轻松愉快地学习读与写的知识，且能“身临其境”地了解民国。",
+          "category": "文学-经典作品",
+          "publisher": "开明出版社",
+          "rating": 916,
+          "ratingCount": 3843,
+          "type": "book",
+          "readTimeSeconds": 12019,
+          "readTimeText": "3小时20分钟",
+          "tags": []
+        },
+        {
+          "id": "3300189649",
+          "title": "如何了解一个人",
+          "author": "[美]戴维·布鲁克斯",
+          "cover": "https://cdn.weread.qq.com/weread/cover/28/cpplatform_o7rw6dnynfzvsekh4c39pc/t6_cpplatform_o7rw6dnynfzvsekh4c39pc1767083845.jpg",
+          "intro": "“人类需要得到认可，就如同需要食物和水一样。”在任何健康的人际、家庭、学校、社区组织或社会中，都存在一项核心技能——深入了解他人，并让他们感到被看见、被重视、被倾听、被理解。然而，在我们周围，常常有很多人感到自己被忽视和不被理解。在这本实用且充满深情的指南中，戴维·布鲁克斯旨在引导和启发人们如何真正地了解他人，并在家庭、工作以及生活的各个领域中建立更深厚的人际关系。 布鲁克斯认为，虽然我们常常谈论“关系”“情感”“社会联系”的重要性，但这些概念都太抽象了，要真正建立人与人之间互相理解、互相信任、互相接纳的深厚关系，涉及一系列细致而具体的社交行为：在不破坏关系的前提下表达不同意见；适时展现自己的脆弱；善于倾听；懂得如何优雅地结束谈话；懂得如何请求和给予宽容；懂得如何拒绝而不伤人心；懂得如何陪伴那些正在经历痛苦的人；懂得如何主持聚会，让每个人都感到受欢迎、被接纳；懂得如何站在他人的角度看问题。 基于此，布鲁克斯在书中提出了几个关键问题：如果你想了解一个人，你应该对他们投入什么样的关注？你应该进行什么样的对话？你应该关注一个人故事中的哪些部分？凭借其与生俱来的好奇心和不断自我超越的信念，布鲁克斯从心理学和神经科学领域以及戏剧、哲学、历史和教育的世界中汲取灵感，呈现了一种亲切、充满希望又切实可行的人际连接方法。它将帮助读者变得更加理解他人、更加体贴他人，并且找到被看见的快乐。在这个过程中，它也将为一个因分歧、敌意和误解而四分五裂的社会提供一种可能的缓和方法。",
+          "category": "个人成长-沟通表达",
+          "publisher": "中信出版集团",
+          "rating": 756,
+          "ratingCount": 569,
+          "type": "book",
+          "readTimeSeconds": 6552,
+          "readTimeText": "1小时49分钟",
           "tags": []
         },
         {
@@ -82,7 +112,7 @@
           "category": "文学-外国文学",
           "publisher": "江苏凤凰文艺出版社",
           "rating": 886,
-          "ratingCount": 1359,
+          "ratingCount": 1384,
           "type": "book",
           "readTimeSeconds": 547,
           "readTimeText": "9分钟",
@@ -92,39 +122,31 @@
       "stats": [
         {
           "stat": "读过",
-          "counts": "3本"
+          "counts": "5本"
         },
         {
           "stat": "读完",
-          "counts": "0本"
+          "counts": "2本"
         },
         {
           "stat": "阅读",
-          "counts": "11天"
+          "counts": "22天"
         },
         {
           "stat": "笔记",
-          "counts": "0条"
+          "counts": "5条"
         }
       ],
       "preferences": {
-        "categoryWord": "偏好阅读个人成长",
+        "categoryWord": "偏好阅读文学",
         "categories": [
-          {
-            "categoryId": 1000000,
-            "categoryTitle": "个人成长",
-            "parentCategoryId": 1000000,
-            "parentCategoryTitle": "个人成长",
-            "readingCount": 1,
-            "readingTime": 8368
-          },
           {
             "categoryId": 300000,
             "categoryTitle": "文学",
             "parentCategoryId": 300000,
             "parentCategoryTitle": "文学",
-            "readingCount": 2,
-            "readingTime": 6243
+            "readingCount": 3,
+            "readingTime": 30856
           },
           {
             "categoryId": 100022,
@@ -132,7 +154,23 @@
             "parentCategoryId": 100000,
             "parentCategoryTitle": "精品小说",
             "readingCount": 1,
-            "readingTime": 5696
+            "readingTime": 21119
+          },
+          {
+            "categoryId": 1000000,
+            "categoryTitle": "个人成长",
+            "parentCategoryId": 1000000,
+            "parentCategoryTitle": "个人成长",
+            "readingCount": 2,
+            "readingTime": 20596
+          },
+          {
+            "categoryId": 1400000,
+            "categoryTitle": "教育学习",
+            "parentCategoryId": 1400000,
+            "parentCategoryTitle": "教育学习",
+            "readingCount": 1,
+            "readingTime": 9190
           },
           {
             "categoryId": 100001,
@@ -165,14 +203,6 @@
             "parentCategoryTitle": "社会文化",
             "readingCount": 0,
             "readingTime": 0
-          },
-          {
-            "categoryId": 600000,
-            "categoryTitle": "哲学宗教",
-            "parentCategoryId": 600000,
-            "parentCategoryTitle": "哲学宗教",
-            "readingCount": 0,
-            "readingTime": 0
           }
         ],
         "authors": []
@@ -181,12 +211,12 @@
     "annually": {
       "mode": "annually",
       "baseTime": 1767196800,
-      "readDays": 103,
-      "totalReadTimeSeconds": 214792,
-      "totalReadTimeText": "59小时39分钟",
-      "dayAverageReadTimeSeconds": 1567,
-      "dayAverageReadTimeText": "26分钟",
-      "comparePercent": -79.62,
+      "readDays": 114,
+      "totalReadTimeSeconds": 245991,
+      "totalReadTimeText": "68小时19分钟",
+      "dayAverageReadTimeSeconds": 1662,
+      "dayAverageReadTimeText": "27分钟",
+      "comparePercent": -78.4,
       "topBooks": [
         {
           "id": "635942",
@@ -197,7 +227,7 @@
           "category": "个人成长-人生哲学",
           "publisher": "中信出版集团",
           "rating": 754,
-          "ratingCount": 10354,
+          "ratingCount": 10385,
           "type": "book",
           "readTimeSeconds": 58287,
           "readTimeText": "16小时11分钟",
@@ -212,7 +242,7 @@
           "category": "经济理财-理财",
           "publisher": "电子工业出版社",
           "rating": 741,
-          "ratingCount": 1774,
+          "ratingCount": 1792,
           "type": "book",
           "readTimeSeconds": 35792,
           "readTimeText": "9小时56分钟",
@@ -227,40 +257,10 @@
           "category": "个人成长-沟通表达",
           "publisher": "天津人民出版社",
           "rating": 848,
-          "ratingCount": 35430,
+          "ratingCount": 35462,
           "type": "book",
           "readTimeSeconds": 23100,
           "readTimeText": "6小时25分钟",
-          "tags": []
-        },
-        {
-          "id": "3300120540",
-          "title": "一生之敌",
-          "author": "史蒂文·普莱斯菲尔德",
-          "cover": "https://cdn.weread.qq.com/weread/cover/24/cpplatform_gres5pbjpfjjyokardywds/t6_cpplatform_gres5pbjpfjjyokardywds1731407053.jpg",
-          "intro": "我写了17年才赚到第一分钱（一个从未制作过的剧本的3500美元稿费）。\n我写了27年才出版了我的第一本小说（《重返荣耀》）。\n在那段时间里，我在11个州做了21份不同的工作。\n我在学校教书，开拖拉机拖车，做广告，在好莱坞做编剧，在海上石油钻井平台工作，像移民工人一样摘水果。\n有一个季节我住在这所房子里。它没有电，没有水，没有门，没有窗户。租金是每月15美元。\n在这段时间里，我一直在写作。\n我为什么要告诉你这些？\n因为这本书是为了能让你从我的错误中学习。\n因为这本书是为了让你避免那些我在成为作家之前所陷入过的所有绝境。\n你本该成为一名画家、企业家、运动员；你本该从昨天开始穿上跑鞋、拿起画笔、出门旅行。你屈服于止痛药、流言蜚语和手机成瘾，你本该成为的人只存在于夜深人静时的幻想。你屈服于这位一生之敌，浪费着自己的天赋。作为一个曾跌入谷底的过来人，作者普雷斯菲尔德以其毕生的经验，为我们总结了造成这些困境的根源——内阻力，并指出这位敌人是我们过上另一种人生面临的最大挑战，而战胜它的方法是付诸行动，成为职业选手。本书为每一个人而写，尤其是创作者、创业者、拖延症患者、浪费天赋、缺乏行动力犹豫不决的人群，作者在给出一记响亮耳光的同时，也给予了无比慷慨真诚的鼓励。",
-          "category": "个人成长-励志成长",
-          "publisher": "上海文化出版社",
-          "rating": 704,
-          "ratingCount": 2658,
-          "type": "book",
-          "readTimeSeconds": 18648,
-          "readTimeText": "5小时10分钟",
-          "tags": []
-        },
-        {
-          "id": "23691233",
-          "title": "如何想到又做到",
-          "author": "[美]肖恩·扬",
-          "cover": "https://cdn.weread.qq.com/weread/cover/85/YueWen_23691233/t6_YueWen_23691233.jpg",
-          "intro": "《如何想到又做到》这本书要解决的问题是，大多数人都能够制定出一些计划，或者是想到要去采取某种行为，但是却缺乏足够的动力或者是有效的力量，把它坚持下来。有一种人，睡前想好千条路，早上起来走老路；有一种人，尽管心态积极向上，行动却宛如废物；有一种人，做了不少的努力，人生依旧不给力。为什么有些人总是想到做不到？而一些人无论做什么都能成功？是意志力不足、是缺乏动力、还是诱惑太多？全都错了！《如何想到又做到》将颠覆你对过去所有行为的认知，给出了你另外的一个解决思路，那就是：要想解决行为问题，先要准确地把行为进行分类，然后用对应的心理武器去攻克它。通过3种行为分类、7大武器组合，告诉你无需意志力，就可达成目标并实现成功的极简方法。这是一本媲美《影响力》的行为改变科学力作，作者集结15年的研究经验讲行为科学和心理学全新成果一网打尽，帮你量身打造行动方案，当你使用这套方法的时候，持久改变行为的可能性要高出3倍。",
-          "category": "心理-认知与行为",
-          "publisher": "浙江教育出版社",
-          "rating": 712,
-          "ratingCount": 2541,
-          "type": "book",
-          "readTimeSeconds": 17163,
-          "readTimeText": "4小时46分钟",
           "tags": []
         },
         {
@@ -274,9 +274,54 @@
           "rating": 814,
           "ratingCount": 1263,
           "type": "book",
-          "readTimeSeconds": 14162,
-          "readTimeText": "3小时56分钟",
+          "readTimeSeconds": 21119,
+          "readTimeText": "5小时51分钟",
           "tags": ["单日阅读最久"]
+        },
+        {
+          "id": "3300120540",
+          "title": "一生之敌",
+          "author": "史蒂文·普莱斯菲尔德",
+          "cover": "https://cdn.weread.qq.com/weread/cover/24/cpplatform_gres5pbjpfjjyokardywds/t6_cpplatform_gres5pbjpfjjyokardywds1731407053.jpg",
+          "intro": "我写了17年才赚到第一分钱（一个从未制作过的剧本的3500美元稿费）。\n我写了27年才出版了我的第一本小说（《重返荣耀》）。\n在那段时间里，我在11个州做了21份不同的工作。\n我在学校教书，开拖拉机拖车，做广告，在好莱坞做编剧，在海上石油钻井平台工作，像移民工人一样摘水果。\n有一个季节我住在这所房子里。它没有电，没有水，没有门，没有窗户。租金是每月15美元。\n在这段时间里，我一直在写作。\n我为什么要告诉你这些？\n因为这本书是为了能让你从我的错误中学习。\n因为这本书是为了让你避免那些我在成为作家之前所陷入过的所有绝境。\n你本该成为一名画家、企业家、运动员；你本该从昨天开始穿上跑鞋、拿起画笔、出门旅行。你屈服于止痛药、流言蜚语和手机成瘾，你本该成为的人只存在于夜深人静时的幻想。你屈服于这位一生之敌，浪费着自己的天赋。作为一个曾跌入谷底的过来人，作者普雷斯菲尔德以其毕生的经验，为我们总结了造成这些困境的根源——内阻力，并指出这位敌人是我们过上另一种人生面临的最大挑战，而战胜它的方法是付诸行动，成为职业选手。本书为每一个人而写，尤其是创作者、创业者、拖延症患者、浪费天赋、缺乏行动力犹豫不决的人群，作者在给出一记响亮耳光的同时，也给予了无比慷慨真诚的鼓励。",
+          "category": "个人成长-励志成长",
+          "publisher": "上海文化出版社",
+          "rating": 704,
+          "ratingCount": 2679,
+          "type": "book",
+          "readTimeSeconds": 18648,
+          "readTimeText": "5小时10分钟",
+          "tags": []
+        },
+        {
+          "id": "23691233",
+          "title": "如何想到又做到",
+          "author": "[美]肖恩·扬",
+          "cover": "https://cdn.weread.qq.com/weread/cover/85/YueWen_23691233/t6_YueWen_23691233.jpg",
+          "intro": "《如何想到又做到》这本书要解决的问题是，大多数人都能够制定出一些计划，或者是想到要去采取某种行为，但是却缺乏足够的动力或者是有效的力量，把它坚持下来。有一种人，睡前想好千条路，早上起来走老路；有一种人，尽管心态积极向上，行动却宛如废物；有一种人，做了不少的努力，人生依旧不给力。为什么有些人总是想到做不到？而一些人无论做什么都能成功？是意志力不足、是缺乏动力、还是诱惑太多？全都错了！《如何想到又做到》将颠覆你对过去所有行为的认知，给出了你另外的一个解决思路，那就是：要想解决行为问题，先要准确地把行为进行分类，然后用对应的心理武器去攻克它。通过3种行为分类、7大武器组合，告诉你无需意志力，就可达成目标并实现成功的极简方法。这是一本媲美《影响力》的行为改变科学力作，作者集结15年的研究经验讲行为科学和心理学全新成果一网打尽，帮你量身打造行动方案，当你使用这套方法的时候，持久改变行为的可能性要高出3倍。",
+          "category": "心理-认知与行为",
+          "publisher": "浙江教育出版社",
+          "rating": 711,
+          "ratingCount": 2548,
+          "type": "book",
+          "readTimeSeconds": 17163,
+          "readTimeText": "4小时46分钟",
+          "tags": []
+        },
+        {
+          "id": "33892858",
+          "title": "静观自我关怀：勇敢爱自己的51项练习",
+          "author": "[美]克里斯汀·内夫 [美]克里斯托弗·杰默",
+          "cover": "https://cdn.weread.qq.com/weread/cover/10/yuewen_33892858/t6_yuewen_338928581721793000.jpg",
+          "intro": "静观自我关怀是全球第一个专门用于增强个人自我关怀能力的培训课程。它可以帮助人们在面对逆境时，静观自己的挣扎，用关怀、和善与支持的方式回应自己，培养自己的内在力量。本书是静观自我关怀的两位创始人——克里斯汀•奈夫和克里斯托弗•杰默的集大成之作。他们将静观自我关怀课程中的大部门内容以简单实用的形式呈现在本书中。全书分为24章，包含23项正式练习、22项非正式练习和6项冥想练习。本书的理念和实践主要都建立在科研的基础上（书后注释给出了详细的相关研究），同样也建立在两位创始人教授千万人如何自我关怀的教学经验之上。书中章节之间有着严谨的逻辑关系，后面讲述的技能都建立在前面技能的基础之上。每章都会提供相关主题的基本信息，然后是练习部分，让你对前面所讲的概念有一些亲身体验。本书文字优美、温暖又深入人心，适合对如何关怀自己和他人感兴趣的大众读者，也适合身处压力具有焦虑和抑郁倾向的读者，还可作为心理学爱好者及心理咨询师的参考用书。",
+          "category": "个人成长-人生哲学",
+          "publisher": "机械工业出版社",
+          "rating": 877,
+          "ratingCount": 257,
+          "type": "book",
+          "readTimeSeconds": 14044,
+          "readTimeText": "3小时54分钟",
+          "tags": []
         },
         {
           "id": "3300046374",
@@ -294,67 +339,52 @@
           "tags": []
         },
         {
-          "id": "33892858",
-          "title": "静观自我关怀：勇敢爱自己的51项练习",
-          "author": "[美]克里斯汀·内夫 [美]克里斯托弗·杰默",
-          "cover": "https://cdn.weread.qq.com/weread/cover/10/yuewen_33892858/t6_yuewen_338928581721793000.jpg",
-          "intro": "静观自我关怀是全球第一个专门用于增强个人自我关怀能力的培训课程。它可以帮助人们在面对逆境时，静观自己的挣扎，用关怀、和善与支持的方式回应自己，培养自己的内在力量。本书是静观自我关怀的两位创始人——克里斯汀•奈夫和克里斯托弗•杰默的集大成之作。他们将静观自我关怀课程中的大部门内容以简单实用的形式呈现在本书中。全书分为24章，包含23项正式练习、22项非正式练习和6项冥想练习。本书的理念和实践主要都建立在科研的基础上（书后注释给出了详细的相关研究），同样也建立在两位创始人教授千万人如何自我关怀的教学经验之上。书中章节之间有着严谨的逻辑关系，后面讲述的技能都建立在前面技能的基础之上。每章都会提供相关主题的基本信息，然后是练习部分，让你对前面所讲的概念有一些亲身体验。本书文字优美、温暖又深入人心，适合对如何关怀自己和他人感兴趣的大众读者，也适合身处压力具有焦虑和抑郁倾向的读者，还可作为心理学爱好者及心理咨询师的参考用书。",
-          "category": "个人成长-人生哲学",
-          "publisher": "机械工业出版社",
-          "rating": 876,
-          "ratingCount": 254,
+          "id": "923996",
+          "title": "文心",
+          "author": "夏丏尊 叶圣陶",
+          "cover": "https://wfqqreader-1252317822.image.myqcloud.com/cover/996/923996/t6_923996.jpg",
+          "intro": "知识是枯燥的，故事是有趣的。把知识巧妙地融进有趣的故事，读故事时习得许多知识，无疑是最理想的学习方法。《文心》就是这一成功方法的典范。夏丏尊、叶圣陶二位先生凭多年教学经验，用《文心》里的32个故事，讲解了“关于国文的全体知识”，平易近人，寓教于乐，多年来受到无尽读者的赞誉。本次《文心》再版，加入吴浩然先生民国风插图，形象再现民国学生的学习和生活。现代读者不仅能借《文心》轻松愉快地学习读与写的知识，且能“身临其境”地了解民国。",
+          "category": "文学-经典作品",
+          "publisher": "开明出版社",
+          "rating": 916,
+          "ratingCount": 3843,
           "type": "book",
-          "readTimeSeconds": 8368,
-          "readTimeText": "2小时19分钟",
+          "readTimeSeconds": 12019,
+          "readTimeText": "3小时20分钟",
           "tags": []
         },
         {
-          "id": "41287028",
-          "title": "美丽新世界",
-          "author": "阿道司·赫胥黎",
-          "cover": "https://wfqqreader-1252317822.image.myqcloud.com/cover/28/41287028/t6_41287028.jpg",
-          "intro": "福特纪元632年（公元2532年），在科技高度发展的世界国，疾病与衰老已被消灭，所有人都享受着科技生产提供的舒适生活，不必承担任何压力，可以随心所欲地追求自由、进行娱乐。伯纳德却觉察出这种幸福十分虚假，他一直处于某种控制下：人类从胚胎工厂出生，并通过定向基因改造划分阶级，以适应不同的社会分工。由于自幼便接受睡眠洗脑教育，所以每个人都心满意足地接受了既定的身份和阶级。为了让人们维持快乐的感觉，国家会无限量供应嗦麻药物。为了寻找真实的人性，伯纳德去往被铁丝网隔绝的野蛮人保留地，偶遇了野蛮人约翰，被其灵魂吸引。他叛逆地将约翰带回文明世界，却引来世界国元首的关注……",
-          "category": "文学-外国文学",
-          "publisher": "江苏凤凰文艺出版社",
-          "rating": 886,
-          "ratingCount": 1359,
+          "id": "3300189649",
+          "title": "如何了解一个人",
+          "author": "[美]戴维·布鲁克斯",
+          "cover": "https://cdn.weread.qq.com/weread/cover/28/cpplatform_o7rw6dnynfzvsekh4c39pc/t6_cpplatform_o7rw6dnynfzvsekh4c39pc1767083845.jpg",
+          "intro": "“人类需要得到认可，就如同需要食物和水一样。”在任何健康的人际、家庭、学校、社区组织或社会中，都存在一项核心技能——深入了解他人，并让他们感到被看见、被重视、被倾听、被理解。然而，在我们周围，常常有很多人感到自己被忽视和不被理解。在这本实用且充满深情的指南中，戴维·布鲁克斯旨在引导和启发人们如何真正地了解他人，并在家庭、工作以及生活的各个领域中建立更深厚的人际关系。 布鲁克斯认为，虽然我们常常谈论“关系”“情感”“社会联系”的重要性，但这些概念都太抽象了，要真正建立人与人之间互相理解、互相信任、互相接纳的深厚关系，涉及一系列细致而具体的社交行为：在不破坏关系的前提下表达不同意见；适时展现自己的脆弱；善于倾听；懂得如何优雅地结束谈话；懂得如何请求和给予宽容；懂得如何拒绝而不伤人心；懂得如何陪伴那些正在经历痛苦的人；懂得如何主持聚会，让每个人都感到受欢迎、被接纳；懂得如何站在他人的角度看问题。 基于此，布鲁克斯在书中提出了几个关键问题：如果你想了解一个人，你应该对他们投入什么样的关注？你应该进行什么样的对话？你应该关注一个人故事中的哪些部分？凭借其与生俱来的好奇心和不断自我超越的信念，布鲁克斯从心理学和神经科学领域以及戏剧、哲学、历史和教育的世界中汲取灵感，呈现了一种亲切、充满希望又切实可行的人际连接方法。它将帮助读者变得更加理解他人、更加体贴他人，并且找到被看见的快乐。在这个过程中，它也将为一个因分歧、敌意和误解而四分五裂的社会提供一种可能的缓和方法。",
+          "category": "个人成长-沟通表达",
+          "publisher": "中信出版集团",
+          "rating": 756,
+          "ratingCount": 569,
           "type": "book",
-          "readTimeSeconds": 6586,
+          "readTimeSeconds": 6552,
           "readTimeText": "1小时49分钟",
-          "tags": []
-        },
-        {
-          "id": "3300141074",
-          "title": "阅读是安静的自我觉醒（果麦经典）",
-          "author": "[德]赫尔曼·黑塞",
-          "cover": "https://cdn.weread.qq.com/weread/cover/39/cpplatform_2tqwvc6pfyx5qahrsixezb/t6_cpplatform_2tqwvc6pfyx5qahrsixezb1744786437.jpg",
-          "intro": "本书是德国作家黑塞的读书随笔精选集。\r\n黑塞写书、爱书，最能知道书的魅力。他一生写了3000余篇书评，思考读书的目的与过程、人与读书的关系，也分享自己喜爱的读物。\r\n他认为读书必须走爱之路，而非义务之路。阅读的目的不应当是为了忘却我们自己和我们的日常生活，而是为了重新更加自信而成熟地、牢牢地把握我们自己的生活。\r\n黑塞强调书与自我的内在统一，他的文学评论不是客观的分析，而是经过内化后从中超拔出来的“随感”。在这本书里，他不以学者的立场而以读者的心境去谈“读书”，在这我们能透视黑塞如何将书籍世界化为自我世界，从而建立适合自己脾性的书目。",
-          "category": "文学-散文杂著",
-          "publisher": "天津人民出版社",
-          "rating": 851,
-          "ratingCount": 2335,
-          "type": "book",
-          "readTimeSeconds": 6018,
-          "readTimeText": "1小时40分钟",
           "tags": []
         }
       ],
       "stats": [
         {
           "stat": "读过",
-          "counts": "15本"
+          "counts": "17本"
         },
         {
           "stat": "读完",
-          "counts": "4本"
+          "counts": "6本"
         },
         {
           "stat": "阅读",
-          "counts": "103天"
+          "counts": "114天"
         },
         {
           "stat": "笔记",
-          "counts": "26条"
+          "counts": "31条"
         }
       ],
       "preferences": {
@@ -365,8 +395,16 @@
             "categoryTitle": "个人成长",
             "parentCategoryId": 1000000,
             "parentCategoryTitle": "个人成长",
+            "readingCount": 6,
+            "readingTime": 122895
+          },
+          {
+            "categoryId": 300000,
+            "categoryTitle": "文学",
+            "parentCategoryId": 300000,
+            "parentCategoryTitle": "文学",
             "readingCount": 5,
-            "readingTime": 110667
+            "readingTime": 46728
           },
           {
             "categoryId": 1100000,
@@ -385,20 +423,20 @@
             "readingTime": 30944
           },
           {
-            "categoryId": 300000,
-            "categoryTitle": "文学",
-            "parentCategoryId": 300000,
-            "parentCategoryTitle": "文学",
-            "readingCount": 4,
-            "readingTime": 22115
-          },
-          {
             "categoryId": 100022,
             "categoryTitle": "治愈小说",
             "parentCategoryId": 100000,
             "parentCategoryTitle": "精品小说",
             "readingCount": 1,
-            "readingTime": 5696
+            "readingTime": 21119
+          },
+          {
+            "categoryId": 1400000,
+            "categoryTitle": "教育学习",
+            "parentCategoryId": 1400000,
+            "parentCategoryTitle": "教育学习",
+            "readingCount": 1,
+            "readingTime": 9190
           },
           {
             "categoryId": 100001,
@@ -415,14 +453,6 @@
             "parentCategoryTitle": "精品小说",
             "readingCount": 1,
             "readingTime": 4404
-          },
-          {
-            "categoryId": 200000,
-            "categoryTitle": "历史",
-            "parentCategoryId": 200000,
-            "parentCategoryTitle": "历史",
-            "readingCount": 0,
-            "readingTime": 0
           }
         ],
         "authors": [
@@ -451,6 +481,12 @@
             "readTime": "6小时25分钟"
           },
           {
+            "authorId": 254806,
+            "name": "米奇·阿尔博姆",
+            "count": 1,
+            "readTime": "5小时51分钟"
+          },
+          {
             "authorId": 2408911,
             "name": "史蒂文·普莱斯菲尔德",
             "count": 1,
@@ -463,28 +499,22 @@
             "readTime": "4小时46分钟"
           },
           {
+            "authorId": 1186728,
+            "name": "克里斯汀·内夫",
+            "count": 1,
+            "readTime": "3小时54分钟"
+          },
+          {
             "authorId": 218748,
             "name": "阿尔弗雷德·阿德勒",
             "count": 1,
             "readTime": "3小时49分钟"
           },
           {
-            "authorId": 1186728,
-            "name": "克里斯汀·内夫",
+            "authorId": 221363,
+            "name": "叶圣陶",
             "count": 1,
-            "readTime": "2小时19分钟"
-          },
-          {
-            "authorId": 212668,
-            "name": "赫尔曼·黑塞",
-            "count": 1,
-            "readTime": "1小时40分钟"
-          },
-          {
-            "authorId": 254806,
-            "name": "米奇·阿尔博姆",
-            "count": 1,
-            "readTime": "1小时34分钟"
+            "readTime": "2小时33分钟"
           }
         ]
       }
@@ -492,9 +522,9 @@
     "overall": {
       "mode": "overall",
       "baseTime": 0,
-      "readDays": 1907,
-      "totalReadTimeSeconds": 7765320,
-      "totalReadTimeText": "2157小时2分钟",
+      "readDays": 1918,
+      "totalReadTimeSeconds": 7796519,
+      "totalReadTimeText": "2165小时41分钟",
       "dayAverageReadTimeSeconds": 0,
       "dayAverageReadTimeText": "0分钟",
       "topBooks": [
@@ -507,7 +537,7 @@
           "category": "精品小说-科幻小说",
           "publisher": "江苏凤凰文艺出版社",
           "rating": 903,
-          "ratingCount": 4981,
+          "ratingCount": 4988,
           "type": "book",
           "readTimeSeconds": 314600,
           "readTimeText": "87小时23分钟",
@@ -537,7 +567,7 @@
           "category": "历史-中国古代",
           "publisher": "四川人民出版社",
           "rating": 928,
-          "ratingCount": 6392,
+          "ratingCount": 6418,
           "type": "book",
           "readTimeSeconds": 201336,
           "readTimeText": "55小时55分钟",
@@ -552,7 +582,7 @@
           "category": "精品小说-科幻小说",
           "publisher": "吉林出版集团有限责任公司",
           "rating": 843,
-          "ratingCount": 1700,
+          "ratingCount": 1706,
           "type": "book",
           "readTimeSeconds": 181683,
           "readTimeText": "50小时28分钟",
@@ -567,7 +597,7 @@
           "category": "哲学宗教-哲学读物",
           "publisher": "译林出版社",
           "rating": 842,
-          "ratingCount": 759,
+          "ratingCount": 760,
           "type": "book",
           "readTimeSeconds": 144446,
           "readTimeText": "40小时7分钟",
@@ -597,7 +627,7 @@
           "category": "哲学宗教-哲学读物",
           "publisher": "译林出版社",
           "rating": 869,
-          "ratingCount": 2617,
+          "ratingCount": 2628,
           "type": "book",
           "readTimeSeconds": 111156,
           "readTimeText": "30小时52分钟",
@@ -611,8 +641,8 @@
           "intro": "古典小说《三国演义》从汉灵帝黄巾起义写起，到西晋三国统一为止，描写了九十余年的重大历史事件及历史人物的活动，展示了三国兴亡的历史画卷，形象地再现了这一风云变幻的历史时代，生动地揭示了统治集团内部尔虞我诈、争权夺利的关系。 由人民文学出版社出版的《三国演义》是以毛宗岗本为底本、经过多次整理校订而成的迄今国内发行量最大、最权威的版本，自面世以来，一直是市场上最受读者欢迎古典文学名著之一。",
           "category": "文学-古典文学",
           "publisher": "人民文学出版社",
-          "rating": 910,
-          "ratingCount": 5377,
+          "rating": 911,
+          "ratingCount": 5394,
           "type": "book",
           "readTimeSeconds": 103554,
           "readTimeText": "28小时45分钟",
@@ -626,8 +656,8 @@
           "intro": "此次出版大字本，底本拟采用发行量最大的“中国古典文学读本丛书”四大名著，其中《三国演义》《西游记》经过全面修订，更臻完善。",
           "category": "文学-古典文学",
           "publisher": "人民文学出版社",
-          "rating": 925,
-          "ratingCount": 11665,
+          "rating": 924,
+          "ratingCount": 11691,
           "type": "book",
           "readTimeSeconds": 93655,
           "readTimeText": "26小时0分钟",
@@ -642,7 +672,7 @@
           "category": "经济理财-商业",
           "publisher": "中信出版社",
           "rating": 883,
-          "ratingCount": 4093,
+          "ratingCount": 4098,
           "type": "book",
           "readTimeSeconds": 87139,
           "readTimeText": "24小时12分钟",
@@ -652,19 +682,19 @@
       "stats": [
         {
           "stat": "读过",
-          "counts": "559本"
+          "counts": "561本"
         },
         {
           "stat": "读完",
-          "counts": "220本"
+          "counts": "222本"
         },
         {
           "stat": "阅读",
-          "counts": "1907天"
+          "counts": "1918天"
         },
         {
           "stat": "笔记",
-          "counts": "1051条"
+          "counts": "1056条"
         }
       ],
       "preferences": {
@@ -692,8 +722,8 @@
             "categoryTitle": "文学",
             "parentCategoryId": 300000,
             "parentCategoryTitle": "文学",
-            "readingCount": 68,
-            "readingTime": 885193
+            "readingCount": 69,
+            "readingTime": 909806
           },
           {
             "categoryId": 100004,
@@ -728,12 +758,12 @@
             "readingTime": 398993
           },
           {
-            "categoryId": 700000,
-            "categoryTitle": "计算机",
-            "parentCategoryId": 700000,
-            "parentCategoryTitle": "计算机",
-            "readingCount": 35,
-            "readingTime": 372875
+            "categoryId": 1000000,
+            "categoryTitle": "个人成长",
+            "parentCategoryId": 1000000,
+            "parentCategoryTitle": "个人成长",
+            "readingCount": 44,
+            "readingTime": 369031
           }
         ],
         "authors": [
