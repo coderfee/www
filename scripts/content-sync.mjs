@@ -16,12 +16,20 @@ export async function syncLocalBlog() {
   await writeOutput(BLOG_OUTPUT_DIR, outputFiles);
 
   console.log(`   - blog: wrote ${outputFiles.length} files.`);
+
+  return {
+    blog: {
+      source: BLOG_SOURCE_DIR,
+      sourceFiles: outputFiles.length,
+      outputFiles: outputFiles.length,
+    },
+  };
 }
 
 export async function syncRemoteContent() {
   const r2 = createR2Client();
 
-  await syncRemoteCollection({
+  const newsletter = await syncRemoteCollection({
     r2,
     name: 'newsletter',
     prefix: NEWSLETTER_R2_PREFIX,
@@ -30,7 +38,7 @@ export async function syncRemoteContent() {
     transform: transformNewsletter,
   });
 
-  await syncRemoteCollection({
+  const blog = await syncRemoteCollection({
     r2,
     name: 'blog',
     prefix: BLOG_R2_PREFIX,
@@ -38,6 +46,8 @@ export async function syncRemoteContent() {
     outputDir: BLOG_OUTPUT_DIR,
     transform: transformBlog,
   });
+
+  return { newsletter, blog };
 }
 
 function createR2Client() {
@@ -76,6 +86,13 @@ async function syncRemoteCollection(collection) {
   await writeOutput(collection.outputDir, outputFiles);
 
   console.log(`   - ${collection.name}: wrote ${outputFiles.length} files.`);
+
+  return {
+    name: collection.name,
+    prefix: collection.prefix,
+    remoteFiles: remoteFiles.length,
+    outputFiles: outputFiles.length,
+  };
 }
 
 async function getRemoteFiles(r2, prefix) {
