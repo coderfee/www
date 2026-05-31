@@ -27,4 +27,6 @@ pnpm-debug.log*
 .claude
 
 src/content/newsletter
+src/content/blog
 .alma-snapshots
+.migration-backups
