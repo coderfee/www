@@ -16,7 +16,7 @@ const posts = await getCollection('blog');
 
 const scoredPosts = posts
   .filter(({ data: { draft = false } }) => !draft)
-  .filter((post) => post.id !== currentSlug)
+  .filter((post) => post.data.slug !== currentSlug)
   .map((post) => {
     const postTags = post.data.tags || [];
     const matchCount = postTags.filter((tag) => tags.includes(tag)).length;
@@ -41,7 +41,7 @@ const scoredPosts = posts
     <div class="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-20">
       {scoredPosts[0] && (
         <a 
-          href={`/blog/${scoredPosts[0].post.id}`}
+          href={`/blog/${scoredPosts[0].post.data.slug}`}
           class="md:col-span-2 group relative overflow-hidden transition-all"
         >
           <span class="absolute -top-4 -right-4 text-[12rem] leading-none font-bold text-zinc-100 dark:text-zinc-900/40 -z-10 select-none transition-transform duration-700 group-hover:scale-110 group-hover:-rotate-3">01</span>
@@ -64,7 +64,7 @@ const scoredPosts = posts
       <div class="flex flex-col gap-16 md:gap-20 md:col-span-1">
         {scoredPosts.slice(1).map((item, index) => (
           <a 
-            href={`/blog/${item.post.id}`}
+            href={`/blog/${item.post.data.slug}`}
             class="group transition-all"
           >
             <div class="flex items-center justify-between mb-6">

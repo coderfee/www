@@ -29,7 +29,7 @@ export async function GET(context) {
         ...post.data,
         pubDate: post.data.date,
         description: post.data.tldr,
-        link: `/blog/${post.id}/`,
+        link: `/blog/${post.data.slug}/`,
         content: await container.renderToString((await render(post)).Content),
       })),
     ),

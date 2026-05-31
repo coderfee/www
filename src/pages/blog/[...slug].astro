@@ -20,7 +20,7 @@ export async function getStaticPaths() {
     const next = index + 1 < sortedPosts.length ? sortedPosts[index + 1] : null;
     const prev = index - 1 >= 0 ? sortedPosts[index - 1] : null;
     return {
-      params: { slug: post.id },
+      params: { slug: post.data.slug },
       props: { post, prev, next },
     };
   });
@@ -35,6 +35,7 @@ type Props = {
 const { post, prev, next } = Astro.props;
 const { Content, headings } = await render(post);
 const { title, tldr, date, tags = [], cover, keywords } = post.data;
+const slug = post.data.slug;
 const modifiedDate = post.data.date;
 
 const jsonLd = {
@@ -68,7 +69,7 @@ const jsonLd = {
   <Fragment slot="head">
     {date && <meta name="date" content={date.toLocaleDateString()} />}
     {keywords && <meta name="keywords" content={keywords.join(", ")} />}
-    <script is:inline define:vars={{ slug: post.id, title }}>
+    <script is:inline define:vars={{ slug, title }}>
       window.__PAGE_DATA__ = { slug, title };
     </script>
     <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
@@ -84,7 +85,7 @@ const jsonLd = {
         <span>返回</span>
       </button>
 
-      <PostHeader slug={post.id} title={title} date={date} tags={tags} tldr={tldr} />
+      <PostHeader slug={slug} title={title} date={date} tags={tags} tldr={tldr} />
 
       <div class="w-full my-10 border-t border-dashed border-zinc-200/30 dark:border-zinc-700/30"></div>
 
@@ -107,7 +108,7 @@ const jsonLd = {
 
       <PostNavigation prev={prev} next={next} />
 
-      <PostRelatedPosts currentSlug={post.id} tags={tags} />
+      <PostRelatedPosts currentSlug={slug} tags={tags} />
 
       <PostComments />
     </div>
