@@ -28,5 +28,6 @@ pnpm-debug.log*
 
 src/content/newsletter
 src/content/blog
+src/data/weread-readdata.json
 .alma-snapshots
 .migration-backups
