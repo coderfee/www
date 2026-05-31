@@ -7,12 +7,13 @@
     "node": ">=24.13.0"
   },
   "scripts": {
-    "dev": "pnpm run sync-r2 && pnpm run sync-weread && astro dev",
-    "build": "pnpm run sync-r2 && pnpm run sync-weread && astro build",
-    "lint": "pnpm biome check ./src && astro check --minimumSeverity warning",
+    "dev": "pnpm run sync-local && astro dev",
+    "build": "pnpm run sync-remote && pnpm run sync-weread && astro build",
+    "lint": "pnpm biome check ./src ./scripts && astro check --minimumSeverity warning",
     "lint:fix": "pnpm biome check ./src --write",
     "upgrade": "pnpm update && pnpmx @astrojs/upgrade",
-    "sync-r2": "node scripts/sync-r2.mjs",
+    "sync-local": "node scripts/sync-local.mjs",
+    "sync-remote": "node scripts/sync-remote.mjs",
     "sync-weread": "node scripts/sync-weread.mjs"
   },
   "dependencies": {
