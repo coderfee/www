@@ -1,6 +1,5 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
-import { GetObjectCommand, ListObjectsV2Command, S3Client } from '@aws-sdk/client-s3';
 
 export const BLOG_SOURCE_DIR = '/Users/chen/Obsidian/notes/02 Writing/03 Blog';
 export const BLOG_R2_PREFIX = '02 Writing/03 Blog/';
@@ -27,36 +26,6 @@ export async function syncLocalBlog() {
 }
 
 export async function syncRemoteContent() {
-  try {
-    return await syncRemoteContentFromManifest();
-  } catch (error) {
-    console.warn(`Worker content manifest sync failed, falling back to R2 SDK: ${getErrorMessage(error)}`);
-  }
-
-  const r2 = createR2Client();
-
-  const newsletter = await syncRemoteCollection({
-    r2,
-    name: 'newsletter',
-    prefix: NEWSLETTER_R2_PREFIX,
-    cacheDir: '/tmp/newsletters',
-    outputDir: NEWSLETTER_OUTPUT_DIR,
-    transform: transformNewsletter,
-  });
-
-  const blog = await syncRemoteCollection({
-    r2,
-    name: 'blog',
-    prefix: BLOG_R2_PREFIX,
-    cacheDir: '/tmp/blog-posts',
-    outputDir: BLOG_OUTPUT_DIR,
-    transform: transformBlog,
-  });
-
-  return { newsletter, blog };
-}
-
-async function syncRemoteContentFromManifest() {
   const manifest = await fetchContentManifest();
 
   const newsletter = await syncManifestCollection({
@@ -183,121 +152,6 @@ async function syncManifestToCache(collection, remoteFiles) {
   await fs.writeFile(manifestPath, JSON.stringify(currentManifest, null, 2));
 }
 
-function createR2Client() {
-  const requiredEnv = ['R2_ACCOUNT_ID', 'R2_ACCESS_KEY_ID', 'R2_SECRET_ACCESS_KEY', 'R2_BUCKET_NAME'];
-  const missingEnv = requiredEnv.filter((key) => !process.env[key]);
-
-  if (missingEnv.length > 0) {
-    throw new Error(`Missing R2 env vars: ${missingEnv.join(', ')}`);
-  }
-
-  return new S3Client({
-    region: 'auto',
-    endpoint: `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
-    credentials: {
-      accessKeyId: process.env.R2_ACCESS_KEY_ID,
-      secretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
-    },
-  });
-}
-
-async function syncRemoteCollection(collection) {
-  console.log(`- Syncing ${collection.name} from R2 prefix "${collection.prefix}"`);
-
-  await fs.mkdir(collection.cacheDir, { recursive: true });
-
-  const remoteFiles = await getRemoteFiles(collection.r2, collection.prefix);
-  console.log(`   - ${collection.name}: found ${remoteFiles.length} files in R2.`);
-
-  if (remoteFiles.length === 0) {
-    throw new Error(`${collection.name} R2 prefix is empty: ${collection.prefix}`);
-  }
-
-  await syncR2ToCache(collection, remoteFiles);
-
-  const outputFiles = await collection.transform(collection.cacheDir);
-  await writeOutput(collection.outputDir, outputFiles);
-
-  console.log(`   - ${collection.name}: wrote ${outputFiles.length} files.`);
-
-  return {
-    name: collection.name,
-    prefix: collection.prefix,
-    remoteFiles: remoteFiles.length,
-    outputFiles: outputFiles.length,
-  };
-}
-
-async function getRemoteFiles(r2, prefix) {
-  const objects = [];
-  let continuationToken;
-
-  do {
-    const listedObjects = await r2.send(
-      new ListObjectsV2Command({
-        Bucket: process.env.R2_BUCKET_NAME,
-        Prefix: prefix,
-        ContinuationToken: continuationToken,
-      }),
-    );
-
-    objects.push(...(listedObjects.Contents || []).filter((item) => item.Key && !item.Key.endsWith('/')));
-    continuationToken = listedObjects.NextContinuationToken;
-  } while (continuationToken);
-
-  return objects;
-}
-
-async function syncR2ToCache(collection, remoteFiles) {
-  const manifestPath = path.join(collection.cacheDir, '.manifest.json');
-  const currentManifest = Object.fromEntries(
-    remoteFiles.map((item) => [
-      item.Key,
-      {
-        etag: item.ETag,
-        lastModified: item.LastModified?.toISOString(),
-        size: item.Size,
-      },
-    ]),
-  );
-
-  const previousManifest = await readJson(manifestPath);
-
-  if (JSON.stringify(previousManifest) === JSON.stringify(currentManifest)) {
-    console.log(`   - ${collection.name}: cache is up to date.`);
-    return;
-  }
-
-  console.log(`   - ${collection.name}: downloading ${remoteFiles.length} files.`);
-  await fs.rm(collection.cacheDir, { recursive: true, force: true });
-  await fs.mkdir(collection.cacheDir, { recursive: true });
-
-  for (const item of remoteFiles) {
-    const relativePath = item.Key.slice(collection.prefix.length);
-    const localPath = path.join(collection.cacheDir, relativePath);
-
-    await fs.mkdir(path.dirname(localPath), { recursive: true });
-
-    const object = await collection.r2.send(
-      new GetObjectCommand({ Bucket: process.env.R2_BUCKET_NAME, Key: item.Key }),
-    );
-    const content = await streamToString(object.Body);
-
-    await fs.writeFile(localPath, content);
-  }
-
-  await fs.writeFile(manifestPath, JSON.stringify(currentManifest, null, 2));
-}
-
-async function streamToString(stream) {
-  const chunks = [];
-  return new Promise((resolve, reject) => {
-    stream.on('data', (chunk) => chunks.push(Buffer.from(chunk)));
-    stream.on('error', (err) => reject(err));
-    stream.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
-  });
-}
-
 async function readJson(file) {
   try {
     return JSON.parse(await fs.readFile(file, 'utf8'));
@@ -307,14 +161,6 @@ async function readJson(file) {
     }
     throw error;
   }
-}
-
-function getErrorMessage(error) {
-  if (error instanceof Error) {
-    return error.message;
-  }
-
-  return String(error);
 }
 
 async function getLocalFiles(dir) {
