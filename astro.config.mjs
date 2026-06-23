@@ -10,6 +10,7 @@ import rehypeCodeProps from 'rehype-mdx-code-props';
 import rehypeSlug from 'rehype-slug';
 import remarkToc from 'remark-toc';
 import Icons from 'unplugin-icons/vite';
+import r2Content from './integrations/r2-content/index.mjs';
 
 export default defineConfig({
   site: 'https://coderfee.com',
@@ -60,6 +61,23 @@ export default defineConfig({
     },
   },
   integrations: [
+    r2Content({
+      local: {
+        newsletterDir: '/Users/chen/Obsidian/notes/03 Newsletter',
+        blogDir: '/Users/chen/Obsidian/notes/02 Writing/03 Blog',
+      },
+      remote: {
+        newsletterPrefix: '03 Newsletter/',
+        blogPrefix: '02 Writing/03 Blog/',
+      },
+      output: {
+        newsletterDir: 'src/content/newsletter',
+        blogDir: 'src/content/blog',
+      },
+      r2: {
+        bucketName: 'obsidian',
+      },
+    }),
     react(),
     mdx(),
     sitemap({
