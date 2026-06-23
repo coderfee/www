@@ -3,12 +3,27 @@
   "name": "blog",
   "main": "src/worker.ts",
   "compatibility_date": "2026-06-23",
+  "placement": {
+    "mode": "smart"
+  },
   "assets": {
     "binding": "ASSETS",
     "directory": "./dist",
     "not_found_handling": "404-page"
   },
+  "routes": [
+    {
+      "pattern": "coderfee.com",
+      "custom_domain": true
+    }
+  ],
   "observability": {
-    "enabled": true
+    "logs": {
+      "enabled": true,
+      "invocation_logs": true
+    },
+    "traces": {
+      "enabled": false
+    }
   }
 }
