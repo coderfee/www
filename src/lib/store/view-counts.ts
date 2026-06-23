@@ -4,7 +4,7 @@ export const viewCounts = persistentMap<Record<string, string>>('view-counts:', 
 
 const getApiUrl = () => {
   const isDev = import.meta.env.DEV;
-  return isDev ? 'http://localhost:8787/api/blog/views' : 'https://api.coderfee.com/api/blog/views';
+  return isDev ? 'http://localhost:8787/api/blog/views' : '/api/blog/views';
 };
 
 export async function fetchViewCounts() {
