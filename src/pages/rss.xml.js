@@ -1,6 +1,6 @@
 import { loadRenderers } from 'astro:container';
 import { getCollection, render } from 'astro:content';
-import { getContainerRenderer } from '@astrojs/mdx';
+import { getContainerRenderer } from '@astrojs/mdx/container-renderer';
 import rss from '@astrojs/rss';
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import { FOLO_CHALLENGE, SITE_DESCRIPTION, SITE_TITLE } from '@/consts';
@@ -10,10 +10,9 @@ export async function GET(context) {
     throw new TypeError('context.site falsy');
   }
 
-  const container = await AstroContainer.create({
+  const container = new AstroContainer({
     renderers: await loadRenderers([getContainerRenderer()]),
   });
-
   const blog = await getCollection('blog');
   const posts = blog
     .filter(({ data: { draft = false } }) => !draft)

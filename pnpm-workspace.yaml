@@ -13,3 +13,7 @@ minimumReleaseAgeExclude:
   - '@biomejs/cli-linux-x64@2.4.16'
   - '@biomejs/cli-win32-arm64@2.4.16'
   - '@biomejs/cli-win32-x64@2.4.16'
+  - '@astrojs/markdown-satteri@0.3.1'
+  - '@astrojs/mdx@7.0.0'
+  - '@astrojs/react@6.0.0'
+  - astro@7.0.0

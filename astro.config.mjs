@@ -1,3 +1,4 @@
+import { unified } from '@astrojs/markdown-remark';
 import mdx from '@astrojs/mdx';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
@@ -21,8 +22,22 @@ export default defineConfig({
     clientPrerender: true,
   },
   markdown: {
+    processor: unified({
+      gfm: true,
+      smartypants: true,
+      remarkPlugins: [[remarkToc, { headings: ['h2', 'h3', 'h4'] }]],
+      rehypePlugins: [
+        [rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'append' }]],
+        [rehypeCodeProps, []],
+        [
+          rehypeExternalLinks,
+          {
+            target: '_blank',
+          },
+        ],
+      ],
+    }),
     syntaxHighlight: 'shiki',
-    gfm: true,
     shikiConfig: {
       theme: 'vitesse-dark',
       wrap: true,
@@ -43,17 +58,6 @@ export default defineConfig({
         },
       ],
     },
-    remarkPlugins: [[remarkToc, { headings: ['h2', 'h3', 'h4'] }]],
-    rehypePlugins: [
-      [rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'append' }]],
-      [rehypeCodeProps, []],
-      [
-        rehypeExternalLinks,
-        {
-          target: '_blank',
-        },
-      ],
-    ],
   },
   integrations: [
     react(),
