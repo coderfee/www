@@ -7,6 +7,14 @@ export interface GitHubStats {
   name: string;
 }
 
+interface GitHubUser {
+  public_repos: number;
+  followers: number;
+  created_at: string;
+  avatar_url: string;
+  name: string | null;
+}
+
 export async function getGitHubStats(username: string): Promise<GitHubStats | null> {
   const CACHE_KEY = `gh_stats_v2_${username}`;
   const CACHE_TTL = 24 * 60 * 60 * 1000;
@@ -26,7 +34,7 @@ export async function getGitHubStats(username: string): Promise<GitHubStats | nu
   try {
     const userRes = await fetch(`https://api.github.com/users/${username}`);
     if (!userRes.ok) throw new Error('Failed to fetch user data');
-    const user = await userRes.json();
+    const user = (await userRes.json()) as GitHubUser;
 
     const reposRes = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`);
     if (!reposRes.ok) throw new Error('Failed to fetch repos data');

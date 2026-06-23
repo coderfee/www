@@ -7,6 +7,6 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": ["unplugin-icons/types/astro"]
+    "types": ["unplugin-icons/types/astro", "@cloudflare/workers-types"]
   }
 }

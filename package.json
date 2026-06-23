@@ -8,15 +8,14 @@
   },
   "scripts": {
     "dev": "pnpm run sync-local && astro dev",
-    "build": "pnpm run sync-remote && pnpm run sync-weread && astro build",
+    "build": "pnpm run sync-remote && astro build",
     "deploy": "pnpm build && wrangler deploy",
     "deploy:dry-run": "pnpm build && wrangler deploy --dry-run",
     "lint": "pnpm biome check ./src ./scripts && astro check --minimumSeverity warning",
     "lint:fix": "pnpm biome check ./src --write",
     "upgrade": "pnpm update && pnpmx @astrojs/upgrade",
     "sync-local": "node scripts/sync-local.mjs",
-    "sync-remote": "node scripts/sync-remote.mjs",
-    "sync-weread": "node scripts/sync-weread.mjs"
+    "sync-remote": "node scripts/sync-remote.mjs"
   },
   "dependencies": {
     "@astrojs/check": "0.9.9",
@@ -47,6 +46,7 @@
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.1073.0",
     "@biomejs/biome": "^2.5.0",
+    "@cloudflare/workers-types": "^4.20260621.1",
     "@commitlint/cli": "^21.0.2",
     "@commitlint/config-conventional": "^21.0.2",
     "@iconify-json/tabler": "^1.2.35",
