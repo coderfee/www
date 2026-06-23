@@ -88,7 +88,7 @@ export default function ReadingStats() {
   useEffect(() => {
     let mounted = true;
 
-    fetch('/api/weread/readdata')
+    fetch('/data/weread.json')
       .then((response) => {
         if (!response.ok) throw new Error(`fetch failed: ${response.status}`);
         return response.json() as Promise<WereadPayload>;
