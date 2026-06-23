@@ -11,7 +11,6 @@ import rehypeSlug from 'rehype-slug';
 import remarkToc from 'remark-toc';
 import Icons from 'unplugin-icons/vite';
 import r2Content from './integrations/r2-content/index.mjs';
-import wereadData from './integrations/weread-data/index.mjs';
 
 export default defineConfig({
   site: 'https://coderfee.com',
@@ -78,10 +77,6 @@ export default defineConfig({
       r2: {
         bucketName: 'obsidian',
       },
-    }),
-    wereadData({
-      outputFile: 'public/data/weread.json',
-      modes: ['weekly', 'monthly', 'annually', 'overall'],
     }),
     react(),
     mdx(),

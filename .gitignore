@@ -24,11 +24,10 @@ pnpm-debug.log*
 
 .idea/
 .vercel/
+.wrangler/
 .claude
 
 src/content/newsletter
 src/content/blog
-src/data/weread-readdata.json
-public/data/weread.json
 .alma-snapshots
 .migration-backups
