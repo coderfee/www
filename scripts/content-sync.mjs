@@ -50,11 +50,11 @@ export async function syncRemoteContent() {
 }
 
 async function fetchContentManifest() {
-  const apiBase = process.env.CONTENT_API_BASE || 'https://blog.coderfee.workers.dev';
-  const apiToken = process.env.CONTENT_API_TOKEN || process.env.API_TOKEN;
+  const apiBase = process.env.CONTENT_API_BASE || 'https://coderfee.com';
+  const apiToken = process.env.API_TOKEN;
 
   if (!apiToken) {
-    throw new Error('Missing CONTENT_API_TOKEN or API_TOKEN');
+    throw new Error('Missing API_TOKEN');
   }
 
   const url = new URL('/api/content/manifest', apiBase);
@@ -72,8 +72,8 @@ async function fetchContentManifest() {
 }
 
 async function fetchContentObject(key) {
-  const apiBase = process.env.CONTENT_API_BASE || 'https://blog.coderfee.workers.dev';
-  const apiToken = process.env.CONTENT_API_TOKEN || process.env.API_TOKEN;
+  const apiBase = process.env.CONTENT_API_BASE || 'https://coderfee.com';
+  const apiToken = process.env.API_TOKEN;
   const url = new URL('/api/content/object', apiBase);
   url.searchParams.set('key', key);
 
