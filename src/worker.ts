@@ -39,6 +39,7 @@ function getRequestBody(request: Request) {
 app.all('/api/blog/views', async (c) => {
   const upstreamUrl = new URL('/api/blog/views', c.env.API_BASE);
   const headers = getProxyHeaders(c.req.raw);
+  headers.set('authorization', `Bearer ${c.env.API_TOKEN}`);
 
   const signal = AbortSignal.timeout(API_TIMEOUT_MS);
 
