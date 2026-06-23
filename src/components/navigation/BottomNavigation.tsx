@@ -37,9 +37,6 @@ export default function BottomNavigation() {
   const handleClick = (path: string) => {
     vibrate('light');
     setActivePath(path);
-    setTimeout(() => {
-      window.location.href = path;
-    }, 200);
   };
 
   const isActive = (path: string) => {
@@ -70,8 +67,9 @@ export default function BottomNavigation() {
               const showPill = isHovered || (active && hoveredPath === null);
 
               return (
-                <motion.button
+                <motion.a
                   key={item.path}
+                  href={item.path}
                   whileTap={{ scale: 0.96 }}
                   onMouseEnter={() => setHoveredPath(item.path)}
                   onClick={() => handleClick(item.path)}
@@ -98,7 +96,7 @@ export default function BottomNavigation() {
                     className={`w-5 h-5 mb-0.5 transition-transform duration-300 ${active ? 'scale-110' : ''}`}
                   />
                   <span className={`text-[10px] leading-none tracking-tight font-medium`}>{item.name}</span>
-                </motion.button>
+                </motion.a>
               );
             })}
           </motion.nav>
