@@ -64,8 +64,6 @@ export async function syncLocalContent(options = {}) {
 }
 
 async function syncLocalCollection(collection) {
-  console.log(`- Syncing ${collection.name} from local source "${collection.sourceDir}"`);
-
   const sourceFiles = (await getLocalFiles(collection.sourceDir))
     .filter((file) => /\.(md|mdx)$/.test(file))
     .map(async (file) => ({
@@ -75,8 +73,6 @@ async function syncLocalCollection(collection) {
     }));
   const outputFiles = await collection.transform(await Promise.all(sourceFiles));
   await writeOutput(collection.outputDir, outputFiles);
-
-  console.log(`   - ${collection.name}: wrote ${outputFiles.length} files.`);
 
   return {
     name: collection.name,
@@ -194,12 +190,9 @@ function getRequiredEnv(name) {
 }
 
 async function syncRemoteCollection(collection) {
-  console.log(`- Syncing ${collection.name} from R2 prefix "${collection.prefix}"`);
-
   const remoteFiles = (await listR2Objects(collection.prefix, collection.r2)).filter(
     (item) => item.key && /\.(md|mdx)$/.test(item.key),
   );
-  console.log(`   - ${collection.name}: found ${remoteFiles.length} files.`);
 
   if (remoteFiles.length === 0) {
     throw new Error(`${collection.name} R2 prefix is empty: ${collection.prefix}`);
@@ -218,8 +211,6 @@ async function syncRemoteCollection(collection) {
   }
 
   await writeOutput(collection.outputDir, outputFiles);
-
-  console.log(`   - ${collection.name}: wrote ${outputFiles.length} files.`);
 
   return {
     name: collection.name,

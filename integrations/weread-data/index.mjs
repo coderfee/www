@@ -10,9 +10,8 @@ export default function wereadData(options = {}) {
     }
 
     syncedWereadData = true;
-    logger.info('Syncing WeRead data.');
     const summary = await syncWereadData(options);
-    logger.info(`Synced WeRead data ${summary.modes.join(', ')} to ${summary.outputFile}.`);
+    logger.info(`Synced WeRead data to ${summary.outputFile}.`);
   }
 
   return {

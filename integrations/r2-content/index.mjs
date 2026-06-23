@@ -10,7 +10,6 @@ export default function r2Content(options = {}) {
     }
 
     syncedRemoteContent = true;
-    logger.info('Syncing remote content from Cloudflare R2.');
     const summary = await syncRemoteContent(options);
     logger.info(
       `Synced newsletter ${summary.newsletter.outputFiles}/${summary.newsletter.remoteFiles}, blog ${summary.blog.outputFiles}/${summary.blog.remoteFiles}.`,
@@ -28,7 +27,6 @@ export default function r2Content(options = {}) {
         await syncRemoteContentOnce(logger);
       },
       'astro:server:setup': async ({ logger }) => {
-        logger.info('Syncing local content from Obsidian.');
         const summary = await syncLocalContent(options);
         logger.info(
           `Synced local newsletter ${summary.newsletter.outputFiles}/${summary.newsletter.sourceFiles}, blog ${summary.blog.outputFiles}/${summary.blog.sourceFiles}.`,
