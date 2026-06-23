@@ -213,6 +213,10 @@ async function syncRemoteCollection(collection) {
     })),
   );
   const outputFiles = await collection.transform(sourceFiles);
+  if (outputFiles.length === 0) {
+    throw new Error(`${collection.name} content output is empty after transform: ${collection.prefix}`);
+  }
+
   await writeOutput(collection.outputDir, outputFiles);
 
   console.log(`   - ${collection.name}: wrote ${outputFiles.length} files.`);
