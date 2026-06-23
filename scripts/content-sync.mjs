@@ -27,6 +27,12 @@ export async function syncLocalBlog() {
 }
 
 export async function syncRemoteContent() {
+  try {
+    return await syncRemoteContentFromManifest();
+  } catch (error) {
+    console.warn(`Worker content manifest sync failed, falling back to R2 SDK: ${getErrorMessage(error)}`);
+  }
+
   const r2 = createR2Client();
 
   const newsletter = await syncRemoteCollection({
@@ -48,6 +54,133 @@ export async function syncRemoteContent() {
   });
 
   return { newsletter, blog };
+}
+
+async function syncRemoteContentFromManifest() {
+  const manifest = await fetchContentManifest();
+
+  const newsletter = await syncManifestCollection({
+    name: 'newsletter',
+    prefix: NEWSLETTER_R2_PREFIX,
+    cacheDir: '/tmp/newsletters',
+    outputDir: NEWSLETTER_OUTPUT_DIR,
+    transform: transformNewsletter,
+    remoteFiles: manifest.collections?.newsletter ?? [],
+  });
+
+  const blog = await syncManifestCollection({
+    name: 'blog',
+    prefix: BLOG_R2_PREFIX,
+    cacheDir: '/tmp/blog-posts',
+    outputDir: BLOG_OUTPUT_DIR,
+    transform: transformBlog,
+    remoteFiles: manifest.collections?.blog ?? [],
+  });
+
+  return { newsletter, blog };
+}
+
+async function fetchContentManifest() {
+  const apiBase = process.env.CONTENT_API_BASE || 'https://blog.coderfee.workers.dev';
+  const apiToken = process.env.CONTENT_API_TOKEN || process.env.API_TOKEN;
+
+  if (!apiToken) {
+    throw new Error('Missing CONTENT_API_TOKEN or API_TOKEN');
+  }
+
+  const url = new URL('/api/content/manifest', apiBase);
+  const response = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${apiToken}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`fetch content manifest failed: ${response.status}`);
+  }
+
+  return response.json();
+}
+
+async function fetchContentObject(key) {
+  const apiBase = process.env.CONTENT_API_BASE || 'https://blog.coderfee.workers.dev';
+  const apiToken = process.env.CONTENT_API_TOKEN || process.env.API_TOKEN;
+  const url = new URL('/api/content/object', apiBase);
+  url.searchParams.set('key', key);
+
+  const response = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${apiToken}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`fetch content object failed: ${key}: ${response.status}`);
+  }
+
+  return response.text();
+}
+
+async function syncManifestCollection(collection) {
+  console.log(`- Syncing ${collection.name} from Worker manifest prefix "${collection.prefix}"`);
+
+  await fs.mkdir(collection.cacheDir, { recursive: true });
+
+  const remoteFiles = collection.remoteFiles.filter((item) => item.key && !item.key.endsWith('/'));
+  console.log(`   - ${collection.name}: found ${remoteFiles.length} files in manifest.`);
+
+  if (remoteFiles.length === 0) {
+    throw new Error(`${collection.name} manifest prefix is empty: ${collection.prefix}`);
+  }
+
+  await syncManifestToCache(collection, remoteFiles);
+
+  const outputFiles = await collection.transform(collection.cacheDir);
+  await writeOutput(collection.outputDir, outputFiles);
+
+  console.log(`   - ${collection.name}: wrote ${outputFiles.length} files.`);
+
+  return {
+    name: collection.name,
+    prefix: collection.prefix,
+    remoteFiles: remoteFiles.length,
+    outputFiles: outputFiles.length,
+  };
+}
+
+async function syncManifestToCache(collection, remoteFiles) {
+  const manifestPath = path.join(collection.cacheDir, '.manifest.json');
+  const currentManifest = Object.fromEntries(
+    remoteFiles.map((item) => [
+      item.key,
+      {
+        etag: item.etag,
+        lastModified: item.lastModified,
+        size: item.size,
+      },
+    ]),
+  );
+
+  const previousManifest = await readJson(manifestPath);
+
+  if (JSON.stringify(previousManifest) === JSON.stringify(currentManifest)) {
+    console.log(`   - ${collection.name}: cache is up to date.`);
+    return;
+  }
+
+  console.log(`   - ${collection.name}: downloading ${remoteFiles.length} files.`);
+  await fs.rm(collection.cacheDir, { recursive: true, force: true });
+  await fs.mkdir(collection.cacheDir, { recursive: true });
+
+  for (const item of remoteFiles) {
+    const relativePath = item.key.slice(collection.prefix.length);
+    const localPath = path.join(collection.cacheDir, relativePath);
+
+    await fs.mkdir(path.dirname(localPath), { recursive: true });
+    await fs.writeFile(localPath, await fetchContentObject(item.key));
+  }
+
+  await fs.writeFile(manifestPath, JSON.stringify(currentManifest, null, 2));
 }
 
 function createR2Client() {
@@ -174,6 +307,14 @@ async function readJson(file) {
     }
     throw error;
   }
+}
+
+function getErrorMessage(error) {
+  if (error instanceof Error) {
+    return error.message;
+  }
+
+  return String(error);
 }
 
 async function getLocalFiles(dir) {
