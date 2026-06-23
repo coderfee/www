@@ -57,11 +57,7 @@ pnpm lint
 
 ### 部署平台
 
-本站使用 Cloudflare 服务进行部署：
-
-- [Cloudflare Pages](https://pages.cloudflare.com/)
-- [Cloudflare Workers](https://workers.cloudflare.com/)
-- [Cloudflare D1](https://developers.cloudflare.com/d1/)
+本站部署在 Cloudflare。
 
 ## License
 

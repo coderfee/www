@@ -57,11 +57,7 @@ pnpm lint
 
 ### Deployment
 
-This site is deployed with Cloudflare services:
-
-- [Cloudflare Pages](https://pages.cloudflare.com/)
-- [Cloudflare Workers](https://workers.cloudflare.com/)
-- [Cloudflare D1](https://developers.cloudflare.com/d1/)
+This site is deployed on Cloudflare.
 
 ## License
 
