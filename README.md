@@ -1,65 +1,74 @@
 # coderfee's blog
 
+[简体中文](./README.zh.md)
+
 ![Astro](https://img.shields.io/badge/Astro-FF5D01?style=for-the-badge&logo=astro&logoColor=white)
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
 
-> 个人博客，基于 Astro 与 React 开发，专注于性能与用户体验
+> A personal blog built with Astro and React, focused on performance and user experience.
 
-📝 [在线访问 coderfee.com](https://coderfee.com)
+📝 [Visit coderfee.com](https://coderfee.com)
 
-## ✨ 特性
+## ✨ Features
 
-- ⚡️ 基于 [Astro](https://astro.build/) 构建，极速加载体验
-- 🔥 使用 [React](https://reactjs.org/) 和 [TypeScript](https://www.typescriptlang.org/) 开发交互组件 
-- 💎 [TailwindCSS 4.x](https://tailwindcss.com/) 驱动的优雅 UI 设计
-- 🔍 内置搜索功能与标签导航
-- 📱 响应式设计，完美适配各种设备
-- 🌐 SEO 友好，支持 RSS 订阅
+- ⚡️ Built with [Astro](https://astro.build/) for a fast loading experience
+- 🔥 Interactive components powered by [React](https://reactjs.org/) and [TypeScript](https://www.typescriptlang.org/)
+- 💎 Elegant UI built with [Tailwind CSS 4.x](https://tailwindcss.com/)
+- 🔍 Built-in search and tag navigation
+- 📱 Responsive design for mobile and desktop devices
+- 🌐 SEO friendly, with RSS support
 
-## 🚀 快速开始
+## 🚀 Getting Started
 
-### 环境要求
+### Requirements
 
-- Node.js 16+
-- pnpm 7+
+- Node.js 24.13.0+
+- pnpm 11.x
 
-### 安装与运行
+### Install and Run
 
 ```bash
-# 克隆仓库
-git clone https://github.com/coderfe/www.git
+# Clone the repository
+git clone https://github.com/coderfee/www.git
 
-# 进入项目目录
+# Enter the project directory
 cd www
 
-# 安装依赖
+# Install dependencies
 pnpm install
 
-# 启动开发服务器
+# Start the development server
 pnpm dev
 ```
 
-现在你可以在浏览器中访问 `http://localhost:4321` 查看网站效果。
+Open `http://localhost:4321` in your browser.
 
-## 📦 构建与部署
+## 📦 Build and Deploy
 
 ```bash
-# 构建生产环境版本
+# Build for production
 pnpm build
 
-# 本地预览生产构建
-pnpm preview
+# Run checks
+pnpm lint
 ```
 
-### 部署平台
+### Deployment
 
-本站使用 Cloudflare 服务进行部署：
+This site is deployed with Cloudflare services:
 
 - [Cloudflare Pages](https://pages.cloudflare.com/)
 - [Cloudflare Workers](https://workers.cloudflare.com/)
 - [Cloudflare D1](https://developers.cloudflare.com/d1/)
 
+## License
+
+Code is licensed under the [MIT License](./LICENSE).
+
+Blog posts, newsletters, images, and other content under `src/content`, `public`, and synced external assets are copyright © coderfee unless otherwise stated.
+
 ---
-*部分代码由 AI 生成*
+
+*Some code in this project was generated with AI assistance.*
