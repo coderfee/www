@@ -2,7 +2,7 @@
   "name": "www",
   "type": "module",
   "version": "3.0.0",
-  "packageManager": "pnpm@11.13.1",
+  "packageManager": "pnpm@11.17.0",
   "engines": {
     "node": ">=24.13.0"
   },
@@ -22,17 +22,17 @@
     "@astrojs/react": "6.0.0",
     "@astrojs/rss": "4.0.18",
     "@astrojs/sitemap": "3.7.3",
-    "@nanostores/persistent": "^1.3.4",
+    "@nanostores/persistent": "^1.3.5",
     "@nanostores/react": "^1.1.0",
     "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "astro": "7.0.0",
     "framer-motion": "^12.42.2",
-    "hono": "^4.12.30",
-    "nanostores": "^1.4.0",
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7",
+    "hono": "^4.12.32",
+    "nanostores": "^1.4.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-external-links": "^3.0.0",
     "rehype-mdx-code-props": "^3.0.1",
@@ -43,12 +43,12 @@
     "typescript": "^7.0.2"
   },
   "devDependencies": {
-    "@aws-sdk/client-s3": "^3.1089.0",
-    "@biomejs/biome": "^2.5.4",
-    "@cloudflare/workers-types": "^5.20260717.1",
+    "@aws-sdk/client-s3": "^3.1094.0",
+    "@biomejs/biome": "^2.5.5",
+    "@cloudflare/workers-types": "^5.20260724.1",
     "@commitlint/cli": "^21.2.1",
     "@commitlint/config-conventional": "^21.2.0",
-    "@iconify-json/tabler": "^1.2.35",
+    "@iconify-json/tabler": "^1.2.37",
     "@iconify/react": "^6.0.2",
     "@tailwindcss/typography": "^0.5.20",
     "@types/node": "latest",
@@ -56,6 +56,6 @@
     "dotenv": "^17.4.2",
     "lefthook": "^2.1.10",
     "unplugin-icons": "^23.0.1",
-    "wrangler": "^4.112.0"
+    "wrangler": "^4.114.0"
   }
 }
