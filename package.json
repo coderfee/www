@@ -43,7 +43,7 @@
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "@aws-sdk/client-s3": "^3.1094.0",
+    "@aws-sdk/client-s3": "^3.1095.0",
     "@biomejs/biome": "^2.5.5",
     "@cloudflare/workers-types": "^5.20260724.1",
     "@commitlint/cli": "^21.2.1",
