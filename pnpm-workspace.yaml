@@ -3,3 +3,6 @@ allowBuilds:
   lefthook: true
   sharp: true
   workerd: true
+
+overrides:
+  style-to-js: "1.1.21"
