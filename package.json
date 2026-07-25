@@ -40,7 +40,7 @@
     "remark-toc": "^9.0.0",
     "tailwindcss": "^4.3.3",
     "tailwindcss-animate": "^1.0.7",
-    "typescript": "^7.0.2"
+    "typescript": "^6.0.3"
   },
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.1094.0",
