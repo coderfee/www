@@ -52,6 +52,21 @@ app.all('/api/blog/views', async (c) => {
       signal,
     });
 
+    if (!response.ok) {
+      console.error('[ViewCounts Proxy] Upstream request failed:', {
+        method: c.req.raw.method,
+        status: response.status,
+        statusText: response.statusText,
+      });
+      return c.json(
+        {
+          success: false,
+          message: '访问统计暂时不可用，请稍后再试',
+        },
+        502,
+      );
+    }
+
     return response;
   } catch (error) {
     console.error('[ViewCounts Proxy] Failed to proxy request:', error);
@@ -59,7 +74,7 @@ app.all('/api/blog/views', async (c) => {
     return c.json(
       {
         success: false,
-        message: 'View counts are temporarily unavailable',
+        message: '访问统计暂时不可用，请稍后再试',
       },
       502,
     );
