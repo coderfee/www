@@ -2,17 +2,31 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
 const title = '页面未找到';
-const description = '你访问的页面不存在或已经移动。';
+const description = '这个页面可能已经移动，或链接地址需要更新。';
 ---
 
 <BaseLayout {title} {description} showTopNavigation={true} showBottomNavigation={true}>
   <section
     class="mx-auto flex min-h-[calc(100dvh-9rem)] max-w-4xl items-center justify-center px-4 py-16 pb-36 select-none sm:px-6 sm:py-24 sm:pb-28"
   >
-    <span class="font-major flex flex-col text-7xl leading-none text-zinc-950 sm:block sm:text-9xl dark:text-zinc-50">
-      <span>4</span>
-      <span>0</span>
-      <span>4</span>
-    </span>
+    <div class="flex items-center gap-8 sm:gap-12">
+      <span class="font-major flex flex-col text-7xl leading-none text-zinc-950 sm:block sm:text-9xl dark:text-zinc-50">
+        <span>4</span>
+        <span>0</span>
+        <span>4</span>
+      </span>
+      <div class="max-w-xs">
+        <h1 class="text-xl font-semibold text-zinc-950 dark:text-zinc-50">页面走丢了</h1>
+        <p class="mt-3 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+          这个链接可能已经更新，回到首页继续浏览吧。
+        </p>
+        <a
+          class="mt-5 inline-flex text-sm font-medium text-zinc-950 underline decoration-zinc-400 underline-offset-4 hover:decoration-zinc-950 dark:text-zinc-50 dark:hover:decoration-zinc-50"
+          href="/"
+        >
+          返回首页
+        </a>
+      </div>
+    </div>
   </section>
 </BaseLayout>
