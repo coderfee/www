@@ -6,3 +6,4 @@ allowBuilds:
 
 overrides:
   style-to-js: "1.1.21"
+  typescript: npm:typescript-native-bridge@6.0.3-bridge.7.tsgo.7.0.2
