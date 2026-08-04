@@ -29,7 +29,7 @@
     "@types/react-dom": "^19.2.3",
     "astro": "^7.1.4",
     "framer-motion": "^12.42.2",
-    "hono": "^4.12.32",
+    "hono": "^4.12.34",
     "nanostores": "^1.4.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
