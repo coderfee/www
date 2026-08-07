@@ -63,12 +63,12 @@ export default defineConfig({
   integrations: [
     r2Content({
       local: {
-        newsletterDir: '/Users/chen/Obsidian/notes/03 Newsletter',
-        blogDir: '/Users/chen/Obsidian/notes/02 Writing/03 Blog',
+        newsletterDir: '/Users/chen/Obsidian/notes/Newsletter',
+        blogDir: '/Users/chen/Obsidian/notes/Writing/Blog',
       },
       remote: {
-        newsletterPrefix: '03 Newsletter/',
-        blogPrefix: '02 Writing/03 Blog/',
+        newsletterPrefix: 'Newsletter/',
+        blogPrefix: 'Writing/Blog/',
       },
       output: {
         newsletterDir: 'src/content/newsletter',

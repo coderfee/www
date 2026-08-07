@@ -7,8 +7,8 @@ Astro integration that syncs Markdown content before Astro starts.
 `pnpm dev` runs `astro dev`. During `astro:server:setup`, this integration syncs local content from:
 
 ```text
-/Users/chen/Obsidian/notes/03 Newsletter -> src/content/newsletter
-/Users/chen/Obsidian/notes/02 Writing/03 Blog -> src/content/blog
+/Users/chen/Obsidian/notes/Newsletter -> src/content/newsletter
+/Users/chen/Obsidian/notes/Writing/Blog -> src/content/blog
 ```
 
 ## Production Build
@@ -32,12 +32,12 @@ export default defineConfig({
   integrations: [
     r2Content({
       local: {
-        newsletterDir: '/Users/chen/Obsidian/notes/03 Newsletter',
-        blogDir: '/Users/chen/Obsidian/notes/02 Writing/03 Blog',
+        newsletterDir: '/Users/chen/Obsidian/notes/Newsletter',
+        blogDir: '/Users/chen/Obsidian/notes/Writing/Blog',
       },
       remote: {
-        newsletterPrefix: '03 Newsletter/',
-        blogPrefix: '02 Writing/03 Blog/',
+        newsletterPrefix: 'Newsletter/',
+        blogPrefix: 'Writing/Blog/',
       },
       output: {
         newsletterDir: 'src/content/newsletter',
@@ -54,6 +54,6 @@ export default defineConfig({
 `pnpm build` runs `astro build`; during `astro:build:start`, this integration syncs content from Cloudflare R2:
 
 ```text
-03 Newsletter/ -> src/content/newsletter
-02 Writing/03 Blog/ -> src/content/blog
+Newsletter/ -> src/content/newsletter
+Writing/Blog/ -> src/content/blog
 ```

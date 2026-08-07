@@ -4,12 +4,12 @@ import { GetObjectCommand, ListObjectsV2Command, S3Client } from '@aws-sdk/clien
 
 export const DEFAULT_REMOTE_CONTENT_OPTIONS = {
   local: {
-    blogDir: '/Users/chen/Obsidian/notes/02 Writing/03 Blog',
-    newsletterDir: '/Users/chen/Obsidian/notes/03 Newsletter',
+    blogDir: '/Users/chen/Obsidian/notes/Writing/Blog',
+    newsletterDir: '/Users/chen/Obsidian/notes/Newsletter',
   },
   remote: {
-    blogPrefix: '02 Writing/03 Blog/',
-    newsletterPrefix: '03 Newsletter/',
+    blogPrefix: 'Writing/Blog/',
+    newsletterPrefix: 'Newsletter/',
   },
   output: {
     blogDir: 'src/content/blog',
