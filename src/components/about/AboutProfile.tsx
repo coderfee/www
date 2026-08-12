@@ -36,7 +36,7 @@ const socialLinks: SocialLink[] = [
   },
   {
     name: 'Email',
-    url: `mailto:${base64Decode(EMAIL_ENCODED)}`,
+    url: 'https://go.coderfee.com/mail',
     icon: 'tabler:mail',
     color: 'text-[#0078D4]',
     bgColor: 'bg-[#0078D4]/[0.05] dark:bg-[#0078D4]/[0.1] hover:bg-[#0078D4]/[0.08] dark:hover:bg-[#0078D4]/[0.15]',

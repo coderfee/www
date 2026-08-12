@@ -63,7 +63,9 @@ export default function EmailModal({ isOpen, onClose, isCopied, onCopy }: Props)
             </div>
           </button>
           <a
-            href={`mailto:${email}`}
+            href="https://go.coderfee.com/mail"
+            target="_blank"
+            rel="noopener"
             onClick={() => vibrate('light')}
             className="w-full py-3 bg-[#0078D4] hover:bg-[#006cbd] text-white rounded-2xl text-center font-bold transition-all shadow-lg flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98]"
           >
