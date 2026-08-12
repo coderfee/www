@@ -19,7 +19,7 @@ import type { Friend, ModalType, SocialLink } from './types';
 const socialLinks: SocialLink[] = [
   {
     name: 'GitHub',
-    url: 'https://github.com/coderfee',
+    url: 'https://go.coderfee.com/github',
     icon: 'tabler:brand-github',
     color: 'text-[#181717] dark:text-zinc-100',
     bgColor: 'bg-[#181717]/[0.03] dark:bg-white/[0.05] hover:bg-[#181717]/[0.06] dark:hover:bg-white/[0.08]',
@@ -28,7 +28,7 @@ const socialLinks: SocialLink[] = [
   },
   {
     name: 'X',
-    url: 'https://x.com/coderfee',
+    url: 'https://go.coderfee.com/x',
     icon: 'tabler:brand-x',
     color: 'text-zinc-900 dark:text-zinc-100',
     bgColor: 'bg-zinc-900/[0.03] dark:bg-white/[0.05] hover:bg-zinc-900/[0.06] dark:hover:bg-white/[0.08]',
@@ -54,7 +54,7 @@ const socialLinks: SocialLink[] = [
   },
   {
     name: 'RSS',
-    url: '/rss.xml',
+    url: 'https://go.coderfee.com/rss',
     icon: 'tabler:rss',
     color: 'text-[#EE802F]',
     bgColor: 'bg-[#EE802F]/[0.05] dark:bg-[#EE802F]/[0.1] hover:bg-[#EE802F]/[0.08] dark:hover:bg-[#EE802F]/[0.15]',
@@ -166,7 +166,7 @@ export default function AboutProfile() {
           isOpen={activeModal === 'rss'}
           onClose={closeModal}
           isCopied={copiedType === 'rss'}
-          onCopy={() => handleCopy('https://coderfee.com/rss.xml', 'rss')}
+          onCopy={() => handleCopy('https://go.coderfee.com/rss', 'rss')}
         />
         <SitemapModal isOpen={activeModal === 'sitemap'} onClose={closeModal} />
         <FriendModal

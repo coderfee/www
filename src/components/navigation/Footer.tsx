@@ -6,17 +6,17 @@ import { motion } from 'framer-motion';
 const socialLinks = [
   {
     name: 'GitHub',
-    url: 'https://github.com/coderfee',
+    url: 'https://go.coderfee.com/github',
     icon: 'tabler:brand-github',
   },
   {
     name: 'Twitter',
-    url: 'https://twitter.com/coderfee',
+    url: 'https://go.coderfee.com/x',
     icon: 'tabler:brand-x',
   },
   {
     name: 'RSS',
-    url: '/rss.xml',
+    url: 'https://go.coderfee.com/rss',
     icon: 'tabler:rss',
   },
   {

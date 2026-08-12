@@ -52,7 +52,7 @@ export default function GitHubModal({ isOpen, onClose, stats }: Props) {
               ))}
             </div>
             <a
-              href="https://github.com/coderfee"
+              href="https://go.coderfee.com/github"
               target="_blank"
               rel="noopener"
               onClick={() => vibrate('light')}
