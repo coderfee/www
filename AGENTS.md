@@ -12,6 +12,14 @@
 6. 遵循 MDX frontmatter 格式（通过查看现有文章自动发现）
 7. 响应式设计所有新功能都应该在移动端测试
 
+## 提交信息规范
+
+- 使用 Conventional Commits 格式：`<type>(<scope>): <subject>`
+- 提交信息必须使用英文
+- 只写单行 header，不写正文（body）；必要时通过 scope 补充上下文
+- 常用 type: `feat`、`fix`、`refactor`、`chore`、`docs`、`style`、`perf`
+- 提交前可先查看 `git log` 对齐历史风格
+
 
 ## 项目概述
 
