@@ -4,6 +4,7 @@ interface Env {
   ASSETS: Fetcher;
   API_BASE: string;
   API_TOKEN: string;
+  GITHUB_TOKEN?: string;
 }
 
 const API_TIMEOUT_MS = 3000;
@@ -128,6 +129,83 @@ app.get('/api/weread/readdata', async (c) => {
       {
         success: false,
         message: 'WeRead data is temporarily unavailable',
+      },
+      502,
+    );
+  }
+});
+
+const GITHUB_STATS_CACHE_KEY = 'https://blog.internal/api/github/stats';
+const GITHUB_STATS_CACHE_TTL_S = 60 * 60;
+
+interface GitHubUser {
+  public_repos: number;
+  followers: number;
+  created_at: string;
+  avatar_url: string;
+  name: string | null;
+}
+
+async function fetchGitHubStats(env: Env, username: string) {
+  const headers: Record<string, string> = {
+    accept: 'application/vnd.github+json',
+    'user-agent': 'blog-worker',
+  };
+  if (env.GITHUB_TOKEN) {
+    headers.authorization = `Bearer ${env.GITHUB_TOKEN}`;
+  }
+
+  const [userRes, reposRes] = await Promise.all([
+    fetch(`https://api.github.com/users/${username}`, { headers }),
+    fetch(`https://api.github.com/users/${username}/repos?per_page=100`, { headers }),
+  ]);
+
+  if (!userRes.ok) throw new Error(`github user failed: ${userRes.status}`);
+  if (!reposRes.ok) throw new Error(`github repos failed: ${reposRes.status}`);
+
+  const user = (await userRes.json()) as GitHubUser;
+  const repos: { stargazers_count: number }[] = await reposRes.json();
+
+  return {
+    repos: user.public_repos,
+    followers: user.followers,
+    stars: repos.reduce((acc, r) => acc + (r.stargazers_count || 0), 0),
+    since: new Date(user.created_at).getFullYear(),
+    avatar: user.avatar_url,
+    name: user.name || username,
+  };
+}
+
+app.get('/api/github/stats', async (c) => {
+  const username = c.req.query('username') || 'coderfee';
+
+  const cache = (caches as unknown as { default: Cache }).default;
+  const cached = await cache.match(GITHUB_STATS_CACHE_KEY);
+  if (cached) {
+    return cached;
+  }
+
+  try {
+    const stats = await fetchGitHubStats(c.env, username);
+
+    const response = new Response(JSON.stringify({ data: stats }), {
+      status: 200,
+      headers: {
+        'content-type': 'application/json; charset=utf-8',
+        'cache-control': `public, max-age=${GITHUB_STATS_CACHE_TTL_S}`,
+      },
+    });
+
+    c.executionCtx.waitUntil(cache.put(GITHUB_STATS_CACHE_KEY, response.clone()));
+
+    return response;
+  } catch (error) {
+    console.error('[GitHub Proxy] Failed to fetch stats:', error);
+
+    return c.json(
+      {
+        success: false,
+        message: 'GitHub stats are temporarily unavailable',
       },
       502,
     );

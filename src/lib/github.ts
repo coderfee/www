@@ -7,14 +7,6 @@ export interface GitHubStats {
   name: string;
 }
 
-interface GitHubUser {
-  public_repos: number;
-  followers: number;
-  created_at: string;
-  avatar_url: string;
-  name: string | null;
-}
-
 export async function getGitHubStats(username: string): Promise<GitHubStats | null> {
   const CACHE_KEY = `gh_stats_v2_${username}`;
   const CACHE_TTL = 24 * 60 * 60 * 1000;
@@ -32,27 +24,13 @@ export async function getGitHubStats(username: string): Promise<GitHubStats | nu
   }
 
   try {
-    const userRes = await fetch(`https://api.github.com/users/${username}`);
-    if (!userRes.ok) throw new Error('Failed to fetch user data');
-    const user = (await userRes.json()) as GitHubUser;
+    const res = await fetch(`/api/github/stats?username=${encodeURIComponent(username)}`);
+    if (!res.ok) throw new Error('Failed to fetch GitHub stats');
 
-    const reposRes = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`);
-    if (!reposRes.ok) throw new Error('Failed to fetch repos data');
-    const repos: { stargazers_count: number }[] = await reposRes.json();
+    const { data } = (await res.json()) as { data: GitHubStats };
 
-    const totalStars = repos.reduce((acc, r) => acc + (r.stargazers_count || 0), 0);
-
-    const stats: GitHubStats = {
-      repos: user.public_repos,
-      followers: user.followers,
-      stars: totalStars,
-      since: new Date(user.created_at).getFullYear(),
-      avatar: user.avatar_url,
-      name: user.name || username,
-    };
-
-    localStorage.setItem(CACHE_KEY, JSON.stringify({ data: stats, timestamp: Date.now() }));
-    return stats;
+    localStorage.setItem(CACHE_KEY, JSON.stringify({ data, timestamp: Date.now() }));
+    return data;
   } catch (error) {
     console.error('GitHub API Error:', error);
     return null;
