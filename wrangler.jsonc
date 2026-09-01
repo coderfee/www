@@ -2,6 +2,7 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "blog",
   "main": "src/worker.ts",
+  "keep_vars": true,
   "compatibility_date": "2026-06-23",
   "placement": {
     "mode": "smart"
