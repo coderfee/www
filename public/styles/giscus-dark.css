@@ -1,0 +1,189 @@
+main {
+  color-scheme: dark;
+  --color-prettylights-syntax-comment: #a1a1aa;
+  --color-prettylights-syntax-constant: #7dd3fc;
+  --color-prettylights-syntax-entity: #d8b4fe;
+  --color-prettylights-syntax-storage-modifier-import: #e4e4e7;
+  --color-prettylights-syntax-entity-tag: #86efac;
+  --color-prettylights-syntax-keyword: #fda4af;
+  --color-prettylights-syntax-string: #bae6fd;
+  --color-prettylights-syntax-variable: #fcd34d;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #fb7185;
+  --color-prettylights-syntax-invalid-illegal-text: #fafafa;
+  --color-prettylights-syntax-invalid-illegal-bg: #9f1239;
+  --color-prettylights-syntax-carriage-return-text: #fafafa;
+  --color-prettylights-syntax-carriage-return-bg: #be123c;
+  --color-prettylights-syntax-string-regexp: #86efac;
+  --color-prettylights-syntax-markup-list: #fde68a;
+  --color-prettylights-syntax-markup-heading: #7dd3fc;
+  --color-prettylights-syntax-markup-italic: #d4d4d8;
+  --color-prettylights-syntax-markup-bold: #f4f4f5;
+  --color-prettylights-syntax-markup-deleted-text: #fecdd3;
+  --color-prettylights-syntax-markup-deleted-bg: #4c0519;
+  --color-prettylights-syntax-markup-inserted-text: #bbf7d0;
+  --color-prettylights-syntax-markup-inserted-bg: #052e16;
+  --color-prettylights-syntax-markup-changed-text: #fde68a;
+  --color-prettylights-syntax-markup-changed-bg: #451a03;
+  --color-prettylights-syntax-markup-ignored-text: #d4d4d8;
+  --color-prettylights-syntax-markup-ignored-bg: #075985;
+  --color-prettylights-syntax-meta-diff-range: #d8b4fe;
+  --color-prettylights-syntax-brackethighlighter-angle: #a1a1aa;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #52525b;
+  --color-prettylights-syntax-constant-other-reference-link: #bae6fd;
+  --color-btn-text: #d4d4d8;
+  --color-btn-bg: #27272a;
+  --color-btn-border: #3f3f46;
+  --color-btn-shadow: 0 1px 2px rgb(0 0 0 / 18%);
+  --color-btn-inset-shadow: 0 0 transparent;
+  --color-btn-hover-bg: #3f3f46;
+  --color-btn-hover-border: #52525b;
+  --color-btn-active-bg: #52525b;
+  --color-btn-active-border: #71717a;
+  --color-btn-selected-bg: #3f3f46;
+  --color-btn-primary-text: #18181b;
+  --color-btn-primary-bg: #f4f4f5;
+  --color-btn-primary-border: #f4f4f5;
+  --color-btn-primary-shadow: 0 1px 2px rgb(0 0 0 / 24%);
+  --color-btn-primary-inset-shadow: 0 0 transparent;
+  --color-btn-primary-hover-bg: #e4e4e7;
+  --color-btn-primary-hover-border: #e4e4e7;
+  --color-btn-primary-selected-bg: #d4d4d8;
+  --color-btn-primary-selected-shadow: 0 0 transparent;
+  --color-btn-primary-disabled-text: rgb(24 24 27 / 55%);
+  --color-btn-primary-disabled-bg: #71717a;
+  --color-btn-primary-disabled-border: #71717a;
+  --color-action-list-item-default-hover-bg: rgb(63 63 70 / 60%);
+  --color-action-list-item-inline-divider: #3f3f46;
+  --color-action-list-item-default-selected-bg: #3f3f46;
+  --color-action-list-item-default-selected-border: #52525b;
+  --color-action-list-item-danger-hover-bg: rgb(190 18 60 / 16%);
+  --color-action-list-item-danger-active-bg: rgb(190 18 60 / 24%);
+  --color-action-list-item-danger-hover-text: #fda4af;
+  --color-segmented-control-bg: #27272a;
+  --color-segmented-control-button-bg: #3f3f46;
+  --color-segmented-control-button-selected-border: #52525b;
+  --color-fg-default: #e4e4e7;
+  --color-fg-muted: #a1a1aa;
+  --color-fg-subtle: #71717a;
+  --color-canvas-default: transparent;
+  --color-canvas-overlay: #18181b;
+  --color-canvas-inset: #18181b;
+  --color-canvas-subtle: #27272a;
+  --color-border-default: #3f3f46;
+  --color-border-muted: #27272a;
+  --color-neutral-muted: #3f3f46;
+  --color-accent-fg: #e4e4e7;
+  --color-accent-emphasis: #f4f4f5;
+  --color-accent-muted: #52525b;
+  --color-accent-subtle: #27272a;
+  --color-success-fg: #4ade80;
+  --color-attention-fg: #facc15;
+  --color-attention-muted: #713f12;
+  --color-attention-subtle: #422006;
+  --color-danger-fg: #fb7185;
+  --color-danger-muted: #881337;
+  --color-danger-subtle: #4c0519;
+  --color-primer-shadow-inset: 0 0 transparent;
+  --color-primer-shadow-focus: 0 0 0 2px rgb(161 161 170 / 22%);
+  --color-scale-gray-1: #e4e4e7;
+  --color-scale-gray-7: #3f3f46;
+  --color-scale-blue-1: #d4d4d8;
+  --color-scale-blue-8: #27272a;
+  --color-social-reaction-bg-hover: #27272a;
+  --color-social-reaction-bg-reacted-hover: #3f3f46;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.gsc-header {
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed rgb(63 63 70 / 75%);
+}
+
+.gsc-comment-box {
+  overflow: hidden;
+  border: 1px solid #3f3f46;
+  border-radius: 0.75rem;
+  background: rgb(39 39 42 / 55%);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 14%);
+}
+
+.gsc-comment-box-tabs {
+  border-bottom-color: #3f3f46;
+}
+
+.gsc-comment-box-textarea {
+  min-height: 7.5rem;
+  border-radius: 0.625rem;
+  background: #18181b;
+  line-height: 1.7;
+}
+
+.gsc-comment-box-textarea:focus {
+  border-color: #71717a;
+  box-shadow: 0 0 0 3px rgb(161 161 170 / 14%);
+}
+
+.gsc-comment-box-bottom {
+  border-top-color: #3f3f46;
+}
+
+.gsc-comment,
+.gsc-reply {
+  border-radius: 0.75rem;
+}
+
+.gsc-replies > .gsc-comment {
+  border-color: #3f3f46;
+  background: rgb(39 39 42 / 45%);
+}
+
+.gsc-comment-author-avatar img {
+  border-radius: 0.625rem;
+}
+
+.gsc-comment-content {
+  line-height: 1.75;
+}
+
+.gsc-comment-content blockquote {
+  border-left-color: #52525b;
+  color: #d4d4d8;
+}
+
+.gsc-comment-content pre,
+.gsc-comment-content code {
+  border-radius: 0.5rem;
+}
+
+.btn {
+  border-radius: 9999px;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+.gsc-social-reaction-summary-item,
+.gsc-reaction-button {
+  border-radius: 9999px;
+}
+
+.gsc-timeline > :is(.gsc-comment, .gsc-reply) + :is(.gsc-comment, .gsc-reply) {
+  border-top: 1px dashed rgb(63 63 70 / 75%);
+}
+
+@media (max-width: 480px) {
+  .gsc-comment-box-textarea {
+    min-height: 6.5rem;
+  }
+
+  .gsc-header {
+    padding-bottom: 0.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition: none;
+  }
+}

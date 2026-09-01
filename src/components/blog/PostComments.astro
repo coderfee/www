@@ -10,8 +10,13 @@
 </section>
 
 <script is:inline>
+  const GISCUS_THEMES = {
+    light: 'https://coderfee.com/styles/giscus-light.css',
+    dark: 'https://coderfee.com/styles/giscus-dark.css',
+  };
+
   function getGiscusTheme() {
-    return 'https://coderfee.com/styles/giscus.css';
+    return document.documentElement.classList.contains('dark') ? GISCUS_THEMES.dark : GISCUS_THEMES.light;
   }
 
   function setGiscusTheme() {

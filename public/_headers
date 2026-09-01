@@ -4,5 +4,5 @@ https://assets.coderfee.com/*
 https://api.coderfee.com/*
   X-Robots-Tag: noindex
 
-/styles/giscus.css
+/styles/*
   Access-Control-Allow-Origin: https://giscus.app
