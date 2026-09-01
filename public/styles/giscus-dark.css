@@ -118,7 +118,7 @@ main {
   border-radius: 0;
 }
 
-.gsc-comment-box-tabs > div > button {
+main .gsc-comment-box .gsc-comment-box-tabs button.rounded-t {
   border-radius: var(--giscus-radius) var(--giscus-radius) 0 0;
 }
 
