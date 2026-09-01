@@ -101,7 +101,7 @@ main {
   border-bottom: 1px dashed rgb(228 228 231 / 70%);
 }
 
-.gsc-comment-box {
+.gsc-comment-box:not(.gsc-comment-box-is-reply) {
   overflow: hidden;
   border: 1px solid #e4e4e7;
   border-radius: var(--giscus-radius);
