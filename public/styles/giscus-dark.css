@@ -1,5 +1,7 @@
 main {
   color-scheme: dark;
+  --giscus-radius: 0.75rem;
+  --giscus-radius-code: 0.5rem;
   --color-prettylights-syntax-comment: #a1a1aa;
   --color-prettylights-syntax-constant: #7dd3fc;
   --color-prettylights-syntax-entity: #d8b4fe;
@@ -102,24 +104,38 @@ main {
 .gsc-comment-box {
   overflow: hidden;
   border: 1px solid #3f3f46;
-  border-radius: 0.75rem;
+  border-radius: var(--giscus-radius);
   background: rgb(39 39 42 / 55%);
   box-shadow: 0 1px 2px rgb(0 0 0 / 14%);
 }
 
 .gsc-comment-box-tabs {
+  border-radius: var(--giscus-radius) var(--giscus-radius) 0 0;
   border-bottom-color: #3f3f46;
+}
+
+.gsc-comment .gsc-comment-box-tabs {
+  border-radius: 0;
+}
+
+.gsc-comment-box-tabs > div > button {
+  border-radius: var(--giscus-radius) var(--giscus-radius) 0 0;
+}
+
+.gsc-comment-box-write,
+.gsc-comment-box-preview {
+  border-radius: var(--giscus-radius);
 }
 
 .gsc-comment-box-textarea {
   min-height: 7.5rem;
-  border-radius: 0.625rem 0.625rem 0 0;
+  border-radius: var(--giscus-radius) var(--giscus-radius) 0 0;
   background: #18181b;
   line-height: 1.7;
 }
 
 .gsc-comment-box-textarea-extras {
-  border-radius: 0 0 0.625rem 0.625rem;
+  border-radius: 0 0 var(--giscus-radius) var(--giscus-radius);
 }
 
 .gsc-comment-box-textarea:focus {
@@ -133,7 +149,11 @@ main {
 
 .gsc-comment,
 .gsc-reply {
-  border-radius: 0.75rem;
+  border-radius: var(--giscus-radius);
+}
+
+.gsc-reply-box {
+  border-radius: 0 0 var(--giscus-radius) var(--giscus-radius);
 }
 
 .gsc-replies > .gsc-comment {
@@ -142,7 +162,7 @@ main {
 }
 
 .gsc-comment-author-avatar img {
-  border-radius: 0.625rem;
+  border-radius: var(--giscus-radius);
 }
 
 .gsc-comment-content {
@@ -156,7 +176,7 @@ main {
 
 .gsc-comment-content pre,
 .gsc-comment-content code {
-  border-radius: 0.5rem;
+  border-radius: var(--giscus-radius-code);
 }
 
 .btn {
