@@ -113,9 +113,13 @@ main {
 
 .gsc-comment-box-textarea {
   min-height: 7.5rem;
-  border-radius: 0.625rem;
+  border-radius: 0.625rem 0.625rem 0 0;
   background: #ffffff;
   line-height: 1.7;
+}
+
+.gsc-comment-box-textarea-extras {
+  border-radius: 0 0 0.625rem 0.625rem;
 }
 
 .gsc-comment-box-textarea:focus {
