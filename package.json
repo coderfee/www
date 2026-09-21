@@ -45,7 +45,7 @@
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.1130.0",
     "@biomejs/biome": "^2.5.13",
-    "@cloudflare/workers-types": "^5.20260911.1",
+    "@cloudflare/workers-types": "^5.20260918.1",
     "@commitlint/cli": "^21.2.2",
     "@commitlint/config-conventional": "^21.2.2",
     "@iconify-json/tabler": "^1.2.38",
