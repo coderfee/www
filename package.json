@@ -27,7 +27,7 @@
     "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
-    "astro": "^7.3.2",
+    "astro": "^7.3.3",
     "framer-motion": "^13.2.0",
     "hono": "^4.13.7",
     "nanostores": "^1.5.3",
