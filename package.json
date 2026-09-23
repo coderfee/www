@@ -1,5 +1,5 @@
 {
-  "name": "www",
+  "name": "blog",
   "type": "module",
   "version": "3.0.0",
   "packageManager": "bun@1.4.2",
