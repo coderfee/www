@@ -2,7 +2,7 @@
   "name": "www",
   "type": "module",
   "version": "3.0.0",
-  "packageManager": "bun@1.4.3",
+  "packageManager": "bun@1.4.2",
   "engines": {
     "node": ">=24.13.0"
   },
