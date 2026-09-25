@@ -27,10 +27,10 @@
     "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
-    "astro": "^7.3.3",
-    "framer-motion": "^13.4.0",
-    "hono": "^4.13.8",
-    "nanostores": "^1.5.3",
+    "astro": "^7.3.5",
+    "framer-motion": "^13.4.3",
+    "hono": "^4.13.9",
+    "nanostores": "^1.5.4",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "rehype-autolink-headings": "^7.1.0",
@@ -43,12 +43,12 @@
     "typescript": "npm:typescript-native-bridge@6.0.3-bridge.7.tsgo.7.0.2"
   },
   "devDependencies": {
-    "@aws-sdk/client-s3": "^3.1138.0",
+    "@aws-sdk/client-s3": "^3.1140.0",
     "@biomejs/biome": "^2.5.14",
-    "@cloudflare/workers-types": "^5.20260922.1",
+    "@cloudflare/workers-types": "^5.20260925.1",
     "@commitlint/cli": "^21.2.3",
     "@commitlint/config-conventional": "^21.2.3",
-    "@iconify-json/tabler": "^1.2.39",
+    "@iconify-json/tabler": "^1.2.40",
     "@iconify/react": "^6.0.2",
     "@tailwindcss/typography": "^0.5.20",
     "@types/node": "latest",
@@ -56,12 +56,12 @@
     "dotenv": "^17.4.2",
     "lefthook": "^2.1.14",
     "unplugin-icons": "^23.0.1",
-    "wrangler": "^4.136.3"
+    "wrangler": "^4.140.0"
   },
   "overrides": {
     "postcss": ">=8.5.28",
     "style-to-js": "1.1.21",
     "typescript": "npm:typescript-native-bridge@6.0.3-bridge.7.tsgo.7.0.2",
-    "undici": ">=8.11.0"
+    "undici": ">=8.11.2"
   }
 }
