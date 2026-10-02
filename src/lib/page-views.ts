@@ -39,13 +39,9 @@ export function reportPageView() {
   const payload = JSON.stringify({ path: pathname, title: document.title });
   const url = getReportUrl();
 
-  if (navigator.sendBeacon?.(url, new Blob([payload], { type: 'application/json' }))) {
-    return;
-  }
-
   fetch(url, {
     method: 'POST',
-    headers: { 'content-type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
     body: payload,
     keepalive: true,
   }).catch(() => {});
