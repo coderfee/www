@@ -1,4 +1,6 @@
-const REPORT_PATH = '/api/blog/page-views';
+const getReportUrl = () => {
+  return import.meta.env.DEV ? 'http://localhost:8787/api/blog/page-views' : '/api/blog/page-views';
+};
 const IGNORED_PATH_PREFIXES = ['/api/', '/assets/', '/_astro/', '/icons/', '/shortcuts/', '/styles/', '/screenshots/'];
 const IGNORED_PATH_SUFFIXES = [
   '.xml',
@@ -35,12 +37,13 @@ export function reportPageView() {
   if (!shouldReportPath(pathname)) return;
 
   const payload = JSON.stringify({ path: pathname, title: document.title });
+  const url = getReportUrl();
 
-  if (navigator.sendBeacon?.(REPORT_PATH, new Blob([payload], { type: 'application/json' }))) {
+  if (navigator.sendBeacon?.(url, new Blob([payload], { type: 'application/json' }))) {
     return;
   }
 
-  fetch(REPORT_PATH, {
+  fetch(url, {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
     body: payload,
