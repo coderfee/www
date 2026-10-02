@@ -27,9 +27,9 @@ const {
     {showBottomNavigation && <BottomNavigation client:load />}
 
     <script>
-      import { fetchViewCounts } from '@/lib/store/view-counts';
+      import { reportPageView } from '@/lib/page-views';
 
-      fetchViewCounts();
+      reportPageView();
     </script>
 
     <script async defer is:inline>

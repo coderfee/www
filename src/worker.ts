@@ -37,8 +37,8 @@ function getRequestBody(request: Request) {
   return request.body;
 }
 
-app.all('/api/blog/views', async (c) => {
-  const upstreamUrl = new URL('/api/blog/views', c.env.API_BASE);
+app.post('/api/blog/page-views', async (c) => {
+  const upstreamUrl = new URL('/api/blog/page-views', c.env.API_BASE);
   const headers = getProxyHeaders(c.req.raw);
   headers.set('authorization', `Bearer ${c.env.API_TOKEN}`);
 
@@ -54,7 +54,7 @@ app.all('/api/blog/views', async (c) => {
     });
 
     if (!response.ok) {
-      console.error('[ViewCounts Proxy] Upstream request failed:', {
+      console.error('[PageViews Proxy] Upstream request failed:', {
         method: c.req.raw.method,
         status: response.status,
         statusText: response.statusText,
@@ -70,7 +70,7 @@ app.all('/api/blog/views', async (c) => {
 
     return response;
   } catch (error) {
-    console.error('[ViewCounts Proxy] Failed to proxy request:', error);
+    console.error('[PageViews Proxy] Failed to proxy request:', error);
 
     return c.json(
       {

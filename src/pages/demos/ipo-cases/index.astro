@@ -307,5 +307,11 @@ import companyList from './_data.json';
       darkModeMediaQuery.addEventListener('change', toggleDarkMode);
       toggleDarkMode(darkModeMediaQuery);
     </script>
+
+    <script>
+      import { reportPageView } from '@/lib/page-views';
+
+      reportPageView();
+    </script>
   </body>
 </html>
