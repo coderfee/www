@@ -2,29 +2,10 @@
 
 > AI Agent 开发指南。本项目基于 Astro 构建，使用 React、TypeScript 和 TailwindCSS。
 
-## 重要提醒
-
-1. 使用简体中文与用户交流
-2. 永远使用 pnpm，不要使用 npm 或 yarn
-3. 提交前运行 `pnpm lint` 确保代码质量
-4. 新增组件优先考虑 Astro 组件，只在需要交互时使用 React
-5. 遵循现有代码风格（通过查看现有代码和 Biome 配置自动发现）
-6. 遵循 MDX frontmatter 格式（通过查看现有文章自动发现）
-7. 响应式设计所有新功能都应该在移动端测试
-
-## 提交信息规范
-
-- 使用 Conventional Commits 格式：`<type>(<scope>): <subject>`
-- 提交信息必须使用英文
-- 只写单行 header，不写正文（body）；必要时通过 scope 补充上下文
-- 常用 type: `feat`、`fix`、`refactor`、`chore`、`docs`、`style`、`perf`
-- 提交前可先查看 `git log` 对齐历史风格
-
-
 ## 项目概述
 
 - 技术栈: Astro 6.x + React 19 + TypeScript 5.x + TailwindCSS 4.x
-- 包管理器: pnpm 10.x（必须使用 pnpm，不支持 npm/yarn）
+- 包管理器: bun 1.4.x
 - 代码质量: Biome (formatter + linter)
 - Git Hooks: Lefthook + Commitlint
 - 内容管理: MDX (Blog + Newsletter)
@@ -33,10 +14,10 @@
 ## 快速开始
 
 ```bash
-pnpm dev        # 启动开发服务器
-pnpm build      # 生产构建
-pnpm lint       # 运行代码检查
-pnpm lint:fix   # 自动修复问题
+bun run dev        # 启动开发服务器
+bun run build      # 生产构建
+bun run lint       # 运行代码检查
+bun run lint:fix   # 自动修复问题
 ```
 
 ## 项目结构

@@ -25,7 +25,7 @@
 ### Requirements
 
 - Node.js 24.13.0+
-- pnpm 11.x
+- bun 1.4.x
 
 ### Install and Run
 
@@ -37,10 +37,10 @@ git clone https://github.com/coderfee/www.git
 cd www
 
 # Install dependencies
-pnpm install
+bun install
 
 # Start the development server
-pnpm dev
+bun run dev
 ```
 
 Open `http://localhost:4321` in your browser.
@@ -49,10 +49,10 @@ Open `http://localhost:4321` in your browser.
 
 ```bash
 # Build for production
-pnpm build
+bun run build
 
 # Run checks
-pnpm lint
+bun run lint
 ```
 
 ### Deployment

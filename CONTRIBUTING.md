@@ -9,30 +9,30 @@ This repository powers a personal blog built with Astro, React, TypeScript, and 
 Requirements:
 
 - Node.js 24.13.0 or newer
-- pnpm 11.x
+- bun 1.4.x
 
 Install dependencies:
 
 ```bash
-pnpm install
+bun install
 ```
 
 Start the local development server:
 
 ```bash
-pnpm dev
+bun run dev
 ```
 
 Build the site:
 
 ```bash
-pnpm build
+bun run build
 ```
 
 Run checks:
 
 ```bash
-pnpm lint
+bun run lint
 ```
 
 ## Pull Requests
@@ -40,7 +40,7 @@ pnpm lint
 - Keep changes focused and small.
 - Prefer Astro components unless React interactivity is required.
 - Follow the existing TypeScript, Astro, and Tailwind CSS patterns.
-- Run `pnpm lint` before opening a pull request.
+- Run `bun run lint` before opening a pull request.
 - Include screenshots or screen recordings for visible UI changes.
 - Explain the user-facing behavior change in the pull request description.
 

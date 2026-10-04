@@ -25,7 +25,7 @@
 ### 环境要求
 
 - Node.js 24.13.0+
-- pnpm 11.x
+- bun 1.4.x
 
 ### 安装与运行
 
@@ -37,10 +37,10 @@ git clone https://github.com/coderfee/www.git
 cd www
 
 # 安装依赖
-pnpm install
+bun install
 
 # 启动开发服务器
-pnpm dev
+bun run dev
 ```
 
 现在你可以在浏览器中访问 `http://localhost:4321` 查看网站效果。
@@ -49,10 +49,10 @@ pnpm dev
 
 ```bash
 # 构建生产环境版本
-pnpm build
+bun run build
 
 # 运行代码检查
-pnpm lint
+bun run lint
 ```
 
 ### 部署平台
