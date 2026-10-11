@@ -73,4 +73,6 @@ Blog posts, newsletters, images, and other content under `src/content`, `public`
 
 Worker 使用普通变量 `API_BASE_URL`，通过 Secrets Store 绑定读取 `BLOG_API_TOKEN` 和可选的 `GITHUB_TOKEN`。Astro 构建期继续使用 `R2_ACCOUNT_ID`、`R2_ACCESS_KEY_ID`、`R2_SECRET_ACCESS_KEY`。配置步骤见 [统一配置文档](../api/docs/secrets-store-setup.md)。
 
+本地 `API_BASE_URL` 指向 `localhost`、`127.0.0.1` 或 `[::1]`，API 的 `.env` 设置 `NODE_ENV=development`，访问统计与读书代理即可免 API Token 联调。远程 API 继续使用 Store 令牌；GitHub Token 独立用于 GitHub 查询。
+
 Worker 代理测试：`bun run test:unit`。

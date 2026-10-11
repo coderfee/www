@@ -7,10 +7,16 @@ interface Env {
   GITHUB_TOKEN_STORE?: SecretsStoreSecret;
 }
 
-async function getApiToken(env: Env) {
+async function getApiHeaders(env: Env, headers = new Headers()) {
+  const hostname = new URL(env.API_BASE_URL).hostname;
+  if (['localhost', '127.0.0.1', '[::1]'].includes(hostname)) {
+    headers.delete('authorization');
+    return headers;
+  }
   const token = await env.BLOG_API_TOKEN_STORE.get();
   if (!token) throw new Error('缺少 Secret: BLOG_API_TOKEN');
-  return token;
+  headers.set('authorization', `Bearer ${token}`);
+  return headers;
 }
 
 const API_TIMEOUT_MS = 3000;
@@ -50,7 +56,7 @@ app.post('/api/blog/page-views', async (c) => {
   const signal = AbortSignal.timeout(API_TIMEOUT_MS);
 
   try {
-    headers.set('authorization', `Bearer ${await getApiToken(c.env)}`);
+    await getApiHeaders(c.env, headers);
     const response = await fetch(upstreamUrl, {
       method: c.req.raw.method,
       headers,
@@ -93,9 +99,7 @@ async function fetchWereadSummary(env: Env, mode: WereadMode) {
   upstreamUrl.searchParams.set('mode', mode);
 
   const response = await fetch(upstreamUrl, {
-    headers: {
-      authorization: `Bearer ${await getApiToken(env)}`,
-    },
+    headers: await getApiHeaders(env),
     signal: AbortSignal.timeout(API_TIMEOUT_MS),
   });
 
