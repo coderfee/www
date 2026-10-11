@@ -31,3 +31,7 @@ src/content/newsletter
 src/content/blog
 .alma-snapshots
 .migration-backups
+
+# Local Worker configuration
+.dev.vars
+.dev.vars.*

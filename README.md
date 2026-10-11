@@ -68,3 +68,9 @@ Blog posts, newsletters, images, and other content under `src/content`, `public`
 ---
 
 *Some code in this project was generated with AI assistance.*
+
+## 环境变量与密钥
+
+Worker 使用普通变量 `API_BASE_URL`，通过 Secrets Store 绑定读取 `BLOG_API_TOKEN` 和可选的 `GITHUB_TOKEN`。Astro 构建期继续使用 `R2_ACCOUNT_ID`、`R2_ACCESS_KEY_ID`、`R2_SECRET_ACCESS_KEY`。配置步骤见 [统一配置文档](../api/docs/secrets-store-setup.md)。
+
+Worker 代理测试：`bun run test:unit`。

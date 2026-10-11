@@ -13,7 +13,8 @@
     "deploy:dry-run": "wrangler deploy --dry-run",
     "lint": "biome check ./src ./integrations && astro check --minimumSeverity warning",
     "lint:fix": "biome check ./src --write",
-    "upgrade": "bunx @astrojs/upgrade"
+    "upgrade": "bunx @astrojs/upgrade",
+    "test:unit": "node --test tests/*.test.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",

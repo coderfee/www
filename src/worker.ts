@@ -2,9 +2,15 @@ import { Hono } from 'hono';
 
 interface Env {
   ASSETS: Fetcher;
-  API_BASE: string;
-  API_TOKEN: string;
-  GITHUB_TOKEN?: string;
+  API_BASE_URL: string;
+  BLOG_API_TOKEN_STORE: SecretsStoreSecret;
+  GITHUB_TOKEN_STORE?: SecretsStoreSecret;
+}
+
+async function getApiToken(env: Env) {
+  const token = await env.BLOG_API_TOKEN_STORE.get();
+  if (!token) throw new Error('缺少 Secret: BLOG_API_TOKEN');
+  return token;
 }
 
 const API_TIMEOUT_MS = 3000;
@@ -38,13 +44,13 @@ function getRequestBody(request: Request) {
 }
 
 app.post('/api/blog/page-views', async (c) => {
-  const upstreamUrl = new URL('/api/blog/page-views', c.env.API_BASE);
+  const upstreamUrl = new URL('/api/blog/page-views', c.env.API_BASE_URL);
   const headers = getProxyHeaders(c.req.raw);
-  headers.set('authorization', `Bearer ${c.env.API_TOKEN}`);
 
   const signal = AbortSignal.timeout(API_TIMEOUT_MS);
 
   try {
+    headers.set('authorization', `Bearer ${await getApiToken(c.env)}`);
     const response = await fetch(upstreamUrl, {
       method: c.req.raw.method,
       headers,
@@ -83,12 +89,12 @@ app.post('/api/blog/page-views', async (c) => {
 });
 
 async function fetchWereadSummary(env: Env, mode: WereadMode) {
-  const upstreamUrl = new URL('/api/weread/readdata', env.API_BASE);
+  const upstreamUrl = new URL('/api/weread/readdata', env.API_BASE_URL);
   upstreamUrl.searchParams.set('mode', mode);
 
   const response = await fetch(upstreamUrl, {
     headers: {
-      authorization: `Bearer ${env.API_TOKEN}`,
+      authorization: `Bearer ${await getApiToken(env)}`,
     },
     signal: AbortSignal.timeout(API_TIMEOUT_MS),
   });
@@ -151,8 +157,9 @@ async function fetchGitHubStats(env: Env, username: string) {
     accept: 'application/vnd.github+json',
     'user-agent': 'blog-worker',
   };
-  if (env.GITHUB_TOKEN) {
-    headers.authorization = `Bearer ${env.GITHUB_TOKEN}`;
+  const githubToken = await env.GITHUB_TOKEN_STORE?.get();
+  if (githubToken) {
+    headers.authorization = `Bearer ${githubToken}`;
   }
 
   const [userRes, reposRes] = await Promise.all([

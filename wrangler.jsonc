@@ -26,5 +26,17 @@
     "traces": {
       "enabled": true
     }
-  }
+  },
+  "secrets_store_secrets": [
+    {
+      "binding": "BLOG_API_TOKEN_STORE",
+      "store_id": "f6197f32d6324add9f15103423616f82",
+      "secret_name": "BLOG_API_TOKEN"
+    },
+    {
+      "binding": "GITHUB_TOKEN_STORE",
+      "store_id": "f6197f32d6324add9f15103423616f82",
+      "secret_name": "GITHUB_TOKEN"
+    }
+  ]
 }
