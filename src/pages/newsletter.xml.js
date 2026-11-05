@@ -14,9 +14,9 @@ export async function GET(context) {
     renderers: await loadRenderers([getContainerRenderer()]),
   });
   const newsletter = await getCollection('newsletter');
-  const posts = newsletter.sort(
-    ({ data: { date: dateA } }, { data: { date: dateB } }) => dateB.valueOf() - dateA.valueOf(),
-  );
+  const posts = newsletter
+    .filter(({ data: { draft = false } }) => !draft)
+    .sort(({ data: { date: dateA } }, { data: { date: dateB } }) => dateB.valueOf() - dateA.valueOf());
 
   return rss({
     title: `${SITE_TITLE} · 明日周刊`,
@@ -27,7 +27,7 @@ export async function GET(context) {
       posts.map(async (post) => ({
         ...post.data,
         pubDate: post.data.date,
-        description: post.data.tldr,
+        description: post.data.description,
         link: `/newsletter/${post.id}/`,
         content: await container.renderToString((await render(post)).Content),
       })),

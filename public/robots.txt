@@ -1,1 +1,6 @@
-Sitemap: https://coderfee.com/sitemap-index.xml
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /cdn-cgi/
+
+Sitemap: https://coderfee.com/sitemap.xml

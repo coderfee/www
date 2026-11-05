@@ -73,6 +73,8 @@ Blog posts, newsletters, images, and other content under `src/content`, `public`
 
 Worker 使用普通变量 `API_BASE_URL`，通过 Secrets Store 绑定读取 `BLOG_API_TOKEN` 和可选的 `GITHUB_TOKEN`。Astro 构建期继续使用 `R2_ACCOUNT_ID`、`R2_ACCESS_KEY_ID`、`R2_SECRET_ACCESS_KEY`。配置步骤见 [统一配置文档](../api/docs/secrets-store-setup.md)。
 
+构建默认从 R2 拉取内容。若 R2 不可用，或想直接用本地 Obsidian 笔记构建，设置 `CONTENT_SOURCE=local` 即可（需要本地存在 `~/Obsidian/notes` 内容目录），或直接运行 `bun run build:local`。
+
 本地 `API_BASE_URL` 指向 `localhost`、`127.0.0.1` 或 `[::1]`，API 的 `.env` 设置 `NODE_ENV=development`，访问统计与读书代理即可免 API Token 联调。远程 API 继续使用 Store 令牌；GitHub Token 独立用于 GitHub 查询。
 
 Worker 代理测试：`bun run test:unit`。

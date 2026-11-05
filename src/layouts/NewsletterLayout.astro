@@ -8,8 +8,12 @@ const { title, description, cover, showBottomNavigation } = Astro.props;
   title={`明日周刊 · ${title}`}
   description={description}
   ogImage={cover}
+  type="article"
   showBottomNavigation={showBottomNavigation}
 >
-  <Fragment slot="head"> <meta name="keywords" content={`明日周刊，${title}`}> </Fragment>
+  <Fragment slot="head">
+    <meta name="keywords" content={`明日周刊，${title}`}>
+    <link rel="alternate" type="application/rss+xml" title="明日周刊" href={new URL('newsletter.xml', Astro.site)}>
+  </Fragment>
   <div class="relative"><slot /></div>
 </BaseLayout>

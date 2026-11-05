@@ -5,7 +5,7 @@ const title = '页面未找到';
 const description = '这个页面可能已经移动，或链接地址需要更新。';
 ---
 
-<BaseLayout {title} {description} showTopNavigation={true} showBottomNavigation={true}>
+<BaseLayout {title} {description} robots="noindex, follow" showTopNavigation={true} showBottomNavigation={true}>
   <section
     class="mx-auto flex min-h-[calc(100dvh-9rem)] max-w-4xl items-center justify-center px-4 py-16 pb-36 select-none sm:px-6 sm:py-24 sm:pb-28"
   >

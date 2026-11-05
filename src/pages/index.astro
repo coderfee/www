@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import PostCard from '@/components/blog/PostCard.astro';
 import Footer from '@/components/navigation/Footer.tsx';
+import { AUTHOR, SITE_DESCRIPTION, SITE_TITLE } from '@/consts';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import IconArrowRight from '~icons/tabler/arrow-right';
 
@@ -12,12 +13,35 @@ const posts = allPosts
   .sort(({ data: { date: dateA } }, { data: { date: dateB } }) => dateB.valueOf() - dateA.valueOf())
   .slice(0, 20);
 
+const pageTitle = 'coderfee 的技术博客：前端、Astro 与 AI 实践';
 const pageDescription =
   'coderfee 的个人技术博客，专注于前端开发、Web 技术实践和架构设计。分享 Astro、React、TypeScript、TailwindCSS 等现代 Web 技术的开发经验、最佳实践和深度思考。';
+
+const siteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: SITE_TITLE,
+  url: new URL('/', Astro.site).toString(),
+  description: SITE_DESCRIPTION,
+  inLanguage: 'zh-Hans',
+  publisher: {
+    '@type': 'Person',
+    '@id': new URL('/#person', Astro.site).toString(),
+    name: AUTHOR,
+    url: new URL('/', Astro.site).toString(),
+    sameAs: ['https://github.com/coderfee'],
+  },
+};
 ---
 
-<BaseLayout title="首页" description={pageDescription}>
+<BaseLayout title={pageTitle} titleSuffix={false} description={pageDescription}>
+  <Fragment slot="head">
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(siteJsonLd)} />
+  </Fragment>
+
   <div class="max-w-3xl mx-auto px-4 sm:px-6">
+    <h1 class="sr-only">coderfee 的技术博客</h1>
+
     <main class="space-y-0">
       {posts.length > 0 ? (
           posts.map((post, index) => (
@@ -42,7 +66,7 @@ const pageDescription =
     {posts.length > 0 && (
       <div class="my-12 flex justify-center">
         <a
-          href="/archive"
+          href="/archive/"
           class="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full
                  bg-white dark:bg-zinc-900
                  border border-zinc-200 dark:border-zinc-700
@@ -66,8 +90,8 @@ const pageDescription =
   <script>
     import { prefetch } from 'astro:prefetch';
 
-    prefetch('/archive', { ignoreSlowConnection: true });
-    prefetch('/newsletter', { ignoreSlowConnection: true });
-    prefetch('/about', { ignoreSlowConnection: true });
+    prefetch('/archive/', { ignoreSlowConnection: true });
+    prefetch('/newsletter/', { ignoreSlowConnection: true });
+    prefetch('/about/', { ignoreSlowConnection: true });
   </script>
 </BaseLayout>

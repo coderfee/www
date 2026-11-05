@@ -1,19 +1,31 @@
 ---
 import '@/styles/style.css';
-import { SITE_DESCRIPTION, SITE_TITLE } from '@/consts';
+import { AUTHOR, SITE_DESCRIPTION, SITE_TITLE } from '@/consts';
 
 export interface Props {
-  title: string;
-  description: string;
-  ogImage: string;
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  type?: 'website' | 'article';
+  titleSuffix?: boolean;
+  robots?: string;
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const {
+  title = SITE_TITLE,
+  description = SITE_DESCRIPTION,
+  ogImage = '/og-default.png',
+  type = 'website',
+  titleSuffix = true,
+  robots = 'index, follow, max-image-preview:large',
+} = Astro.props;
 
-const { title = SITE_TITLE, description = SITE_DESCRIPTION, ogImage = '/placeholder-social.jpg' } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const documentTitle = titleSuffix ? `${title} - ${SITE_TITLE}` : title;
+const ogImageURL = new URL(ogImage, Astro.site);
 ---
 
-<title>{title} - coderfee's blog</title>
+<title>{documentTitle}</title>
 
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.cn">
@@ -33,29 +45,36 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION, ogImage = '/placehol
 <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#181818" media="(prefers-color-scheme: dark)">
 <meta name="generator" content={Astro.generator}>
+<meta name="author" content={AUTHOR}>
+<meta name="robots" content={robots}>
 
 <!-- Canonical URL -->
-<link rel="canonical" href={canonicalURL}>
+{!robots.includes('noindex') && <link rel="canonical" href={canonicalURL}>}
 
 <meta name="description" content={description}>
 
 <!-- Open Graph / Facebook -->
-<meta property="og:type" content="website">
-<meta property="og:url" content={Astro.url}>
+<meta property="og:type" content={type}>
+<meta property="og:site_name" content={SITE_TITLE}>
+<meta property="og:locale" content="zh_CN">
+<meta property="og:url" content={canonicalURL}>
 <meta property="og:title" content={title}>
 <meta property="og:description" content={description}>
-<meta property="og:image" content={new URL(ogImage, Astro.url)}>
+<meta property="og:image" content={ogImageURL}>
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content={title}>
 
 <!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content={Astro.url}>
-<meta property="twitter:title" content={title}>
-<meta property="twitter:description" content={description}>
-<meta property="twitter:image" content={new URL(ogImage, Astro.url)}>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content={canonicalURL}>
+<meta name="twitter:title" content={title}>
+<meta name="twitter:description" content={description}>
+<meta name="twitter:image" content={ogImageURL}>
+<meta name="twitter:image:alt" content={title}>
 
 <!-- rss styles -->
-<link rel="alternate" type="application/rss+xml" href={`${Astro.site}rss.xml`}>
-<link rel="alternate" type="application/rss+xml" title="coderfee's blog" href={new URL("rss.xml", Astro.site)}>
+<link rel="alternate" type="application/rss+xml" title={SITE_TITLE} href={new URL('rss.xml', Astro.site)}>
 
 <slot />
 

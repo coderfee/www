@@ -1,8 +1,2 @@
-https://assets.coderfee.com/*
-  X-Robots-Tag: noindex
-
-https://api.coderfee.com/*
-  X-Robots-Tag: noindex
-
 /styles/*
   Access-Control-Allow-Origin: https://giscus.app

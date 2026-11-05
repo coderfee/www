@@ -134,3 +134,23 @@ test('GitHub Token 绑定可选，公开统计支持匿名查询', async () => {
   const response = await worker.fetch(new Request('https://blog.test/api/github/stats'), env, ctx);
   assert.equal(response.status, 200);
 });
+
+test('旧版周刊链接 301 到补齐期号的地址', async () => {
+  const response = await worker.fetch(new Request('https://blog.test/newsletter/2025/week-4/'), env, ctx);
+  assert.equal(response.status, 301);
+  assert.equal(response.headers.get('location'), '/newsletter/week-04/');
+});
+
+test('旧 sitemap 入口 301 到 /sitemap.xml', async () => {
+  for (const pathname of ['/sitemap-index.xml', '/sitemap-0.xml']) {
+    const response = await worker.fetch(new Request(`https://blog.test${pathname}`), env, ctx);
+    assert.equal(response.status, 301);
+    assert.equal(response.headers.get('location'), '/sitemap.xml');
+  }
+});
+
+test('旧站内路径 301 到现有文章', async () => {
+  const response = await worker.fetch(new Request('https://blog.test/read-think/huozhe-xusanguan'), env, ctx);
+  assert.equal(response.status, 301);
+  assert.equal(response.headers.get('location'), '/blog/archive/huozhe-xusanguan/');
+});

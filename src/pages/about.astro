@@ -1,11 +1,31 @@
 ---
 import AboutProfile from '@/components/about/AboutProfile.tsx';
+import { AUTHOR } from '@/consts';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
 const title = '关于';
-const description = 'coderfee 的个人主页';
+const description = 'coderfee 的个人主页：前端开发者，记录编程、AI 应用、读书笔记和个人随笔。';
+
+const profileJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  url: new URL('/about/', Astro.site).toString(),
+  mainEntity: {
+    '@type': 'Person',
+    '@id': new URL('/#person', Astro.site).toString(),
+    name: AUTHOR,
+    url: new URL('/', Astro.site).toString(),
+    sameAs: ['https://github.com/coderfee'],
+    jobTitle: '前端开发者',
+    description: '记录编程、AI 应用、读书笔记和个人随笔。',
+  },
+};
 ---
 
 <BaseLayout title={title} description={description}>
+  <Fragment slot="head">
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(profileJsonLd)} />
+  </Fragment>
+
   <div class="max-w-xl mx-auto px-4 py-8 pb-24"><AboutProfile client:load /></div>
 </BaseLayout>

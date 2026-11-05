@@ -21,7 +21,7 @@ const socialLinks = [
   },
   {
     name: '站点地图',
-    url: '/sitemap-0.xml',
+    url: '/sitemap.xml',
     icon: 'tabler:brand-safari',
   },
 ];

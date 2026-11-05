@@ -7,6 +7,9 @@ const {
   title,
   description,
   ogImage,
+  type,
+  titleSuffix,
+  robots,
   showNavigation = true,
   showTopNavigation = showNavigation,
   showBottomNavigation = showNavigation,
@@ -16,7 +19,7 @@ const {
 <!doctype html>
 <html lang="zh-Hans">
   <head>
-    <DocumentMeta title={title} description={description} ogImage={ogImage} />
+    <DocumentMeta {title} {description} {ogImage} {type} {titleSuffix} {robots} />
     <slot name="head" />
   </head>
   <body class="bg-white dark:bg-zinc-900 dark:text-white min-h-dvh flex flex-col overflow-x-hidden">
@@ -30,6 +33,35 @@ const {
       import { reportPageView } from '@/lib/page-views';
 
       reportPageView();
+    </script>
+
+    <script is:inline>
+      // 正文图片加载失败时展示占位文案，避免破图
+      (() => {
+        const FALLBACK_TEXT = '原图已失效';
+
+        function replaceImage(img) {
+          if (!(img instanceof HTMLImageElement) || img.dataset.fallbackApplied) return;
+          if (!img.closest('.prose')) return;
+
+          img.dataset.fallbackApplied = 'true';
+
+          const fallback = document.createElement('span');
+          fallback.className = 'image-fallback';
+          fallback.textContent = FALLBACK_TEXT;
+          if (img.alt) fallback.title = img.alt;
+
+          img.replaceWith(fallback);
+        }
+
+        document.addEventListener('error', (event) => replaceImage(event.target), true);
+
+        window.addEventListener('load', () => {
+          document.querySelectorAll('.prose img').forEach((img) => {
+            if (img.complete && img.naturalWidth === 0) replaceImage(img);
+          });
+        });
+      })();
     </script>
 
     <script async defer is:inline>

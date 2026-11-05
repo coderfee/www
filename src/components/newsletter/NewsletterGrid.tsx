@@ -47,7 +47,7 @@ function FeaturedCard({ item }: { item: NewsletterItem }) {
   return (
     <motion.article variants={itemVariants} className="relative group col-span-12 mb-8">
       <a
-        href={`/newsletter/${item.id}`}
+        href={`/newsletter/${item.id}/`}
         className="flex flex-col lg:grid lg:grid-cols-12 gap-0 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl rounded-[2.5rem] overflow-hidden border border-white dark:border-zinc-800/50 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.08)] dark:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3)] hover:shadow-[0_48px_80px_-12px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_48px_80px_-12px_rgba(0,0,0,0.4)] transition-shadow duration-700"
       >
         <div className="lg:col-span-7 aspect-16/10 lg:aspect-auto overflow-hidden bg-zinc-100 dark:bg-zinc-800">
@@ -121,7 +121,7 @@ function NewsletterCard({ item, spanClass }: { item: NewsletterItem; spanClass: 
       onMouseLeave={handleMouseLeave}
       className={`relative group flex flex-col h-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl rounded-4xl overflow-hidden border border-white dark:border-zinc-800/50 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.06)] dark:shadow-[0_24px_48px_-12px_rgba(0,0,0,0.25)] hover:shadow-[0_40px_64px_-10px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_40px_64px_-10px_rgba(0,0,0,0.35)] transition-shadow duration-500 ${spanClass}`}
     >
-      <a href={`/newsletter/${item.id}`} className="flex flex-col h-full">
+      <a href={`/newsletter/${item.id}/`} className="flex flex-col h-full">
         {item.data.cover && (
           <div className="aspect-16/10 w-full overflow-hidden bg-zinc-100 dark:bg-zinc-800 relative z-0">
             <motion.img

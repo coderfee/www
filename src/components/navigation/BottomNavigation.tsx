@@ -8,10 +8,10 @@ import { useHaptic } from '@/lib/hooks';
 
 const navItems = [
   { name: '首页', path: '/', icon: 'tabler:smart-home' },
-  { name: '归档', path: '/archive', icon: 'tabler:archive' },
-  { name: '周刊', path: '/newsletter', icon: 'tabler:book-2' },
-  { name: '阅读', path: '/reading', icon: 'tabler:books' },
-  { name: '关于', path: '/about', icon: 'tabler:user' },
+  { name: '归档', path: '/archive/', icon: 'tabler:archive' },
+  { name: '周刊', path: '/newsletter/', icon: 'tabler:book-2' },
+  { name: '阅读', path: '/reading/', icon: 'tabler:books' },
+  { name: '关于', path: '/about/', icon: 'tabler:user' },
 ];
 
 export default function BottomNavigation() {

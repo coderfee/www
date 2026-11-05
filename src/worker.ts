@@ -34,6 +34,37 @@ interface WereadApiResponse {
 
 const app = new Hono<{ Bindings: Env }>();
 
+const LEGACY_REDIRECTS: Record<string, string> = {
+  '/sitemap-index.xml': '/sitemap.xml',
+  '/sitemap-index.xml/': '/sitemap.xml',
+  '/sitemap-0.xml': '/sitemap.xml',
+  '/sitemap-0.xml/': '/sitemap.xml',
+  '/vuejs-develop-guide/': '/blog/tags/Vue/',
+  '/read-think/huozhe-xusanguan/': '/blog/archive/huozhe-xusanguan/',
+  '/2016/12/31/2016-12-31-2016-bye/': '/blog/year-in-review/2016/',
+  '/2016/08/08/2016-08-08-IE8-compatibility/': '/blog/archive/ie8-compatibility/',
+};
+
+app.use('*', async (c, next) => {
+  if (c.req.method !== 'GET' && c.req.method !== 'HEAD') {
+    return next();
+  }
+
+  const { pathname } = new URL(c.req.url);
+  const legacyTarget = LEGACY_REDIRECTS[pathname] ?? LEGACY_REDIRECTS[`${pathname}/`];
+  if (legacyTarget) {
+    return c.redirect(legacyTarget, 301);
+  }
+
+  // 旧版周刊链接把期号写在年份下，例如 /newsletter/2025/week-4/ → /newsletter/week-04/
+  const legacyNewsletter = pathname.match(/^\/newsletter\/\d{4}\/week-(\d{1,2})\/?$/);
+  if (legacyNewsletter) {
+    return c.redirect(`/newsletter/week-${legacyNewsletter[1].padStart(2, '0')}/`, 301);
+  }
+
+  return next();
+});
+
 function getProxyHeaders(request: Request) {
   const headers = new Headers(request.headers);
   headers.delete('host');

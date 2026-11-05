@@ -47,3 +47,13 @@ pre:hover .copy-code {
 .copy-code.copied {
   @apply text-green-600 border-green-600;
 }
+
+.image-fallback {
+  @apply mx-auto my-4 flex w-fit min-h-12 min-w-48 items-center justify-center rounded-lg border border-dashed border-zinc-300 px-4 py-3 text-sm text-zinc-500;
+}
+
+@media (prefers-color-scheme: dark) {
+  .image-fallback {
+    @apply border-zinc-700 text-zinc-400;
+  }
+}

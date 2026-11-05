@@ -17,12 +17,18 @@ const posts = allPosts
   .filter(({ data: { tags = [], draft = false } }) => !draft && tags.includes(tag))
   .sort(({ data: { date: dateA } }, { data: { date: dateB } }) => dateB.valueOf() - dateA.valueOf());
 
-const tagDescription = `浏览 coderfee 博客中关于 ${tag} 的 ${posts.length} 篇技术文章，包括开发教程、实践经验和深度思考。探索与 ${tag} 相关的最新内容。`;
+const tagDescription =
+  posts.length > 0
+    ? `coderfee 博客中关于 ${tag} 的 ${posts.length} 篇文章：${posts
+        .slice(0, 3)
+        .map(({ data: { title } }) => title)
+        .join('、')}。`
+    : `coderfee 博客中关于 ${tag} 的文章合集。`;
 
 const pageTitle = `${tag} - 技术文章合集`;
 ---
 
-<BaseLayout title={pageTitle} description={tagDescription}>
+<BaseLayout title={pageTitle} description={tagDescription} robots={posts.length < 2 ? 'noindex, follow' : undefined}>
   <div class="max-w-4xl mx-auto px-4 sm:px-6 pt-20">
     <header class="mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
       <h1 class="font-noto text-2xl sm:text-4xl font-bold text-zinc-800 dark:text-zinc-100 text-center">#{tag}</h1>

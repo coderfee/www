@@ -26,8 +26,13 @@ const years = Object.keys(postsByYear)
   .sort((a, b) => b - a);
 ---
 
-<BaseLayout title="归档" description="所有归档文章">
+<BaseLayout
+  title="全部文章归档"
+  description={`按年份浏览 coderfee 的全部 ${posts.length} 篇文章，涵盖前端开发、AI 应用、读书笔记和个人随笔。`}
+>
   <div class="max-w-3xl mx-auto px-4 sm:px-6">
+    <h1 class="sr-only">全部文章归档</h1>
+
     <main class="space-y-16 sm:space-y-24">
       {years.map((year) => (
         <section class="relative flex flex-col mt-8 sm:mt-0 sm:flex-row gap-8 sm:gap-12">

@@ -13,7 +13,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import IconArrowLeft from '~icons/tabler/arrow-left';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
+  const posts = (await getCollection('blog')).filter(({ data: { draft = false } }) => !draft);
   const sortedPosts = posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
   return sortedPosts.map((post, index) => {
@@ -34,42 +34,92 @@ type Props = {
 
 const { post, prev, next } = Astro.props;
 const { Content, headings } = await render(post);
-const { title, tldr, date, tags = [], cover, keywords } = post.data;
+const { title, tldr, date, updated, tags = [], cover, keywords } = post.data;
 const slug = post.data.slug;
-const modifiedDate = post.data.date;
+const modifiedDate = updated ?? date;
+const coverImage = typeof cover === 'string' ? cover : undefined;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+const imageURL = new URL(coverImage ?? '/og-default.png', Astro.site).toString();
+const postKeywords = keywords?.length ? keywords : tags;
+const firstTag = tags[0];
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
   headline: title,
   description: tldr,
+  image: [imageURL],
+  url: canonicalURL,
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': canonicalURL,
+  },
   datePublished: date.toISOString(),
-  dateModified: modifiedDate ? modifiedDate.toISOString() : date.toISOString(),
+  dateModified: modifiedDate.toISOString(),
+  inLanguage: 'zh-Hans',
   author: {
     '@type': 'Person',
+    '@id': new URL('/#person', Astro.site).toString(),
     name: AUTHOR,
+    url: new URL('/', Astro.site).toString(),
+    sameAs: ['https://github.com/coderfee'],
   },
   publisher: {
     '@type': 'Organization',
+    '@id': new URL('/#organization', Astro.site).toString(),
     name: AUTHOR,
+    url: new URL('/', Astro.site).toString(),
     logo: {
       '@type': 'ImageObject',
-      url: new URL('/favicon.svg', Astro.site).toString(),
+      url: new URL('/icons/icon-512.png', Astro.site).toString(),
+      width: 512,
+      height: 512,
     },
   },
-  mainEntityOfPage: {
-    '@type': 'WebPage',
-    '@id': new URL(Astro.url.pathname, Astro.site).toString(),
-  },
+  ...(firstTag ? { articleSection: firstTag } : {}),
+  ...(postKeywords.length > 0 ? { keywords: postKeywords.join(', ') } : {}),
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: '首页',
+      item: new URL('/', Astro.site).toString(),
+    },
+    ...(firstTag
+      ? [
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: `#${firstTag}`,
+            item: new URL(`/blog/tags/${encodeURIComponent(firstTag)}/`, Astro.site).toString(),
+          },
+        ]
+      : []),
+    {
+      '@type': 'ListItem',
+      position: firstTag ? 3 : 2,
+      name: title,
+      item: canonicalURL,
+    },
+  ],
 };
 ---
 
-<BaseLayout title={title} description={tldr} ogImage={cover} showBottomNavigation={false}>
+<BaseLayout title={title} description={tldr} ogImage={coverImage} type="article" showBottomNavigation={false}>
   <TOCDesktop client:media="(min-width: 1280px)" headings={headings} />
   <Fragment slot="head">
-    {date && <meta name="date" content={date.toLocaleDateString()} />}
-    {keywords && <meta name="keywords" content={keywords.join(", ")} />}
+    <meta property="article:published_time" content={date.toISOString()}>
+    <meta property="article:modified_time" content={modifiedDate.toISOString()}>
+    <meta property="article:author" content={AUTHOR}>
+    {tags.map((tag) => <meta property="article:tag" content={tag} />)}
+    {postKeywords.length > 0 && <meta name="keywords" content={postKeywords.join(', ')} />}
     <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
   </Fragment>
 
   <article class="relative min-h-screen animate-in fade-in slide-in-from-bottom-8 duration-700">

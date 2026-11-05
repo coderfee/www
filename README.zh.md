@@ -48,8 +48,11 @@ bun run dev
 ## 📦 构建与部署
 
 ```bash
-# 构建生产环境版本
+# 构建生产环境版本（默认从 R2 拉取内容）
 bun run build
+
+# 直接使用本地 Obsidian 笔记构建（等价于 CONTENT_SOURCE=local astro build）
+bun run build:local
 
 # 运行代码检查
 bun run lint

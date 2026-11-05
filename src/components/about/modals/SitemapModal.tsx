@@ -41,7 +41,7 @@ export default function SitemapModal({ isOpen, onClose }: { isOpen: boolean; onC
             </div>
           </div>
           <a
-            href="/sitemap-0.xml"
+            href="/sitemap.xml"
             target="_blank"
             rel="noopener"
             onClick={() => vibrate('light')}

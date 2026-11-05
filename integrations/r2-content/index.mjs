@@ -1,15 +1,26 @@
 import 'dotenv/config';
 import { syncLocalContent, syncRemoteContent } from './content-sync.mjs';
 
-export default function r2Content(options = {}) {
-  let syncedRemoteContent = false;
+const useLocalContent = process.env.CONTENT_SOURCE === 'local';
 
-  async function syncRemoteContentOnce(logger) {
-    if (syncedRemoteContent) {
+export default function r2Content(options = {}) {
+  let syncedContent = false;
+
+  async function syncContentOnce(logger) {
+    if (syncedContent) {
       return;
     }
 
-    syncedRemoteContent = true;
+    syncedContent = true;
+
+    if (useLocalContent) {
+      const summary = await syncLocalContent(options);
+      logger.info(
+        `Synced local newsletter ${summary.newsletter.outputFiles}/${summary.newsletter.sourceFiles}, blog ${summary.blog.outputFiles}/${summary.blog.sourceFiles}.`,
+      );
+      return;
+    }
+
     const summary = await syncRemoteContent(options);
     logger.info(
       `Synced newsletter ${summary.newsletter.outputFiles}/${summary.newsletter.remoteFiles}, blog ${summary.blog.outputFiles}/${summary.blog.remoteFiles}.`,
@@ -24,7 +35,7 @@ export default function r2Content(options = {}) {
           return;
         }
 
-        await syncRemoteContentOnce(logger);
+        await syncContentOnce(logger);
       },
       'astro:server:setup': async ({ logger }) => {
         const summary = await syncLocalContent(options);
@@ -33,7 +44,7 @@ export default function r2Content(options = {}) {
         );
       },
       'astro:build:start': async ({ logger }) => {
-        await syncRemoteContentOnce(logger);
+        await syncContentOnce(logger);
       },
     },
   };

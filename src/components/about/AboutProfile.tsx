@@ -63,7 +63,7 @@ const socialLinks: SocialLink[] = [
   },
   {
     name: '内容总览',
-    url: '/sitemap-0.xml',
+    url: '/sitemap.xml',
     icon: 'tabler:map-2',
     color: 'text-[#0D9488]',
     bgColor: 'bg-[#0D9488]/[0.05] dark:bg-[#0D9488]/[0.1] hover:bg-[#0D9488]/[0.08] dark:hover:bg-[#0D9488]/[0.15]',
