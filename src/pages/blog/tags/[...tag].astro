@@ -22,7 +22,9 @@ const tagDescription =
     ? `coderfee 博客中关于 ${tag} 的 ${posts.length} 篇文章：${posts
         .slice(0, 3)
         .map(({ data: { title } }) => title)
-        .join('、')}。`
+        .join(
+          '、',
+        )}。包含相关开发教程、实践经验与深度思考，按发布时间排序，方便按主题连续阅读，也便于查找同主题的旧文。`
     : `coderfee 博客中关于 ${tag} 的文章合集。`;
 
 const pageTitle = `${tag} - 技术文章合集`;

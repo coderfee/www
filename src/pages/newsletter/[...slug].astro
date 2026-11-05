@@ -23,10 +23,16 @@ export async function getStaticPaths() {
 
 const { newsletter } = Astro.props;
 const { Content, headings } = await render(newsletter);
-const { title, description, cover, date, issue } = newsletter.data;
+const { title, description, seoDescription, cover, date, issue } = newsletter.data;
 ---
 
-<NewsletterLayout title={title} description={description} cover={cover} showBottomNavigation={false}>
+<NewsletterLayout
+  title={title}
+  description={description}
+  seoDescription={seoDescription}
+  cover={cover}
+  showBottomNavigation={false}
+>
   <TOCDesktop client:media="(min-width: 1280px)" headings={headings} hasComments={false} />
 
   <div class="max-w-7xl mx-auto px-4 py-8 lg:py-20 relative">

@@ -9,6 +9,7 @@ const blog = defineCollection({
       title: z.string(),
       slug: z.string(),
       tldr: z.string(),
+      seoDescription: z.string().optional(),
       date: z
         .string()
         .or(z.date())
@@ -32,6 +33,7 @@ const newsletter = defineCollection({
     z.object({
       title: z.string(),
       description: z.string(),
+      seoDescription: z.string().optional(),
       date: z
         .string()
         .or(z.date())

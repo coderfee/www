@@ -1,12 +1,12 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 
-const { title, description, cover, showBottomNavigation } = Astro.props;
+const { title, description, seoDescription, cover, showBottomNavigation } = Astro.props;
 ---
 
 <BaseLayout
   title={`明日周刊 · ${title}`}
-  description={description}
+  description={seoDescription ?? description}
   ogImage={cover}
   type="article"
   showBottomNavigation={showBottomNavigation}

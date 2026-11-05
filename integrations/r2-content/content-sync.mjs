@@ -318,6 +318,8 @@ function normalizeBlogFrontmatter(data) {
     slug: data.slug,
     date: data.date,
     tldr: data.tldr,
+    seoDescription: data.seoDescription,
+    updated: data.updated,
     tags: normalizeTags(data.tags),
     keywords: normalizeArray(data.keywords),
     heroImage: data.heroImage,
